@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Environment variables (never commit secrets!)
+.env
+.env.local
+.env.production
+.env.capacitor
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +28,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Build artifacts
+*.zip
+*.apk
+
+# Old server data (now using MySQL)
+server/data/
+server/src/

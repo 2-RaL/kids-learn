@@ -2,13 +2,13 @@ import { create } from 'zustand';
 import { apiUrl } from '../config/api';
 
 export interface AuthUser {
-  id: string;
+  id: number | string;
   username: string;
   displayName: string;
   role: 'admin' | 'user';
   isActive: boolean;
   createdAt: string;
-  lastLoginAt?: string;
+  lastLoginAt?: string | null;
 }
 
 interface AuthState {

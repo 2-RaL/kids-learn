@@ -24,7 +24,7 @@ export const AdminPanel: React.FC = () => {
   const [newRole, setNewRole] = useState<'user' | 'admin'>('user');
 
   // Change password modal state
-  const [editingUserId, setEditingUserId] = useState<string | null>(null);
+  const [editingUserId, setEditingUserId] = useState<string | number | null>(null);
   const [editPassword, setEditPassword] = useState('');
 
   const fetchUsers = async () => {
@@ -90,7 +90,7 @@ export const AdminPanel: React.FC = () => {
 
   const handleToggleActive = async (targetUser: AuthUser) => {
     if (!token) return;
-    if (targetUser.id === currentAdmin?.id) {
+    if (String(targetUser.id) === String(currentAdmin?.id)) {
       setError('Öz hesabınızı deaktiv edə bilməzsiniz!');
       return;
     }
@@ -115,7 +115,7 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
-  const handleChangePassword = async (userId: string) => {
+  const handleChangePassword = async (userId: string | number) => {
     if (!token || !editPassword) return;
 
     try {
@@ -139,9 +139,9 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
-  const handleDeleteUser = async (userId: string, name: string) => {
+  const handleDeleteUser = async (userId: string | number, name: string) => {
     if (!token) return;
-    if (userId === currentAdmin?.id) {
+    if (String(userId) === String(currentAdmin?.id)) {
       setError('Özünüzü silə bilməzsiniz!');
       return;
     }
@@ -292,7 +292,7 @@ export const AdminPanel: React.FC = () => {
                       </tr>
                     ) : (
                       filteredUsers.map((u) => {
-                        const isSelf = u.id === currentAdmin?.id;
+                        const isSelf = String(u.id) === String(currentAdmin?.id);
                         return (
                           <tr key={u.id} className="hover:bg-slate-50 transition-colors">
                             <td className="p-3.5">
