@@ -115,4 +115,6 @@ export interface GameState {
   isLoading: boolean;
   feedbackMessage: string | null;
   feedbackType: 'success' | 'error' | 'info' | null;
+  showCharacterDrawer: boolean;
+  showRightDrawer: boolean;
 }

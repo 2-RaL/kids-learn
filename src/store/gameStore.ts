@@ -52,6 +52,8 @@ const initialState: GameState = {
   isLoading: true,
   feedbackMessage: null,
   feedbackType: null,
+  showCharacterDrawer: false,
+  showRightDrawer: false,
 };
 
 // Internal counters for achievements
@@ -79,6 +81,8 @@ interface GameActions {
   toggleFullscreen: () => void;
   clearHistory: () => void;
   setShowAchievements: (v: boolean) => void;
+  setShowCharacterDrawer: (v: boolean) => void;
+  setShowRightDrawer: (v: boolean) => void;
   setLoading: (v: boolean) => void;
   generateChallenge: () => void;
   checkChallengeCommand: (command: CharacterCommand) => void;
@@ -205,6 +209,8 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
   },
   clearHistory: () => set({ commandHistory: [] }),
   setShowAchievements: (v) => set({ showAchievements: v }),
+  setShowCharacterDrawer: (v) => set({ showCharacterDrawer: v }),
+  setShowRightDrawer: (v) => set({ showRightDrawer: v }),
   setLoading: (v) => set({ isLoading: v }),
 
   setFeedback: (msg, type) => {

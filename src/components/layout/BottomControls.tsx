@@ -94,8 +94,8 @@ export const BottomControls: React.FC = () => {
         onClick={() => executeCommand(item.command, 'button')}
         whileHover={{ scale: 1.04, y: -2 }}
         whileTap={{ scale: 0.96, y: 1 }}
-        className={`flex-1 min-w-[70px] sm:min-w-[85px] py-1.5 sm:py-2 px-1.5 sm:px-2 rounded-2xl flex items-center justify-center gap-1.5 shadow-sm transition-all border-2 cursor-pointer select-none ${
-          isActive ? 'ring-3 ring-indigo-400/80 scale-102 shadow-md' : 'hover:shadow'
+        className={`flex-1 min-w-[52px] xs:min-w-[60px] sm:min-w-[78px] py-1 xs:py-1.5 sm:py-2 px-1 xs:px-1.5 sm:px-2 rounded-xl sm:rounded-2xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm transition-all border-2 cursor-pointer select-none active:scale-95 ${
+          isActive ? 'ring-2 sm:ring-3 ring-indigo-400/80 scale-102 shadow-md' : 'hover:shadow'
         }`}
         style={{
           backgroundColor: item.bgColor,
@@ -103,21 +103,21 @@ export const BottomControls: React.FC = () => {
           color: item.textColor,
         }}
       >
-        <span className="text-lg sm:text-xl leading-none">{item.icon}</span>
-        <span className="font-extrabold text-xs sm:text-sm tracking-wide truncate">{label}</span>
+        <span className="text-sm xs:text-base sm:text-xl leading-none flex-shrink-0">{item.icon}</span>
+        <span className="font-extrabold text-[10px] xs:text-xs sm:text-sm tracking-tight truncate">{label}</span>
       </motion.button>
     );
   };
 
   return (
-    <div className="bg-white/85 backdrop-blur-md rounded-3xl p-2.5 sm:p-3 shadow-xl border border-white/60 flex flex-col gap-2">
+    <div className="bg-white/85 backdrop-blur-md rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 shadow-xl border border-white/60 flex flex-col gap-1.5 sm:gap-2">
       {/* Category selector tabs */}
-      <div className="flex items-center justify-center gap-1.5 bg-slate-100/80 p-1 rounded-2xl">
+      <div className="flex items-center justify-center gap-1 sm:gap-1.5 bg-slate-100/90 p-1 rounded-xl sm:rounded-2xl">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.key}
             onClick={() => setSelectedCategory(cat.key)}
-            className={`flex-1 py-1.5 px-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
+            className={`flex-1 py-1 sm:py-1.5 px-1.5 sm:px-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer ${
               selectedCategory === cat.key
                 ? 'bg-white text-indigo-700 shadow-sm scale-102'
                 : 'text-slate-500 hover:text-slate-800'
@@ -129,12 +129,12 @@ export const BottomControls: React.FC = () => {
       </div>
 
       {/* Row 1 */}
-      <div className="flex gap-1.5 sm:gap-2 w-full">
+      <div className="flex gap-1 xs:gap-1.5 sm:gap-2 w-full">
         {rows[0].map(renderButton)}
       </div>
 
       {/* Row 2 */}
-      <div className="flex gap-1.5 sm:gap-2 w-full">
+      <div className="flex gap-1 xs:gap-1.5 sm:gap-2 w-full">
         {rows[1].map(renderButton)}
       </div>
     </div>

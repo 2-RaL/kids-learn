@@ -3,10 +3,15 @@ import { motion } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
 import { CHARACTERS } from '../../config/characters';
 import type { Gender } from '../../types';
-import { Users, Check, Info } from 'lucide-react';
+import { Users, Check, Info, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export const CharacterSelector: React.FC = () => {
+interface CharacterSelectorProps {
+  onClose?: () => void;
+  isDrawer?: boolean;
+}
+
+export const CharacterSelector: React.FC<CharacterSelectorProps> = ({ onClose, isDrawer = false }) => {
   const { t } = useTranslation();
   const { selectedCharacter, selectedGender, setCharacter, setGender } = useGameStore();
 
@@ -18,16 +23,37 @@ export const CharacterSelector: React.FC = () => {
     }
   };
 
+  const handleSelectCharacter = (charId: string, charGender: Gender) => {
+    setCharacter(charId);
+    setGender(charGender);
+    if (isDrawer && onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="bg-white/80 backdrop-blur-md rounded-3xl p-4 sm:p-5 shadow-xl border border-white/60 flex flex-col h-full">
+    <div className={`bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-5 shadow-xl border border-white/60 flex flex-col h-full ${isDrawer ? 'max-h-full' : ''}`}>
       {/* Header */}
-      <div className="flex items-center gap-2 mb-3.5">
-        <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
-          <Users className="w-4 h-4" />
+      <div className="flex items-center justify-between mb-3.5">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+            <Users className="w-4 h-4" />
+          </div>
+          <h2 className="text-base sm:text-lg font-black text-slate-800">
+            Personaj seç
+          </h2>
         </div>
-        <h2 className="text-base sm:text-lg font-black text-slate-800">
-          Personaj seç
-        </h2>
+
+        {/* Close button for drawer mode */}
+        {isDrawer && onClose && (
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors active:scale-95 cursor-pointer"
+            title="Bağla"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
 
       {/* Gender Capsule Buttons (QIZ / OĞLAN) */}
@@ -64,10 +90,7 @@ export const CharacterSelector: React.FC = () => {
           return (
             <motion.button
               key={char.id}
-              onClick={() => {
-                setCharacter(char.id);
-                setGender(char.gender);
-              }}
+              onClick={() => handleSelectCharacter(char.id, char.gender)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className={`relative group rounded-2xl p-1.5 transition-all flex flex-col items-center justify-center text-center overflow-hidden border-2 ${

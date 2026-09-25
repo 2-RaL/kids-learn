@@ -816,7 +816,7 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0.9 }}
             transition={{ duration: 0.15 }}
-            className="w-auto max-h-[74vh] h-[390px] sm:h-[440px] md:h-[480px] lg:h-[510px] object-contain drop-shadow-[0_14px_22px_rgba(0,0,0,0.24)] pointer-events-none"
+            className="w-auto h-[230px] xs:h-[270px] sm:h-[340px] md:h-[420px] lg:h-[480px] max-h-[48vh] sm:max-h-[58vh] md:max-h-[68vh] object-contain drop-shadow-[0_14px_22px_rgba(0,0,0,0.24)] pointer-events-none"
             draggable={false}
           />
         </AnimatePresence>
