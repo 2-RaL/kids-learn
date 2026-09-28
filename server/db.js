@@ -271,188 +271,375 @@ export async function initDatabase() {
 
   console.log('✅ All content tables ready.');
 
-  // ── Seed Default Data ──────────────────────────────────────────────
+  // ── Seed Default Data (100% Idempotent) ──────────────────────────
 
-  // Admin
-  const [admins] = await db.query("SELECT id FROM users WHERE role = 'admin' LIMIT 1");
-  if (admins.length === 0) {
-    const adminUsername = process.env.ADMIN_USERNAME || 'admin';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-    const hash = await bcrypt.hash(adminPassword, 10);
-    await db.query(
-      `INSERT INTO users (username, password_hash, display_name, role, is_active) VALUES (?, ?, ?, 'admin', 1)`,
-      [adminUsername, hash, 'Sistem Admini']
+  // 1. Default admin account
+  try {
+    const adminUsername = (process.env.ADMIN_USERNAME || 'admin').trim();
+    const [existingAdmin] = await db.query(
+      'SELECT id FROM users WHERE LOWER(username) = LOWER(?) LIMIT 1',
+      [adminUsername]
     );
-    console.log(`👤 Default admin created: username="${adminUsername}"`);
+    if (existingAdmin.length === 0) {
+      const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+      const hash = await bcrypt.hash(adminPassword, 10);
+      await db.query(
+        `INSERT INTO users (username, password_hash, display_name, role, is_active)
+         VALUES (?, ?, ?, 'admin', 1)
+         ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP`,
+        [adminUsername.toLowerCase(), hash, 'Sistem Admini']
+      );
+      console.log(`👤 Default admin created: username="${adminUsername}"`);
+    }
+  } catch (err) {
+    console.warn('⚠️ Admin seed warning:', err.message);
   }
 
-  // Default therapist
-  const [therapists] = await db.query("SELECT id FROM users WHERE role = 'therapist' LIMIT 1");
-  if (therapists.length === 0) {
-    const hash = await bcrypt.hash('logoped123', 10);
-    await db.query(
-      `INSERT INTO users (username, password_hash, display_name, role, is_active) VALUES (?, ?, ?, 'therapist', 1)`,
-      ['logoped', hash, 'Demo Loqoped']
+  // 2. Default therapist account ('logoped')
+  try {
+    const [existingTherapist] = await db.query(
+      'SELECT id FROM users WHERE LOWER(username) = ? LIMIT 1',
+      ['logoped']
     );
-    console.log('👤 Default therapist created: username="logoped"');
+    if (existingTherapist.length === 0) {
+      const hash = await bcrypt.hash('logoped123', 10);
+      await db.query(
+        `INSERT INTO users (username, password_hash, display_name, role, is_active)
+         VALUES (?, ?, ?, 'therapist', 1)
+         ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP`,
+        ['logoped', hash, 'Demo Loqoped']
+      );
+      console.log('👤 Default therapist created: username="logoped"');
+    }
+  } catch (err) {
+    console.warn('⚠️ Therapist seed warning:', err.message);
   }
 
-  // Default parent
-  const [parents] = await db.query("SELECT id FROM users WHERE role = 'parent' LIMIT 1");
-  if (parents.length === 0) {
-    const hash = await bcrypt.hash('valideyn123', 10);
-    const [result] = await db.query(
-      `INSERT INTO users (username, password_hash, display_name, role, is_active) VALUES (?, ?, ?, 'parent', 1)`,
-      ['valideyn', hash, 'Demo Valideyn']
+  // 3. Default parent account ('valideyn')
+  try {
+    const [existingParent] = await db.query(
+      'SELECT id FROM users WHERE LOWER(username) = ? LIMIT 1',
+      ['valideyn']
     );
-    // Create parent profile
-    await db.query(
-      `INSERT INTO parent_profiles (user_id, child_name, child_age) VALUES (?, ?, ?)`,
-      [result.insertId, null, null]
-    );
-    console.log('👤 Default parent created: username="valideyn"');
+    let parentUserId = null;
+    if (existingParent.length === 0) {
+      const hash = await bcrypt.hash('valideyn123', 10);
+      const [res] = await db.query(
+        `INSERT INTO users (username, password_hash, display_name, role, is_active)
+         VALUES (?, ?, ?, 'parent', 1)
+         ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP`,
+        ['valideyn', hash, 'Demo Valideyn']
+      );
+      parentUserId = res.insertId;
+      console.log('👤 Default parent created: username="valideyn"');
+    } else {
+      parentUserId = existingParent[0].id;
+    }
+
+    if (parentUserId) {
+      await db.query(
+        `INSERT INTO parent_profiles (user_id, child_name, child_age)
+         VALUES (?, NULL, NULL)
+         ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP`,
+        [parentUserId]
+      );
+    }
+  } catch (err) {
+    console.warn('⚠️ Parent seed warning:', err.message);
   }
 
-  // Age groups
-  const [ageGroupCount] = await db.query('SELECT COUNT(*) AS cnt FROM age_groups');
-  if (ageGroupCount[0].cnt === 0) {
-    await db.query(`
-      INSERT INTO age_groups (name, min_age, max_age, color) VALUES
-      ('3-4 yaş', 3, 4, '#f59e0b'),
-      ('5-6 yaş', 5, 6, '#10b981'),
-      ('7-8 yaş', 7, 8, '#6366f1'),
-      ('9-10 yaş', 9, 10, '#ec4899')
-    `);
-    console.log('📊 Age groups seeded.');
+  // 4. Age groups
+  try {
+    const defaultAgeGroups = [
+      { name: '3-4 yaş', min_age: 3, max_age: 4, color: '#f59e0b' },
+      { name: '5-6 yaş', min_age: 5, max_age: 6, color: '#10b981' },
+      { name: '7-8 yaş', min_age: 7, max_age: 8, color: '#6366f1' },
+      { name: '9-10 yaş', min_age: 9, max_age: 10, color: '#ec4899' },
+    ];
+    for (const ag of defaultAgeGroups) {
+      const [existing] = await db.query('SELECT id FROM age_groups WHERE name = ? LIMIT 1', [ag.name]);
+      if (existing.length === 0) {
+        await db.query(
+          'INSERT INTO age_groups (name, min_age, max_age, color) VALUES (?, ?, ?, ?)',
+          [ag.name, ag.min_age, ag.max_age, ag.color]
+        );
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Age groups seed warning:', err.message);
   }
 
-  // Story categories
-  const [storyCatCount] = await db.query('SELECT COUNT(*) AS cnt FROM story_categories');
-  if (storyCatCount[0].cnt === 0) {
-    await db.query(`
-      INSERT INTO story_categories (name, name_az, slug, icon, color) VALUES
-      ('Bedtime Stories', 'Gecə hekayələri', 'bedtime', '🌙', '#6366f1'),
-      ('Daytime Stories', 'Gündüz hekayələri', 'daytime', '☀️', '#f59e0b')
-    `);
-    console.log('📚 Story categories seeded.');
+  // 5. Story categories
+  try {
+    const defaultStoryCategories = [
+      { name: 'Bedtime Stories', name_az: 'Gecə hekayələri', slug: 'bedtime', icon: '🌙', color: '#6366f1' },
+      { name: 'Daytime Stories', name_az: 'Gündüz hekayələri', slug: 'daytime', icon: '☀️', color: '#f59e0b' },
+    ];
+    for (const sc of defaultStoryCategories) {
+      await db.query(
+        `INSERT INTO story_categories (name, name_az, slug, icon, color)
+         VALUES (?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE name_az = VALUES(name_az)`,
+        [sc.name, sc.name_az, sc.slug, sc.icon, sc.color]
+      );
+    }
+  } catch (err) {
+    console.warn('⚠️ Story categories seed warning:', err.message);
   }
 
-  // Video categories
-  const [vidCatCount] = await db.query('SELECT COUNT(*) AS cnt FROM video_categories');
-  if (vidCatCount[0].cnt === 0) {
-    await db.query(`
-      INSERT INTO video_categories (name, name_az, slug, icon, color) VALUES
-      ('Movements', 'Hərəkətlər', 'movements', '🏃', '#10b981'),
-      ('Communication', 'Ünsiyyət', 'communication', '💬', '#6366f1')
-    `);
-    console.log('🎬 Video categories seeded.');
+  // 6. Video categories
+  try {
+    const defaultVideoCategories = [
+      { name: 'Movements', name_az: 'Hərəkətlər', slug: 'movements', icon: '🏃', color: '#10b981' },
+      { name: 'Communication', name_az: 'Ünsiyyət', slug: 'communication', icon: '💬', color: '#6366f1' },
+    ];
+    for (const vc of defaultVideoCategories) {
+      await db.query(
+        `INSERT INTO video_categories (name, name_az, slug, icon, color)
+         VALUES (?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE name_az = VALUES(name_az)`,
+        [vc.name, vc.name_az, vc.slug, vc.icon, vc.color]
+      );
+    }
+  } catch (err) {
+    console.warn('⚠️ Video categories seed warning:', err.message);
   }
 
-  // Parent characters
-  const [charCount] = await db.query('SELECT COUNT(*) AS cnt FROM parent_characters');
-  if (charCount[0].cnt === 0) {
-    await db.query(`
-      INSERT INTO parent_characters (name, name_az, emoji, is_active, sort_order) VALUES
-      ('Rabbit', 'Dovşan', '🐰', 1, 1),
-      ('Lion', 'Aslan', '🦁', 1, 2)
-    `);
-    console.log('🐰 Parent characters seeded.');
+  // 7. Parent characters
+  try {
+    const defaultCharacters = [
+      { name: 'Rabbit', name_az: 'Dovşan', emoji: '🐰', is_active: 1, sort_order: 1 },
+      { name: 'Lion', name_az: 'Aslan', emoji: '🦁', is_active: 1, sort_order: 2 },
+      { name: 'Bear', name_az: 'Ayı', emoji: '🐻', is_active: 1, sort_order: 3 },
+      { name: 'Fox', name_az: 'Tülkü', emoji: '🦊', is_active: 1, sort_order: 4 },
+    ];
+    for (const ch of defaultCharacters) {
+      const [existing] = await db.query('SELECT id FROM parent_characters WHERE name = ? LIMIT 1', [ch.name]);
+      if (existing.length === 0) {
+        await db.query(
+          'INSERT INTO parent_characters (name, name_az, emoji, is_active, sort_order) VALUES (?, ?, ?, ?, ?)',
+          [ch.name, ch.name_az, ch.emoji, ch.is_active, ch.sort_order]
+        );
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Parent characters seed warning:', err.message);
   }
 
-  // Movements
-  const [movCount] = await db.query('SELECT COUNT(*) AS cnt FROM movements');
-  if (movCount[0].cnt === 0) {
-    await db.query(`
-      INSERT INTO movements (name, name_az, command_key, icon, min_age, max_age, sort_order) VALUES
-      ('Sit', 'Otur', 'sit', '🧘', 3, 12, 1),
-      ('Stand', 'Qalx', 'stand', '🧍', 3, 12, 2),
-      ('Walk Forward', 'İrəli get', 'walkForward', '🚶', 3, 12, 3),
-      ('Walk Backward', 'Geri get', 'walkBackward', '🚶', 3, 12, 4),
-      ('Move Left', 'Sola get', 'moveLeft', '⬅️', 3, 12, 5),
-      ('Move Right', 'Sağa get', 'moveRight', '➡️', 3, 12, 6),
-      ('Run', 'Qaç', 'run', '🏃', 3, 12, 7),
-      ('Jump', 'Tullan', 'jump', '🦘', 3, 12, 8),
-      ('Wave', 'Əlini salla', 'wave', '👋', 3, 12, 9),
-      ('Nod', 'Başını salla', 'nod', '🙆', 3, 12, 10),
-      ('Spin', 'Yerində dön', 'spin', '🌀', 3, 12, 11),
-      ('Stop', 'Dayan', 'stop', '✋', 3, 12, 12)
-    `);
-    console.log('🏃 Movements seeded.');
+  // 8. Movements
+  try {
+    const defaultMovements = [
+      { name: 'Sit', name_az: 'Otur', command_key: 'sit', icon: '🧘', min_age: 3, max_age: 12, sort_order: 1 },
+      { name: 'Stand', name_az: 'Qalx', command_key: 'stand', icon: '🧍', min_age: 3, max_age: 12, sort_order: 2 },
+      { name: 'Walk Forward', name_az: 'İrəli get', command_key: 'walkForward', icon: '🚶', min_age: 3, max_age: 12, sort_order: 3 },
+      { name: 'Walk Backward', name_az: 'Geri get', command_key: 'walkBackward', icon: '🚶', min_age: 3, max_age: 12, sort_order: 4 },
+      { name: 'Move Left', name_az: 'Sola get', command_key: 'moveLeft', icon: '⬅️', min_age: 3, max_age: 12, sort_order: 5 },
+      { name: 'Move Right', name_az: 'Sağa get', command_key: 'moveRight', icon: '➡️', min_age: 3, max_age: 12, sort_order: 6 },
+      { name: 'Run', name_az: 'Qaç', command_key: 'run', icon: '🏃', min_age: 3, max_age: 12, sort_order: 7 },
+      { name: 'Jump', name_az: 'Tullan', command_key: 'jump', icon: '🦘', min_age: 3, max_age: 12, sort_order: 8 },
+      { name: 'Wave', name_az: 'Əlini salla', command_key: 'wave', icon: '👋', min_age: 3, max_age: 12, sort_order: 9 },
+      { name: 'Nod', name_az: 'Başını salla', command_key: 'nod', icon: '🙆', min_age: 3, max_age: 12, sort_order: 10 },
+      { name: 'Spin', name_az: 'Yerində dön', command_key: 'spin', icon: '🌀', min_age: 3, max_age: 12, sort_order: 11 },
+      { name: 'Stop', name_az: 'Dayan', command_key: 'stop', icon: '✋', min_age: 3, max_age: 12, sort_order: 12 },
+    ];
+    for (const m of defaultMovements) {
+      await db.query(
+        `INSERT INTO movements (name, name_az, command_key, icon, min_age, max_age, sort_order)
+         VALUES (?, ?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE name_az = VALUES(name_az)`,
+        [m.name, m.name_az, m.command_key, m.icon, m.min_age, m.max_age, m.sort_order]
+      );
+    }
+  } catch (err) {
+    console.warn('⚠️ Movements seed warning:', err.message);
   }
 
-  // Sample stories
-  const [storyCount] = await db.query('SELECT COUNT(*) AS cnt FROM stories');
-  if (storyCount[0].cnt === 0) {
-    const [cats] = await db.query('SELECT id, slug FROM story_categories');
-    const bedtimeId = cats.find(c => c.slug === 'bedtime')?.id || 1;
-    const daytimeId = cats.find(c => c.slug === 'daytime')?.id || 2;
-    await db.query(`
-      INSERT INTO stories (title, short_description, full_story, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, is_published) VALUES
-      ('Kiçik Dovşan', 'Kiçik dovşanın meşədəki macərası', 'Bir zamanlar meşədə kiçik bir dovşan yaşayırdı. Hər gün o, meşənin ən gözəl çiçəklərini tapmağa çalışırdı...', ?, 3, 6, 5, 1, 1),
-      ('Günəşli Gün', 'Uşaqların parkdakı əyləncəli günü', 'Bir yay günü, Leyla və onun dostları parka getdilər. Orada yelləncəkdə oynadılar, topu bir-birinə atdılar...', ?, 4, 8, 7, 0, 1)
-    `, [bedtimeId, daytimeId]);
-    console.log('📖 Sample stories seeded.');
+  // 9. Sample stories
+  try {
+    const defaultStories = [
+      {
+        title: 'Kiçik Dovşan',
+        short_description: 'Kiçik dovşanın meşədəki macərası',
+        full_story: 'Bir zamanlar meşədə kiçik bir dovşan yaşayırdı. Hər gün o, meşənin ən gözəl çiçəklərini tapmağa çalışırdı...',
+        category_slug: 'bedtime',
+        min_age: 3,
+        max_age: 6,
+        reading_duration_minutes: 5,
+        is_bedtime: 1,
+      },
+      {
+        title: 'Günəşli Gün',
+        short_description: 'Uşaqların parkdakı əyləncəli günü',
+        full_story: 'Bir yay günü, Leyla və onun dostları parka getdilər. Orada yelləncəkdə oynadılar, topu bir-birinə atdılar...',
+        category_slug: 'daytime',
+        min_age: 4,
+        max_age: 8,
+        reading_duration_minutes: 7,
+        is_bedtime: 0,
+      },
+    ];
+    for (const st of defaultStories) {
+      const [existing] = await db.query('SELECT id FROM stories WHERE title = ? LIMIT 1', [st.title]);
+      if (existing.length === 0) {
+        const [cats] = await db.query('SELECT id FROM story_categories WHERE slug = ? LIMIT 1', [st.category_slug]);
+        const catId = cats[0]?.id || null;
+        await db.query(
+          `INSERT INTO stories (title, short_description, full_story, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, is_published)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`,
+          [st.title, st.short_description, st.full_story, catId, st.min_age, st.max_age, st.reading_duration_minutes, st.is_bedtime]
+        );
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Stories seed warning:', err.message);
   }
 
-  // Sample logic questions
-  const [logicCount] = await db.query('SELECT COUNT(*) AS cnt FROM logic_questions');
-  if (logicCount[0].cnt === 0) {
-    const [q1] = await db.query(
-      `INSERT INTO logic_questions (question_text, question_type, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?)`,
-      ['Hansı fərqlidir?', 'visual', 3, 6, 'easy']
-    );
-    await db.query(
-      `INSERT INTO logic_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)`,
-      [q1.insertId, '🍎', 0, 1, q1.insertId, '🍊', 0, 2, q1.insertId, '🚗', 1, 3]
-    );
-
-    const [q2] = await db.query(
-      `INSERT INTO logic_questions (question_text, question_type, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?)`,
-      ['Qırmızı olanı seç', 'color', 3, 5, 'easy']
-    );
-    await db.query(
-      `INSERT INTO logic_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)`,
-      [q2.insertId, '🍎', 1, 1, q2.insertId, '🍌', 0, 2, q2.insertId, '🫐', 0, 3]
-    );
-    console.log('🧠 Sample logic questions seeded.');
+  // 10. Sample logic questions
+  try {
+    const defaultLogic = [
+      {
+        question_text: 'Hansı fərqlidir?',
+        question_type: 'visual',
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        answers: [
+          { text: '🍎', correct: 0 },
+          { text: '🍊', correct: 0 },
+          { text: '🚗', correct: 1 },
+        ],
+      },
+      {
+        question_text: 'Qırmızı olanı seç',
+        question_type: 'color',
+        min_age: 3,
+        max_age: 5,
+        difficulty: 'easy',
+        answers: [
+          { text: '🍎', correct: 1 },
+          { text: '🍌', correct: 0 },
+          { text: '🫐', correct: 0 },
+        ],
+      },
+    ];
+    for (const lq of defaultLogic) {
+      const [existing] = await db.query('SELECT id FROM logic_questions WHERE question_text = ? LIMIT 1', [lq.question_text]);
+      if (existing.length === 0) {
+        const [inserted] = await db.query(
+          `INSERT INTO logic_questions (question_text, question_type, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?)`,
+          [lq.question_text, lq.question_type, lq.min_age, lq.max_age, lq.difficulty]
+        );
+        const qId = inserted.insertId;
+        for (let i = 0; i < lq.answers.length; i++) {
+          const a = lq.answers[i];
+          await db.query(
+            `INSERT INTO logic_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
+            [qId, a.text, a.correct, i + 1]
+          );
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Logic questions seed warning:', err.message);
   }
 
-  // Sample math questions
-  const [mathCount] = await db.query('SELECT COUNT(*) AS cnt FROM math_questions');
-  if (mathCount[0].cnt === 0) {
-    const [mq1] = await db.query(
-      `INSERT INTO math_questions (question_text, question_type, visual_elements, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?, ?)`,
-      ['Neçə alma var?', 'counting', '🍎🍎', 3, 5, 'easy']
-    );
-    await db.query(
-      `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)`,
-      [mq1.insertId, '1', 0, 1, mq1.insertId, '2', 1, 2, mq1.insertId, '3', 0, 3]
-    );
-
-    const [mq2] = await db.query(
-      `INSERT INTO math_questions (question_text, question_type, visual_elements, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?, ?)`,
-      ['Neçə dovşan var?', 'counting', '🐰🐰🐰', 4, 6, 'easy']
-    );
-    await db.query(
-      `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?)`,
-      [mq2.insertId, '2', 0, 1, mq2.insertId, '3', 1, 2, mq2.insertId, '4', 0, 3]
-    );
-    console.log('🔢 Sample math questions seeded.');
+  // 11. Sample math questions
+  try {
+    const defaultMath = [
+      {
+        question_text: 'Neçə alma var?',
+        question_type: 'counting',
+        visual_elements: '🍎🍎',
+        min_age: 3,
+        max_age: 5,
+        difficulty: 'easy',
+        answers: [
+          { text: '1', correct: 0 },
+          { text: '2', correct: 1 },
+          { text: '3', correct: 0 },
+        ],
+      },
+      {
+        question_text: 'Neçə dovşan var?',
+        question_type: 'counting',
+        visual_elements: '🐰🐰🐰',
+        min_age: 4,
+        max_age: 6,
+        difficulty: 'easy',
+        answers: [
+          { text: '2', correct: 0 },
+          { text: '3', correct: 1 },
+          { text: '4', correct: 0 },
+        ],
+      },
+    ];
+    for (const mq of defaultMath) {
+      const [existing] = await db.query('SELECT id FROM math_questions WHERE question_text = ? LIMIT 1', [mq.question_text]);
+      if (existing.length === 0) {
+        const [inserted] = await db.query(
+          `INSERT INTO math_questions (question_text, question_type, visual_elements, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?, ?)`,
+          [mq.question_text, mq.question_type, mq.visual_elements, mq.min_age, mq.max_age, mq.difficulty]
+        );
+        const qId = inserted.insertId;
+        for (let i = 0; i < mq.answers.length; i++) {
+          const a = mq.answers[i];
+          await db.query(
+            `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
+            [qId, a.text, a.correct, i + 1]
+          );
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Math questions seed warning:', err.message);
   }
 
-  // Sample chess lessons
-  const [chessCount] = await db.query('SELECT COUNT(*) AS cnt FROM chess_lessons');
-  if (chessCount[0].cnt === 0) {
-    await db.query(`
-      INSERT INTO chess_lessons (title, description, lesson_type, min_age, max_age, difficulty, sort_order, is_active) VALUES
-      ('Şah nədir?', 'Şahmat oyununda ən vacib fiqur — Şah haqqında öyrənin', 'piece_intro', 5, 12, 'easy', 1, 1),
-      ('Vəzir necə hərəkət edir?', 'Ən güclü fiqur olan Vəzirin hərəkətini öyrənin', 'movement_rule', 6, 12, 'easy', 2, 1),
-      ('At necə hərəkət edir?', 'L şəklində hərəkət edən At fiqurunu tanıyın', 'piece_intro', 5, 12, 'medium', 3, 1)
-    `);
-    console.log('♟️ Sample chess lessons seeded.');
+  // 12. Sample chess lessons
+  try {
+    const defaultChess = [
+      {
+        title: 'Şah nədir?',
+        description: 'Şahmat oyununda ən vacib fiqur — Şah haqqında öyrənin',
+        lesson_type: 'piece_intro',
+        min_age: 5,
+        max_age: 12,
+        difficulty: 'easy',
+        sort_order: 1,
+      },
+      {
+        title: 'Vəzir necə hərəkət edir?',
+        description: 'Ən güclü fiqur olan Vəzirin hərəkətini öyrənin',
+        lesson_type: 'movement_rule',
+        min_age: 6,
+        max_age: 12,
+        difficulty: 'easy',
+        sort_order: 2,
+      },
+      {
+        title: 'At necə hərəkət edir?',
+        description: 'L şəklində hərəkət edən At fiqurunu tanıyın',
+        lesson_type: 'piece_intro',
+        min_age: 5,
+        max_age: 12,
+        difficulty: 'medium',
+        sort_order: 3,
+      },
+    ];
+    for (const cl of defaultChess) {
+      const [existing] = await db.query('SELECT id FROM chess_lessons WHERE title = ? LIMIT 1', [cl.title]);
+      if (existing.length === 0) {
+        await db.query(
+          `INSERT INTO chess_lessons (title, description, lesson_type, min_age, max_age, difficulty, sort_order, is_active)
+           VALUES (?, ?, ?, ?, ?, ?, ?, 1)`,
+          [cl.title, cl.description, cl.lesson_type, cl.min_age, cl.max_age, cl.difficulty, cl.sort_order]
+        );
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Chess lessons seed warning:', err.message);
   }
 
-  console.log('\n✅ Database initialization complete!\n');
+  console.log('✅ Database initialization complete!\n');
 }
 
 // ── Helper: sanitize user output ──────────────────────────────────────

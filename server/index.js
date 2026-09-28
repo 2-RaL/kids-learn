@@ -74,8 +74,12 @@ async function startServer() {
   try {
     console.log('\n🚀 Kids Move & Learn — Starting server...\n');
 
-    // Initialize database (create tables + default admin)
-    await initDatabase();
+    // Initialize database (create tables + idempotent seed)
+    try {
+      await initDatabase();
+    } catch (dbErr) {
+      console.error('⚠️ Database initialization warning/error:', dbErr.message);
+    }
 
     app.listen(PORT, () => {
       console.log(`\n✅ Server is running on port ${PORT}`);
