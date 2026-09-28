@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { initDatabase, getPool } from './db.js';
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import parentRoutes from './routes/parentRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +35,7 @@ app.use(express.json({ limit: '10mb' }));
 // ── API Routes ───────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/parent', parentRoutes);
 
 // Health check endpoint
 app.get('/api/health', async (_req, res) => {

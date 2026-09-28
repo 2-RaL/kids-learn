@@ -13,6 +13,7 @@ import {
   BookOpen,
   Shield,
   LogOut,
+  ArrowLeft,
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
@@ -24,7 +25,7 @@ const LANG_OPTIONS: { code: Language; flag: string; label: string }[] = [
 
 export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { user, logout, setShowAdminPanel } = useAuthStore();
+  const { user, logout, setShowAdminPanel, setActivePortal } = useAuthStore();
   const {
     language,
     setLanguage,
@@ -41,8 +42,17 @@ export const Header: React.FC = () => {
 
   return (
     <header className="w-full flex items-center justify-between px-2 sm:px-6 py-1.5 sm:py-2 z-30 select-none gap-1 sm:gap-2">
-      {/* Left: 3D Sun and Clouds matching mockup */}
+      {/* Left: 3D Sun and Clouds matching mockup + Portallar Button */}
       <div className="flex items-center gap-1 sm:gap-2.5 flex-shrink-0">
+        <button
+          onClick={() => setActivePortal('select')}
+          className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-white/20 hover:bg-white/30 text-white font-extrabold text-[11px] sm:text-xs border border-white/30 transition shadow-sm cursor-pointer"
+          title="Portallara Qayıt"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Portallar</span>
+        </button>
+
         <motion.div
           animate={{ y: [0, -3, 0] }}
           transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}

@@ -11,20 +11,80 @@ import CharacterDrawer from './components/character/CharacterDrawer';
 import RightDrawer from './components/layout/RightDrawer';
 import AchievementsModal from './components/achievements/AchievementsModal';
 import LoadingScreen from './components/common/LoadingScreen';
-import LoginPage from './components/auth/LoginPage';
+import PortalSelectionPage from './components/portal/PortalSelectionPage';
+import PortalLoginPage from './components/auth/PortalLoginPage';
+import ParentPortal from './components/parent/ParentPortal';
 import AdminPanel from './components/admin/AdminPanel';
 import { ShieldCheck } from 'lucide-react';
 
 export const App: React.FC = () => {
-  const { isLoading, showCharacterDrawer, setShowCharacterDrawer, showRightDrawer, setShowRightDrawer } = useGameStore();
-  const { isAuthenticated, showAdminPanel, checkAuth } = useAuthStore();
+  const {
+    isLoading,
+    showCharacterDrawer,
+    setShowCharacterDrawer,
+    showRightDrawer,
+    setShowRightDrawer,
+  } = useGameStore();
+
+  const {
+    isAuthenticated,
+    user,
+    activePortal,
+    setActivePortal,
+    checkAuth,
+  } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
+
+    // Listen to hash changes in browser URL
+    const handleHashChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#therapist') {
+        setActivePortal('therapist');
+      } else if (hash === '#parent') {
+        setActivePortal('parent');
+      } else if (hash === '#admin') {
+        setActivePortal('admin');
+      } else if (!hash || hash === '#' || hash === '#select') {
+        setActivePortal('select');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  if (!isAuthenticated) {
-    return <LoginPage />;
+  // ── Route 1: Portal Selection Landing Page ──────────────────────────
+  if (activePortal === 'select') {
+    return <PortalSelectionPage />;
+  }
+
+  // ── Route 2: Parent Portal ──────────────────────────────────────────
+  if (activePortal === 'parent') {
+    const isParentOrAdmin = isAuthenticated && user && ['parent', 'admin'].includes(user.role);
+    if (!isParentOrAdmin) {
+      return <PortalLoginPage portalType="parent" />;
+    }
+    return <ParentPortal />;
+  }
+
+  // ── Route 3: Admin Panel ────────────────────────────────────────────
+  if (activePortal === 'admin') {
+    const isAdmin = isAuthenticated && user && user.role === 'admin';
+    if (!isAdmin) {
+      return <PortalLoginPage portalType="admin" />;
+    }
+    return <AdminPanel />;
+  }
+
+  // ── Route 4: Speech Therapist Portal ("Logopedlər üçün") ─────────────
+  // (Requires therapist, admin, or user role)
+  const isTherapistAuthorized =
+    isAuthenticated && user && ['therapist', 'admin', 'user'].includes(user.role);
+
+  if (!isTherapistAuthorized) {
+    return <PortalLoginPage portalType="therapist" />;
   }
 
   return (
@@ -38,7 +98,7 @@ export const App: React.FC = () => {
       {/* Animated Loading Screen */}
       <LoadingScreen />
 
-      {/* Main Game Interface */}
+      {/* Main Game Interface for Speech Therapist */}
       <AnimatePresence>
         {!isLoading && (
           <motion.div
@@ -54,7 +114,7 @@ export const App: React.FC = () => {
 
             {/* Responsive Main Playing Field */}
             <div className="flex flex-1 gap-2 sm:gap-3 px-2 sm:px-3 pb-1.5 sm:pb-2 min-h-0 overflow-hidden">
-              {/* Left Column - Character Selection (Desktop XL+ only; on mobile/tablet it opens as Left Drawer) */}
+              {/* Left Column - Character Selection (Desktop XL+ only; on mobile/tablet opens as Left Drawer) */}
               <div className="hidden xl:block w-56 lg:w-60 xl:w-64 flex-shrink-0 min-h-0">
                 <LeftPanel />
               </div>
@@ -72,7 +132,7 @@ export const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column - Voice Control, Learning Mode & History (Desktop LG+ only; on mobile/tablet opens as Right Drawer) */}
+              {/* Right Column - Voice Control, Learning Mode & History */}
               <div className="hidden lg:block w-64 lg:w-72 xl:w-80 flex-shrink-0 min-h-0">
                 <RightPanel />
               </div>
@@ -84,8 +144,11 @@ export const App: React.FC = () => {
               <span className="truncate">
                 Uşaqların təhlükəsizliyi bizim prioritetimizdir. Səsiniz cihazınızda işlənir, heç bir məlumat toplanmır.
               </span>
-              <button className="underline hover:text-white ml-1 text-sky-200 font-semibold cursor-pointer hidden sm:inline">
-                Valideyn məlumatı
+              <button
+                onClick={() => setActivePortal('parent')}
+                className="underline hover:text-white ml-1 text-sky-200 font-semibold cursor-pointer hidden sm:inline"
+              >
+                Valideyn portalı
               </button>
             </footer>
           </motion.div>
@@ -106,9 +169,6 @@ export const App: React.FC = () => {
 
       {/* Achievements Modal */}
       <AchievementsModal />
-
-      {/* Admin Panel Modal */}
-      {showAdminPanel && <AdminPanel />}
     </div>
   );
 };

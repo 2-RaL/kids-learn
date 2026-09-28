@@ -1,0 +1,338 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  BookOpen, Video, Activity, Brain, Calculator, Award,
+  Settings, LogOut, ArrowLeft, Home, Sparkles, Filter, Menu, X, Smile
+} from 'lucide-react';
+import { useAuthStore } from '../../store/authStore';
+import ParentStories from './ParentStories';
+import ParentVideos from './ParentVideos';
+import ParentMovement from './ParentMovement';
+import ParentLogic from './ParentLogic';
+import ParentMath from './ParentMath';
+import ParentChess from './ParentChess';
+import ParentSettings from './ParentSettings';
+
+type ParentTab = 'dashboard' | 'stories' | 'videos' | 'movement' | 'logic' | 'math' | 'chess' | 'settings';
+
+export const ParentPortal: React.FC = () => {
+  const { user, parentProfile, logout, setActivePortal } = useAuthStore();
+  const [activeTab, setActiveTab] = useState<ParentTab>('dashboard');
+  const [selectedAge, setSelectedAge] = useState<number | null>(parentProfile?.child_age || null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const childDisplayName = parentProfile?.child_name || 'Dostumuz';
+
+  const navItems = [
+    { id: 'dashboard' as ParentTab, label: 'Ana Səhifə', icon: Home, emoji: '🏠' },
+    { id: 'stories' as ParentTab, label: 'Hekayələr', icon: BookOpen, emoji: '📖' },
+    { id: 'videos' as ParentTab, label: 'Video Dərslər', icon: Video, emoji: '🎬' },
+    { id: 'movement' as ParentTab, label: 'Hərəkətlərlə Öyrən', icon: Activity, emoji: '🏃' },
+    { id: 'logic' as ParentTab, label: 'Məntiq Oyunları', icon: Brain, emoji: '🧠' },
+    { id: 'math' as ParentTab, label: 'Riyazi Əməllər', icon: Calculator, emoji: '🔢' },
+    { id: 'chess' as ParentTab, label: 'Şahmat', icon: Award, emoji: '♟️' },
+    { id: 'settings' as ParentTab, label: 'Profil və Parametrlər', icon: Settings, emoji: '⚙️' },
+  ];
+
+  return (
+    <div
+      className="min-h-screen w-full flex flex-col md:flex-row select-none"
+      style={{
+        background: 'linear-gradient(135deg, #fef3c7 0%, #fed7aa 35%, #fde68a 100%)',
+        fontFamily: "'Nunito', sans-serif",
+      }}
+    >
+      {/* Sidebar (Desktop) */}
+      <aside className="hidden md:flex flex-col justify-between w-64 lg:w-72 bg-white/90 backdrop-blur-xl border-r border-amber-200/60 p-5 shadow-lg flex-shrink-0">
+        <div>
+          {/* Brand & Portal Label */}
+          <div className="flex items-center gap-3 pb-5 border-b border-amber-100">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-400 flex items-center justify-center text-2xl shadow-md shadow-amber-500/30 flex-shrink-0">
+              👨‍👩‍👧‍👦
+            </div>
+            <div className="overflow-hidden">
+              <h1 className="text-base font-black text-slate-800 tracking-tight truncate">
+                Kids Move & Learn
+              </h1>
+              <span className="inline-block px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold uppercase tracking-wider">
+                Valideyn Portalı
+              </span>
+            </div>
+          </div>
+
+          {/* Child Mini Badge */}
+          <div className="my-4 p-3 rounded-2xl bg-amber-50/80 border border-amber-200/70 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-400/80 flex items-center justify-center text-xl flex-shrink-0">
+              {parentProfile?.child_gender === 'girl' ? '👧' : '👦'}
+            </div>
+            <div className="overflow-hidden">
+              <p className="text-xs font-bold text-slate-500 leading-tight">Övladınız:</p>
+              <p className="text-sm font-black text-slate-800 truncate">{childDisplayName}</p>
+              <p className="text-[10px] font-bold text-amber-700">
+                {selectedAge ? `${selectedAge} yaş` : 'Yaş qeyd olunmayıb'}
+              </p>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="space-y-1.5 mt-2">
+            {navItems.map((item) => {
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs lg:text-sm transition-all text-left cursor-pointer ${
+                    isActive
+                      ? 'bg-amber-400 text-slate-900 shadow-md shadow-amber-400/30 font-black'
+                      : 'text-slate-600 hover:bg-amber-100/60 hover:text-slate-900'
+                  }`}
+                >
+                  <span className="text-lg">{item.emoji}</span>
+                  <span className="truncate">{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Sidebar Footer Buttons */}
+        <div className="pt-4 border-t border-amber-100 space-y-2">
+          <button
+            onClick={() => setActivePortal('select')}
+            className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Portallara Qayıt</span>
+          </button>
+          <button
+            onClick={logout}
+            className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold transition-colors cursor-pointer"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Çıxış</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* Mobile Top Navigation */}
+      <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-amber-200 p-3.5 flex items-center justify-between sticky top-0 z-40">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">👨‍👩‍👧‍👦</span>
+          <div>
+            <h2 className="text-sm font-black text-slate-800">Valideyn Portalı</h2>
+            <p className="text-[10px] text-slate-500 font-bold">{childDisplayName} ({selectedAge ? `${selectedAge} yaş` : 'Bütün yaşlar'})</p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2 rounded-xl bg-amber-100 text-slate-700 cursor-pointer"
+        >
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden bg-white border-b border-amber-200 p-4 space-y-2 z-30 shadow-lg"
+          >
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-xs text-left cursor-pointer ${
+                  activeTab === item.id ? 'bg-amber-400 text-slate-900 font-black' : 'text-slate-700 hover:bg-amber-50'
+                }`}
+              >
+                <span className="text-lg">{item.emoji}</span>
+                <span>{item.label}</span>
+              </button>
+            ))}
+
+            <div className="pt-3 border-t border-slate-100 flex gap-2">
+              <button
+                onClick={() => setActivePortal('select')}
+                className="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold"
+              >
+                Portallar
+              </button>
+              <button
+                onClick={logout}
+                className="flex-1 py-2 rounded-xl bg-red-50 text-red-600 text-xs font-bold"
+              >
+                Çıxış
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
+        {/* Top Filter Bar */}
+        <header className="bg-white/80 backdrop-blur-md border-b border-amber-200/50 px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🌟</span>
+            <div>
+              <h2 className="text-sm sm:text-base font-black text-slate-800">
+                Salam, <span className="text-amber-600">{childDisplayName}</span>!
+              </h2>
+              <p className="text-[11px] text-slate-500 font-semibold hidden sm:block">
+                Bu gün nə öyrənmək istəyirsən?
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Age Filter Selector */}
+          <div className="flex items-center gap-1.5 bg-amber-100/60 p-1 rounded-2xl">
+            <span className="text-[11px] font-bold text-amber-900 px-2 flex items-center gap-1">
+              <Filter className="w-3 h-3 text-amber-700" />
+              <span className="hidden sm:inline">Yaş:</span>
+            </span>
+            {[
+              { label: 'Hamısı', value: null },
+              { label: '3-4', value: 4 },
+              { label: '5-6', value: 6 },
+              { label: '7-8', value: 8 },
+              { label: '9-10', value: 10 },
+            ].map((opt, idx) => (
+              <button
+                key={idx}
+                onClick={() => setSelectedAge(opt.value)}
+                className={`px-2.5 py-1 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                  selectedAge === opt.value
+                    ? 'bg-amber-400 text-slate-900 shadow-sm'
+                    : 'text-amber-800 hover:bg-amber-200/50'
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </header>
+
+        {/* Tab Content Display */}
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
+          {activeTab === 'dashboard' && (
+            <div className="space-y-6 max-w-6xl mx-auto">
+              {/* Welcome Hero Banner */}
+              <div className="relative rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 text-white shadow-xl overflow-hidden">
+                <div className="absolute -right-6 -bottom-6 text-9xl opacity-20 select-none">
+                  🚀
+                </div>
+                <div className="relative z-10 max-w-xl">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-extrabold mb-3">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-200" />
+                    <span>Övladınızın Sevimli İnkişaf Dünyası</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-black mb-2">
+                    Xoş gəldiniz, Valideynlər və Balacalar!
+                  </h2>
+                  <p className="text-xs sm:text-sm text-amber-50 font-medium leading-relaxed mb-4">
+                    Burada uşaqlar üçün nağıllar, hərəkətli öyrədici videolar, məntiq və riyaziyyat oyunları, eləcə də şahmat dərsləri toplanıb.
+                  </p>
+                  <div className="flex flex-wrap gap-2 text-xs font-extrabold">
+                    <span className="bg-white/25 px-3 py-1 rounded-xl">✓ Reklamsız</span>
+                    <span className="bg-white/25 px-3 py-1 rounded-xl">✓ Təhlükəsiz Məzmun</span>
+                    <span className="bg-white/25 px-3 py-1 rounded-xl">✓ Azərbaycan Dilində</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Launch Cards Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {[
+                  {
+                    id: 'stories' as ParentTab,
+                    title: 'Nağıllar və Hekayələr',
+                    desc: 'Gecə və gündüz üçün maraqlı nağıllar, səsli oxuma imkanı.',
+                    emoji: '📖',
+                    color: 'from-amber-500 to-orange-400',
+                  },
+                  {
+                    id: 'videos' as ParentTab,
+                    title: 'Video ilə Öyrən',
+                    desc: 'Nitq inkişafı və fiziki hərəkət videoları.',
+                    emoji: '🎬',
+                    color: 'from-sky-500 to-cyan-400',
+                  },
+                  {
+                    id: 'movement' as ParentTab,
+                    title: 'Hərəkətlərlə Öyrən',
+                    desc: 'Dovşan və digər dostlarla hərəkət komandaları və əyləncə.',
+                    emoji: '🏃',
+                    color: 'from-emerald-500 to-teal-400',
+                  },
+                  {
+                    id: 'logic' as ParentTab,
+                    title: 'Məntiq Oyunları',
+                    desc: 'Rənglər, fərqlər və uşaqlar üçün əyləncəli tapmacalar.',
+                    emoji: '🧠',
+                    color: 'from-purple-500 to-indigo-400',
+                  },
+                  {
+                    id: 'math' as ParentTab,
+                    title: 'Riyazi Əməllər',
+                    desc: 'Almalar, ulduzlar və əyləncəli sayma dərsləri.',
+                    emoji: '🔢',
+                    color: 'from-pink-500 to-rose-400',
+                  },
+                  {
+                    id: 'chess' as ParentTab,
+                    title: 'Uşaqlar üçün Şahmat',
+                    desc: 'Şahmat fiqurları və onların hərəkət qaydaları.',
+                    emoji: '♟️',
+                    color: 'from-slate-700 to-slate-900',
+                  },
+                ].map((item) => (
+                  <motion.div
+                    key={item.id}
+                    whileHover={{ y: -5 }}
+                    onClick={() => setActiveTab(item.id)}
+                    className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all border border-amber-100 flex flex-col justify-between cursor-pointer group"
+                  >
+                    <div>
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${item.color} flex items-center justify-center text-3xl shadow-md mb-4 group-hover:scale-105 transition-transform`}>
+                        {item.emoji}
+                      </div>
+                      <h3 className="text-lg font-black text-slate-800 group-hover:text-amber-600 transition-colors mb-1.5">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-amber-600">
+                      <span>Bölməyə daxil ol</span>
+                      <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'stories' && <ParentStories selectedAge={selectedAge} />}
+          {activeTab === 'videos' && <ParentVideos selectedAge={selectedAge} />}
+          {activeTab === 'movement' && <ParentMovement />}
+          {activeTab === 'logic' && <ParentLogic selectedAge={selectedAge} />}
+          {activeTab === 'math' && <ParentMath selectedAge={selectedAge} />}
+          {activeTab === 'chess' && <ParentChess />}
+          {activeTab === 'settings' && <ParentSettings />}
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default ParentPortal;
