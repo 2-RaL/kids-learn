@@ -6,6 +6,7 @@ import { initDatabase, getPool } from './db.js';
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import parentRoutes from './routes/parentRoutes.js';
+import ttsRoutes from './routes/ttsRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,6 +37,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/parent', parentRoutes);
+app.use('/api/tts', ttsRoutes);
 
 // Health check endpoint
 app.get('/api/health', async (_req, res) => {

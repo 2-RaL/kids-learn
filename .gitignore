@@ -40,3 +40,6 @@ Desktop.ini
 # Old server data (now using MySQL)
 server/data/
 server/src/
+
+# Generated TTS audio cache
+public/assets/audio/cache/

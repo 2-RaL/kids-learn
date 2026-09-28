@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
 import { MULTILINGUAL_STORIES, type MultilingualStory } from '../../data/parentStoriesData';
-import { parentSpeech } from '../../utils/parentSpeech';
+import { parentSpeech, type VoicePersona } from '../../utils/parentSpeech';
 
 interface ParentStoriesProps {
   selectedAge?: number | null;
@@ -21,6 +21,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
   const [searchQuery, setSearchQuery] = useState('');
   const [fontSize, setFontSize] = useState<number>(18);
   const [isCozyNight, setIsCozyNight] = useState(false);
+  const [voicePersona, setVoicePersona] = useState<VoicePersona>(parentSpeech.getVoicePersona());
 
   // Audio Playback State
   const [audioState, setAudioState] = useState<'idle' | 'playing' | 'paused'>('idle');
@@ -467,8 +468,45 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
                   </button>
                 </div>
 
-                {/* Language indicator & status badge */}
-                <div className="flex items-center gap-2">
+                {/* Voice persona & Language indicator */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {/* Voice Persona Switcher for Azerbaijani */}
+                  {language === 'az' && (
+                    <div className="flex items-center gap-1 bg-white/90 p-0.5 rounded-xl border border-amber-200 shadow-xs">
+                      <span className="text-[10px] font-black text-slate-400 px-1 hidden sm:inline">Səs:</span>
+                      <button
+                        onClick={() => {
+                          parentSpeech.setVoicePersona('banu');
+                          setVoicePersona('banu');
+                          if (audioState === 'playing') handleStopAudio();
+                        }}
+                        className={`px-2 py-0.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          voicePersona === 'banu'
+                            ? 'bg-amber-400 text-slate-900 shadow-xs font-black'
+                            : 'text-slate-600 hover:bg-amber-50'
+                        }`}
+                        title="Banu xanım (Mehriban Müəllimə / Qadın səsi)"
+                      >
+                        👩 Banu
+                      </button>
+                      <button
+                        onClick={() => {
+                          parentSpeech.setVoicePersona('babek');
+                          setVoicePersona('babek');
+                          if (audioState === 'playing') handleStopAudio();
+                        }}
+                        className={`px-2 py-0.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          voicePersona === 'babek'
+                            ? 'bg-amber-400 text-slate-900 shadow-xs font-black'
+                            : 'text-slate-600 hover:bg-amber-50'
+                        }`}
+                        title="Babək bəy (Cəsur Bələdçi / Kişi səsi)"
+                      >
+                        👨 Babək
+                      </button>
+                    </div>
+                  )}
+
                   <span
                     className={`text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 ${
                       isCozyNight
