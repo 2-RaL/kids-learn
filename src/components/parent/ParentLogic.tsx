@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Sparkles, CheckCircle2, XCircle, RotateCcw, Award, ChevronRight, HelpCircle } from 'lucide-react';
+import { Brain, Sparkles, CheckCircle2, XCircle, RotateCcw, Award, ChevronRight, HelpCircle, Volume2 } from 'lucide-react';
 import { apiUrl } from '../../config/api';
 import { useAuthStore } from '../../store/authStore';
+import { useGameStore } from '../../store/gameStore';
+import { parentSpeech } from '../../utils/parentSpeech';
 
 interface LogicAnswer {
   id: number;
@@ -29,6 +31,8 @@ interface ParentLogicProps {
 
 export const ParentLogic: React.FC<ParentLogicProps> = ({ selectedAge }) => {
   const { token } = useAuthStore();
+  const { language } = useGameStore();
+  const currentLang = language || 'az';
   const [questions, setQuestions] = useState<LogicQuestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,78 +42,204 @@ export const ParentLogic: React.FC<ParentLogicProps> = ({ selectedAge }) => {
   const [streak, setStreak] = useState(0);
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; text: string } | null>(null);
 
+  const MULTILINGUAL_LOGIC_QUESTIONS: Record<string, LogicQuestion[]> = {
+    az: [
+      {
+        id: 1,
+        question_text: 'Hansı əşya digərlərindən fərqlidir?',
+        question_type: 'visual',
+        image_url: null,
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'Avtomobil nəqliyyat vasitəsidir, meyvə deyil.',
+        answers: [
+          { id: 101, answer_text: '🍎 Alma', image_url: null, is_correct: false },
+          { id: 102, answer_text: '🍊 Portağal', image_url: null, is_correct: false },
+          { id: 103, answer_text: '🚗 Maşın', image_url: null, is_correct: true },
+          { id: 104, answer_text: '🍌 Banan', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 2,
+        question_text: 'Qırmızı rəngdə olan meyvə hansıdır?',
+        question_type: 'color',
+        image_url: null,
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'Çiyələk parlaq qırmızı rəngdə olur.',
+        answers: [
+          { id: 201, answer_text: '🍓 Çiyələk', image_url: null, is_correct: true },
+          { id: 202, answer_text: '🍋 Limon', image_url: null, is_correct: false },
+          { id: 203, answer_text: '🫐 Qaragilə', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 3,
+        question_text: 'Hansı heyvan uça bilir?',
+        question_type: 'classification',
+        image_url: null,
+        min_age: 4,
+        max_age: 7,
+        difficulty: 'easy',
+        explanation: 'Qaranquş qanadları olan və uçan quşdur.',
+        answers: [
+          { id: 301, answer_text: '🐶 İt', image_url: null, is_correct: false },
+          { id: 302, answer_text: '🐦 Quş', image_url: null, is_correct: true },
+          { id: 303, answer_text: '🐱 Pişik', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 4,
+        question_text: 'Qış fəslində nə yağır?',
+        question_type: 'nature',
+        image_url: null,
+        min_age: 4,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'Qışda hava soyuq olur və ağ qar yağır.',
+        answers: [
+          { id: 401, answer_text: '❄️ Qar', image_url: null, is_correct: true },
+          { id: 402, answer_text: '🍂 Yarpaq', image_url: null, is_correct: false },
+          { id: 403, answer_text: '☀️ Günəş şüası', image_url: null, is_correct: false },
+        ],
+      },
+    ],
+    en: [
+      {
+        id: 1,
+        question_text: 'Which item is different from the others?',
+        question_type: 'visual',
+        image_url: null,
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'A car is a vehicle, not a fruit.',
+        answers: [
+          { id: 101, answer_text: '🍎 Apple', image_url: null, is_correct: false },
+          { id: 102, answer_text: '🍊 Orange', image_url: null, is_correct: false },
+          { id: 103, answer_text: '🚗 Car', image_url: null, is_correct: true },
+          { id: 104, answer_text: '🍌 Banana', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 2,
+        question_text: 'Which fruit is red?',
+        question_type: 'color',
+        image_url: null,
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'Strawberries are bright red.',
+        answers: [
+          { id: 201, answer_text: '🍓 Strawberry', image_url: null, is_correct: true },
+          { id: 202, answer_text: '🍋 Lemon', image_url: null, is_correct: false },
+          { id: 203, answer_text: '🫐 Blueberry', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 3,
+        question_text: 'Which animal can fly?',
+        question_type: 'classification',
+        image_url: null,
+        min_age: 4,
+        max_age: 7,
+        difficulty: 'easy',
+        explanation: 'A bird has wings and can fly in the sky.',
+        answers: [
+          { id: 301, answer_text: '🐶 Dog', image_url: null, is_correct: false },
+          { id: 302, answer_text: '🐦 Bird', image_url: null, is_correct: true },
+          { id: 303, answer_text: '🐱 Cat', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 4,
+        question_text: 'What falls from the sky in winter?',
+        question_type: 'nature',
+        image_url: null,
+        min_age: 4,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'In cold winter weather, white snow falls.',
+        answers: [
+          { id: 401, answer_text: '❄️ Snow', image_url: null, is_correct: true },
+          { id: 402, answer_text: '🍂 Leaves', image_url: null, is_correct: false },
+          { id: 403, answer_text: '☀️ Sunlight', image_url: null, is_correct: false },
+        ],
+      },
+    ],
+    ru: [
+      {
+        id: 1,
+        question_text: 'Какой предмет лишний среди остальных?',
+        question_type: 'visual',
+        image_url: null,
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'Машина — это транспортное средство, а не фрукт.',
+        answers: [
+          { id: 101, answer_text: '🍎 Яблоко', image_url: null, is_correct: false },
+          { id: 102, answer_text: '🍊 Апельсин', image_url: null, is_correct: false },
+          { id: 103, answer_text: '🚗 Машина', image_url: null, is_correct: true },
+          { id: 104, answer_text: '🍌 Банан', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 2,
+        question_text: 'Какая ягода красного цвета?',
+        question_type: 'color',
+        image_url: null,
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'Клубника имеет ярко-красный цвет.',
+        answers: [
+          { id: 201, answer_text: '🍓 Клубника', image_url: null, is_correct: true },
+          { id: 202, answer_text: '🍋 Лимон', image_url: null, is_correct: false },
+          { id: 203, answer_text: '🫐 Черника', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 3,
+        question_text: 'Кто из животных умеет летать?',
+        question_type: 'classification',
+        image_url: null,
+        min_age: 4,
+        max_age: 7,
+        difficulty: 'easy',
+        explanation: 'У птицы есть крылья, и она летает высоко в небе.',
+        answers: [
+          { id: 301, answer_text: '🐶 Собака', image_url: null, is_correct: false },
+          { id: 302, answer_text: '🐦 Птица', image_url: null, is_correct: true },
+          { id: 303, answer_text: '🐱 Кошка', image_url: null, is_correct: false },
+        ],
+      },
+      {
+        id: 4,
+        question_text: 'Что падает с неба зимой?',
+        question_type: 'nature',
+        image_url: null,
+        min_age: 4,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'Зимой на улице холодно и идёт белый снег.',
+        answers: [
+          { id: 401, answer_text: '❄️ Снег', image_url: null, is_correct: true },
+          { id: 402, answer_text: '🍂 Листья', image_url: null, is_correct: false },
+          { id: 403, answer_text: '☀️ Солнечный свет', image_url: null, is_correct: false },
+        ],
+      },
+    ],
+  };
+
   useEffect(() => {
     fetchQuestions();
-  }, [selectedAge, token]);
+  }, [selectedAge, token, currentLang]);
 
   const fetchQuestions = async () => {
-    if (!token) return;
-    setIsLoading(true);
-    try {
-      let url = apiUrl('/api/parent/logic-questions');
-      if (selectedAge) url += `?age=${selectedAge}`;
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      if (res.ok && data.questions?.length > 0) {
-        setQuestions(data.questions);
-      } else {
-        // Fallback default logic questions
-        setQuestions([
-          {
-            id: 1,
-            question_text: 'Hansı əşya digərlərindən fərqlidir?',
-            question_type: 'visual',
-            image_url: null,
-            min_age: 3,
-            max_age: 6,
-            difficulty: 'easy',
-            explanation: 'Avtomobil nəqliyyat vasitəsidir, meyvə deyil.',
-            answers: [
-              { id: 101, answer_text: '🍎 Alma', image_url: null, is_correct: false },
-              { id: 102, answer_text: '🍊 Portağal', image_url: null, is_correct: false },
-              { id: 103, answer_text: '🚗 Maşın', image_url: null, is_correct: true },
-              { id: 104, answer_text: '🍌 Banan', image_url: null, is_correct: false },
-            ],
-          },
-          {
-            id: 2,
-            question_text: 'Qırmızı rəngdə olan meyvə hansıdır?',
-            question_type: 'color',
-            image_url: null,
-            min_age: 3,
-            max_age: 6,
-            difficulty: 'easy',
-            explanation: 'Çiyələk parlaq qırmızı rəngdə olur.',
-            answers: [
-              { id: 201, answer_text: '🍓 Çiyələk', image_url: null, is_correct: true },
-              { id: 202, answer_text: '🍋 Limon', image_url: null, is_correct: false },
-              { id: 203, answer_text: '🫐 Qaragilə', image_url: null, is_correct: false },
-            ],
-          },
-          {
-            id: 3,
-            question_text: 'Hansı heyvan uça bilir?',
-            question_type: 'classification',
-            image_url: null,
-            min_age: 4,
-            max_age: 7,
-            difficulty: 'easy',
-            explanation: 'Qaranquş qanadları olan və uçan quşdur.',
-            answers: [
-              { id: 301, answer_text: '🐶 İt', image_url: null, is_correct: false },
-              { id: 302, answer_text: '🐦 Quş', image_url: null, is_correct: true },
-              { id: 303, answer_text: '🐱 Pişik', image_url: null, is_correct: false },
-            ],
-          },
-        ]);
-      }
-    } catch {
-      // Fallback
-    } finally {
-      setIsLoading(false);
-    }
+    setQuestions(MULTILINGUAL_LOGIC_QUESTIONS[currentLang] || MULTILINGUAL_LOGIC_QUESTIONS.az);
   };
 
   const playFeedbackSound = (isCorrect: boolean) => {
@@ -246,9 +376,18 @@ export const ParentLogic: React.FC<ParentLogicProps> = ({ selectedAge }) => {
 
             {/* Question Card */}
             <div className="text-center mb-6">
-              <h3 className="text-xl sm:text-2xl font-black text-slate-800 mb-2">
-                {currentQ.question_text}
-              </h3>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-800">
+                  {currentQ.question_text}
+                </h3>
+                <button
+                  onClick={() => parentSpeech.speakQuick(currentQ.question_text, currentLang)}
+                  className="p-2 rounded-2xl bg-indigo-50 hover:bg-indigo-100 text-indigo-600 transition-colors cursor-pointer shadow-xs border border-indigo-100"
+                  title="Sualı səsli dinlə"
+                >
+                  <Volume2 className="w-5 h-5" />
+                </button>
+              </div>
               {currentQ.image_url && (
                 <div className="my-4 max-h-48 overflow-hidden rounded-2xl mx-auto flex items-center justify-center">
                   <img src={currentQ.image_url} alt="Sual" className="max-h-48 object-contain" />

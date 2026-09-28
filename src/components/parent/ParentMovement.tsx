@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Volume2, Award, Play, RotateCcw, Smile } from 'lucide-react';
 import { apiUrl } from '../../config/api';
 import { useAuthStore } from '../../store/authStore';
+import { useGameStore } from '../../store/gameStore';
+import { parentSpeech } from '../../utils/parentSpeech';
 
 interface Movement {
   id: number;
@@ -118,30 +120,44 @@ export const ParentMovement: React.FC = () => {
     } catch {}
   };
 
-  const speakAction = (text: string) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.pitch = 1.2;
-      utterance.rate = 0.95;
-      const voices = window.speechSynthesis.getVoices();
-      const azVoice = voices.find(v => v.lang.startsWith('az') || v.lang.startsWith('tr'));
-      if (azVoice) utterance.voice = azVoice;
-      window.speechSynthesis.speak(utterance);
-    }
+  const { language } = useGameStore();
+  const currentLang = language || 'az';
+
+  const RU_MOVEMENT_NAMES: Record<string, string> = {
+    sit: 'Садись',
+    stand: 'Встань',
+    walkForward: 'Иди вперёд',
+    run: 'Беги',
+    jump: 'Прыгай',
+    wave: 'Помаши рукой',
+    spin: 'Крутись',
+    stop: 'Стоп',
+  };
+
+  const getSpokenMovementName = (mov: Movement) => {
+    if (currentLang === 'en') return mov.name;
+    if (currentLang === 'ru') return RU_MOVEMENT_NAMES[mov.command_key] || mov.name;
+    return mov.name_az;
   };
 
   const executeMovement = (mov: Movement) => {
+    const spokenName = getSpokenMovementName(mov);
     setCurrentAction(mov.command_key);
-    setActionLabel(`${mov.name_az}! Gəl sən də təkrar et!`);
+    setActionLabel(`${spokenName}!`);
     playSoundEffect(mov.command_key);
-    speakAction(mov.name_az);
+    parentSpeech.speakQuick(spokenName, currentLang);
     setStarsWon(prev => prev + 1);
 
     // Reset to idle after animation
     setTimeout(() => {
       setCurrentAction('idle');
-      setActionLabel(`Əhsən! ${selectedChar.name_az} ilə növbəti hərəkəti seç.`);
+      setActionLabel(
+        currentLang === 'en'
+          ? `Well done! Choose next move with ${selectedChar.name}.`
+          : currentLang === 'ru'
+          ? `Молодец! Выбери следующее движение с ${selectedChar.name}.`
+          : `Əhsən! ${selectedChar.name_az} ilə növbəti hərəkəti seç.`
+      );
     }, 2800);
   };
 

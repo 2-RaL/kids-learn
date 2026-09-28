@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, CheckCircle2, ChevronRight, Calculator, Plus, Minus } from 'lucide-react';
+import { Sparkles, CheckCircle2, ChevronRight, Calculator, Plus, Minus, Volume2 } from 'lucide-react';
 import { apiUrl } from '../../config/api';
 import { useAuthStore } from '../../store/authStore';
+import { useGameStore } from '../../store/gameStore';
+import { parentSpeech } from '../../utils/parentSpeech';
 
 interface MathAnswer {
   id: number;
@@ -28,6 +30,8 @@ interface ParentMathProps {
 
 export const ParentMath: React.FC<ParentMathProps> = ({ selectedAge }) => {
   const { token } = useAuthStore();
+  const { language } = useGameStore();
+  const currentLang = language || 'az';
   const [questions, setQuestions] = useState<MathQuestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,76 +40,198 @@ export const ParentMath: React.FC<ParentMathProps> = ({ selectedAge }) => {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; text: string } | null>(null);
 
+  const MULTILINGUAL_MATH_QUESTIONS: Record<string, MathQuestion[]> = {
+    az: [
+      {
+        id: 1,
+        question_text: 'Şəkildə neçə qırmızı alma var?',
+        question_type: 'counting',
+        visual_elements: '🍎🍎🍎',
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: '1, 2, 3 alma var.',
+        answers: [
+          { id: 11, answer_text: '2', is_correct: false },
+          { id: 12, answer_text: '3', is_correct: true },
+          { id: 13, answer_text: '4', is_correct: false },
+        ],
+      },
+      {
+        id: 2,
+        question_text: '2 + 1 cəmi neçə edir?',
+        question_type: 'addition',
+        visual_elements: '⭐ ⭐ + ⭐',
+        min_age: 4,
+        max_age: 7,
+        difficulty: 'easy',
+        explanation: '2 ulduza 1 ulduz əlavə etsək 3 olar.',
+        answers: [
+          { id: 21, answer_text: '3', is_correct: true },
+          { id: 22, answer_text: '4', is_correct: false },
+          { id: 23, answer_text: '5', is_correct: false },
+        ],
+      },
+      {
+        id: 3,
+        question_text: 'Hansı ədəd daha böyükdür?',
+        question_type: 'comparison',
+        visual_elements: '5  və  2',
+        min_age: 5,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: '5 ədədi 2-dən böyükdür.',
+        answers: [
+          { id: 31, answer_text: '5', is_correct: true },
+          { id: 32, answer_text: '2', is_correct: false },
+        ],
+      },
+      {
+        id: 4,
+        question_text: '4 - 1 fərqi neçə edir?',
+        question_type: 'subtraction',
+        visual_elements: '🎈🎈🎈🎈 - 🎈',
+        min_age: 5,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: '4 şardan 1-i uçduqda 3 şar qalır.',
+        answers: [
+          { id: 41, answer_text: '2', is_correct: false },
+          { id: 42, answer_text: '3', is_correct: true },
+          { id: 43, answer_text: '5', is_correct: false },
+        ],
+      },
+    ],
+    en: [
+      {
+        id: 1,
+        question_text: 'How many red apples are in the picture?',
+        question_type: 'counting',
+        visual_elements: '🍎🍎🍎',
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'There are 1, 2, 3 apples.',
+        answers: [
+          { id: 11, answer_text: '2', is_correct: false },
+          { id: 12, answer_text: '3', is_correct: true },
+          { id: 13, answer_text: '4', is_correct: false },
+        ],
+      },
+      {
+        id: 2,
+        question_text: 'What is 2 + 1?',
+        question_type: 'addition',
+        visual_elements: '⭐ ⭐ + ⭐',
+        min_age: 4,
+        max_age: 7,
+        difficulty: 'easy',
+        explanation: '2 stars plus 1 star equals 3 stars.',
+        answers: [
+          { id: 21, answer_text: '3', is_correct: true },
+          { id: 22, answer_text: '4', is_correct: false },
+          { id: 23, answer_text: '5', is_correct: false },
+        ],
+      },
+      {
+        id: 3,
+        question_text: 'Which number is greater?',
+        question_type: 'comparison',
+        visual_elements: '5  and  2',
+        min_age: 5,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'Number 5 is greater than 2.',
+        answers: [
+          { id: 31, answer_text: '5', is_correct: true },
+          { id: 32, answer_text: '2', is_correct: false },
+        ],
+      },
+      {
+        id: 4,
+        question_text: 'What is 4 - 1?',
+        question_type: 'subtraction',
+        visual_elements: '🎈🎈🎈🎈 - 🎈',
+        min_age: 5,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'If 1 balloon flies away from 4, 3 remain.',
+        answers: [
+          { id: 41, answer_text: '2', is_correct: false },
+          { id: 42, answer_text: '3', is_correct: true },
+          { id: 43, answer_text: '5', is_correct: false },
+        ],
+      },
+    ],
+    ru: [
+      {
+        id: 1,
+        question_text: 'Сколько красных яблок на картинке?',
+        question_type: 'counting',
+        visual_elements: '🍎🍎🍎',
+        min_age: 3,
+        max_age: 6,
+        difficulty: 'easy',
+        explanation: 'Здесь ровно 1, 2, 3 яблока.',
+        answers: [
+          { id: 11, answer_text: '2', is_correct: false },
+          { id: 12, answer_text: '3', is_correct: true },
+          { id: 13, answer_text: '4', is_correct: false },
+        ],
+      },
+      {
+        id: 2,
+        question_text: 'Сколько будет 2 + 1?',
+        question_type: 'addition',
+        visual_elements: '⭐ ⭐ + ⭐',
+        min_age: 4,
+        max_age: 7,
+        difficulty: 'easy',
+        explanation: 'К двум звёздочкам прибавим одну — получится 3.',
+        answers: [
+          { id: 21, answer_text: '3', is_correct: true },
+          { id: 22, answer_text: '4', is_correct: false },
+          { id: 23, answer_text: '5', is_correct: false },
+        ],
+      },
+      {
+        id: 3,
+        question_text: 'Какое число больше?',
+        question_type: 'comparison',
+        visual_elements: '5  и  2',
+        min_age: 5,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'Число 5 больше, чем 2.',
+        answers: [
+          { id: 31, answer_text: '5', is_correct: true },
+          { id: 32, answer_text: '2', is_correct: false },
+        ],
+      },
+      {
+        id: 4,
+        question_text: 'Сколько будет 4 - 1?',
+        question_type: 'subtraction',
+        visual_elements: '🎈🎈🎈🎈 - 🎈',
+        min_age: 5,
+        max_age: 8,
+        difficulty: 'easy',
+        explanation: 'Если из четырёх шариков улетит один, останется 3.',
+        answers: [
+          { id: 41, answer_text: '2', is_correct: false },
+          { id: 42, answer_text: '3', is_correct: true },
+          { id: 43, answer_text: '5', is_correct: false },
+        ],
+      },
+    ],
+  };
+
   useEffect(() => {
     fetchQuestions();
-  }, [selectedAge, token]);
+  }, [selectedAge, token, currentLang]);
 
   const fetchQuestions = async () => {
-    if (!token) return;
-    setIsLoading(true);
-    try {
-      let url = apiUrl('/api/parent/math-questions');
-      if (selectedAge) url += `?age=${selectedAge}`;
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      if (res.ok && data.questions?.length > 0) {
-        setQuestions(data.questions);
-      } else {
-        // Fallback default questions
-        setQuestions([
-          {
-            id: 1,
-            question_text: 'Şəkildə neçə alma var?',
-            question_type: 'counting',
-            visual_elements: '🍎🍎🍎',
-            min_age: 3,
-            max_age: 6,
-            difficulty: 'easy',
-            explanation: '1, 2, 3 alma var.',
-            answers: [
-              { id: 11, answer_text: '2', is_correct: false },
-              { id: 12, answer_text: '3', is_correct: true },
-              { id: 13, answer_text: '4', is_correct: false },
-            ],
-          },
-          {
-            id: 2,
-            question_text: '2 + 1 cəmi neçə edir?',
-            question_type: 'addition',
-            visual_elements: '⭐ ⭐ + ⭐',
-            min_age: 4,
-            max_age: 7,
-            difficulty: 'easy',
-            explanation: '2 ulduza 1 ulduz əlavə etsək 3 olar.',
-            answers: [
-              { id: 21, answer_text: '3', is_correct: true },
-              { id: 22, answer_text: '4', is_correct: false },
-              { id: 23, answer_text: '5', is_correct: false },
-            ],
-          },
-          {
-            id: 3,
-            question_text: 'Hansı ədəd daha böyükdür?',
-            question_type: 'comparison',
-            visual_elements: '5  və  2',
-            min_age: 5,
-            max_age: 8,
-            difficulty: 'easy',
-            explanation: '5 ədədi 2-dən böyükdür.',
-            answers: [
-              { id: 31, answer_text: '5', is_correct: true },
-              { id: 32, answer_text: '2', is_correct: false },
-            ],
-          },
-        ]);
-      }
-    } catch {
-      // Fallback
-    } finally {
-      setIsLoading(false);
-    }
+    setQuestions(MULTILINGUAL_MATH_QUESTIONS[currentLang] || MULTILINGUAL_MATH_QUESTIONS.az);
   };
 
   const playFeedbackSound = (isCorrect: boolean) => {
@@ -221,9 +347,18 @@ export const ParentMath: React.FC<ParentMathProps> = ({ selectedAge }) => {
 
             {/* Question Text */}
             <div className="text-center mb-6">
-              <h3 className="text-xl sm:text-2xl font-black text-slate-800 mb-4">
-                {currentQ.question_text}
-              </h3>
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-800">
+                  {currentQ.question_text}
+                </h3>
+                <button
+                  onClick={() => parentSpeech.speakQuick(currentQ.question_text, currentLang)}
+                  className="p-2 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-600 transition-colors cursor-pointer shadow-xs border border-emerald-100"
+                  title="Sualı səsli dinlə"
+                >
+                  <Volume2 className="w-5 h-5" />
+                </button>
+              </div>
 
               {/* Visual Counting Objects */}
               {currentQ.visual_elements && (
