@@ -4,15 +4,17 @@ import {
   Users, UserPlus, Shield, Trash2, Key, CheckCircle2,
   AlertCircle, RefreshCw, Search, Check, Ban, ArrowLeft,
   LayoutDashboard, BookOpen, Video, Brain, Calculator, Award,
-  Plus, Edit2, X, Filter, LogOut
+  Plus, Edit2, X, Filter, LogOut, Pencil, History, RotateCcw, Bell, ShieldAlert
 } from 'lucide-react';
-import { useAuthStore, type AuthUser } from '../../store/authStore';
+import { useAuthStore, type AuthUser, type UserRole } from '../../store/authStore';
 import { apiUrl } from '../../config/api';
 
-type AdminTab = 'dashboard' | 'users' | 'stories' | 'videos' | 'logic' | 'math' | 'chess' | 'age-groups';
+type AdminTab = 'dashboard' | 'users' | 'stories' | 'videos' | 'logic' | 'math' | 'chess' | 'audit';
+type UserRoleFilter = 'all' | 'admin' | 'editor' | 'therapist' | 'parent' | 'user';
 
 export const AdminPanel: React.FC = () => {
   const { token, user: currentAdmin, logout, setActivePortal } = useAuthStore();
+  const isSuperAdmin = currentAdmin?.role === 'admin';
 
   const [activeTab, setActiveTab] = useState<AdminTab>('dashboard');
   const [stats, setStats] = useState<any>(null);
@@ -22,15 +24,30 @@ export const AdminPanel: React.FC = () => {
 
   // Users State
   const [users, setUsers] = useState<AuthUser[]>([]);
-  const [userRoleFilter, setUserRoleFilter] = useState<'all' | 'therapist' | 'parent' | 'admin'>('all');
+  const [userRoleFilter, setUserRoleFilter] = useState<UserRoleFilter>('all');
   const [userSearchTerm, setUserSearchTerm] = useState('');
+
+  // Create User Modal State
   const [isCreateUserOpen, setIsCreateUserOpen] = useState(false);
   const [newUsername, setNewUsername] = useState('');
   const [newDisplayName, setNewDisplayName] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [newRole, setNewRole] = useState<'therapist' | 'parent' | 'admin'>('therapist');
-  const [editingUserId, setEditingUserId] = useState<string | number | null>(null);
-  const [editPassword, setEditPassword] = useState('');
+  const [newRole, setNewRole] = useState<UserRole>('user');
+
+  // Edit User Modal State
+  const [isEditUserOpen, setIsEditUserOpen] = useState(false);
+  const [editUserId, setEditUserId] = useState<string | number | null>(null);
+  const [editUsername, setEditUsername] = useState('');
+  const [editDisplayName, setEditDisplayName] = useState('');
+  const [editEmail, setEditEmail] = useState('');
+  const [editRole, setEditRole] = useState<UserRole>('user');
+  const [editPasswordInput, setEditPasswordInput] = useState('');
+  const [editIsActive, setEditIsActive] = useState(true);
+
+  // Redaktor Audit Logs & Rollback State
+  const [auditLogs, setAuditLogs] = useState<any[]>([]);
+  const [unrevertedAuditCount, setUnrevertedAuditCount] = useState(0);
+  const [isRevertingId, setIsRevertingId] = useState<number | null>(null);
 
   // Stories State
   const [stories, setStories] = useState<any[]>([]);
@@ -196,13 +213,22 @@ export const AdminPanel: React.FC = () => {
 
   useEffect(() => {
     fetchStats();
-    fetchUsers();
     fetchStories();
     fetchVideos();
     fetchLogic();
     fetchMath();
     fetchChess();
-  }, [token]);
+    if (isSuperAdmin) {
+      fetchUsers();
+      fetchAuditLogs();
+    }
+  }, [token, isSuperAdmin]);
+
+  useEffect(() => {
+    if (!isSuperAdmin && (activeTab === 'users' || activeTab === 'audit')) {
+      setActiveTab('dashboard');
+    }
+  }, [isSuperAdmin, activeTab]);
 
   // Handle User Create
   const handleCreateUser = async (e: React.FormEvent) => {
@@ -231,6 +257,90 @@ export const AdminPanel: React.FC = () => {
       fetchStats();
     } catch (err: any) {
       setError(err.message);
+    }
+  };
+
+  // Open Edit User Modal
+  const handleOpenEditUser = (targetUser: AuthUser) => {
+    setEditUserId(targetUser.id);
+    setEditUsername(targetUser.username);
+    setEditDisplayName(targetUser.displayName || (targetUser as any).display_name || targetUser.username);
+    setEditEmail((targetUser as any).email || '');
+    setEditRole(targetUser.role || 'user');
+    setEditPasswordInput('');
+    setEditIsActive(targetUser.isActive !== undefined ? targetUser.isActive : !!(targetUser as any).is_active);
+    setIsEditUserOpen(true);
+  };
+
+  // Submit Edit User
+  const handleUpdateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!token || !editUserId) return;
+    try {
+      const res = await fetch(apiUrl(`/api/admin/users/${editUserId}`), {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          username: editUsername.trim(),
+          displayName: editDisplayName.trim(),
+          email: editEmail.trim() || null,
+          role: editRole,
+          isActive: editIsActive,
+          password: editPasswordInput.trim() ? editPasswordInput : undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'İstifadəçi yenilənə bilmədi');
+      showNotification(`"${editDisplayName || editUsername}" məlumatları uğurla yeniləndi!`);
+      setIsEditUserOpen(false);
+      fetchUsers();
+      fetchStats();
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  // Fetch Redaktor Audit Logs (Super Admin only)
+  const fetchAuditLogs = async () => {
+    if (!token || currentAdmin?.role !== 'admin') return;
+    try {
+      const res = await fetch(apiUrl('/api/admin/audit-logs'), {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (res.ok && Array.isArray(data.logs)) {
+        setAuditLogs(data.logs);
+        setUnrevertedAuditCount(data.unrevertedCount || 0);
+      }
+    } catch {}
+  };
+
+  // Revert Action (Rollback / Undo)
+  const handleRevertAction = async (logId: number, entityTitle: string) => {
+    if (!token) return;
+    if (!confirm(`"${entityTitle || 'Bu fəaliyyət'}" üçün edilmiş dəyişikliyi ləğv edib əvvəlki vəziyyətinə qaytarmaq (Undo) istədiyinizə əminsiniz?`)) {
+      return;
+    }
+    setIsRevertingId(logId);
+    try {
+      const res = await fetch(apiUrl(`/api/admin/audit-logs/${logId}/revert`), {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Fəaliyyəti ləğv etmək mümkün olmadı');
+      showNotification(data.message || 'Fəaliyyət ləğv edildi və məlumat bərpa olundu!');
+      fetchAuditLogs();
+      fetchStats();
+      fetchLogic();
+      fetchStories();
+      fetchVideos();
+      fetchMath();
+      fetchChess();
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsRevertingId(null);
     }
   };
 
@@ -446,7 +556,18 @@ export const AdminPanel: React.FC = () => {
 
   const navItems = [
     { id: 'dashboard' as AdminTab, label: 'Statistika', icon: LayoutDashboard, emoji: '📊' },
-    { id: 'users' as AdminTab, label: 'İstifadəçilər', icon: Users, emoji: '👥' },
+    ...(isSuperAdmin
+      ? [
+          { id: 'users' as AdminTab, label: 'İstifadəçilər', icon: Users, emoji: '👥' },
+          {
+            id: 'audit' as AdminTab,
+            label: 'Redaktor Tarixçəsi',
+            icon: History,
+            emoji: '📜',
+            badge: unrevertedAuditCount > 0 ? unrevertedAuditCount : undefined,
+          },
+        ]
+      : []),
     { id: 'stories' as AdminTab, label: 'Hekayələr', icon: BookOpen, emoji: '📖' },
     { id: 'videos' as AdminTab, label: 'Videolar', icon: Video, emoji: '🎬' },
     { id: 'logic' as AdminTab, label: 'Məntiq Sualları', icon: Brain, emoji: '🧠' },
@@ -475,12 +596,18 @@ export const AdminPanel: React.FC = () => {
 
           {/* Admin user info */}
           <div className="my-4 p-3 rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm">
-              👑
+            <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm ${
+              isSuperAdmin ? 'bg-indigo-500/20 text-indigo-400' : 'bg-amber-500/20 text-amber-400'
+            }`}>
+              {isSuperAdmin ? '👑' : '✍️'}
             </div>
             <div className="overflow-hidden">
               <p className="text-xs font-bold text-white truncate">{currentAdmin?.displayName || currentAdmin?.username}</p>
-              <p className="text-[10px] text-emerald-400 font-extrabold uppercase tracking-wider">Super Administrator</p>
+              <p className={`text-[10px] font-extrabold uppercase tracking-wider ${
+                isSuperAdmin ? 'text-emerald-400' : 'text-amber-400'
+              }`}>
+                {isSuperAdmin ? 'Super Administrator' : 'Məzmun Redaktoru'}
+              </p>
             </div>
           </div>
 
@@ -492,14 +619,21 @@ export const AdminPanel: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs lg:text-sm transition-all text-left cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-bold text-xs lg:text-sm transition-all text-left cursor-pointer ${
                     isActive
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
                       : 'text-slate-400 hover:bg-slate-900 hover:text-white'
                   }`}
                 >
-                  <span className="text-lg">{item.emoji}</span>
-                  <span>{item.label}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-lg">{item.emoji}</span>
+                    <span>{item.label}</span>
+                  </div>
+                  {(item as any).badge ? (
+                    <span className="px-2 py-0.5 text-[10px] font-black rounded-full bg-rose-500 text-white animate-pulse">
+                      {(item as any).badge}
+                    </span>
+                  ) : null}
                 </button>
               );
             })}
@@ -530,6 +664,27 @@ export const AdminPanel: React.FC = () => {
         {/* Top bar alerts */}
         <div className="p-4 sm:p-6 pb-0">
           <AnimatePresence>
+            {isSuperAdmin && unrevertedAuditCount > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="mb-4 p-3.5 rounded-2xl bg-amber-950/80 border border-amber-500/50 text-amber-200 text-xs font-bold flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg"
+              >
+                <div className="flex items-center gap-2">
+                  <Bell className="w-4 h-4 text-amber-400 shrink-0 animate-bounce" />
+                  <span>
+                    Diqqət: Redaktorlar tərəfindən <span className="text-amber-300 font-black underline">{unrevertedAuditCount} ədəd</span> yeni əməliyyat həyata keçirilib! Səhvən edilən hərəkəti buradan ləğv edə bilərsiniz.
+                  </span>
+                </div>
+                <button
+                  onClick={() => setActiveTab('audit')}
+                  className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black transition-all cursor-pointer whitespace-nowrap self-end sm:self-auto"
+                >
+                  Tarixçəyə bax və Ləğv et
+                </button>
+              </motion.div>
+            )}
             {successMsg && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -572,8 +727,11 @@ export const AdminPanel: React.FC = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
                 { title: 'Ümumi İstifadəçi', value: stats?.totalUsers || 0, icon: Users, color: 'text-indigo-400', bg: 'bg-indigo-950/40 border-indigo-800/40' },
+                ...(isSuperAdmin ? [
+                  { title: 'Redaktorlar', value: stats?.editors || 0, icon: Edit2, color: 'text-amber-400', bg: 'bg-amber-950/40 border-amber-800/40' },
+                ] : []),
                 { title: 'Loqopedlər', value: stats?.therapists || 0, icon: Shield, color: 'text-sky-400', bg: 'bg-sky-950/40 border-sky-800/40' },
-                { title: 'Valideynlər', value: stats?.parents || 0, icon: Users, color: 'text-amber-400', bg: 'bg-amber-950/40 border-amber-800/40' },
+                { title: 'Valideynlər', value: stats?.parents || 0, icon: Users, color: 'text-emerald-400', bg: 'bg-emerald-950/40 border-emerald-800/40' },
                 { title: 'Hekayələr', value: stats?.stories || 0, icon: BookOpen, color: 'text-emerald-400', bg: 'bg-emerald-950/40 border-emerald-800/40' },
                 { title: 'Videolar', value: stats?.videos || 0, icon: Video, color: 'text-cyan-400', bg: 'bg-cyan-950/40 border-cyan-800/40' },
                 { title: 'Məntiq Sualları', value: stats?.logicQuestions || 0, icon: Brain, color: 'text-purple-400', bg: 'bg-purple-950/40 border-purple-800/40' },
@@ -594,13 +752,24 @@ export const AdminPanel: React.FC = () => {
             <div className="p-6 rounded-3xl bg-slate-950 border border-slate-800">
               <h3 className="text-sm font-bold text-slate-300 mb-4">Sürətli İdarəetmə</h3>
               <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={() => { setActiveTab('users'); setIsCreateUserOpen(true); }}
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
-                >
-                  <UserPlus className="w-4 h-4" />
-                  <span>Yeni İstifadəçi Əlavə Et</span>
-                </button>
+                {isSuperAdmin && (
+                  <button
+                    onClick={() => { setActiveTab('users'); setIsCreateUserOpen(true); }}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    <span>Yeni İstifadəçi Əlavə Et</span>
+                  </button>
+                )}
+                {isSuperAdmin && (
+                  <button
+                    onClick={() => setActiveTab('audit')}
+                    className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <History className="w-4 h-4" />
+                    <span>Redaktor Tarixçəsi ({unrevertedAuditCount})</span>
+                  </button>
+                )}
                 <button
                   onClick={() => { setActiveTab('stories'); setIsStoryModalOpen(true); }}
                   className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
@@ -621,12 +790,12 @@ export const AdminPanel: React.FC = () => {
         )}
 
         {/* Tab 2: Users Management */}
-        {activeTab === 'users' && (
+        {activeTab === 'users' && isSuperAdmin && (
           <div className="p-4 sm:p-8 space-y-6 max-w-6xl">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-black text-white">İstifadəçilər</h2>
-                <p className="text-xs text-slate-400 mt-0.5">Loqoped, Valideyn və Admin hesablarının idarə olunması</p>
+                <p className="text-xs text-slate-400 mt-0.5">Admin, Redaktor, Loqoped, Valideyn və Sadə İstifadəçi hesablarının idarə olunması</p>
               </div>
 
               <button
@@ -640,12 +809,14 @@ export const AdminPanel: React.FC = () => {
 
             {/* Filters */}
             <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950 p-3 rounded-2xl border border-slate-800">
-              <div className="flex gap-1.5">
+              <div className="flex flex-wrap gap-1.5">
                 {[
                   { id: 'all', label: 'Hamısı' },
+                  { id: 'admin', label: 'Adminlər' },
+                  { id: 'editor', label: 'Redaktorlar' },
                   { id: 'therapist', label: 'Loqopedlər' },
                   { id: 'parent', label: 'Valideynlər' },
-                  { id: 'admin', label: 'Adminlər' },
+                  { id: 'user', label: 'Sadə İstifadəçilər' },
                 ].map(f => (
                   <button
                     key={f.id}
@@ -703,11 +874,23 @@ export const AdminPanel: React.FC = () => {
                             <span className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
                               u.role === 'admin'
                                 ? 'bg-purple-950 text-purple-400 border border-purple-800'
+                                : u.role === 'editor'
+                                ? 'bg-amber-950 text-amber-400 border border-amber-800'
                                 : u.role === 'therapist'
                                 ? 'bg-sky-950 text-sky-400 border border-sky-800'
-                                : 'bg-amber-950 text-amber-400 border border-amber-800'
+                                : u.role === 'parent'
+                                ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                                : 'bg-slate-800 text-slate-300 border border-slate-700'
                             }`}>
-                              {u.role === 'therapist' ? 'Loqoped' : u.role === 'parent' ? 'Valideyn' : 'Admin'}
+                              {u.role === 'admin'
+                                ? 'Admin'
+                                : u.role === 'editor'
+                                ? 'Redaktor'
+                                : u.role === 'therapist'
+                                ? 'Loqoped'
+                                : u.role === 'parent'
+                                ? 'Valideyn'
+                                : 'İstifadəçi'}
                             </span>
                           </td>
                           <td className="p-4">
@@ -720,6 +903,13 @@ export const AdminPanel: React.FC = () => {
                           </td>
                           <td className="p-4 text-right">
                             <div className="flex items-center justify-end gap-2">
+                              <button
+                                onClick={() => handleOpenEditUser(u)}
+                                className="p-1.5 rounded-lg bg-slate-900 hover:bg-indigo-950 text-slate-400 hover:text-indigo-400 cursor-pointer transition-colors"
+                                title="İstifadəçini Redaktə Et"
+                              >
+                                <Pencil className="w-3.5 h-3.5 text-indigo-400" />
+                              </button>
                               <button
                                 onClick={() => handleToggleUserActive(u)}
                                 className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
@@ -935,6 +1125,150 @@ export const AdminPanel: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* Tab 8: Editor Audit Log & Rollback (Super Admin Only) */}
+        {activeTab === 'audit' && isSuperAdmin && (
+          <div className="p-4 sm:p-8 space-y-6 max-w-6xl">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-2xl font-black text-white">Redaktor Fəaliyyət Tarixçəsi</h2>
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-950 text-amber-400 border border-amber-800">
+                    Audit Log & Undo
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-1">
+                  Redaktorların sildiyi, əlavə etdiyi və ya dəyişdirdiyi bütün məlumatlar burada qeyd olunur.
+                  Səhvən silinən sual və ya məzmunu buradan dərhal əvvəlki vəziyyətinə qaytara (Undo) bilərsiniz.
+                </p>
+              </div>
+
+              <button
+                onClick={fetchAuditLogs}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer border border-slate-700"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Yenilə</span>
+              </button>
+            </div>
+
+            {/* Audit Log Table */}
+            <div className="bg-slate-950 rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-900 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-800">
+                  <tr>
+                    <th className="p-4">Tarix & Saat</th>
+                    <th className="p-4">Redaktor</th>
+                    <th className="p-4">Əməliyyat</th>
+                    <th className="p-4">Bölmə & Element</th>
+                    <th className="p-4">Status</th>
+                    <th className="p-4 text-right">Müdaxilə</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60 font-medium">
+                  {auditLogs.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="p-8 text-center text-slate-500 text-xs">
+                        Hələlik heç bir redaktor əməliyyatı qeydə alınmayıb.
+                      </td>
+                    </tr>
+                  ) : (
+                    auditLogs.map((log: any) => {
+                      const dateStr = log.created_at
+                        ? new Date(log.created_at).toLocaleString('az-AZ', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })
+                        : '—';
+
+                      const actionBadge =
+                        log.action_type === 'DELETE' ? (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-950 text-rose-400 border border-rose-800">
+                            Silinmə
+                          </span>
+                        ) : log.action_type === 'UPDATE' ? (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-sky-950 text-sky-400 border border-sky-800">
+                            Dəyişiklik
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-950 text-emerald-400 border border-emerald-800">
+                            Əlavə
+                          </span>
+                        );
+
+                      const entityLabels: Record<string, string> = {
+                        logic: 'Məntiq Sualı',
+                        math: 'Riyaziyyat Sualı',
+                        story: 'Hekayə',
+                        video: 'Video',
+                        chess: 'Şahmat Dərsi',
+                        age_group: 'Yaş Qrupu',
+                      };
+
+                      return (
+                        <tr key={log.id} className="hover:bg-slate-900/50 transition-colors">
+                          <td className="p-4 text-slate-400 whitespace-nowrap">
+                            {dateStr}
+                          </td>
+                          <td className="p-4">
+                            <div className="font-extrabold text-white">
+                              {log.user_display_name || log.user_name}
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              @{log.user_name} ({log.user_role})
+                            </div>
+                          </td>
+                          <td className="p-4">{actionBadge}</td>
+                          <td className="p-4">
+                            <span className="text-[11px] font-bold text-indigo-400 block">
+                              {entityLabels[log.entity_type] || log.entity_type}
+                            </span>
+                            <span className="text-white font-medium line-clamp-1">
+                              {log.entity_title || `ID: #${log.entity_id}`}
+                            </span>
+                          </td>
+                          <td className="p-4">
+                            {log.is_reverted ? (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-400">
+                                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                                Ləğv edildi / Bərpa olundu
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-950 text-amber-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                                Qüvvədədir
+                              </span>
+                            )}
+                          </td>
+                          <td className="p-4 text-right">
+                            {log.is_reverted ? (
+                              <span className="text-[11px] text-slate-500 italic">
+                                {log.reverted_by_name ? `${log.reverted_by_name} tərəfindən bərpa edildi` : 'Bərpa edilib'}
+                              </span>
+                            ) : (
+                              <button
+                                onClick={() => handleRevertAction(log.id, log.entity_title)}
+                                disabled={isRevertingId === log.id}
+                                className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-slate-950 font-black text-xs inline-flex items-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-95"
+                                title="Bu əməliyyatı ləğv et və məlumatı geri qaytar (Undo)"
+                              >
+                                <RotateCcw className={`w-3.5 h-3.5 ${isRevertingId === log.id ? 'animate-spin' : ''}`} />
+                                <span>Geri Qaytar (Ləğv et)</span>
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Modal: Create User */}
@@ -954,24 +1288,24 @@ export const AdminPanel: React.FC = () => {
                 </button>
               </div>
 
-              <form onSubmit={handleCreateUser} className="space-y-4">
+              <form onSubmit={handleCreateUser} className="space-y-3.5">
                 <div>
-                  <label className="text-xs font-bold text-slate-400">İstifadəçi adı:</label>
+                  <label className="text-xs font-bold text-slate-400">İstifadəçi adı (Username):</label>
                   <input
                     type="text"
                     required
                     value={newUsername}
                     onChange={e => setNewUsername(e.target.value)}
-                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white"
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400">Görünən ad:</label>
+                  <label className="text-xs font-bold text-slate-400">Görünən ad (Display Name):</label>
                   <input
                     type="text"
                     value={newDisplayName}
                     onChange={e => setNewDisplayName(e.target.value)}
-                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white"
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div>
@@ -981,34 +1315,155 @@ export const AdminPanel: React.FC = () => {
                     required
                     value={newPassword}
                     onChange={e => setNewPassword(e.target.value)}
-                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white"
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400">Rol:</label>
+                  <label className="text-xs font-bold text-slate-400">Rol və İcazə Statusu:</label>
                   <select
                     value={newRole}
                     onChange={e => setNewRole(e.target.value as any)}
-                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white"
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
                   >
-                    <option value="therapist">Loqoped (Therapist)</option>
-                    <option value="parent">Valideyn (Parent)</option>
-                    <option value="admin">Administrator (Admin)</option>
+                    <option value="user">Sadə İstifadəçi (Admin panelə girişi yoxdur)</option>
+                    <option value="editor">Redaktor (Admin məzmun redaktoru, istifadəçi idarəsi yoxdur)</option>
+                    <option value="admin">Administrator (Super Admin - hər şeyə tam səlahiyyət)</option>
+                    <option value="therapist">Loqoped (Therapist portalı)</option>
+                    <option value="parent">Valideyn (Valideyn portalı)</option>
                   </select>
                 </div>
                 <div className="pt-2 flex gap-2">
                   <button
                     type="button"
                     onClick={() => setIsCreateUserOpen(false)}
-                    className="flex-1 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold"
+                    className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-colors"
                   >
                     Ləğv et
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold"
+                    className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors shadow-lg shadow-indigo-600/30"
                   >
                     Əlavə et
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Modal: Edit User (Super Admin Only) */}
+      <AnimatePresence>
+        {isEditUserOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">
+                    <Pencil className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-extrabold text-white text-base">İstifadəçini Redaktə Et</h3>
+                    <p className="text-[11px] text-slate-400">Hesab məlumatlarını və statusunu dəyişdirin</p>
+                  </div>
+                </div>
+                <button onClick={() => setIsEditUserOpen(false)} className="text-slate-400 hover:text-white">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleUpdateUser} className="space-y-3.5">
+                <div>
+                  <label className="text-xs font-bold text-slate-400">Görünən ad (Display Name):</label>
+                  <input
+                    type="text"
+                    required
+                    value={editDisplayName}
+                    onChange={e => setEditDisplayName(e.target.value)}
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-slate-400">İstifadəçi adı (Username):</label>
+                  <input
+                    type="text"
+                    required
+                    value={editUsername}
+                    onChange={e => setEditUsername(e.target.value)}
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-slate-400">E-poçt (Email - istəyə bağlı):</label>
+                  <input
+                    type="email"
+                    value={editEmail}
+                    onChange={e => setEditEmail(e.target.value)}
+                    placeholder="istifadeci@example.com"
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-slate-400">İstifadəçi Statusu / Rolu:</label>
+                  <select
+                    value={editRole}
+                    onChange={e => setEditRole(e.target.value as UserRole)}
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  >
+                    <option value="user">Sadə İstifadəçi (Yalnız məzmunları görür, admin panelə girə bilmir)</option>
+                    <option value="editor">Redaktor (Admin məzmun redaktoru, lakin istifadəçi idarəsi yoxdur)</option>
+                    <option value="admin">Admin (Hər şeyi görə və idarə edə bilən tam səlahiyyətli super admin)</option>
+                    <option value="therapist">Loqoped (Therapist portalı)</option>
+                    <option value="parent">Valideyn (Valideyn portalı)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-slate-400">Yeni Şifrə (dəyişmək istəmirsinizsə boş buraxın):</label>
+                  <input
+                    type="password"
+                    value={editPasswordInput}
+                    onChange={e => setEditPasswordInput(e.target.value)}
+                    placeholder="Şifrəni olduğu kimi saxlamaq üçün boş saxlayın"
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+
+                <div className="flex items-center gap-2 pt-1">
+                  <input
+                    type="checkbox"
+                    id="editIsActive"
+                    checked={editIsActive}
+                    onChange={e => setEditIsActive(e.target.checked)}
+                    className="w-4 h-4 rounded text-indigo-600 bg-slate-950 border-slate-800 cursor-pointer"
+                  />
+                  <label htmlFor="editIsActive" className="text-xs font-bold text-slate-300 cursor-pointer">
+                    İstifadəçi hesabı aktivdir
+                  </label>
+                </div>
+
+                <div className="pt-3 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsEditUserOpen(false)}
+                    className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-colors cursor-pointer"
+                  >
+                    Ləğv et
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors shadow-lg shadow-indigo-600/30 cursor-pointer"
+                  >
+                    Yadda saxla
                   </button>
                 </div>
               </form>

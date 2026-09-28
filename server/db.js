@@ -44,7 +44,7 @@ export async function initDatabase() {
       password_hash VARCHAR(255) NOT NULL,
       display_name VARCHAR(200) NOT NULL DEFAULT '',
       email VARCHAR(255) DEFAULT NULL,
-      role ENUM('admin', 'therapist', 'parent') NOT NULL DEFAULT 'therapist',
+      role VARCHAR(50) NOT NULL DEFAULT 'user',
       is_active TINYINT(1) NOT NULL DEFAULT 1,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -55,12 +55,36 @@ export async function initDatabase() {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   `);
 
-  // Migrate old 'user' role to 'therapist' if needed
+  // Ensure role column supports admin, editor, therapist, parent, user
   await db.query(`
-    UPDATE users SET role = 'therapist' WHERE role = 'user'
+    ALTER TABLE users MODIFY COLUMN role VARCHAR(50) NOT NULL DEFAULT 'user'
   `).catch(() => {});
 
-  console.log('✅ Users table ready.');
+  // ── Editor Audit Logs (Fəaliyyət Tarixçəsi və Rollback) ─────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS editor_audit_logs (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      user_name VARCHAR(100) NOT NULL,
+      user_display_name VARCHAR(200) NOT NULL,
+      user_role VARCHAR(50) NOT NULL DEFAULT 'editor',
+      action_type ENUM('create', 'update', 'delete') NOT NULL,
+      entity_type VARCHAR(50) NOT NULL,
+      entity_id INT NOT NULL,
+      entity_title VARCHAR(300) DEFAULT NULL,
+      previous_state LONGTEXT DEFAULT NULL,
+      new_state LONGTEXT DEFAULT NULL,
+      is_reverted TINYINT(1) NOT NULL DEFAULT 0,
+      reverted_at DATETIME DEFAULT NULL,
+      reverted_by_name VARCHAR(100) DEFAULT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_user_id (user_id),
+      INDEX idx_created_at (created_at),
+      INDEX idx_is_reverted (is_reverted)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  console.log('✅ Users & audit tables ready.');
 
   // ── Age Groups ──────────────────────────────────────────────────────
   await db.query(`
@@ -346,6 +370,26 @@ export async function initDatabase() {
     }
   } catch (err) {
     console.warn('⚠️ Parent seed warning:', err.message);
+  }
+
+  // 4. Default editor account ('redaktor')
+  try {
+    const [existingEditor] = await db.query(
+      'SELECT id FROM users WHERE LOWER(username) = ? LIMIT 1',
+      ['redaktor']
+    );
+    if (existingEditor.length === 0) {
+      const hash = await bcrypt.hash('redaktor123', 10);
+      await db.query(
+        `INSERT INTO users (username, password_hash, display_name, role, is_active)
+         VALUES (?, ?, ?, 'editor', 1)
+         ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP`,
+        ['redaktor', hash, 'Məzmun Redaktoru']
+      );
+      console.log('👤 Default editor created: username="redaktor"');
+    }
+  } catch (err) {
+    console.warn('⚠️ Editor seed warning:', err.message);
   }
 
   // 4. Age groups
@@ -694,8 +738,8 @@ export async function createUser({ username, password, displayName, email, role 
   const existing = await findUserByUsername(username);
   if (existing) throw new Error('Bu istifadəçi adı artıq mövcuddur!');
 
-  const allowedRoles = ['admin', 'therapist', 'parent'];
-  const safeRole = allowedRoles.includes(role) ? role : 'therapist';
+  const allowedRoles = ['admin', 'editor', 'therapist', 'parent', 'user'];
+  const safeRole = allowedRoles.includes(role) ? role : 'user';
   const hash = await bcrypt.hash(password, 10);
 
   const [result] = await db.query(
@@ -720,6 +764,15 @@ export async function updateUser(id, updates) {
   const fields = [];
   const values = [];
 
+  if (updates.username !== undefined && updates.username.trim() !== '') {
+    const cleanUsername = updates.username.trim().toLowerCase();
+    const existing = await findUserByUsername(cleanUsername);
+    if (existing && String(existing.id) !== String(id)) {
+      throw new Error('Bu istifadəçi adı artıq başqa istifadəçi tərəfindən istifadə olunur!');
+    }
+    fields.push('username = ?');
+    values.push(cleanUsername);
+  }
   if (updates.password) {
     fields.push('password_hash = ?');
     values.push(await bcrypt.hash(updates.password, 10));
@@ -733,7 +786,7 @@ export async function updateUser(id, updates) {
     values.push(updates.email || null);
   }
   if (updates.role !== undefined) {
-    const allowedRoles = ['admin', 'therapist', 'parent'];
+    const allowedRoles = ['admin', 'editor', 'therapist', 'parent', 'user'];
     if (allowedRoles.includes(updates.role)) {
       fields.push('role = ?');
       values.push(updates.role);
@@ -787,4 +840,229 @@ export async function upsertParentProfile(userId, { childName, childAge, childGe
     );
   }
   return getParentProfile(userId);
+}
+
+// ── Editor Audit Logs & Rollback System ────────────────────────────────
+
+export async function createAuditLog({
+  userId,
+  userName,
+  userDisplayName,
+  userRole,
+  actionType,
+  entityType,
+  entityId,
+  entityTitle,
+  previousState = null,
+  newState = null,
+}) {
+  const db = getPool();
+  const [result] = await db.query(
+    `INSERT INTO editor_audit_logs 
+     (user_id, user_name, user_display_name, user_role, action_type, entity_type, entity_id, entity_title, previous_state, new_state) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      userId,
+      userName,
+      userDisplayName,
+      userRole || 'editor',
+      actionType,
+      entityType,
+      entityId,
+      entityTitle || null,
+      previousState ? JSON.stringify(previousState) : null,
+      newState ? JSON.stringify(newState) : null,
+    ]
+  );
+  return result.insertId;
+}
+
+export async function getAuditLogs(limit = 100) {
+  const db = getPool();
+  const [rows] = await db.query(
+    'SELECT * FROM editor_audit_logs ORDER BY created_at DESC LIMIT ?',
+    [parseInt(limit, 10)]
+  );
+  return rows;
+}
+
+export async function getAuditLogById(id) {
+  const db = getPool();
+  const [rows] = await db.query('SELECT * FROM editor_audit_logs WHERE id = ? LIMIT 1', [id]);
+  return rows[0] || null;
+}
+
+export async function markAuditLogReverted(id, adminName) {
+  const db = getPool();
+  await db.query(
+    'UPDATE editor_audit_logs SET is_reverted = 1, reverted_at = NOW(), reverted_by_name = ? WHERE id = ?',
+    [adminName, id]
+  );
+}
+
+export async function revertAuditLog(auditLogId, adminUser) {
+  const db = getPool();
+  const log = await getAuditLogById(auditLogId);
+  if (!log) throw new Error('Fəaliyyət qeydi tapılmadı!');
+  if (log.is_reverted) throw new Error('Bu fəaliyyət artıq əvvəllər ləğv edilib / geri qaytarılıb!');
+
+  const prev = log.previous_state ? JSON.parse(log.previous_state) : null;
+
+  switch (log.entity_type) {
+    case 'logic': {
+      if (log.action_type === 'delete' && prev) {
+        const q = prev.question || prev;
+        const [res] = await db.query(
+          `INSERT INTO logic_questions (question_text, question_type, image_url, min_age, max_age, difficulty, explanation, is_active)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [q.question_text, q.question_type || 'visual', q.image_url || null, q.min_age || 3, q.max_age || 12, q.difficulty || 'easy', q.explanation || null, q.is_active !== undefined ? q.is_active : 1]
+        );
+        const newQId = res.insertId;
+        const answers = prev.answers || [];
+        for (let i = 0; i < answers.length; i++) {
+          const a = answers[i];
+          await db.query(
+            `INSERT INTO logic_answers (question_id, answer_text, image_url, is_correct, sort_order) VALUES (?, ?, ?, ?, ?)`,
+            [newQId, a.answer_text, a.image_url || null, a.is_correct ? 1 : 0, a.sort_order || i + 1]
+          );
+        }
+      } else if (log.action_type === 'update' && prev) {
+        const q = prev.question || prev;
+        await db.query(
+          `UPDATE logic_questions SET question_text = ?, question_type = ?, image_url = ?, min_age = ?, max_age = ?, difficulty = ?, explanation = ?, is_active = ? WHERE id = ?`,
+          [q.question_text, q.question_type || 'visual', q.image_url || null, q.min_age || 3, q.max_age || 12, q.difficulty || 'easy', q.explanation || null, q.is_active !== undefined ? q.is_active : 1, log.entity_id]
+        );
+        if (Array.isArray(prev.answers)) {
+          await db.query('DELETE FROM logic_answers WHERE question_id = ?', [log.entity_id]);
+          for (let i = 0; i < prev.answers.length; i++) {
+            const a = prev.answers[i];
+            await db.query(
+              `INSERT INTO logic_answers (question_id, answer_text, image_url, is_correct, sort_order) VALUES (?, ?, ?, ?, ?)`,
+              [log.entity_id, a.answer_text, a.image_url || null, a.is_correct ? 1 : 0, a.sort_order || i + 1]
+            );
+          }
+        }
+      } else if (log.action_type === 'create') {
+        await db.query('DELETE FROM logic_questions WHERE id = ?', [log.entity_id]);
+      }
+      break;
+    }
+
+    case 'math': {
+      if (log.action_type === 'delete' && prev) {
+        const q = prev.question || prev;
+        const [res] = await db.query(
+          `INSERT INTO math_questions (question_text, question_type, visual_elements, min_age, max_age, difficulty, explanation, is_active)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [q.question_text, q.question_type || 'counting', q.visual_elements || null, q.min_age || 3, q.max_age || 12, q.difficulty || 'easy', q.explanation || null, q.is_active !== undefined ? q.is_active : 1]
+        );
+        const newQId = res.insertId;
+        const answers = prev.answers || [];
+        for (let i = 0; i < answers.length; i++) {
+          const a = answers[i];
+          await db.query(
+            `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
+            [newQId, a.answer_text, a.is_correct ? 1 : 0, a.sort_order || i + 1]
+          );
+        }
+      } else if (log.action_type === 'update' && prev) {
+        const q = prev.question || prev;
+        await db.query(
+          `UPDATE math_questions SET question_text = ?, question_type = ?, visual_elements = ?, min_age = ?, max_age = ?, difficulty = ?, explanation = ?, is_active = ? WHERE id = ?`,
+          [q.question_text, q.question_type || 'counting', q.visual_elements || null, q.min_age || 3, q.max_age || 12, q.difficulty || 'easy', q.explanation || null, q.is_active !== undefined ? q.is_active : 1, log.entity_id]
+        );
+        if (Array.isArray(prev.answers)) {
+          await db.query('DELETE FROM math_answers WHERE question_id = ?', [log.entity_id]);
+          for (let i = 0; i < prev.answers.length; i++) {
+            const a = prev.answers[i];
+            await db.query(
+              `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
+              [log.entity_id, a.answer_text, a.is_correct ? 1 : 0, a.sort_order || i + 1]
+            );
+          }
+        }
+      } else if (log.action_type === 'create') {
+        await db.query('DELETE FROM math_questions WHERE id = ?', [log.entity_id]);
+      }
+      break;
+    }
+
+    case 'story': {
+      if (log.action_type === 'delete' && prev) {
+        await db.query(
+          `INSERT INTO stories (title, short_description, full_story, cover_image, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, audio_url, is_published)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [prev.title, prev.short_description || null, prev.full_story || null, prev.cover_image || null, prev.category_id || null, prev.min_age || 3, prev.max_age || 12, prev.reading_duration_minutes || 5, prev.is_bedtime ? 1 : 0, prev.audio_url || null, prev.is_published !== undefined ? prev.is_published : 1]
+        );
+      } else if (log.action_type === 'update' && prev) {
+        await db.query(
+          `UPDATE stories SET title = ?, short_description = ?, full_story = ?, cover_image = ?, category_id = ?, min_age = ?, max_age = ?, reading_duration_minutes = ?, is_bedtime = ?, audio_url = ?, is_published = ? WHERE id = ?`,
+          [prev.title, prev.short_description || null, prev.full_story || null, prev.cover_image || null, prev.category_id || null, prev.min_age || 3, prev.max_age || 12, prev.reading_duration_minutes || 5, prev.is_bedtime ? 1 : 0, prev.audio_url || null, prev.is_published ? 1 : 0, log.entity_id]
+        );
+      } else if (log.action_type === 'create') {
+        await db.query('DELETE FROM stories WHERE id = ?', [log.entity_id]);
+      }
+      break;
+    }
+
+    case 'video': {
+      if (log.action_type === 'delete' && prev) {
+        await db.query(
+          `INSERT INTO videos (title, description, video_url, thumbnail_url, category_id, min_age, max_age, difficulty, duration_seconds, is_published)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [prev.title, prev.description || null, prev.video_url || null, prev.thumbnail_url || null, prev.category_id || null, prev.min_age || 3, prev.max_age || 12, prev.difficulty || 'easy', prev.duration_seconds || null, prev.is_published !== undefined ? prev.is_published : 1]
+        );
+      } else if (log.action_type === 'update' && prev) {
+        await db.query(
+          `UPDATE videos SET title = ?, description = ?, video_url = ?, thumbnail_url = ?, category_id = ?, min_age = ?, max_age = ?, difficulty = ?, duration_seconds = ?, is_published = ? WHERE id = ?`,
+          [prev.title, prev.description || null, prev.video_url || null, prev.thumbnail_url || null, prev.category_id || null, prev.min_age || 3, prev.max_age || 12, prev.difficulty || 'easy', prev.duration_seconds || null, prev.is_published ? 1 : 0, log.entity_id]
+        );
+      } else if (log.action_type === 'create') {
+        await db.query('DELETE FROM videos WHERE id = ?', [log.entity_id]);
+      }
+      break;
+    }
+
+    case 'chess': {
+      if (log.action_type === 'delete' && prev) {
+        await db.query(
+          `INSERT INTO chess_lessons (title, description, lesson_type, image_url, min_age, max_age, difficulty, sort_order, is_active)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [prev.title, prev.description || null, prev.lesson_type || 'piece_intro', prev.image_url || null, prev.min_age || 5, prev.max_age || 12, prev.difficulty || 'easy', prev.sort_order || 0, prev.is_active !== undefined ? prev.is_active : 1]
+        );
+      } else if (log.action_type === 'update' && prev) {
+        await db.query(
+          `UPDATE chess_lessons SET title = ?, description = ?, lesson_type = ?, image_url = ?, min_age = ?, max_age = ?, difficulty = ?, sort_order = ?, is_active = ? WHERE id = ?`,
+          [prev.title, prev.description || null, prev.lesson_type || 'piece_intro', prev.image_url || null, prev.min_age || 5, prev.max_age || 12, prev.difficulty || 'easy', prev.sort_order || 0, prev.is_active ? 1 : 0, log.entity_id]
+        );
+      } else if (log.action_type === 'create') {
+        await db.query('DELETE FROM chess_lessons WHERE id = ?', [log.entity_id]);
+      }
+      break;
+    }
+
+    case 'age_group': {
+      if (log.action_type === 'delete' && prev) {
+        await db.query(
+          `INSERT INTO age_groups (name, min_age, max_age, description, color, is_active) VALUES (?, ?, ?, ?, ?, ?)`,
+          [prev.name, prev.min_age, prev.max_age, prev.description || null, prev.color || '#6366f1', prev.is_active !== undefined ? prev.is_active : 1]
+        );
+      } else if (log.action_type === 'update' && prev) {
+        await db.query(
+          `UPDATE age_groups SET name = ?, min_age = ?, max_age = ?, description = ?, color = ?, is_active = ? WHERE id = ?`,
+          [prev.name, prev.min_age, prev.max_age, prev.description || null, prev.color || '#6366f1', prev.is_active ? 1 : 0, log.entity_id]
+        );
+      } else if (log.action_type === 'create') {
+        await db.query('DELETE FROM age_groups WHERE id = ?', [log.entity_id]);
+      }
+      break;
+    }
+
+    default:
+      throw new Error(`Bilinməyən kateqoriya: ${log.entity_type}`);
+  }
+
+  const adminName = adminUser?.displayName || adminUser?.username || 'Admin';
+  await markAuditLogReverted(auditLogId, adminName);
+  return { success: true, message: 'Fəaliyyət uğurla ləğv edildi və məlumat bərpa olundu!' };
 }

@@ -30,21 +30,28 @@ export async function authMiddleware(req, res, next) {
 }
 
 export function adminMiddleware(req, res, next) {
+  if (!req.user || (req.user.role !== 'admin' && req.user.role !== 'editor')) {
+    return res.status(403).json({ error: 'Bu əməliyyat üçün admin və ya redaktor hüquqları tələb olunur!' });
+  }
+  next();
+}
+
+export function superAdminOnlyMiddleware(req, res, next) {
   if (!req.user || req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Bu əməliyyat üçün admin hüquqları tələb olunur!' });
+    return res.status(403).json({ error: 'Bu əməliyyat yalnız Super Admin üçün icazəlidir!' });
   }
   next();
 }
 
 export function therapistMiddleware(req, res, next) {
-  if (!req.user || (req.user.role !== 'therapist' && req.user.role !== 'admin')) {
-    return res.status(403).json({ error: 'Bu əməliyyat üçün loqoped hüquqları tələb olunur!' });
+  if (!req.user || !['therapist', 'admin', 'editor', 'user'].includes(req.user.role)) {
+    return res.status(403).json({ error: 'Bu əməliyyat üçün giriş hüququ tələb olunur!' });
   }
   next();
 }
 
 export function parentMiddleware(req, res, next) {
-  if (!req.user || (req.user.role !== 'parent' && req.user.role !== 'admin')) {
+  if (!req.user || !['parent', 'admin', 'editor', 'user'].includes(req.user.role)) {
     return res.status(403).json({ error: 'Bu əməliyyat üçün valideyn hüquqları tələb olunur!' });
   }
   next();

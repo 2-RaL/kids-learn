@@ -152,15 +152,15 @@ export const Header: React.FC = () => {
           {isFullscreen ? <Minimize className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Maximize className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
         </button>
 
-        {/* Admin Panel Button (only if admin) */}
-        {user?.role === 'admin' && (
+        {/* Admin/Editor Panel Button (only if admin or editor) */}
+        {user && (user.role === 'admin' || user.role === 'editor') && (
           <button
             onClick={() => setActivePortal('admin')}
             className="flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-amber-500 hover:bg-amber-600 text-amber-950 font-black text-xs shadow-md transition-all border border-amber-300 cursor-pointer"
-            title="Admin İdarəetmə Paneli"
+            title={user.role === 'editor' ? 'Redaktor İdarəetmə Paneli' : 'Admin İdarəetmə Paneli'}
           >
             <Shield className="w-3.5 h-3.5 fill-amber-950" />
-            <span className="hidden md:inline">Admin</span>
+            <span className="hidden md:inline">{user.role === 'editor' ? 'Redaktor' : 'Admin'}</span>
           </button>
         )}
 

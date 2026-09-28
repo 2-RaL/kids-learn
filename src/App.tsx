@@ -64,8 +64,8 @@ export const App: React.FC = () => {
 
     // ── Route 2: Parent Portal ──────────────────────────────────────────
     if (activePortal === 'parent') {
-      const isParentOrAdmin = isAuthenticated && user && ['parent', 'admin'].includes(user.role);
-      if (!isParentOrAdmin) {
+      const isParentAuthorized = isAuthenticated && user && ['parent', 'admin', 'editor', 'user'].includes(user.role);
+      if (!isParentAuthorized) {
         return <PortalLoginPage portalType="parent" />;
       }
       return <ParentPortal />;
@@ -73,17 +73,17 @@ export const App: React.FC = () => {
 
     // ── Route 3: Admin Panel ────────────────────────────────────────────
     if (activePortal === 'admin') {
-      const isAdmin = isAuthenticated && user && user.role === 'admin';
-      if (!isAdmin) {
+      const canAccessAdmin = isAuthenticated && user && ['admin', 'editor'].includes(user.role);
+      if (!canAccessAdmin) {
         return <PortalLoginPage portalType="admin" />;
       }
       return <AdminPanel />;
     }
 
     // ── Route 4: Speech Therapist Portal ("Logopedlər üçün") ─────────────
-    // (Requires therapist, admin, or user role)
+    // (Requires therapist, admin, editor, or user role)
     const isTherapistAuthorized =
-      isAuthenticated && user && ['therapist', 'admin', 'user'].includes(user.role);
+      isAuthenticated && user && ['therapist', 'admin', 'editor', 'user'].includes(user.role);
 
     if (!isTherapistAuthorized) {
       return <PortalLoginPage portalType="therapist" />;

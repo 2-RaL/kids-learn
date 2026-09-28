@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { apiUrl } from '../config/api';
 
-export type UserRole = 'admin' | 'therapist' | 'parent' | 'user';
+export type UserRole = 'admin' | 'editor' | 'therapist' | 'parent' | 'user';
 
 export interface ParentProfile {
   id?: number;
