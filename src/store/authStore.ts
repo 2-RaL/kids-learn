@@ -11,11 +11,15 @@ export interface ParentProfile {
   age_group_id?: number | null;
 }
 
+export type PortalAccessType = 'both' | 'therapist' | 'parent';
+
 export interface AuthUser {
   id: number | string;
   username: string;
   displayName: string;
+  email?: string | null;
   role: UserRole;
+  portalAccess?: PortalAccessType;
   isActive: boolean;
   createdAt: string;
   lastLoginAt?: string | null;

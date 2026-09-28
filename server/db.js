@@ -60,6 +60,11 @@ export async function initDatabase() {
     ALTER TABLE users MODIFY COLUMN role VARCHAR(50) NOT NULL DEFAULT 'user'
   `).catch(() => {});
 
+  // Ensure portal_access column exists (both, therapist, parent)
+  await db.query(`
+    ALTER TABLE users ADD COLUMN portal_access VARCHAR(50) NOT NULL DEFAULT 'both'
+  `).catch(() => {});
+
   // ── Editor Audit Logs (Fəaliyyət Tarixçəsi və Rollback) ─────────────
   await db.query(`
     CREATE TABLE IF NOT EXISTS editor_audit_logs (
@@ -696,6 +701,7 @@ export function toSafeUser(user) {
     displayName: user.display_name,
     email: user.email || null,
     role: user.role,
+    portalAccess: user.portal_access || 'both',
     isActive: !!user.is_active,
     createdAt: user.created_at ? new Date(user.created_at).toISOString() : null,
     updatedAt: user.updated_at ? new Date(user.updated_at).toISOString() : null,
@@ -722,7 +728,7 @@ export async function findUserById(id) {
 
 export async function getAllUsers(roleFilter = null) {
   const db = getPool();
-  let query = 'SELECT id, username, display_name, email, role, is_active, created_at, updated_at, last_login_at FROM users';
+  let query = 'SELECT id, username, display_name, email, role, portal_access, is_active, created_at, updated_at, last_login_at FROM users';
   const params = [];
   if (roleFilter) {
     query += ' WHERE role = ?';
@@ -733,18 +739,23 @@ export async function getAllUsers(roleFilter = null) {
   return rows.map(toSafeUser);
 }
 
-export async function createUser({ username, password, displayName, email, role }) {
+export async function createUser({ username, password, displayName, email, role, portalAccess }) {
   const db = getPool();
   const existing = await findUserByUsername(username);
   if (existing) throw new Error('Bu istifadəçi adı artıq mövcuddur!');
 
   const allowedRoles = ['admin', 'editor', 'therapist', 'parent', 'user'];
   const safeRole = allowedRoles.includes(role) ? role : 'user';
+  const allowedAccess = ['both', 'therapist', 'parent'];
+  const safeAccess = allowedAccess.includes(portalAccess)
+    ? portalAccess
+    : (safeRole === 'therapist' ? 'therapist' : safeRole === 'parent' ? 'parent' : 'both');
+
   const hash = await bcrypt.hash(password, 10);
 
   const [result] = await db.query(
-    `INSERT INTO users (username, password_hash, display_name, email, role, is_active) VALUES (?, ?, ?, ?, ?, 1)`,
-    [username.trim().toLowerCase(), hash, (displayName || username).trim(), email || null, safeRole]
+    `INSERT INTO users (username, password_hash, display_name, email, role, portal_access, is_active) VALUES (?, ?, ?, ?, ?, ?, 1)`,
+    [username.trim().toLowerCase(), hash, (displayName || username).trim(), email || null, safeRole, safeAccess]
   );
 
   // Create parent profile if parent role
@@ -790,6 +801,13 @@ export async function updateUser(id, updates) {
     if (allowedRoles.includes(updates.role)) {
       fields.push('role = ?');
       values.push(updates.role);
+    }
+  }
+  if (updates.portalAccess !== undefined) {
+    const allowedAccess = ['both', 'therapist', 'parent'];
+    if (allowedAccess.includes(updates.portalAccess)) {
+      fields.push('portal_access = ?');
+      values.push(updates.portalAccess);
     }
   }
   if (updates.isActive !== undefined) {

@@ -33,6 +33,7 @@ export const AdminPanel: React.FC = () => {
   const [newDisplayName, setNewDisplayName] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newRole, setNewRole] = useState<UserRole>('user');
+  const [newPortalAccess, setNewPortalAccess] = useState<'both' | 'therapist' | 'parent'>('both');
 
   // Edit User Modal State
   const [isEditUserOpen, setIsEditUserOpen] = useState(false);
@@ -41,6 +42,7 @@ export const AdminPanel: React.FC = () => {
   const [editDisplayName, setEditDisplayName] = useState('');
   const [editEmail, setEditEmail] = useState('');
   const [editRole, setEditRole] = useState<UserRole>('user');
+  const [editPortalAccess, setEditPortalAccess] = useState<'both' | 'therapist' | 'parent'>('both');
   const [editPasswordInput, setEditPasswordInput] = useState('');
   const [editIsActive, setEditIsActive] = useState(true);
 
@@ -243,6 +245,7 @@ export const AdminPanel: React.FC = () => {
           displayName: (newDisplayName || newUsername).trim(),
           password: newPassword,
           role: newRole,
+          portalAccess: newPortalAccess,
         }),
       });
       const data = await res.json();
@@ -252,6 +255,7 @@ export const AdminPanel: React.FC = () => {
       setNewUsername('');
       setNewDisplayName('');
       setNewPassword('');
+      setNewPortalAccess('both');
       setIsCreateUserOpen(false);
       fetchUsers();
       fetchStats();
@@ -267,6 +271,7 @@ export const AdminPanel: React.FC = () => {
     setEditDisplayName(targetUser.displayName || (targetUser as any).display_name || targetUser.username);
     setEditEmail((targetUser as any).email || '');
     setEditRole(targetUser.role || 'user');
+    setEditPortalAccess((targetUser as any).portalAccess || (targetUser as any).portal_access || 'both');
     setEditPasswordInput('');
     setEditIsActive(targetUser.isActive !== undefined ? targetUser.isActive : !!(targetUser as any).is_active);
     setIsEditUserOpen(true);
@@ -285,6 +290,7 @@ export const AdminPanel: React.FC = () => {
           displayName: editDisplayName.trim(),
           email: editEmail.trim() || null,
           role: editRole,
+          portalAccess: editPortalAccess,
           isActive: editIsActive,
           password: editPasswordInput.trim() ? editPasswordInput : undefined,
         }),
@@ -849,6 +855,7 @@ export const AdminPanel: React.FC = () => {
                   <tr>
                     <th className="p-4">İstifadəçi</th>
                     <th className="p-4">Rol</th>
+                    <th className="p-4">Portal İcazəsi</th>
                     <th className="p-4">Status</th>
                     <th className="p-4 text-right">Əməliyyatlar</th>
                   </tr>
@@ -856,7 +863,7 @@ export const AdminPanel: React.FC = () => {
                 <tbody className="divide-y divide-slate-800/60 font-medium">
                   {filteredUsers.length === 0 ? (
                     <tr>
-                      <td colSpan={4} className="p-8 text-center text-slate-500 text-xs">
+                      <td colSpan={5} className="p-8 text-center text-slate-500 text-xs">
                         Heç bir istifadəçi tapılmadı.
                       </td>
                     </tr>
@@ -864,6 +871,7 @@ export const AdminPanel: React.FC = () => {
                     filteredUsers.map(u => {
                       const displayName = u.displayName || (u as any).display_name || u.username;
                       const isActive = u.isActive !== undefined ? u.isActive : !!(u as any).is_active;
+                      const access = (u as any).portalAccess || (u as any).portal_access || 'both';
                       return (
                         <tr key={u.id} className="hover:bg-slate-900/50 transition-colors">
                           <td className="p-4">
@@ -892,6 +900,27 @@ export const AdminPanel: React.FC = () => {
                                 ? 'Valideyn'
                                 : 'İstifadəçi'}
                             </span>
+                          </td>
+                          <td className="p-4">
+                            {u.role === 'admin' || u.role === 'editor' ? (
+                              <span className="text-[10px] font-bold text-slate-400 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded-md">
+                                Bütün portallar
+                              </span>
+                            ) : (
+                              <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
+                                access === 'therapist'
+                                  ? 'bg-sky-950 text-sky-400 border border-sky-800'
+                                  : access === 'parent'
+                                  ? 'bg-amber-950 text-amber-400 border border-amber-800'
+                                  : 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                              }`}>
+                                {access === 'therapist'
+                                  ? '🩺 Loqoped'
+                                  : access === 'parent'
+                                  ? '👨‍👩‍👧‍👦 Valideyn'
+                                  : '✨ Hər İkisi'}
+                              </span>
+                            )}
                           </td>
                           <td className="p-4">
                             <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
@@ -1332,6 +1361,21 @@ export const AdminPanel: React.FC = () => {
                     <option value="parent">Valideyn (Valideyn portalı)</option>
                   </select>
                 </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-400">Daxil Ola Biləcəyi Portal:</label>
+                  <select
+                    value={newPortalAccess}
+                    onChange={e => setNewPortalAccess(e.target.value as any)}
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  >
+                    <option value="both">Hər iki portal (Loqoped və Valideyn)</option>
+                    <option value="therapist">Yalnız Loqoped Portalı</option>
+                    <option value="parent">Yalnız Valideyn Portalı</option>
+                  </select>
+                  <p className="text-[10px] text-slate-500 mt-1">
+                    Sadə istifadəçilərin hansı portala daxil ola biləcəyini seçin (Redaktor və Admin hər iki portala daxil ola bilir).
+                  </p>
+                </div>
                 <div className="pt-2 flex gap-2">
                   <button
                     type="button"
@@ -1425,6 +1469,22 @@ export const AdminPanel: React.FC = () => {
                     <option value="therapist">Loqoped (Therapist portalı)</option>
                     <option value="parent">Valideyn (Valideyn portalı)</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-slate-400">Daxil Ola Biləcəyi Portal:</label>
+                  <select
+                    value={editPortalAccess}
+                    onChange={e => setEditPortalAccess(e.target.value as any)}
+                    className="w-full mt-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  >
+                    <option value="both">Hər iki portal (Loqoped və Valideyn)</option>
+                    <option value="therapist">Yalnız Loqoped Portalı</option>
+                    <option value="parent">Yalnız Valideyn Portalı</option>
+                  </select>
+                  <p className="text-[10px] text-slate-500 mt-1">
+                    Sadə istifadəçilərin hansı portala daxil ola biləcəyini seçin (Redaktor və Admin hər iki portala daxil ola bilir).
+                  </p>
                 </div>
 
                 <div>

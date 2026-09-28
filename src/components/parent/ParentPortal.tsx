@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, Video, Activity, Brain, Calculator, Award,
-  Settings, LogOut, ArrowLeft, Home, Sparkles, Filter, Menu, X, Smile
+  Settings, LogOut, ArrowLeft, Home, Sparkles, Filter, Menu, X, Smile, Shield
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useGameStore } from '../../store/gameStore';
@@ -182,6 +182,16 @@ export const ParentPortal: React.FC = () => {
               </button>
             ))}
           </div>
+
+          {user && ['admin', 'editor'].includes(user.role) && (
+            <button
+              onClick={() => setActivePortal('admin')}
+              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-black transition-colors cursor-pointer border border-amber-400 shadow-sm"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span>{user.role === 'editor' ? 'Redaktor Paneli' : 'Admin Paneli'}</span>
+            </button>
+          )}
 
           <button
             onClick={() => setActivePortal('select')}

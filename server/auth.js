@@ -44,15 +44,31 @@ export function superAdminOnlyMiddleware(req, res, next) {
 }
 
 export function therapistMiddleware(req, res, next) {
-  if (!req.user || !['therapist', 'admin', 'editor', 'user'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Bu əməliyyat üçün giriş hüququ tələb olunur!' });
+  if (!req.user) {
+    return res.status(401).json({ error: 'Giriş tələb olunur!' });
   }
-  next();
+  // Admin and editor have full access to both portals
+  if (['admin', 'editor'].includes(req.user.role)) {
+    return next();
+  }
+  const access = req.user.portalAccess || req.user.portal_access || 'both';
+  if (['therapist', 'both'].includes(access) && ['therapist', 'user'].includes(req.user.role)) {
+    return next();
+  }
+  return res.status(403).json({ error: 'Bu portala (Loqoped) giriş hüququnuz yoxdur!' });
 }
 
 export function parentMiddleware(req, res, next) {
-  if (!req.user || !['parent', 'admin', 'editor', 'user'].includes(req.user.role)) {
-    return res.status(403).json({ error: 'Bu əməliyyat üçün valideyn hüquqları tələb olunur!' });
+  if (!req.user) {
+    return res.status(401).json({ error: 'Giriş tələb olunur!' });
   }
-  next();
+  // Admin and editor have full access to both portals
+  if (['admin', 'editor'].includes(req.user.role)) {
+    return next();
+  }
+  const access = req.user.portalAccess || req.user.portal_access || 'both';
+  if (['parent', 'both'].includes(access) && ['parent', 'user'].includes(req.user.role)) {
+    return next();
+  }
+  return res.status(403).json({ error: 'Bu portala (Valideyn) giriş hüququnuz yoxdur!' });
 }

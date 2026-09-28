@@ -100,7 +100,7 @@ router.get('/users', superAdminOnlyMiddleware, async (req, res) => {
 // POST /api/admin/users
 router.post('/users', superAdminOnlyMiddleware, async (req, res) => {
   try {
-    const { username, password, displayName, email, role } = req.body;
+    const { username, password, displayName, email, role, portalAccess } = req.body;
     if (!username || !password) {
       return res.status(400).json({ error: 'İstifadəçi adı və şifrə mütləqdir!' });
     }
@@ -114,6 +114,7 @@ router.post('/users', superAdminOnlyMiddleware, async (req, res) => {
       displayName: displayName || username,
       email: email || null,
       role: ['admin', 'editor', 'therapist', 'parent', 'user'].includes(role) ? role : 'user',
+      portalAccess: ['both', 'therapist', 'parent'].includes(portalAccess) ? portalAccess : undefined,
     });
 
     res.status(201).json({ user: newUser });
@@ -127,7 +128,7 @@ router.post('/users', superAdminOnlyMiddleware, async (req, res) => {
 router.put('/users/:id', superAdminOnlyMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { username, password, displayName, email, role, isActive } = req.body;
+    const { username, password, displayName, email, role, isActive, portalAccess } = req.body;
 
     const updated = await updateUser(parseInt(id, 10), {
       ...(username ? { username } : {}),
@@ -136,6 +137,7 @@ router.put('/users/:id', superAdminOnlyMiddleware, async (req, res) => {
       ...(email !== undefined ? { email } : {}),
       ...(role !== undefined ? { role } : {}),
       ...(isActive !== undefined ? { isActive } : {}),
+      ...(portalAccess !== undefined ? { portalAccess } : {}),
     });
 
     res.json({ user: updated });

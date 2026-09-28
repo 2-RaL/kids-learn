@@ -60,23 +60,35 @@ export const PortalSelectionPage: React.FC = () => {
           className="flex items-center gap-2 sm:gap-3"
         >
           {isAuthenticated && user && (
-            <div className="hidden sm:flex items-center gap-2 bg-white/15 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-xs border border-white/20">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Daxil olunub: <strong>{user.displayName || user.username}</strong></span>
+            <div className="flex items-center gap-2 bg-white/15 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-xs border border-white/20">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="hidden sm:inline">Daxil olunub: <strong>{user.displayName || user.username}</strong></span>
               <span className="bg-sky-500/80 px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider">
-                {user.role}
+                {user.role === 'admin' ? 'Admin' : user.role === 'editor' ? 'Redaktor' : user.role === 'therapist' ? 'Loqoped' : user.role === 'parent' ? 'Valideyn' : 'İstifadəçi'}
               </span>
             </div>
           )}
 
-          <button
-            onClick={handleSelectAdmin}
-            className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white/90 text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer"
-            title="Sistem İdarəetmə Paneli"
-          >
-            <Lock className="w-3.5 h-3.5 text-amber-300" />
-            <span>Admin Girişi</span>
-          </button>
+          {(!user || ['admin', 'editor'].includes(user.role)) && (
+            <button
+              onClick={handleSelectAdmin}
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white/90 text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer"
+              title="Sistem İdarəetmə Paneli"
+            >
+              <Lock className="w-3.5 h-3.5 text-amber-300" />
+              <span>{user?.role === 'editor' ? 'Redaktor Paneli' : 'Admin Girişi'}</span>
+            </button>
+          )}
+
+          {isAuthenticated && (
+            <button
+              onClick={logout}
+              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-red-500/80 hover:bg-red-600 text-white text-xs sm:text-sm font-bold transition-all shadow-sm cursor-pointer"
+              title="Hesabdan çıxış"
+            >
+              Çıxış
+            </button>
+          )}
         </motion.div>
       </header>
 

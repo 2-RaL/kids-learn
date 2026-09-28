@@ -65,12 +65,6 @@ export const PortalLoginPage: React.FC<PortalLoginPageProps> = ({ portalType }) 
     await login(username.trim(), password, portalType);
   };
 
-  const fillCredentials = (u: string, p: string) => {
-    setUsername(u);
-    setPassword(p);
-    clearError();
-  };
-
   // Portal-specific theme configurations
   const config = {
     therapist: {
@@ -80,8 +74,6 @@ export const PortalLoginPage: React.FC<PortalLoginPageProps> = ({ portalType }) 
       emoji: '🩺',
       bgGradient: 'radial-gradient(ellipse at top, #0284c7 0%, #0369a1 40%, #0c4a6e 100%)',
       btnGradient: 'from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600',
-      demoUser: 'logoped',
-      demoPass: 'logoped123',
     },
     parent: {
       title: 'Valideyn Portalı',
@@ -90,8 +82,6 @@ export const PortalLoginPage: React.FC<PortalLoginPageProps> = ({ portalType }) 
       emoji: '👨‍👩‍👧‍👦',
       bgGradient: 'radial-gradient(ellipse at top, #f59e0b 0%, #d97706 40%, #7c2d12 100%)',
       btnGradient: 'from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600',
-      demoUser: 'valideyn',
-      demoPass: 'valideyn123',
     },
     admin: {
       title: 'İdarəetmə Paneli',
@@ -100,8 +90,6 @@ export const PortalLoginPage: React.FC<PortalLoginPageProps> = ({ portalType }) 
       emoji: '🛡️',
       bgGradient: 'radial-gradient(ellipse at top, #6366f1 0%, #4338ca 40%, #1e1b4b 100%)',
       btnGradient: 'from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700',
-      demoUser: 'admin',
-      demoPass: 'admin123',
     },
   }[portalType];
 
@@ -239,17 +227,12 @@ export const PortalLoginPage: React.FC<PortalLoginPageProps> = ({ portalType }) 
             </button>
           </form>
 
-          {/* Quick Demo Credentials shortcut */}
+          {/* Security Notice */}
           <div className="mt-5 pt-4 border-t border-slate-100 text-center">
-            <p className="text-[11px] text-slate-400 font-semibold mb-2">Sürətli Demo Girişi:</p>
-            <button
-              type="button"
-              onClick={() => fillCredentials(config.demoUser, config.demoPass)}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
-            >
-              <Sparkles className="w-3 h-3 text-amber-500" />
-              <span>{config.demoUser} / {config.demoPass}</span>
-            </button>
+            <p className="text-[11px] text-slate-400 font-semibold flex items-center justify-center gap-1.5">
+              <Lock className="w-3 h-3 text-slate-400" />
+              <span>Yalnız təyin edilmiş rəsmi istifadəçi hesabları daxil ola bilər</span>
+            </p>
           </div>
         </motion.div>
       </main>

@@ -22,15 +22,31 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ error: 'Hesabınız deaktiv edilib. Administrator ilə əlaqə saxlayın.' });
     }
 
-    // Role-based portal access enforcement
-    if (portalType === 'therapist' && !['therapist', 'admin'].includes(user.role)) {
-      return res.status(403).json({ error: 'Bu portal yalnız loqopedlər üçündür!' });
+    // Role-based and portal-based access enforcement
+    if (portalType === 'admin') {
+      if (!['admin', 'editor'].includes(user.role)) {
+        return res.status(403).json({ error: 'Bu panel yalnız Admin və Redaktorlar üçündür!' });
+      }
     }
-    if (portalType === 'parent' && !['parent', 'admin'].includes(user.role)) {
-      return res.status(403).json({ error: 'Bu portal yalnız valideynlər üçündür!' });
+
+    if (portalType === 'therapist') {
+      if (!['admin', 'editor'].includes(user.role)) {
+        const access = user.portal_access || 'both';
+        const canAccess = ['therapist', 'both'].includes(access) && ['therapist', 'user'].includes(user.role);
+        if (!canAccess) {
+          return res.status(403).json({ error: 'Hesabınızın Loqoped portalına daxil olmaq icazəsi yoxdur!' });
+        }
+      }
     }
-    if (portalType === 'admin' && user.role !== 'admin') {
-      return res.status(403).json({ error: 'Bu panel yalnız adminlər üçündür!' });
+
+    if (portalType === 'parent') {
+      if (!['admin', 'editor'].includes(user.role)) {
+        const access = user.portal_access || 'both';
+        const canAccess = ['parent', 'both'].includes(access) && ['parent', 'user'].includes(user.role);
+        if (!canAccess) {
+          return res.status(403).json({ error: 'Hesabınızın Valideyn portalına daxil olmaq icazəsi yoxdur!' });
+        }
+      }
     }
 
     const isValid = await bcrypt.compare(password, user.password_hash);
@@ -47,6 +63,7 @@ router.post('/login', async (req, res) => {
       userId: user.id,
       username: user.username,
       role: user.role,
+      portalAccess: user.portal_access || 'both',
     });
 
     // Include parent profile if applicable
