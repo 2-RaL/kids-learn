@@ -262,21 +262,52 @@ router.get('/stories', async (_req, res) => {
 router.post('/stories', async (req, res) => {
   try {
     const db = getPool();
-    const { title, shortDescription, fullStory, coverImage, categoryId, minAge, maxAge, readingDurationMinutes, isBedtime, audioUrl, isPublished } = req.body;
+    const { title, shortDescription, fullStory, coverImage, coverEmoji, categoryId, minAge, maxAge, readingDurationMinutes, isBedtime, audioUrl, isPublished, translations } = req.body;
+
+    let finalTranslations = translations;
+    if (!finalTranslations && (title || fullStory)) {
+      const paragraphs = fullStory
+        ? fullStory.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean)
+        : [shortDescription || title];
+      finalTranslations = JSON.stringify({
+        az: {
+          title: title || '',
+          short_description: shortDescription || '',
+          paragraphs: paragraphs.length > 0 ? paragraphs : [title || ''],
+        },
+        en: {
+          title: title || '',
+          short_description: shortDescription || '',
+          paragraphs: paragraphs.length > 0 ? paragraphs : [title || ''],
+        },
+        ru: {
+          title: title || '',
+          short_description: shortDescription || '',
+          paragraphs: paragraphs.length > 0 ? paragraphs : [title || ''],
+        },
+      });
+    } else if (typeof finalTranslations === 'object') {
+      finalTranslations = JSON.stringify(finalTranslations);
+    }
+
+    const finalCoverEmoji = coverEmoji || (isBedtime ? '🌙' : '📖');
+
     const [result] = await db.query(
-      `INSERT INTO stories (title, short_description, full_story, cover_image, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, audio_url, is_published) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO stories (title, short_description, full_story, cover_image, cover_emoji, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, audio_url, translations, is_published) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         title,
         shortDescription || null,
         fullStory || null,
         coverImage || null,
+        finalCoverEmoji,
         categoryId ? parseInt(categoryId, 10) : null,
         parseInt(minAge || 3, 10),
         parseInt(maxAge || 12, 10),
         parseInt(readingDurationMinutes || 5, 10),
         isBedtime ? 1 : 0,
         audioUrl || null,
+        finalTranslations || null,
         isPublished !== false ? 1 : 0,
       ]
     );
@@ -290,25 +321,56 @@ router.post('/stories', async (req, res) => {
 router.put('/stories/:id', async (req, res) => {
   try {
     const db = getPool();
-    const { title, shortDescription, fullStory, coverImage, categoryId, minAge, maxAge, readingDurationMinutes, isBedtime, audioUrl, isPublished } = req.body;
+    const { title, shortDescription, fullStory, coverImage, coverEmoji, categoryId, minAge, maxAge, readingDurationMinutes, isBedtime, audioUrl, isPublished, translations } = req.body;
     const [[existing]] = await db.query('SELECT * FROM stories WHERE id = ?', [req.params.id]);
+
+    let finalTranslations = translations;
+    if (!finalTranslations && (title || fullStory)) {
+      const paragraphs = fullStory
+        ? fullStory.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean)
+        : [shortDescription || title];
+      finalTranslations = JSON.stringify({
+        az: {
+          title: title || '',
+          short_description: shortDescription || '',
+          paragraphs: paragraphs.length > 0 ? paragraphs : [title || ''],
+        },
+        en: {
+          title: title || '',
+          short_description: shortDescription || '',
+          paragraphs: paragraphs.length > 0 ? paragraphs : [title || ''],
+        },
+        ru: {
+          title: title || '',
+          short_description: shortDescription || '',
+          paragraphs: paragraphs.length > 0 ? paragraphs : [title || ''],
+        },
+      });
+    } else if (typeof finalTranslations === 'object') {
+      finalTranslations = JSON.stringify(finalTranslations);
+    }
+
+    const finalCoverEmoji = coverEmoji || (isBedtime ? '🌙' : '📖');
+
     await db.query(
       `UPDATE stories SET 
-        title = ?, short_description = ?, full_story = ?, cover_image = ?, 
+        title = ?, short_description = ?, full_story = ?, cover_image = ?, cover_emoji = ?,
         category_id = ?, min_age = ?, max_age = ?, reading_duration_minutes = ?, 
-        is_bedtime = ?, audio_url = ?, is_published = ? 
+        is_bedtime = ?, audio_url = ?, translations = ?, is_published = ? 
        WHERE id = ?`,
       [
         title,
         shortDescription || null,
         fullStory || null,
         coverImage || null,
+        finalCoverEmoji,
         categoryId ? parseInt(categoryId, 10) : null,
         parseInt(minAge || 3, 10),
         parseInt(maxAge || 12, 10),
         parseInt(readingDurationMinutes || 5, 10),
         isBedtime ? 1 : 0,
         audioUrl || null,
+        finalTranslations || null,
         isPublished ? 1 : 0,
         req.params.id,
       ]

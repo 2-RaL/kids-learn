@@ -4,7 +4,7 @@ import { Sparkles, Heart, Activity, BookOpen, Video, Brain, Award, ShieldCheck, 
 import { useAuthStore } from '../../store/authStore';
 
 export const PortalSelectionPage: React.FC = () => {
-  const { user, isAuthenticated, setActivePortal } = useAuthStore();
+  const { user, isAuthenticated, logout, setActivePortal } = useAuthStore();
 
   const handleSelectTherapist = () => {
     setActivePortal('therapist');

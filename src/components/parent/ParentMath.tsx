@@ -231,7 +231,30 @@ export const ParentMath: React.FC<ParentMathProps> = ({ selectedAge }) => {
   }, [selectedAge, token, currentLang]);
 
   const fetchQuestions = async () => {
+    setIsLoading(true);
+    if (token) {
+      try {
+        let url = apiUrl('/api/parent/math-questions');
+        if (selectedAge) {
+          url += `?age=${selectedAge}`;
+        }
+        const res = await fetch(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.questions && data.questions.length > 0) {
+            setQuestions(data.questions);
+            setIsLoading(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Math questions API fetch failed, fallback to multilingual default:', err);
+      }
+    }
     setQuestions(MULTILINGUAL_MATH_QUESTIONS[currentLang] || MULTILINGUAL_MATH_QUESTIONS.az);
+    setIsLoading(false);
   };
 
   const playFeedbackSound = (isCorrect: boolean) => {

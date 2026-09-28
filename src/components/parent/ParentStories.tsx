@@ -6,6 +6,8 @@ import {
   Bookmark, CheckCircle2, Globe
 } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
+import { useAuthStore } from '../../store/authStore';
+import { apiUrl } from '../../config/api';
 import { MULTILINGUAL_STORIES, type MultilingualStory } from '../../data/parentStoriesData';
 import { parentSpeech, type VoicePersona } from '../../utils/parentSpeech';
 
@@ -15,13 +17,84 @@ interface ParentStoriesProps {
 
 export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => {
   const { language } = useGameStore();
+  const { token } = useAuthStore();
 
+  const [stories, setStories] = useState<MultilingualStory[]>(MULTILINGUAL_STORIES);
   const [activeStory, setActiveStory] = useState<MultilingualStory | null>(null);
   const [filterType, setFilterType] = useState<'all' | 'bedtime' | 'daytime'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [fontSize, setFontSize] = useState<number>(18);
   const [isCozyNight, setIsCozyNight] = useState(false);
   const [voicePersona, setVoicePersona] = useState<VoicePersona>(parentSpeech.getVoicePersona());
+
+  // Fetch stories from database to sync with Admin Panel additions/updates
+  useEffect(() => {
+    fetchStories();
+  }, [selectedAge, token]);
+
+  const fetchStories = async () => {
+    if (!token) return;
+    try {
+      let url = apiUrl('/api/parent/stories');
+      if (selectedAge) {
+        url += `?age=${selectedAge}`;
+      }
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.stories && data.stories.length > 0) {
+          const mapped: MultilingualStory[] = data.stories.map((s: any) => {
+            let parsedTr: any = null;
+            if (s.translations) {
+              try {
+                parsedTr = typeof s.translations === 'string' ? JSON.parse(s.translations) : s.translations;
+              } catch (e) {
+                parsedTr = null;
+              }
+            }
+
+            const rawParagraphs = s.full_story
+              ? s.full_story.split(/\n\s*\n/).map((p: string) => p.trim()).filter(Boolean)
+              : [s.short_description || s.title];
+
+            const translations = parsedTr || {
+              az: {
+                title: s.title,
+                short_description: s.short_description || '',
+                paragraphs: rawParagraphs,
+              },
+              en: {
+                title: s.title,
+                short_description: s.short_description || '',
+                paragraphs: rawParagraphs,
+              },
+              ru: {
+                title: s.title,
+                short_description: s.short_description || '',
+                paragraphs: rawParagraphs,
+              },
+            };
+
+            return {
+              id: s.id,
+              min_age: s.min_age || 3,
+              max_age: s.max_age || 12,
+              is_bedtime: Boolean(s.is_bedtime),
+              category: s.is_bedtime ? 'bedtime' : 'daytime',
+              reading_duration_minutes: s.reading_duration_minutes || 5,
+              cover_emoji: s.cover_emoji || (s.is_bedtime ? '🌙' : '📖'),
+              translations,
+            };
+          });
+          setStories(mapped);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to fetch stories from API, using fallback:', err);
+    }
+  };
 
   // Audio Playback State
   const [audioState, setAudioState] = useState<'idle' | 'playing' | 'paused'>('idle');
@@ -114,7 +187,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
   };
 
   // Filter stories by age, category and search term
-  const filteredStories = MULTILINGUAL_STORIES.filter((story) => {
+  const filteredStories = stories.filter((story) => {
     if (selectedAge && (selectedAge < story.min_age || selectedAge > story.max_age)) {
       return false;
     }
@@ -124,9 +197,9 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       const tr = story.translations[language] || story.translations.az;
-      const titleMatch = tr.title.toLowerCase().includes(q);
-      const descMatch = tr.short_description.toLowerCase().includes(q);
-      return titleMatch || descMatch;
+      const titleMatch = tr?.title?.toLowerCase().includes(q);
+      const descMatch = tr?.short_description?.toLowerCase().includes(q);
+      return Boolean(titleMatch || descMatch);
     }
     return true;
   });
@@ -214,7 +287,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              {labels.all} ({MULTILINGUAL_STORIES.length})
+              {labels.all} ({stories.length})
             </button>
             <button
               onClick={() => setFilterType('bedtime')}

@@ -1,5 +1,12 @@
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcryptjs';
+import {
+  DEFAULT_STORIES,
+  DEFAULT_LOGIC_QUESTIONS,
+  DEFAULT_MATH_QUESTIONS,
+  DEFAULT_VIDEOS,
+  DEFAULT_CHESS_LESSONS,
+} from './defaultData.js';
 
 let pool = null;
 
@@ -142,6 +149,7 @@ export async function initDatabase() {
       short_description TEXT DEFAULT NULL,
       full_story LONGTEXT DEFAULT NULL,
       cover_image VARCHAR(500) DEFAULT NULL,
+      cover_emoji VARCHAR(50) DEFAULT '📖',
       category_id INT DEFAULT NULL,
       min_age INT NOT NULL DEFAULT 3,
       max_age INT NOT NULL DEFAULT 12,
@@ -149,11 +157,19 @@ export async function initDatabase() {
       is_bedtime TINYINT(1) NOT NULL DEFAULT 0,
       audio_url VARCHAR(500) DEFAULT NULL,
       is_published TINYINT(1) NOT NULL DEFAULT 1,
+      translations LONGTEXT DEFAULT NULL,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       FOREIGN KEY (category_id) REFERENCES story_categories(id) ON DELETE SET NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   `);
+
+  try {
+    await db.query(`ALTER TABLE stories ADD COLUMN cover_emoji VARCHAR(50) DEFAULT '📖'`);
+  } catch {}
+  try {
+    await db.query(`ALTER TABLE stories ADD COLUMN translations LONGTEXT DEFAULT NULL`);
+  } catch {}
 
   // ── Video Categories ────────────────────────────────────────────────
   await db.query(`
@@ -503,39 +519,30 @@ export async function initDatabase() {
     console.warn('⚠️ Movements seed warning:', err.message);
   }
 
-  // 9. Sample stories
+  // 9. Stories seed (8 complete stories with multilingual translations)
   try {
-    const defaultStories = [
-      {
-        title: 'Kiçik Dovşan',
-        short_description: 'Kiçik dovşanın meşədəki macərası',
-        full_story: 'Bir zamanlar meşədə kiçik bir dovşan yaşayırdı. Hər gün o, meşənin ən gözəl çiçəklərini tapmağa çalışırdı...',
-        category_slug: 'bedtime',
-        min_age: 3,
-        max_age: 6,
-        reading_duration_minutes: 5,
-        is_bedtime: 1,
-      },
-      {
-        title: 'Günəşli Gün',
-        short_description: 'Uşaqların parkdakı əyləncəli günü',
-        full_story: 'Bir yay günü, Leyla və onun dostları parka getdilər. Orada yelləncəkdə oynadılar, topu bir-birinə atdılar...',
-        category_slug: 'daytime',
-        min_age: 4,
-        max_age: 8,
-        reading_duration_minutes: 7,
-        is_bedtime: 0,
-      },
-    ];
-    for (const st of defaultStories) {
-      const [existing] = await db.query('SELECT id FROM stories WHERE title = ? LIMIT 1', [st.title]);
+    await db.query("DELETE FROM stories WHERE title IN ('Kiçik Dovşan', 'Günəşli Gün')");
+    for (const st of DEFAULT_STORIES) {
+      const az = st.translations.az;
+      const [existing] = await db.query('SELECT id FROM stories WHERE title = ? LIMIT 1', [az.title]);
+      const [cats] = await db.query('SELECT id FROM story_categories WHERE slug = ? LIMIT 1', [st.category]);
+      const catId = cats[0]?.id || null;
+      const fullStoryText = az.paragraphs.join('\n\n');
+      const translationsJson = JSON.stringify(st.translations);
+
       if (existing.length === 0) {
-        const [cats] = await db.query('SELECT id FROM story_categories WHERE slug = ? LIMIT 1', [st.category_slug]);
-        const catId = cats[0]?.id || null;
         await db.query(
-          `INSERT INTO stories (title, short_description, full_story, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, is_published)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`,
-          [st.title, st.short_description, st.full_story, catId, st.min_age, st.max_age, st.reading_duration_minutes, st.is_bedtime]
+          `INSERT INTO stories (title, short_description, full_story, category_id, min_age, max_age, reading_duration_minutes, is_bedtime, cover_emoji, translations, is_published)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`,
+          [az.title, az.short_description, fullStoryText, catId, st.min_age, st.max_age, st.reading_duration_minutes, st.is_bedtime, st.cover_emoji, translationsJson]
+        );
+      } else {
+        await db.query(
+          `UPDATE stories SET 
+            short_description = ?, full_story = ?, category_id = ?, min_age = ?, max_age = ?, 
+            reading_duration_minutes = ?, is_bedtime = ?, cover_emoji = ?, translations = ?
+           WHERE id = ?`,
+          [az.short_description, fullStoryText, catId, st.min_age, st.max_age, st.reading_duration_minutes, st.is_bedtime, st.cover_emoji, translationsJson, existing[0].id]
         );
       }
     }
@@ -543,138 +550,91 @@ export async function initDatabase() {
     console.warn('⚠️ Stories seed warning:', err.message);
   }
 
-  // 10. Sample logic questions
+  // 10. Logic questions seed
   try {
-    const defaultLogic = [
-      {
-        question_text: 'Hansı fərqlidir?',
-        question_type: 'visual',
-        min_age: 3,
-        max_age: 6,
-        difficulty: 'easy',
-        answers: [
-          { text: '🍎', correct: 0 },
-          { text: '🍊', correct: 0 },
-          { text: '🚗', correct: 1 },
-        ],
-      },
-      {
-        question_text: 'Qırmızı olanı seç',
-        question_type: 'color',
-        min_age: 3,
-        max_age: 5,
-        difficulty: 'easy',
-        answers: [
-          { text: '🍎', correct: 1 },
-          { text: '🍌', correct: 0 },
-          { text: '🫐', correct: 0 },
-        ],
-      },
-    ];
-    for (const lq of defaultLogic) {
+    await db.query("DELETE FROM logic_questions WHERE question_text IN ('Hansı fərqlidir?', 'Qırmızı olanı seç')");
+    for (const lq of DEFAULT_LOGIC_QUESTIONS) {
       const [existing] = await db.query('SELECT id FROM logic_questions WHERE question_text = ? LIMIT 1', [lq.question_text]);
+      let qId;
       if (existing.length === 0) {
         const [inserted] = await db.query(
-          `INSERT INTO logic_questions (question_text, question_type, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?)`,
-          [lq.question_text, lq.question_type, lq.min_age, lq.max_age, lq.difficulty]
+          `INSERT INTO logic_questions (question_text, question_type, min_age, max_age, difficulty, explanation, is_active) VALUES (?, ?, ?, ?, ?, ?, 1)`,
+          [lq.question_text, lq.question_type, lq.min_age, lq.max_age, lq.difficulty, lq.explanation]
         );
-        const qId = inserted.insertId;
-        for (let i = 0; i < lq.answers.length; i++) {
-          const a = lq.answers[i];
-          await db.query(
-            `INSERT INTO logic_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
-            [qId, a.text, a.correct, i + 1]
-          );
-        }
+        qId = inserted.insertId;
+      } else {
+        qId = existing[0].id;
+        await db.query(
+          `UPDATE logic_questions SET question_type = ?, min_age = ?, max_age = ?, difficulty = ?, explanation = ? WHERE id = ?`,
+          [lq.question_type, lq.min_age, lq.max_age, lq.difficulty, lq.explanation, qId]
+        );
+        await db.query('DELETE FROM logic_answers WHERE question_id = ?', [qId]);
+      }
+      for (let i = 0; i < lq.answers.length; i++) {
+        const a = lq.answers[i];
+        await db.query(
+          `INSERT INTO logic_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
+          [qId, a.text, a.correct, i + 1]
+        );
       }
     }
   } catch (err) {
     console.warn('⚠️ Logic questions seed warning:', err.message);
   }
 
-  // 11. Sample math questions
+  // 11. Math questions seed
   try {
-    const defaultMath = [
-      {
-        question_text: 'Neçə alma var?',
-        question_type: 'counting',
-        visual_elements: '🍎🍎',
-        min_age: 3,
-        max_age: 5,
-        difficulty: 'easy',
-        answers: [
-          { text: '1', correct: 0 },
-          { text: '2', correct: 1 },
-          { text: '3', correct: 0 },
-        ],
-      },
-      {
-        question_text: 'Neçə dovşan var?',
-        question_type: 'counting',
-        visual_elements: '🐰🐰🐰',
-        min_age: 4,
-        max_age: 6,
-        difficulty: 'easy',
-        answers: [
-          { text: '2', correct: 0 },
-          { text: '3', correct: 1 },
-          { text: '4', correct: 0 },
-        ],
-      },
-    ];
-    for (const mq of defaultMath) {
+    await db.query("DELETE FROM math_questions WHERE question_text IN ('Neçə alma var?', 'Neçə dovşan var?')");
+    for (const mq of DEFAULT_MATH_QUESTIONS) {
       const [existing] = await db.query('SELECT id FROM math_questions WHERE question_text = ? LIMIT 1', [mq.question_text]);
+      let qId;
       if (existing.length === 0) {
         const [inserted] = await db.query(
-          `INSERT INTO math_questions (question_text, question_type, visual_elements, min_age, max_age, difficulty) VALUES (?, ?, ?, ?, ?, ?)`,
-          [mq.question_text, mq.question_type, mq.visual_elements, mq.min_age, mq.max_age, mq.difficulty]
+          `INSERT INTO math_questions (question_text, question_type, visual_elements, min_age, max_age, difficulty, explanation, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, 1)`,
+          [mq.question_text, mq.question_type, mq.visual_elements, mq.min_age, mq.max_age, mq.difficulty, mq.explanation]
         );
-        const qId = inserted.insertId;
-        for (let i = 0; i < mq.answers.length; i++) {
-          const a = mq.answers[i];
-          await db.query(
-            `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
-            [qId, a.text, a.correct, i + 1]
-          );
-        }
+        qId = inserted.insertId;
+      } else {
+        qId = existing[0].id;
+        await db.query(
+          `UPDATE math_questions SET question_type = ?, visual_elements = ?, min_age = ?, max_age = ?, difficulty = ?, explanation = ? WHERE id = ?`,
+          [mq.question_type, mq.visual_elements, mq.min_age, mq.max_age, mq.difficulty, mq.explanation, qId]
+        );
+        await db.query('DELETE FROM math_answers WHERE question_id = ?', [qId]);
+      }
+      for (let i = 0; i < mq.answers.length; i++) {
+        const a = mq.answers[i];
+        await db.query(
+          `INSERT INTO math_answers (question_id, answer_text, is_correct, sort_order) VALUES (?, ?, ?, ?)`,
+          [qId, a.text, a.correct, i + 1]
+        );
       }
     }
   } catch (err) {
     console.warn('⚠️ Math questions seed warning:', err.message);
   }
 
-  // 12. Sample chess lessons
+  // 12. Videos seed
   try {
-    const defaultChess = [
-      {
-        title: 'Şah nədir?',
-        description: 'Şahmat oyununda ən vacib fiqur — Şah haqqında öyrənin',
-        lesson_type: 'piece_intro',
-        min_age: 5,
-        max_age: 12,
-        difficulty: 'easy',
-        sort_order: 1,
-      },
-      {
-        title: 'Vəzir necə hərəkət edir?',
-        description: 'Ən güclü fiqur olan Vəzirin hərəkətini öyrənin',
-        lesson_type: 'movement_rule',
-        min_age: 6,
-        max_age: 12,
-        difficulty: 'easy',
-        sort_order: 2,
-      },
-      {
-        title: 'At necə hərəkət edir?',
-        description: 'L şəklində hərəkət edən At fiqurunu tanıyın',
-        lesson_type: 'piece_intro',
-        min_age: 5,
-        max_age: 12,
-        difficulty: 'medium',
-        sort_order: 3,
-      },
-    ];
-    for (const cl of defaultChess) {
+    for (const v of DEFAULT_VIDEOS) {
+      const [existing] = await db.query('SELECT id FROM videos WHERE title = ? LIMIT 1', [v.title]);
+      const [cats] = await db.query('SELECT id FROM video_categories WHERE slug = ? LIMIT 1', [v.category_slug]);
+      const catId = cats[0]?.id || null;
+      if (existing.length === 0) {
+        await db.query(
+          `INSERT INTO videos (title, description, video_url, category_id, min_age, max_age, difficulty, duration_seconds, is_published)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`,
+          [v.title, v.description, v.video_url, catId, v.min_age, v.max_age, v.difficulty, v.duration_seconds]
+        );
+      }
+    }
+  } catch (err) {
+    console.warn('⚠️ Videos seed warning:', err.message);
+  }
+
+  // 13. Chess lessons seed
+  try {
+    for (const cl of DEFAULT_CHESS_LESSONS) {
       const [existing] = await db.query('SELECT id FROM chess_lessons WHERE title = ? LIMIT 1', [cl.title]);
       if (existing.length === 0) {
         await db.query(

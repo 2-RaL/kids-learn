@@ -239,7 +239,30 @@ export const ParentLogic: React.FC<ParentLogicProps> = ({ selectedAge }) => {
   }, [selectedAge, token, currentLang]);
 
   const fetchQuestions = async () => {
+    setIsLoading(true);
+    if (token) {
+      try {
+        let url = apiUrl('/api/parent/logic-questions');
+        if (selectedAge) {
+          url += `?age=${selectedAge}`;
+        }
+        const res = await fetch(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.questions && data.questions.length > 0) {
+            setQuestions(data.questions);
+            setIsLoading(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Logic questions API fetch failed, fallback to multilingual default:', err);
+      }
+    }
     setQuestions(MULTILINGUAL_LOGIC_QUESTIONS[currentLang] || MULTILINGUAL_LOGIC_QUESTIONS.az);
+    setIsLoading(false);
   };
 
   const playFeedbackSound = (isCorrect: boolean) => {

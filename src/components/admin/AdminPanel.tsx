@@ -547,6 +547,48 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
+  // Delete Logic Question
+  const handleDeleteLogic = async (id: number) => {
+    if (!confirm('Bu məntiq sualını silmək istəyirsiniz?')) return;
+    try {
+      await fetch(apiUrl(`/api/admin/logic-questions/${id}`), {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchLogic();
+      fetchStats();
+      showNotification('Məntiq sualı silindi');
+    } catch {}
+  };
+
+  // Delete Math Question
+  const handleDeleteMath = async (id: number) => {
+    if (!confirm('Bu riyaziyyat sualını silmək istəyirsiniz?')) return;
+    try {
+      await fetch(apiUrl(`/api/admin/math-questions/${id}`), {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchMath();
+      fetchStats();
+      showNotification('Riyaziyyat sualı silindi');
+    } catch {}
+  };
+
+  // Delete Chess Lesson
+  const handleDeleteChess = async (id: number) => {
+    if (!confirm('Bu şahmat dərsini silmək istəyirsiniz?')) return;
+    try {
+      await fetch(apiUrl(`/api/admin/chess-lessons/${id}`), {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchChess();
+      fetchStats();
+      showNotification('Şahmat dərsi silindi');
+    } catch {}
+  };
+
   const userList = Array.isArray(users) ? users : [];
   const filteredUsers = userList.filter(u => {
     if (!u) return false;
@@ -998,8 +1040,29 @@ export const AdminPanel: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-900">
                     <button
+                      onClick={() => {
+                        setStoryForm({
+                          id: s.id,
+                          title: s.title,
+                          shortDescription: s.short_description || '',
+                          fullStory: s.full_story || '',
+                          categoryId: s.category_id || 1,
+                          minAge: s.min_age || 3,
+                          maxAge: s.max_age || 10,
+                          readingDurationMinutes: s.reading_duration_minutes || 5,
+                          isBedtime: Boolean(s.is_bedtime),
+                        });
+                        setIsStoryModalOpen(true);
+                      }}
+                      className="p-1.5 rounded-lg bg-slate-900 hover:bg-emerald-950 text-slate-400 hover:text-emerald-400 cursor-pointer"
+                      title="Düzəliş et"
+                    >
+                      <Edit2 className="w-3.5 h-3.5" />
+                    </button>
+                    <button
                       onClick={() => handleDeleteStory(s.id)}
                       className="p-1.5 rounded-lg bg-slate-900 hover:bg-red-950 text-slate-400 hover:text-red-400 cursor-pointer"
+                      title="Sil"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -1079,7 +1142,16 @@ export const AdminPanel: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                  <span className="text-xs text-slate-500">{q.min_age}-{q.max_age} yaş</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-slate-500">{q.min_age}-{q.max_age} yaş</span>
+                    <button
+                      onClick={() => handleDeleteLogic(q.id)}
+                      className="p-1.5 rounded-lg bg-slate-900 hover:bg-red-950 text-slate-400 hover:text-red-400 cursor-pointer"
+                      title="Sil"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1117,7 +1189,16 @@ export const AdminPanel: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                  <span className="text-xs text-slate-500">{q.min_age}-{q.max_age} yaş</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-slate-500">{q.min_age}-{q.max_age} yaş</span>
+                    <button
+                      onClick={() => handleDeleteMath(q.id)}
+                      className="p-1.5 rounded-lg bg-slate-900 hover:bg-red-950 text-slate-400 hover:text-red-400 cursor-pointer"
+                      title="Sil"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1143,12 +1224,23 @@ export const AdminPanel: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {chessLessons.map(c => (
-                <div key={c.id} className="bg-slate-950 p-5 rounded-3xl border border-slate-800">
-                  <h3 className="text-base font-black text-white mb-1">{c.title}</h3>
-                  <p className="text-xs text-slate-400 mb-2">{c.description}</p>
-                  <span className="text-[10px] text-yellow-500 font-bold bg-yellow-950 px-2.5 py-0.5 rounded-full">
-                    {c.min_age}-{c.max_age} yaş
-                  </span>
+                <div key={c.id} className="bg-slate-950 p-5 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base font-black text-white mb-1">{c.title}</h3>
+                    <p className="text-xs text-slate-400 mb-2">{c.description}</p>
+                    <span className="text-[10px] text-yellow-500 font-bold bg-yellow-950 px-2.5 py-0.5 rounded-full">
+                      {c.min_age}-{c.max_age} yaş
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-end pt-3 border-t border-slate-900 mt-3">
+                    <button
+                      onClick={() => handleDeleteChess(c.id)}
+                      className="p-1.5 rounded-lg bg-slate-900 hover:bg-red-950 text-slate-400 hover:text-red-400 cursor-pointer"
+                      title="Sil"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
