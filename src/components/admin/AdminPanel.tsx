@@ -126,9 +126,14 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setUsers(data.users);
+      if (res.ok && Array.isArray(data.users)) {
+        setUsers(data.users);
+      } else {
+        setUsers([]);
+      }
     } catch (err: any) {
       setError(err.message);
+      setUsers([]);
     } finally {
       setIsLoading(false);
     }
@@ -141,7 +146,7 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setStories(data.stories || []);
+      if (res.ok) setStories(Array.isArray(data.stories) ? data.stories : []);
     } catch {}
   };
 
@@ -152,7 +157,7 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setVideos(data.videos || []);
+      if (res.ok) setVideos(Array.isArray(data.videos) ? data.videos : []);
     } catch {}
   };
 
@@ -163,7 +168,7 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setLogicQuestions(data.questions || []);
+      if (res.ok) setLogicQuestions(Array.isArray(data.questions) ? data.questions : []);
     } catch {}
   };
 
@@ -174,7 +179,7 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setMathQuestions(data.questions || []);
+      if (res.ok) setMathQuestions(Array.isArray(data.questions) ? data.questions : []);
     } catch {}
   };
 
@@ -185,7 +190,7 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setChessLessons(data.lessons || []);
+      if (res.ok) setChessLessons(Array.isArray(data.lessons) ? data.lessons : []);
     } catch {}
   };
 
@@ -208,15 +213,16 @@ export const AdminPanel: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({
-          username: newUsername,
-          displayName: newDisplayName || newUsername,
+          username: newUsername.trim(),
+          displayName: (newDisplayName || newUsername).trim(),
           password: newPassword,
           role: newRole,
         }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'İstifadəçi yaradıla bilmədi');
-      showNotification(`"${data.user.displayName}" uğurla əlavə edildi!`);
+      const addedName = data.user?.displayName || (data.user as any)?.display_name || data.user?.username || newDisplayName || newUsername;
+      showNotification(`"${addedName}" uğurla əlavə edildi!`);
       setNewUsername('');
       setNewDisplayName('');
       setNewPassword('');
@@ -232,10 +238,11 @@ export const AdminPanel: React.FC = () => {
   const handleToggleUserActive = async (targetUser: AuthUser) => {
     if (!token) return;
     try {
+      const isCurrentlyActive = targetUser.isActive !== undefined ? targetUser.isActive : !!(targetUser as any).is_active;
       const res = await fetch(apiUrl(`/api/admin/users/${targetUser.id}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ isActive: !targetUser.isActive }),
+        body: JSON.stringify({ isActive: !isCurrentlyActive }),
       });
       if (res.ok) {
         showNotification('İstifadəçi statusu dəyişdirildi');
@@ -424,11 +431,15 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
-  const filteredUsers = users.filter(u => {
+  const userList = Array.isArray(users) ? users : [];
+  const filteredUsers = userList.filter(u => {
+    if (!u) return false;
     if (userRoleFilter !== 'all' && u.role !== userRoleFilter) return false;
     if (userSearchTerm.trim()) {
       const q = userSearchTerm.toLowerCase();
-      return u.username.toLowerCase().includes(q) || u.displayName.toLowerCase().includes(q);
+      const uname = (u.username || '').toLowerCase();
+      const dname = ((u.displayName || (u as any).display_name) || '').toLowerCase();
+      return uname.includes(q) || dname.includes(q);
     }
     return true;
   });
@@ -672,51 +683,63 @@ export const AdminPanel: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 font-medium">
-                  {filteredUsers.map(u => (
-                    <tr key={u.id} className="hover:bg-slate-900/50 transition-colors">
-                      <td className="p-4">
-                        <div className="font-extrabold text-white">{u.displayName || u.username}</div>
-                        <div className="text-[11px] text-slate-500">@{u.username}</div>
-                      </td>
-                      <td className="p-4">
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
-                          u.role === 'admin'
-                            ? 'bg-purple-950 text-purple-400 border border-purple-800'
-                            : u.role === 'therapist'
-                            ? 'bg-sky-950 text-sky-400 border border-sky-800'
-                            : 'bg-amber-950 text-amber-400 border border-amber-800'
-                        }`}>
-                          {u.role === 'therapist' ? 'Loqoped' : u.role === 'parent' ? 'Valideyn' : 'Admin'}
-                        </span>
-                      </td>
-                      <td className="p-4">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                          u.isActive ? 'bg-emerald-950 text-emerald-400' : 'bg-rose-950 text-rose-400'
-                        }`}>
-                          <span className={`w-1.5 h-1.5 rounded-full ${u.isActive ? 'bg-emerald-400' : 'bg-rose-400'}`} />
-                          {u.isActive ? 'Aktiv' : 'Deaktiv'}
-                        </span>
-                      </td>
-                      <td className="p-4 text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <button
-                            onClick={() => handleToggleUserActive(u)}
-                            className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
-                            title={u.isActive ? 'Deaktiv et' : 'Aktivləşdir'}
-                          >
-                            {u.isActive ? <Ban className="w-3.5 h-3.5 text-amber-400" /> : <Check className="w-3.5 h-3.5 text-emerald-400" />}
-                          </button>
-                          <button
-                            onClick={() => handleDeleteUser(u)}
-                            className="p-1.5 rounded-lg bg-slate-900 hover:bg-red-950 text-slate-400 hover:text-red-400 cursor-pointer"
-                            title="Sil"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                  {filteredUsers.length === 0 ? (
+                    <tr>
+                      <td colSpan={4} className="p-8 text-center text-slate-500 text-xs">
+                        Heç bir istifadəçi tapılmadı.
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    filteredUsers.map(u => {
+                      const displayName = u.displayName || (u as any).display_name || u.username;
+                      const isActive = u.isActive !== undefined ? u.isActive : !!(u as any).is_active;
+                      return (
+                        <tr key={u.id} className="hover:bg-slate-900/50 transition-colors">
+                          <td className="p-4">
+                            <div className="font-extrabold text-white">{displayName}</div>
+                            <div className="text-[11px] text-slate-500">@{u.username}</div>
+                          </td>
+                          <td className="p-4">
+                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                              u.role === 'admin'
+                                ? 'bg-purple-950 text-purple-400 border border-purple-800'
+                                : u.role === 'therapist'
+                                ? 'bg-sky-950 text-sky-400 border border-sky-800'
+                                : 'bg-amber-950 text-amber-400 border border-amber-800'
+                            }`}>
+                              {u.role === 'therapist' ? 'Loqoped' : u.role === 'parent' ? 'Valideyn' : 'Admin'}
+                            </span>
+                          </td>
+                          <td className="p-4">
+                            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                              isActive ? 'bg-emerald-950 text-emerald-400' : 'bg-rose-950 text-rose-400'
+                            }`}>
+                              <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-emerald-400' : 'bg-rose-400'}`} />
+                              {isActive ? 'Aktiv' : 'Deaktiv'}
+                            </span>
+                          </td>
+                          <td className="p-4 text-right">
+                            <div className="flex items-center justify-end gap-2">
+                              <button
+                                onClick={() => handleToggleUserActive(u)}
+                                className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
+                                title={isActive ? 'Deaktiv et' : 'Aktivləşdir'}
+                              >
+                                {isActive ? <Ban className="w-3.5 h-3.5 text-amber-400" /> : <Check className="w-3.5 h-3.5 text-emerald-400" />}
+                              </button>
+                              <button
+                                onClick={() => handleDeleteUser(u)}
+                                className="p-1.5 rounded-lg bg-slate-900 hover:bg-red-950 text-slate-400 hover:text-red-400 cursor-pointer"
+                                title="Sil"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
             </div>

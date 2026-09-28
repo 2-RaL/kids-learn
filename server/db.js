@@ -686,7 +686,7 @@ export async function getAllUsers(roleFilter = null) {
   }
   query += ' ORDER BY created_at DESC';
   const [rows] = await db.query(query, params);
-  return rows;
+  return rows.map(toSafeUser);
 }
 
 export async function createUser({ username, password, displayName, email, role }) {

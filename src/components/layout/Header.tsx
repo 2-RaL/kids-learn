@@ -155,7 +155,7 @@ export const Header: React.FC = () => {
         {/* Admin Panel Button (only if admin) */}
         {user?.role === 'admin' && (
           <button
-            onClick={() => setShowAdminPanel(true)}
+            onClick={() => setActivePortal('admin')}
             className="flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-amber-500 hover:bg-amber-600 text-amber-950 font-black text-xs shadow-md transition-all border border-amber-300 cursor-pointer"
             title="Admin İdarəetmə Paneli"
           >

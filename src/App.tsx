@@ -15,6 +15,7 @@ import PortalSelectionPage from './components/portal/PortalSelectionPage';
 import PortalLoginPage from './components/auth/PortalLoginPage';
 import ParentPortal from './components/parent/ParentPortal';
 import AdminPanel from './components/admin/AdminPanel';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import { ShieldCheck } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -55,46 +56,47 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // ── Route 1: Portal Selection Landing Page ──────────────────────────
-  if (activePortal === 'select') {
-    return <PortalSelectionPage />;
-  }
-
-  // ── Route 2: Parent Portal ──────────────────────────────────────────
-  if (activePortal === 'parent') {
-    const isParentOrAdmin = isAuthenticated && user && ['parent', 'admin'].includes(user.role);
-    if (!isParentOrAdmin) {
-      return <PortalLoginPage portalType="parent" />;
+  const renderPortal = () => {
+    // ── Route 1: Portal Selection Landing Page ──────────────────────────
+    if (activePortal === 'select') {
+      return <PortalSelectionPage />;
     }
-    return <ParentPortal />;
-  }
 
-  // ── Route 3: Admin Panel ────────────────────────────────────────────
-  if (activePortal === 'admin') {
-    const isAdmin = isAuthenticated && user && user.role === 'admin';
-    if (!isAdmin) {
-      return <PortalLoginPage portalType="admin" />;
+    // ── Route 2: Parent Portal ──────────────────────────────────────────
+    if (activePortal === 'parent') {
+      const isParentOrAdmin = isAuthenticated && user && ['parent', 'admin'].includes(user.role);
+      if (!isParentOrAdmin) {
+        return <PortalLoginPage portalType="parent" />;
+      }
+      return <ParentPortal />;
     }
-    return <AdminPanel />;
-  }
 
-  // ── Route 4: Speech Therapist Portal ("Logopedlər üçün") ─────────────
-  // (Requires therapist, admin, or user role)
-  const isTherapistAuthorized =
-    isAuthenticated && user && ['therapist', 'admin', 'user'].includes(user.role);
+    // ── Route 3: Admin Panel ────────────────────────────────────────────
+    if (activePortal === 'admin') {
+      const isAdmin = isAuthenticated && user && user.role === 'admin';
+      if (!isAdmin) {
+        return <PortalLoginPage portalType="admin" />;
+      }
+      return <AdminPanel />;
+    }
 
-  if (!isTherapistAuthorized) {
-    return <PortalLoginPage portalType="therapist" />;
-  }
+    // ── Route 4: Speech Therapist Portal ("Logopedlər üçün") ─────────────
+    // (Requires therapist, admin, or user role)
+    const isTherapistAuthorized =
+      isAuthenticated && user && ['therapist', 'admin', 'user'].includes(user.role);
 
-  return (
-    <div
-      className="flex flex-col min-h-screen w-full overflow-hidden select-none"
-      style={{
-        background: 'linear-gradient(180deg, #38bdf8 0%, #60a5fa 45%, #93c5fd 100%)',
-        fontFamily: "'Nunito', sans-serif",
-      }}
-    >
+    if (!isTherapistAuthorized) {
+      return <PortalLoginPage portalType="therapist" />;
+    }
+
+    return (
+      <div
+        className="flex flex-col min-h-screen w-full overflow-hidden select-none"
+        style={{
+          background: 'linear-gradient(180deg, #38bdf8 0%, #60a5fa 45%, #93c5fd 100%)',
+          fontFamily: "'Nunito', sans-serif",
+        }}
+      >
       {/* Animated Loading Screen */}
       <LoadingScreen />
 
@@ -170,6 +172,13 @@ export const App: React.FC = () => {
       {/* Achievements Modal */}
       <AchievementsModal />
     </div>
+    );
+  };
+
+  return (
+    <ErrorBoundary>
+      {renderPortal()}
+    </ErrorBoundary>
   );
 };
 
