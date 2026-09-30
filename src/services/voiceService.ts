@@ -274,12 +274,13 @@ class VoiceService {
   private synth: SpeechSynthesis | null = null;
   private voices: SpeechSynthesisVoice[] = [];
   private voicesLoaded: boolean = false;
-  private activeAudio: HTMLAudioElement | null = null;
+  private audioPlayer: HTMLAudioElement | null = null;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
 
   private isPlaying: boolean = false;
   private isPaused: boolean = false;
   private heartbeatTimer: any = null;
+  private sentenceTimer: any = null;
 
   // Active voice persona (default: 'banu' - Female teacher/storyteller)
   private persona: VoicePersona = 'banu';
@@ -448,7 +449,7 @@ class VoiceService {
     if (lang === 'az') {
       const voiceName = this.persona === 'babek' ? 'az-AZ-BabekNeural' : 'az-AZ-BanuNeural';
       const hash = this.getAudioHash(voiceName, cleaned);
-      const staticCacheUrl = `/assets/audio/cache/${hash}.mp3`;
+      const staticCacheUrl = apiUrl(`/assets/audio/cache/${hash}.mp3`);
       const apiTtsUrl = apiUrl(`/api/tts?text=${encodeURIComponent(cleaned)}&voice=${voiceName}`);
 
       this.isPlaying = true;
@@ -479,8 +480,37 @@ class VoiceService {
     this.speakWithBrowserSynth(cleaned, lang, onEnd, onError);
   }
 
+  private getAudioPlayer(): HTMLAudioElement | null {
+    if (typeof window === 'undefined') return null;
+    if (!this.audioPlayer) {
+      this.audioPlayer = new Audio();
+      this.audioPlayer.preload = 'auto';
+    }
+    return this.audioPlayer;
+  }
+
+  private stopCurrentAudio(): void {
+    if (this.audioPlayer) {
+      this.audioPlayer.onended = null;
+      this.audioPlayer.onerror = null;
+      try {
+        this.audioPlayer.pause();
+        this.audioPlayer.currentTime = 0;
+      } catch {}
+      this.audioPlayer.removeAttribute('src');
+    }
+  }
+
+  private clearSentenceTimer(): void {
+    if (this.sentenceTimer) {
+      clearTimeout(this.sentenceTimer);
+      this.sentenceTimer = null;
+    }
+  }
+
   /**
-   * Robust Audio player trying primary URL then fallback URL
+   * Robust Audio player trying primary URL then fallback URL using single persistent player.
+   * Eliminates browser autoplay NotAllowedError and stalls on subsequent sentences.
    */
   private playAudioWithFallback(
     primaryUrl: string,
@@ -489,52 +519,79 @@ class VoiceService {
     onEnd?: () => void,
     onError?: () => void
   ): void {
-    const primaryAudio = new Audio(primaryUrl);
-    this.activeAudio = primaryAudio;
+    this.stopCurrentAudio();
+    this.clearSentenceTimer();
+
+    const player = this.getAudioPlayer();
+    if (!player) {
+      onAllAudioFailed();
+      return;
+    }
+
     this.isPlaying = true;
     this.isPaused = false;
-
-    primaryAudio.onended = () => {
-      this.activeAudio = null;
-      onEnd?.();
-    };
 
     let hasFallbackTriggered = false;
     const triggerFallback = () => {
       if (hasFallbackTriggered) return;
       hasFallbackTriggered = true;
 
-      // Primary (e.g. static cache) missed; try fallback API
-      const fallbackAudio = new Audio(fallbackUrl);
-      this.activeAudio = fallbackAudio;
+      if (!this.isPlaying) return;
 
-      fallbackAudio.onended = () => {
-        this.activeAudio = null;
-        onEnd?.();
+      console.warn('[VoiceService] Primary audio failed, attempting fallback URL:', fallbackUrl);
+
+      player.onended = () => {
+        if (this.isPlaying) {
+          onEnd?.();
+        }
       };
 
-      fallbackAudio.onerror = () => {
-        this.activeAudio = null;
+      player.onerror = () => {
+        console.warn('[VoiceService] Fallback audio onerror for:', fallbackUrl);
         onAllAudioFailed();
       };
 
-      fallbackAudio.play().catch(() => {
-        this.activeAudio = null;
+      try {
+        player.src = fallbackUrl;
+        player.load();
+        const playPromise = player.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn('[VoiceService] Fallback play() rejected:', err);
+            onAllAudioFailed();
+          });
+        }
+      } catch (err) {
+        console.warn('[VoiceService] Fallback synchronous error:', err);
         onAllAudioFailed();
-      });
+      }
     };
 
-    primaryAudio.onerror = () => {
+    player.onended = () => {
+      if (this.isPlaying) {
+        onEnd?.();
+      }
+    };
+
+    player.onerror = () => {
       triggerFallback();
     };
 
-    primaryAudio.play().catch((err) => {
-      if (primaryAudio.error) {
-        triggerFallback();
-      } else {
-        console.warn('[VoiceService] primaryAudio.play() rejected:', err);
+    try {
+      player.src = primaryUrl;
+      player.load();
+      const playPromise = player.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          // ANY play() rejection triggers fallback immediately!
+          console.warn('[VoiceService] Primary audio play() rejected:', err);
+          triggerFallback();
+        });
       }
-    });
+    } catch (err) {
+      console.warn('[VoiceService] Primary audio synchronous error:', err);
+      triggerFallback();
+    }
   }
 
   /**
@@ -608,9 +665,17 @@ class VoiceService {
   ): void {
     this.stop();
 
+    // Prepare and unlock audio element inside the user interaction event
+    const player = this.getAudioPlayer();
+    if (player) {
+      try {
+        player.load();
+      } catch {}
+    }
+
     this.sentences = this.tokenizeSentences(paragraphs);
     this.currentSentenceIndex = 0;
-    this.activeLang = lang;
+    this.activeLang = lang || 'az';
     this.onSentenceChangeCallback = onSentenceChange;
     this.onEndCallback = onEnd;
 
@@ -625,7 +690,9 @@ class VoiceService {
   }
 
   private playNextSentence(): void {
-    if (!this.isPlaying) return;
+    this.clearSentenceTimer();
+
+    if (!this.isPlaying || this.isPaused) return;
 
     if (this.currentSentenceIndex >= this.sentences.length) {
       this.stop();
@@ -640,7 +707,7 @@ class VoiceService {
     if (this.activeLang === 'az') {
       const voiceName = this.persona === 'babek' ? 'az-AZ-BabekNeural' : 'az-AZ-BanuNeural';
       const hash = this.getAudioHash(voiceName, current.text);
-      const staticCacheUrl = `/assets/audio/cache/${hash}.mp3`;
+      const staticCacheUrl = apiUrl(`/assets/audio/cache/${hash}.mp3`);
       const apiTtsUrl = apiUrl(`/api/tts?text=${encodeURIComponent(current.text)}&voice=${voiceName}`);
 
       this.playAudioWithFallback(
@@ -652,7 +719,8 @@ class VoiceService {
         () => {
           if (this.isPlaying && !this.isPaused) {
             this.currentSentenceIndex++;
-            setTimeout(() => {
+            this.clearSentenceTimer();
+            this.sentenceTimer = setTimeout(() => {
               if (this.isPlaying && !this.isPaused) {
                 this.playNextSentence();
               }
@@ -662,7 +730,8 @@ class VoiceService {
         () => {
           if (this.isPlaying && !this.isPaused) {
             this.currentSentenceIndex++;
-            setTimeout(() => {
+            this.clearSentenceTimer();
+            this.sentenceTimer = setTimeout(() => {
               if (this.isPlaying && !this.isPaused) {
                 this.playNextSentence();
               }
@@ -678,7 +747,7 @@ class VoiceService {
   }
 
   private playSentenceWithSynth(text: string): void {
-    if (!this.synth || !this.isPlaying) return;
+    if (!this.synth || !this.isPlaying || this.isPaused) return;
 
     const voice = this.getBestVoice(this.activeLang);
     const u = new SpeechSynthesisUtterance(text);
@@ -696,18 +765,26 @@ class VoiceService {
     u.onend = () => {
       if (this.isPlaying && !this.isPaused) {
         this.currentSentenceIndex++;
-        setTimeout(() => {
-          this.playNextSentence();
+        this.clearSentenceTimer();
+        this.sentenceTimer = setTimeout(() => {
+          if (this.isPlaying && !this.isPaused) {
+            this.playNextSentence();
+          }
         }, 250);
       }
     };
 
     u.onerror = (e) => {
       if (e.error !== 'interrupted' && e.error !== 'canceled') {
-        this.currentSentenceIndex++;
-        setTimeout(() => {
-          this.playNextSentence();
-        }, 200);
+        if (this.isPlaying && !this.isPaused) {
+          this.currentSentenceIndex++;
+          this.clearSentenceTimer();
+          this.sentenceTimer = setTimeout(() => {
+            if (this.isPlaying && !this.isPaused) {
+              this.playNextSentence();
+            }
+          }, 200);
+        }
       }
     };
 
@@ -718,8 +795,11 @@ class VoiceService {
 
   public pause(): void {
     this.isPaused = true;
-    if (this.activeAudio) {
-      this.activeAudio.pause();
+    this.clearSentenceTimer();
+    if (this.audioPlayer) {
+      try {
+        this.audioPlayer.pause();
+      } catch {}
     }
     if (this.synth) {
       this.synth.pause();
@@ -729,8 +809,11 @@ class VoiceService {
 
   public resume(): void {
     this.isPaused = false;
-    if (this.activeAudio) {
-      this.activeAudio.play().catch(() => {});
+    this.clearSentenceTimer();
+    if (this.audioPlayer && this.audioPlayer.src && this.audioPlayer.paused) {
+      this.audioPlayer.play().catch(() => {});
+    } else if (this.sentences.length > 0 && this.currentSentenceIndex < this.sentences.length) {
+      this.playNextSentence();
     }
     if (this.synth && this.synth.paused) {
       this.synth.resume();
@@ -739,12 +822,9 @@ class VoiceService {
   }
 
   public stop(): void {
+    this.clearSentenceTimer();
     this.stopHeartbeat();
-    if (this.activeAudio) {
-      this.activeAudio.pause();
-      this.activeAudio.currentTime = 0;
-      this.activeAudio = null;
-    }
+    this.stopCurrentAudio();
     if (this.synth) {
       this.synth.cancel();
     }
@@ -756,6 +836,7 @@ class VoiceService {
   }
 
   public replay(): void {
+    this.stop();
     if (this.sentences.length > 0 && this.onSentenceChangeCallback && this.onEndCallback) {
       this.currentSentenceIndex = 0;
       this.isPlaying = true;

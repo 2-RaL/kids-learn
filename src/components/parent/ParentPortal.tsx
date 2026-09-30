@@ -97,6 +97,168 @@ export const ParentPortal: React.FC = () => {
     { id: 'settings' as ParentTab, label: navLabels.settings, icon: Settings, emoji: '⚙️' },
   ];
 
+  const dashboardContent = {
+    az: {
+      heroBadge: 'Övladınızın Sevimli İnkişaf Dünyası',
+      heroTitle: 'Xoş gəldiniz, Valideynlər və Balacalar!',
+      heroDesc: 'Burada uşaqlar üçün nağıllar, hərəkətli öyrədici videolar, məntiq və riyaziyyat oyunları, eləcə də şahmat dərsləri toplanıb.',
+      tag1: '✓ Reklamsız',
+      tag2: '✓ Təhlükəsiz Məzmun',
+      tag3: '✓ Azərbaycan Dilində',
+      explore: 'Bölməyə daxil ol',
+      cards: [
+        {
+          id: 'stories' as ParentTab,
+          title: 'Nağıllar və Hekayələr',
+          desc: 'Gecə və gündüz üçün maraqlı nağıllar, səsli oxuma imkanı.',
+          emoji: '📖',
+          color: 'from-amber-500 to-orange-400',
+        },
+        {
+          id: 'videos' as ParentTab,
+          title: 'Video ilə Öyrən',
+          desc: 'Nitq inkişafı və fiziki hərəkət videoları.',
+          emoji: '🎬',
+          color: 'from-sky-500 to-cyan-400',
+        },
+        {
+          id: 'movement' as ParentTab,
+          title: 'Hərəkətlərlə Öyrən',
+          desc: 'Dovşan və digər dostlarla hərəkət komandaları və əyləncə.',
+          emoji: '🏃',
+          color: 'from-emerald-500 to-teal-400',
+        },
+        {
+          id: 'logic' as ParentTab,
+          title: 'Məntiq Oyunları',
+          desc: 'Rənglər, fərqlər və uşaqlar üçün əyləncəli tapmacalar.',
+          emoji: '🧠',
+          color: 'from-purple-500 to-indigo-400',
+        },
+        {
+          id: 'math' as ParentTab,
+          title: 'Riyazi Əməllər',
+          desc: 'Almalar, ulduzlar və əyləncəli sayma dərsləri.',
+          emoji: '🔢',
+          color: 'from-pink-500 to-rose-400',
+        },
+        {
+          id: 'chess' as ParentTab,
+          title: 'Uşaqlar üçün Şahmat',
+          desc: 'Şahmat fiqurları və onların hərəkət qaydaları.',
+          emoji: '♟️',
+          color: 'from-slate-700 to-slate-900',
+        },
+      ],
+    },
+    en: {
+      heroBadge: "Your Child's Favorite Learning World",
+      heroTitle: 'Welcome, Parents and Little Explorers!',
+      heroDesc: 'Fairy tales, active movement videos, interactive logic & math challenges, and chess academy lessons for children.',
+      tag1: '✓ Ad-Free',
+      tag2: '✓ Safe Content',
+      tag3: '✓ In English',
+      explore: 'Open Section',
+      cards: [
+        {
+          id: 'stories' as ParentTab,
+          title: 'Stories & Tales',
+          desc: 'Bedtime and daytime stories with interactive voice narration.',
+          emoji: '📖',
+          color: 'from-amber-500 to-orange-400',
+        },
+        {
+          id: 'videos' as ParentTab,
+          title: 'Learn with Video',
+          desc: 'Speech development, language skills, and active exercise videos.',
+          emoji: '🎬',
+          color: 'from-sky-500 to-cyan-400',
+        },
+        {
+          id: 'movement' as ParentTab,
+          title: 'Move & Learn',
+          desc: 'Physical movement commands and exercises with fun character friends.',
+          emoji: '🏃',
+          color: 'from-emerald-500 to-teal-400',
+        },
+        {
+          id: 'logic' as ParentTab,
+          title: 'Logic Games',
+          desc: 'Colors, shapes, differences, and thinking puzzles for young minds.',
+          emoji: '🧠',
+          color: 'from-purple-500 to-indigo-400',
+        },
+        {
+          id: 'math' as ParentTab,
+          title: 'Math Fun',
+          desc: 'Playful additions, subtractions, and interactive counting games.',
+          emoji: '🔢',
+          color: 'from-pink-500 to-rose-400',
+        },
+        {
+          id: 'chess' as ParentTab,
+          title: 'Kids Chess Academy',
+          desc: 'Chess pieces and their movement rules simplified for kids.',
+          emoji: '♟️',
+          color: 'from-slate-700 to-slate-900',
+        },
+      ],
+    },
+    ru: {
+      heroBadge: 'Любимый Мир Развития Вашего Ребёнка',
+      heroTitle: 'Добро пожаловать, родители и малыши!',
+      heroDesc: 'Увлекательные сказки, развивающие видео, игры на логику и математику, а также детская шахматная школа.',
+      tag1: '✓ Без рекламы',
+      tag2: '✓ Безопасный контент',
+      tag3: '✓ На русском языке',
+      explore: 'Перейти к разделу',
+      cards: [
+        {
+          id: 'stories' as ParentTab,
+          title: 'Сказки и Истории',
+          desc: 'Дневные и вечерние сказки с голосовым чтением для детей.',
+          emoji: '📖',
+          color: 'from-amber-500 to-orange-400',
+        },
+        {
+          id: 'videos' as ParentTab,
+          title: 'Учись по Видео',
+          desc: 'Видеоуроки для развития речи и двигательной активности.',
+          emoji: '🎬',
+          color: 'from-sky-500 to-cyan-400',
+        },
+        {
+          id: 'movement' as ParentTab,
+          title: 'Учимся в Движении',
+          desc: 'Двигательные команды, зарядка и весёлые упражнения с героями.',
+          emoji: '🏃',
+          color: 'from-emerald-500 to-teal-400',
+        },
+        {
+          id: 'logic' as ParentTab,
+          title: 'Игры на Логику',
+          desc: 'Цвета, формы, отличия и увлекательные головоломки.',
+          emoji: '🧠',
+          color: 'from-purple-500 to-indigo-400',
+        },
+        {
+          id: 'math' as ParentTab,
+          title: 'Весёлая Математика',
+          desc: 'Яблоки, звёздочки, сложение и забавные уроки счёта.',
+          emoji: '🔢',
+          color: 'from-pink-500 to-rose-400',
+        },
+        {
+          id: 'chess' as ParentTab,
+          title: 'Шахматы для Детей',
+          desc: 'Шахматные фигуры и правила их ходов в простой форме.',
+          emoji: '♟️',
+          color: 'from-slate-700 to-slate-900',
+        },
+      ],
+    },
+  }[currentLang];
+
   return (
     <div
       className="min-h-screen w-full flex flex-col md:flex-row select-none"
@@ -371,68 +533,25 @@ export const ParentPortal: React.FC = () => {
                 <div className="relative z-10 max-w-xl">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-extrabold mb-3">
                     <Sparkles className="w-3.5 h-3.5 text-amber-200" />
-                    <span>Övladınızın Sevimli İnkişaf Dünyası</span>
+                    <span>{dashboardContent.heroBadge}</span>
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-black mb-2">
-                    Xoş gəldiniz, Valideynlər və Balacalar!
+                    {dashboardContent.heroTitle}
                   </h2>
                   <p className="text-xs sm:text-sm text-amber-50 font-medium leading-relaxed mb-4">
-                    Burada uşaqlar üçün nağıllar, hərəkətli öyrədici videolar, məntiq və riyaziyyat oyunları, eləcə də şahmat dərsləri toplanıb.
+                    {dashboardContent.heroDesc}
                   </p>
                   <div className="flex flex-wrap gap-2 text-xs font-extrabold">
-                    <span className="bg-white/25 px-3 py-1 rounded-xl">✓ Reklamsız</span>
-                    <span className="bg-white/25 px-3 py-1 rounded-xl">✓ Təhlükəsiz Məzmun</span>
-                    <span className="bg-white/25 px-3 py-1 rounded-xl">✓ Azərbaycan Dilində</span>
+                    <span className="bg-white/25 px-3 py-1 rounded-xl">{dashboardContent.tag1}</span>
+                    <span className="bg-white/25 px-3 py-1 rounded-xl">{dashboardContent.tag2}</span>
+                    <span className="bg-white/25 px-3 py-1 rounded-xl">{dashboardContent.tag3}</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick Launch Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {[
-                  {
-                    id: 'stories' as ParentTab,
-                    title: 'Nağıllar və Hekayələr',
-                    desc: 'Gecə və gündüz üçün maraqlı nağıllar, səsli oxuma imkanı.',
-                    emoji: '📖',
-                    color: 'from-amber-500 to-orange-400',
-                  },
-                  {
-                    id: 'videos' as ParentTab,
-                    title: 'Video ilə Öyrən',
-                    desc: 'Nitq inkişafı və fiziki hərəkət videoları.',
-                    emoji: '🎬',
-                    color: 'from-sky-500 to-cyan-400',
-                  },
-                  {
-                    id: 'movement' as ParentTab,
-                    title: 'Hərəkətlərlə Öyrən',
-                    desc: 'Dovşan və digər dostlarla hərəkət komandaları və əyləncə.',
-                    emoji: '🏃',
-                    color: 'from-emerald-500 to-teal-400',
-                  },
-                  {
-                    id: 'logic' as ParentTab,
-                    title: 'Məntiq Oyunları',
-                    desc: 'Rənglər, fərqlər və uşaqlar üçün əyləncəli tapmacalar.',
-                    emoji: '🧠',
-                    color: 'from-purple-500 to-indigo-400',
-                  },
-                  {
-                    id: 'math' as ParentTab,
-                    title: 'Riyazi Əməllər',
-                    desc: 'Almalar, ulduzlar və əyləncəli sayma dərsləri.',
-                    emoji: '🔢',
-                    color: 'from-pink-500 to-rose-400',
-                  },
-                  {
-                    id: 'chess' as ParentTab,
-                    title: 'Uşaqlar üçün Şahmat',
-                    desc: 'Şahmat fiqurları və onların hərəkət qaydaları.',
-                    emoji: '♟️',
-                    color: 'from-slate-700 to-slate-900',
-                  },
-                ].map((item) => (
+                {dashboardContent.cards.map((item) => (
                   <motion.div
                     key={item.id}
                     whileHover={{ y: -5 }}
@@ -452,7 +571,7 @@ export const ParentPortal: React.FC = () => {
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-amber-600">
-                      <span>Bölməyə daxil ol</span>
+                      <span>{dashboardContent.explore}</span>
                       <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
                     </div>
                   </motion.div>

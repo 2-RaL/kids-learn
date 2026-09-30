@@ -17,6 +17,7 @@ interface ParentStoriesProps {
 
 export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => {
   const { language } = useGameStore();
+  const currentLang = language || 'az';
   const { token } = useAuthStore();
 
   const [stories, setStories] = useState<MultilingualStory[]>(MULTILINGUAL_STORIES);
@@ -135,7 +136,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
   };
 
   const currentTranslation = activeStory
-    ? activeStory.translations[language] || activeStory.translations.az
+    ? activeStory.translations[currentLang] || activeStory.translations.az
     : null;
 
   // ── Narration Controls ──────────────────────────────────────────────
@@ -152,7 +153,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
     setAudioState('playing');
     parentSpeech.startStoryNarrator(
       currentTranslation.paragraphs,
-      language,
+      currentLang,
       (paraIdx, sentIdx) => {
         setActiveParagraphIndex(paraIdx);
         setActiveSentenceIndex(sentIdx);

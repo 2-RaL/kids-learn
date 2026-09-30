@@ -29,6 +29,19 @@ interface ParentLogicProps {
   selectedAge?: number | null;
 }
 
+// Extracts leading emoji/smiley from answer strings so it can be rendered prominently for young children
+const extractEmojiAndText = (str: string) => {
+  if (!str) return { emoji: '', text: '' };
+  const match = str.match(/^([\p{Extended_Pictographic}\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{FE0E}\u{FE0F}\s]+)(.*)$/u);
+  if (match && match[1] && match[1].trim()) {
+    return {
+      emoji: match[1].trim(),
+      text: match[2]?.trim() || '',
+    };
+  }
+  return { emoji: '', text: str.trim() };
+};
+
 export const ParentLogic: React.FC<ParentLogicProps> = ({ selectedAge }) => {
   const { token } = useAuthStore();
   const { language } = useGameStore();
@@ -419,31 +432,41 @@ export const ParentLogic: React.FC<ParentLogicProps> = ({ selectedAge }) => {
             </div>
 
             {/* Options */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               {currentQ.answers?.map((ans) => {
                 const isSelected = selectedAnswerId === ans.id;
-                let btnStyle = 'bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200';
+                const { emoji, text } = extractEmojiAndText(ans.answer_text);
+                let btnStyle = 'bg-white hover:bg-amber-50/80 text-slate-800 border-amber-200/80 hover:border-amber-400 shadow-sm';
 
                 if (isAnswered) {
                   if (ans.is_correct) {
-                    btnStyle = 'bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/20';
+                    btnStyle = 'bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/25';
                   } else if (isSelected && !ans.is_correct) {
-                    btnStyle = 'bg-rose-500 text-white border-rose-400';
+                    btnStyle = 'bg-rose-500 text-white border-rose-400 shadow-md shadow-rose-500/20';
                   } else {
-                    btnStyle = 'bg-slate-100 text-slate-400 border-transparent opacity-60';
+                    btnStyle = 'bg-slate-100 text-slate-400 border-transparent opacity-50';
                   }
                 }
 
                 return (
                   <motion.button
                     key={ans.id}
-                    whileHover={!isAnswered ? { scale: 1.02 } : {}}
-                    whileTap={!isAnswered ? { scale: 0.98 } : {}}
+                    whileHover={!isAnswered ? { scale: 1.03, y: -2 } : {}}
+                    whileTap={!isAnswered ? { scale: 0.97 } : {}}
                     onClick={() => handleSelectAnswer(ans)}
                     disabled={isAnswered}
-                    className={`p-4 rounded-2xl font-extrabold text-sm sm:text-base border-2 transition-all flex items-center justify-center text-center cursor-pointer ${btnStyle}`}
+                    className={`min-h-[115px] sm:min-h-[130px] p-4 sm:p-5 rounded-3xl border-2 transition-all flex flex-col items-center justify-center text-center cursor-pointer group ${btnStyle}`}
                   >
-                    <span>{ans.answer_text}</span>
+                    {emoji && (
+                      <span className="text-4xl sm:text-5xl md:text-6xl drop-shadow-sm mb-2 group-hover:scale-110 transition-transform select-none">
+                        {emoji}
+                      </span>
+                    )}
+                    {text && (
+                      <span className="text-base sm:text-lg font-black tracking-wide leading-tight">
+                        {text}
+                      </span>
+                    )}
                   </motion.button>
                 );
               })}
