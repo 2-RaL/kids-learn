@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { MULTILINGUAL_STORIES } from '../src/data/parentStoriesData';
-import { CHESS_LESSONS } from '../src/data/parentChessData';
+import { MULTILINGUAL_STORIES } from '../src/data/parentStoriesData.ts';
+import { CHESS_LESSONS } from '../src/data/parentChessData.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

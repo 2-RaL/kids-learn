@@ -451,17 +451,27 @@ class VoiceService {
       const staticCacheUrl = `/assets/audio/cache/${hash}.mp3`;
       const apiTtsUrl = apiUrl(`/api/tts?text=${encodeURIComponent(cleaned)}&voice=${voiceName}`);
 
+      this.isPlaying = true;
+      this.isPaused = false;
+
       // Try static cache first, then API endpoint, then native az-AZ browser voice
-      this.playAudioWithFallback(staticCacheUrl, apiTtsUrl, () => {
-        // Fallback to native browser az-AZ voice ONLY if genuine az-AZ voice exists
-        const azVoice = this.getBestVoice('az');
-        if (azVoice) {
+      this.playAudioWithFallback(
+        staticCacheUrl,
+        apiTtsUrl,
+        () => {
           this.speakWithBrowserSynth(cleaned, 'az', onEnd, onError);
-        } else {
-          console.warn('[VoiceService] No Azerbaijani audio or browser voice available.');
+        },
+        () => {
+          this.isPlaying = false;
+          this.isPaused = false;
+          onEnd?.();
+        },
+        () => {
+          this.isPlaying = false;
+          this.isPaused = false;
           onError?.();
         }
-      }, onEnd, onError);
+      );
       return;
     }
 
@@ -485,20 +495,20 @@ class VoiceService {
     this.isPaused = false;
 
     primaryAudio.onended = () => {
-      this.isPlaying = false;
-      this.isPaused = false;
       this.activeAudio = null;
       onEnd?.();
     };
 
-    primaryAudio.onerror = () => {
+    let hasFallbackTriggered = false;
+    const triggerFallback = () => {
+      if (hasFallbackTriggered) return;
+      hasFallbackTriggered = true;
+
       // Primary (e.g. static cache) missed; try fallback API
       const fallbackAudio = new Audio(fallbackUrl);
       this.activeAudio = fallbackAudio;
 
       fallbackAudio.onended = () => {
-        this.isPlaying = false;
-        this.isPaused = false;
         this.activeAudio = null;
         onEnd?.();
       };
@@ -514,10 +524,15 @@ class VoiceService {
       });
     };
 
-    primaryAudio.play().catch(() => {
-      // Trigger error branch for fallback
-      if (primaryAudio.onerror) {
-        (primaryAudio.onerror as any)(new Event('error'));
+    primaryAudio.onerror = () => {
+      triggerFallback();
+    };
+
+    primaryAudio.play().catch((err) => {
+      if (primaryAudio.error) {
+        triggerFallback();
+      } else {
+        console.warn('[VoiceService] primaryAudio.play() rejected:', err);
       }
     });
   }
@@ -537,20 +552,12 @@ class VoiceService {
     }
 
     const voice = this.getBestVoice(lang);
-
-    // STRICT: For Azerbaijani, if no genuine az voice exists, abort to prevent foreign voice corruption
-    if (lang === 'az' && !voice) {
-      console.warn('[VoiceService] Cannot speak Azerbaijani: no genuine az-AZ voice found in browser.');
-      onError?.();
-      return;
-    }
-
     const u = new SpeechSynthesisUtterance(text);
     if (voice) {
       u.voice = voice;
       u.lang = voice.lang;
     } else {
-      u.lang = lang === 'ru' ? 'ru-RU' : 'en-US';
+      u.lang = lang === 'az' ? 'az-AZ' : lang === 'ru' ? 'ru-RU' : 'en-US';
     }
 
     // Professional Child-Friendly delivery rates
@@ -640,24 +647,26 @@ class VoiceService {
         staticCacheUrl,
         apiTtsUrl,
         () => {
-          // Fallback to browser synthesis ONLY if genuine az-AZ voice exists
-          const azVoice = this.getBestVoice('az');
-          if (azVoice) {
-            this.playSentenceWithSynth(current.text);
-          } else {
-            // Advance to next sentence on error after brief pause
-            if (this.isPlaying && !this.isPaused) {
-              this.currentSentenceIndex++;
-              setTimeout(() => this.playNextSentence(), 300);
-            }
+          this.playSentenceWithSynth(current.text);
+        },
+        () => {
+          if (this.isPlaying && !this.isPaused) {
+            this.currentSentenceIndex++;
+            setTimeout(() => {
+              if (this.isPlaying && !this.isPaused) {
+                this.playNextSentence();
+              }
+            }, 250); // Natural breath pause between sentences
           }
         },
         () => {
           if (this.isPlaying && !this.isPaused) {
             this.currentSentenceIndex++;
             setTimeout(() => {
-              this.playNextSentence();
-            }, 250); // Natural breath pause between sentences
+              if (this.isPlaying && !this.isPaused) {
+                this.playNextSentence();
+              }
+            }, 300);
           }
         }
       );
@@ -672,20 +681,12 @@ class VoiceService {
     if (!this.synth || !this.isPlaying) return;
 
     const voice = this.getBestVoice(this.activeLang);
-    if (this.activeLang === 'az' && !voice) {
-      if (this.isPlaying && !this.isPaused) {
-        this.currentSentenceIndex++;
-        setTimeout(() => this.playNextSentence(), 300);
-      }
-      return;
-    }
-
     const u = new SpeechSynthesisUtterance(text);
     if (voice) {
       u.voice = voice;
       u.lang = voice.lang;
     } else {
-      u.lang = this.activeLang === 'ru' ? 'ru-RU' : 'en-US';
+      u.lang = this.activeLang === 'az' ? 'az-AZ' : this.activeLang === 'ru' ? 'ru-RU' : 'en-US';
     }
 
     u.rate = this.activeLang === 'az' ? 0.90 : 0.92;

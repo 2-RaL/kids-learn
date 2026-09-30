@@ -41,5 +41,4 @@ Desktop.ini
 server/data/
 server/src/
 
-# Generated TTS audio cache
-public/assets/audio/cache/
+
