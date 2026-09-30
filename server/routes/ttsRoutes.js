@@ -2,7 +2,7 @@ import { Router } from 'express';
 import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
-import { execFile } from 'child_process';
+import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -10,12 +10,13 @@ const __dirname = path.dirname(__filename);
 
 const router = Router();
 const CACHE_DIR = path.resolve(__dirname, '..', '..', 'public', 'assets', 'audio', 'cache');
+const HELPER_SCRIPT = path.resolve(__dirname, '..', '..', 'scripts', 'tts_helper.py');
 
 if (!fs.existsSync(CACHE_DIR)) {
   fs.mkdirSync(CACHE_DIR, { recursive: true });
 }
 
-// Supported high-quality Microsoft Neural studio voices
+// Supported studio-grade Microsoft Neural voices
 const VOICE_MAP = {
   'banu': 'az-AZ-BanuNeural',
   'az-AZ-BanuNeural': 'az-AZ-BanuNeural',
@@ -29,51 +30,80 @@ const VOICE_MAP = {
   'ru-RU-DmitryNeural': 'ru-RU-DmitryNeural'
 };
 
-// GET /api/tts?text=...&voice=...
-router.get('/', (req, res) => {
-  const text = (req.query.text || '').toString().trim();
-  const voiceKey = (req.query.voice || 'banu').toString().trim();
+function handleTtsRequest(text, voiceKey, res) {
   const voice = VOICE_MAP[voiceKey] || VOICE_MAP.banu;
+  const trimmed = (text || '').trim();
 
-  if (!text) {
+  if (!trimmed) {
     return res.status(400).json({ error: 'Text parameter is required' });
   }
 
-  // Truncate to safe length if needed
-  const safeText = text.slice(0, 1000);
+  // Safe maximum length per request (1500 chars)
+  const safeText = trimmed.slice(0, 1500);
 
-  // Deterministic cache key based on voice and text content
+  // Deterministic MD5 cache key
   const hash = crypto.createHash('md5').update(`${voice}_${safeText}`).digest('hex');
   const filePath = path.join(CACHE_DIR, `${hash}.mp3`);
 
-  // Fast cache hit
-  if (fs.existsSync(filePath)) {
+  // Instant cache hit
+  if (fs.existsSync(filePath) && fs.statSync(filePath).size > 100) {
     res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Accept-Ranges', 'bytes');
     res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
     return res.sendFile(filePath);
   }
 
-  // Generate on-demand via edge-tts
+  // Generate on-demand via tts_helper.py with UTF-8 stdin
   const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
-  const args = [
-    '-m',
-    'edge_tts',
-    '--voice', voice,
-    '--rate', '-4%',
-    '--text', safeText,
-    '--write-media', filePath
-  ];
+  const child = spawn(
+    pythonCmd,
+    [HELPER_SCRIPT, '--voice', voice, '--rate', '-4%', '--output', filePath],
+    { stdio: ['pipe', 'ignore', 'pipe'] }
+  );
 
-  execFile(pythonCmd, args, { timeout: 15000 }, (error, _stdout, stderr) => {
-    if (error || !fs.existsSync(filePath)) {
-      console.error('Edge-tts generation error:', error?.message || stderr);
-      return res.status(500).json({ error: 'TTS generation failed' });
+  let stderr = '';
+  child.stderr.on('data', (d) => {
+    stderr += d.toString();
+  });
+
+  child.on('error', (err) => {
+    console.error('[TTS] Subprocess spawn error:', err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'TTS subprocess error', details: err.message });
+    }
+  });
+
+  child.on('close', (code) => {
+    if (code === 0 && fs.existsSync(filePath) && fs.statSync(filePath).size > 100) {
+      res.setHeader('Content-Type', 'audio/mpeg');
+      res.setHeader('Accept-Ranges', 'bytes');
+      res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
+      return res.sendFile(filePath);
     }
 
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
-    return res.sendFile(filePath);
+    console.error('[TTS] Synthesis failed. Code:', code, 'Stderr:', stderr);
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'TTS generation failed', code, details: stderr });
+    }
   });
+
+  // Write safeText to stdin using UTF-8 Buffer
+  child.stdin.write(Buffer.from(safeText, 'utf-8'));
+  child.stdin.end();
+}
+
+// GET /api/tts?text=...&voice=...
+router.get('/', (req, res) => {
+  const text = (req.query.text || '').toString();
+  const voiceKey = (req.query.voice || 'banu').toString();
+  handleTtsRequest(text, voiceKey, res);
+});
+
+// POST /api/tts { text: "...", voice: "..." }
+router.post('/', (req, res) => {
+  const text = (req.body?.text || '').toString();
+  const voiceKey = (req.body?.voice || 'banu').toString();
+  handleTtsRequest(text, voiceKey, res);
 });
 
 export default router;

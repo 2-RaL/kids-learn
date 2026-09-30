@@ -1,10 +1,11 @@
 import type { CharacterCommand } from '../types';
 import type { Language } from '../types';
+import { voiceService } from '../services/voiceService';
 
 /**
  * Play pre-recorded TTS audio for a command in the given language.
- * Uses edge-tts generated MP3 files stored in /assets/audio/{lang}/{command}.mp3
- * This replaces browser SpeechSynthesis which doesn't support Azerbaijani (az-AZ).
+ * Uses edge-tts generated MP3 files stored in /assets/audio/{lang}/{gender}/{command}.mp3
+ * Coordinated with voiceService to prevent voice collision.
  */
 
 let currentAudio: HTMLAudioElement | null = null;
@@ -17,7 +18,10 @@ export function playCommandAudio(
   if (command === 'idle') return;
 
   try {
-    // Stop any currently playing audio
+    // Stop any ongoing narration from voiceService
+    voiceService.stop();
+
+    // Stop any currently playing command audio
     if (currentAudio) {
       currentAudio.pause();
       currentAudio.currentTime = 0;
