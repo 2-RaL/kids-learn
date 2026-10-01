@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
 import { CHARACTERS } from '../../config/characters';
+import { COMMAND_AZ_LABELS } from '../../config/commands';
 import CharacterAvatar from './CharacterAvatar';
 import { RotateCcw, RotateCw, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -116,7 +117,7 @@ export const CharacterScene: React.FC = () => {
           <CharacterAvatar character={character} command={currentCommand} speed={animationSpeed} />
         </div>
 
-        {/* Bottom Feedback Badge (e.g. Əmr başa düşüldü! ✅) */}
+        {/* Bottom Feedback Badge (e.g. 🪴 Leyla: Sula (Bitki) ✅) */}
         <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none max-w-[90%]">
           <AnimatePresence>
             {(feedbackMessage || currentCommand !== 'idle') && (
@@ -124,9 +125,19 @@ export const CharacterScene: React.FC = () => {
                 initial={{ opacity: 0, y: 15, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-black/80 backdrop-blur-md text-white font-extrabold text-xs sm:text-base flex items-center gap-2 shadow-2xl border border-white/30 truncate"
+                className="px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-slate-900/90 backdrop-blur-md text-white font-extrabold text-xs sm:text-base flex items-center gap-2 shadow-2xl border border-white/30 truncate"
               >
-                <span className="truncate">{feedbackMessage || t('commandUnderstood') || 'Əmr başa düşüldü!'}</span>
+                {currentCommand !== 'idle' && COMMAND_AZ_LABELS[currentCommand] && (
+                  <span className="text-base sm:text-lg flex-shrink-0">
+                    {COMMAND_AZ_LABELS[currentCommand].icon}
+                  </span>
+                )}
+                <span className="truncate">
+                  {feedbackMessage ||
+                    (currentCommand !== 'idle' && COMMAND_AZ_LABELS[currentCommand]
+                      ? `${character.name}: ${COMMAND_AZ_LABELS[currentCommand].label}`
+                      : t('commandUnderstood') || 'Əmr başa düşüldü!')}
+                </span>
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 flex-shrink-0" />
               </motion.div>
             )}

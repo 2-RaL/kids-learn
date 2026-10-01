@@ -32,11 +32,15 @@ function getCharacterPrefix(characterId: string): string {
 export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, command, speed }) => {
   const duration = SPEED_MAP[speed];
   const prefix = getCharacterPrefix(character.id);
-  const [imgError, setImgError] = useState(false);
+  const [imgFallbackLevel, setImgFallbackLevel] = useState(0);
 
   useEffect(() => {
-    setImgError(false);
+    setImgFallbackLevel(0);
   }, [character.id, command]);
+
+  const handleImgError = () => {
+    setImgFallbackLevel((prev) => prev + 1);
+  };
 
   // Select 3D rendered sprite pose based on the active command
   const poseType = useMemo(() => {
@@ -112,13 +116,19 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
     }
   }, [command]);
 
-  // Try transparent PNG first; if error, fallback to standing PNG
+  // 3-Level Robust Action Sprite Loader:
+  // Level 0: Dedicated command sprite (/assets/characters/${prefix}_${command}.png)
+  // Level 1: Base pose sprite (/assets/characters/${prefix}_${poseType}.png)
+  // Level 2: Safe standing fallback (/assets/characters/${prefix}_standing.png)
   const poseImage = useMemo(() => {
-    if (imgError) {
-      return `/assets/characters/${prefix}_standing.png`;
+    if (imgFallbackLevel === 0) {
+      return `/assets/characters/${prefix}_${command}.png`;
     }
-    return `/assets/characters/${prefix}_${poseType}.png`;
-  }, [prefix, poseType, imgError]);
+    if (imgFallbackLevel === 1) {
+      return `/assets/characters/${prefix}_${poseType}.png`;
+    }
+    return `/assets/characters/${prefix}_standing.png`;
+  }, [prefix, command, poseType, imgFallbackLevel]);
 
   // Motion variants for natural human physics
   const motionConfig = useMemo(() => {
@@ -495,6 +505,317 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
             ease: 'easeInOut',
           },
           shadowAnimate: { scaleX: [1, 0.95, 1], opacity: 0.65 },
+        };
+
+      case 'walk':
+        return {
+          animate: {
+            x: [-20, 20, -20],
+            y: [0, -8, 0, -8, 0],
+            rotate: [1.5, -1.5, 1.5],
+          },
+          transition: {
+            duration: duration * 1.4,
+            repeat: Infinity,
+            repeatType: 'loop' as const,
+            ease: 'easeInOut',
+          },
+          shadowAnimate: { scaleX: [1, 0.9, 1, 0.9, 1], opacity: 0.65 },
+        };
+
+      case 'slide':
+        return {
+          animate: {
+            x: [-60, 40],
+            y: [-30, 25],
+            rotate: [-8, 4, 0],
+          },
+          transition: {
+            duration: duration * 1.3,
+            repeat: Infinity,
+            repeatType: 'reverse' as const,
+            ease: 'easeInOut',
+          },
+          shadowAnimate: { scaleX: [0.8, 1.2], opacity: [0.4, 0.75] },
+        };
+
+      case 'rideBike':
+        return {
+          animate: {
+            x: [-40, 40, -40],
+            y: [0, -6, 0, -6, 0],
+            rotate: [1.5, -1.5, 1.5],
+          },
+          transition: {
+            duration: duration * 1.5,
+            repeat: Infinity,
+            repeatType: 'loop' as const,
+            ease: 'easeInOut',
+          },
+          shadowAnimate: { scaleX: [0.95, 1.05, 0.95], opacity: 0.65 },
+        };
+
+      case 'surprised':
+        return {
+          animate: {
+            y: [0, -28, -22, -26, 0],
+            scale: [1, 1.12, 1.06, 1.1, 1],
+          },
+          transition: {
+            duration: duration * 0.9,
+            repeat: Infinity,
+            repeatType: 'loop' as const,
+            ease: 'easeInOut',
+          },
+          shadowAnimate: { scaleX: [1, 0.8, 1], opacity: [0.65, 0.4, 0.65] },
+        };
+
+      case 'playToy':
+        return {
+          animate: {
+            y: [38, 42, 38],
+            rotate: [0, -2.5, 2.5, 0],
+          },
+          transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+        };
+
+      case 'wakeUp':
+        return {
+          animate: {
+            y: [25, -18, 0],
+            scaleY: [0.95, 1.08, 1],
+            scaleX: [1.03, 0.95, 1],
+          },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [1.1, 0.85, 1], opacity: 0.65 },
+        };
+
+      case 'bathe':
+        return {
+          animate: {
+            y: [0, -6, 0, -6, 0],
+            rotate: [-2, 2, -2],
+          },
+          transition: { duration: duration * 1.1, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [1, 0.95, 1], opacity: 0.65 },
+        };
+
+      case 'wash':
+        return {
+          animate: {
+            y: [0, -4, 0],
+            rotate: [-1.5, 1.5, -1.5],
+          },
+          transition: { duration: duration * 0.7, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'comb':
+        return {
+          animate: {
+            rotate: [0, 4, -2, 4, 0],
+            y: [0, -4, 0],
+          },
+          transition: { duration: duration * 1.0, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'dress':
+        return {
+          animate: {
+            rotateY: [0, 180, 360],
+            scale: [1, 1.05, 1],
+          },
+          transition: { duration: duration * 1.5, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [1, 0.7, 1], opacity: 0.65 },
+        };
+
+      case 'paint':
+        return {
+          animate: {
+            x: [0, 14, -10, 14, 0],
+            y: [0, -6, 4, -4, 0],
+          },
+          transition: { duration: duration * 1.4, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'cut':
+        return {
+          animate: {
+            scale: [1, 1.03, 0.98, 1.02, 1],
+            y: [38, 40, 38],
+          },
+          transition: { duration: duration * 0.9, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+        };
+
+      case 'talk':
+        return {
+          animate: {
+            y: [0, -6, 0, -4, 0],
+            rotate: [0, 2, -2, 1, 0],
+          },
+          transition: { duration: duration * 1.1, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'build':
+        return {
+          animate: {
+            y: [38, 34, 40, 38],
+          },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+        };
+
+      case 'hug':
+        return {
+          animate: {
+            scale: [1, 1.08, 0.96, 1.06, 1],
+            y: [0, -4, 0],
+          },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [1, 1.05, 1], opacity: 0.65 },
+        };
+
+      case 'holdHands':
+        return {
+          animate: {
+            x: [0, 8, -8, 0],
+            rotate: [-2, 2, -2],
+          },
+          transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'help':
+        return {
+          animate: {
+            y: [0, -8, 0],
+            scale: [1, 1.04, 1],
+          },
+          transition: { duration: duration * 1.1, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'openDoor':
+        return {
+          animate: {
+            x: [0, 16, 0],
+            rotate: [0, -3, 0],
+          },
+          transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'closeDoor':
+        return {
+          animate: {
+            x: [0, -12, 0],
+          },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'putAway':
+        return {
+          animate: {
+            y: [38, 44, 38],
+          },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+        };
+
+      case 'collect':
+        return {
+          animate: {
+            x: [-12, 12, -12],
+            y: [38, 42, 38],
+          },
+          transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+        };
+
+      case 'clean':
+        return {
+          animate: {
+            x: [-18, 18, -18],
+            rotate: [-4, 4, -4],
+          },
+          transition: { duration: duration * 1.0, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'bring':
+        return {
+          animate: {
+            x: [-25, 25, -25],
+            y: [0, -10, 0, -10, 0],
+          },
+          transition: { duration: duration * 1.4, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [0.9, 1.1, 0.9], opacity: 0.65 },
+        };
+
+      case 'takeAway':
+        return {
+          animate: {
+            x: [0, 45, 0],
+            y: [0, -10, 0],
+          },
+          transition: { duration: duration * 1.4, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [0.9, 1.1, 0.9], opacity: 0.65 },
+        };
+
+      case 'carry':
+        return {
+          animate: {
+            y: [0, -12, 0, -12, 0],
+            rotate: [2, -2, 2],
+          },
+          transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [0.95, 1.05, 0.95], opacity: 0.65 },
+        };
+
+      case 'pull':
+        return {
+          animate: {
+            x: [10, -25, 0],
+            y: [0, -8, 0],
+          },
+          transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'scatter':
+        return {
+          animate: {
+            scale: [0.95, 1.12, 0.98, 1],
+            rotate: [-4, 4, 0],
+          },
+          transition: { duration: duration * 0.9, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [1, 1.15, 1], opacity: 0.65 },
+        };
+
+      case 'waterPlant':
+        return {
+          animate: {
+            rotate: [0, 5, 8, 5, 0],
+            y: [0, -4, 0],
+          },
+          transition: { duration: duration * 1.4, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'lightMatch':
+        return {
+          animate: {
+            y: [0, -4, -2, 0],
+            scale: [1, 1.02, 1],
+          },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: 1, opacity: 0.65 },
         };
 
       case 'idle':
@@ -1100,7 +1421,7 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
             key={poseImage}
             src={poseImage}
             alt={character.name}
-            onError={() => setImgError(true)}
+            onError={handleImgError}
             initial={{ opacity: 0.9, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0.9 }}
