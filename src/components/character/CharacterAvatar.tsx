@@ -45,12 +45,23 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'stretch':
       case 'slide':
         return 'jumping';
+      case 'laugh':
+      case 'dance':
+      case 'clap':
+      case 'surprised':
+        return 'laugh';
+      case 'cry':
+        return 'cry';
+      case 'playInstrument':
+      case 'sing':
+        return 'playInstrument';
       case 'wave':
       case 'point':
-      case 'sing':
       case 'talk':
       case 'hug':
       case 'holdHands':
+      case 'nod':
+      case 'shakeHead':
       case 'lightMatch':
       case 'waterPlant':
         return 'waving';
@@ -78,20 +89,12 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'moveLeft':
       case 'moveRight':
       case 'spin':
-      case 'nod':
-      case 'shakeHead':
-      case 'clap':
-      case 'dance':
       case 'stop':
       case 'idle':
-      case 'laugh':
-      case 'cry':
       case 'think':
       case 'count':
       case 'eat':
       case 'drink':
-      case 'surprised':
-      case 'playInstrument':
       case 'wakeUp':
       case 'bathe':
       case 'wash':
@@ -109,10 +112,10 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
     }
   }, [command]);
 
-  // Try transparent PNG first; if still converting, fallback to jpg
+  // Try transparent PNG first; if error, fallback to standing PNG
   const poseImage = useMemo(() => {
     if (imgError) {
-      return `/assets/characters/${prefix}_${poseType}.jpg`;
+      return `/assets/characters/${prefix}_standing.png`;
     }
     return `/assets/characters/${prefix}_${poseType}.png`;
   }, [prefix, poseType, imgError]);
@@ -476,6 +479,22 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
             ease: 'easeOut',
           },
           shadowAnimate: { scaleX: 1, opacity: 0.65 },
+        };
+
+      case 'playInstrument':
+        return {
+          animate: {
+            rotate: [-2.5, 2.5, -2.5],
+            y: [0, -5, 0, -5, 0],
+            scaleX: [1, 1.015, 1],
+          },
+          transition: {
+            duration: duration * 1.1,
+            repeat: Infinity,
+            repeatType: 'loop' as const,
+            ease: 'easeInOut',
+          },
+          shadowAnimate: { scaleX: [1, 0.95, 1], opacity: 0.65 },
         };
 
       case 'idle':

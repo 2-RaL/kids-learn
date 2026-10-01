@@ -107,10 +107,12 @@ export const CharacterSelector: React.FC<CharacterSelectorProps> = ({ onClose, i
               )}
 
               {/* 3D Character Portrait Image */}
-              <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-amber-50/50 flex items-center justify-center">
+              <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-gradient-to-b from-amber-50/70 to-slate-100/90 flex items-center justify-center shadow-xs border border-slate-200/50">
                 <img
                   src={char.thumbnail || '/assets/portraits/girl_leyla.jpg'}
                   alt={char.name}
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover object-top transition duration-200 group-hover:scale-105"
                   draggable={false}
                 />
