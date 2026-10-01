@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Volume2, VolumeX, Sparkles, CheckCircle2, RotateCcw,
-  ArrowRight, Award, Star, ArrowLeft
+  ArrowRight, Award, Star, ArrowLeft, BookOpen, Lightbulb
 } from 'lucide-react';
-import type { LearningModuleCategory, LearningActivityItem } from '../../data/learningModulesData';
+import type {
+  LearningModuleCategory,
+  LearningActivityItem,
+  VisualScene,
+  LearningLesson,
+} from '../../data/learningModulesData';
 import { ACTIVITY_TRANSLATIONS, UI_TRANSLATIONS } from '../../data/learningTranslations';
 import { parentSpeech } from '../../utils/parentSpeech';
 import { useGameStore } from '../../store/gameStore';
@@ -15,6 +20,197 @@ interface LearningActivityPlayerProps {
   onCompleteActivity?: (activityId: string, score: number) => void;
 }
 
+// ── Visual Scene Renderer (for Spatial Placement & Math Formulas) ───
+interface VisualSceneCardProps {
+  scene: VisualScene;
+  activeLang: 'az' | 'en' | 'ru';
+}
+
+const VisualSceneCard: React.FC<VisualSceneCardProps> = ({ scene, activeLang }) => {
+  const caption =
+    activeLang === 'en'
+      ? scene.captionEn || scene.captionAz
+      : activeLang === 'ru'
+      ? scene.captionRu || scene.captionAz
+      : scene.captionAz;
+
+  if (scene.type === 'spatial') {
+    const { containerEmoji = '🪑', itemEmoji = '📖', position = 'on' } = scene;
+    return (
+      <div className="w-full bg-gradient-to-b from-sky-50 via-amber-50/40 to-emerald-50/30 rounded-3xl border-2 border-amber-200/80 p-4 sm:p-6 shadow-inner flex flex-col items-center justify-center relative overflow-hidden">
+        {caption && (
+          <div className="mb-3 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur px-3.5 py-1.5 rounded-full border border-amber-200 text-xs sm:text-sm font-black text-slate-700 shadow-xs">
+            <span>🖼️</span>
+            <span>{caption}</span>
+          </div>
+        )}
+
+        {/* Scene Container */}
+        <div className="w-full max-w-sm h-48 sm:h-56 relative flex items-center justify-center bg-white/80 rounded-2xl border border-slate-200/80 shadow-sm p-4">
+          {position === 'on' && (
+            <div className="flex flex-col items-center justify-center relative">
+              {/* Item on top */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}
+                className="text-7xl sm:text-8xl md:text-9xl filter drop-shadow-lg z-10 -mb-2 select-none"
+              >
+                {itemEmoji}
+              </motion.div>
+              {/* Table top beam */}
+              <div className="w-48 sm:w-56 h-3 bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 rounded-full shadow-md z-0" />
+              {/* Table / Chair base */}
+              <div className="text-6xl sm:text-7xl text-slate-700 -mt-2 opacity-90 select-none">
+                {containerEmoji}
+              </div>
+              <span className="absolute -bottom-2 bg-emerald-500 text-white font-black text-[11px] px-2.5 py-0.5 rounded-full shadow-xs">
+                👆 {activeLang === 'en' ? 'On top' : activeLang === 'ru' ? 'Сверху' : 'Üstündə'}
+              </span>
+            </div>
+          )}
+
+          {position === 'under' && (
+            <div className="flex flex-col items-center justify-center relative">
+              {/* Table top and container */}
+              <div className="text-6xl sm:text-7xl text-slate-700 -mb-2 opacity-90 select-none">
+                {containerEmoji}
+              </div>
+              <div className="w-48 sm:w-56 h-3 bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 rounded-full shadow-md" />
+              {/* Item below */}
+              <motion.div
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+                className="text-7xl sm:text-8xl md:text-9xl filter drop-shadow-lg mt-1 z-10 select-none"
+              >
+                {itemEmoji}
+              </motion.div>
+              <span className="absolute -bottom-2 bg-indigo-500 text-white font-black text-[11px] px-2.5 py-0.5 rounded-full shadow-xs">
+                👇 {activeLang === 'en' ? 'Underneath' : activeLang === 'ru' ? 'Под' : 'Altında'}
+              </span>
+            </div>
+          )}
+
+          {position === 'in' && (
+            <div className="flex flex-col items-center justify-center relative">
+              <div className="relative flex items-center justify-center">
+                <span className="text-8xl sm:text-9xl filter drop-shadow-md select-none">
+                  {containerEmoji}
+                </span>
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1], y: [0, -4, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                  className="absolute text-6xl sm:text-7xl md:text-8xl filter drop-shadow-lg select-none"
+                >
+                  {itemEmoji}
+                </motion.div>
+              </div>
+              <span className="mt-2 bg-sky-500 text-white font-black text-[11px] px-2.5 py-0.5 rounded-full shadow-xs">
+                📥 {activeLang === 'en' ? 'Inside' : activeLang === 'ru' ? 'Внутри' : 'İçində'}
+              </span>
+            </div>
+          )}
+
+          {position === 'beside' && (
+            <div className="flex flex-col items-center justify-center relative">
+              <div className="flex items-center justify-center gap-6 sm:gap-8">
+                <span className="text-7xl sm:text-8xl filter drop-shadow-md select-none">
+                  {containerEmoji}
+                </span>
+                <span className="text-2xl text-amber-500 font-black animate-pulse select-none">↔️</span>
+                <motion.div
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                  className="text-7xl sm:text-8xl filter drop-shadow-lg select-none"
+                >
+                  {itemEmoji}
+                </motion.div>
+              </div>
+              <span className="mt-3 bg-amber-500 text-white font-black text-[11px] px-2.5 py-0.5 rounded-full shadow-xs">
+                👉 {activeLang === 'en' ? 'Beside' : activeLang === 'ru' ? 'Рядом' : 'Yanında'}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (scene.type === 'math' && scene.mathFormula) {
+    const { leftCount, leftEmoji, operator, rightCount, rightEmoji, resultEmoji } = scene.mathFormula;
+    return (
+      <div className="w-full bg-gradient-to-r from-amber-50 via-rose-50 to-sky-50 rounded-3xl border-2 border-amber-200/80 p-4 sm:p-6 shadow-inner flex flex-col items-center justify-center">
+        {caption && (
+          <div className="mb-3 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur px-3 py-1 rounded-full border border-amber-200 text-xs sm:text-sm font-black text-slate-700 shadow-xs">
+            <span>🍎</span>
+            <span>{caption}</span>
+          </div>
+        )}
+
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 py-2">
+          {/* Left item/group */}
+          <div className="bg-white/90 border-2 border-rose-300 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col items-center justify-center min-w-[80px] sm:min-w-[100px]">
+            {leftCount <= 5 ? (
+              <div className="flex gap-1 justify-center flex-wrap max-w-[120px]">
+                {Array.from({ length: leftCount }).map((_, i) => (
+                  <span key={i} className="text-3xl sm:text-4xl filter drop-shadow-xs select-none">
+                    {leftEmoji}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center gap-1">
+                <span className="text-4xl sm:text-5xl filter drop-shadow-xs select-none">{leftEmoji}</span>
+                <span className="text-xs sm:text-sm font-black text-slate-400">×</span>
+              </div>
+            )}
+            <span className="text-xl sm:text-3xl font-black text-rose-600 mt-1">{leftCount}</span>
+          </div>
+
+          {/* Operator */}
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-400 text-slate-950 font-black text-2xl flex items-center justify-center shadow-md select-none">
+            {operator}
+          </div>
+
+          {/* Right item/group */}
+          <div className="bg-white/90 border-2 border-emerald-300 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col items-center justify-center min-w-[80px] sm:min-w-[100px]">
+            {rightCount <= 5 ? (
+              <div className="flex gap-1 justify-center flex-wrap max-w-[120px]">
+                {Array.from({ length: rightCount }).map((_, i) => (
+                  <span key={i} className="text-3xl sm:text-4xl filter drop-shadow-xs select-none">
+                    {rightEmoji}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center gap-1">
+                <span className="text-4xl sm:text-5xl filter drop-shadow-xs select-none">{rightEmoji}</span>
+                <span className="text-xs sm:text-sm font-black text-slate-400">×</span>
+              </div>
+            )}
+            <span className="text-xl sm:text-3xl font-black text-emerald-600 mt-1">{rightCount}</span>
+          </div>
+
+          {/* Equals */}
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-sky-200 text-slate-900 font-black text-2xl flex items-center justify-center shadow-md select-none">
+            =
+          </div>
+
+          {/* Question / Mystery Box */}
+          <div className="bg-amber-300/80 border-2 border-dashed border-amber-500 rounded-2xl p-3 sm:p-4 shadow-md flex flex-col items-center justify-center min-w-[70px] sm:min-w-[90px] animate-pulse">
+            <span className="text-2xl sm:text-3xl font-black text-slate-900">?</span>
+            <span className="text-[11px] font-extrabold text-amber-900 mt-0.5 select-none">
+              {resultEmoji || leftEmoji}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+// ── Main Activity Player Component ──────────────────────────────────
 export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   module,
   onClose,
@@ -31,6 +227,10 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
+  // Lesson view acknowledgement and review state
+  const [acknowledgedLessons, setAcknowledgedLessons] = useState<Record<string, boolean>>({});
+  const [isReviewingLesson, setIsReviewingLesson] = useState(false);
+
   // Sequence state
   const [sequenceItems, setSequenceItems] = useState<Array<{ id: string; text: string; order: number; emoji: string }>>([]);
 
@@ -41,7 +241,23 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   const currentActivity: LearningActivityItem | undefined = module.activities[currentIndex];
   const ui = UI_TRANSLATIONS[activeLang] || UI_TRANSLATIONS.az;
 
-  // Stop all background audio and speech on mount, unmount, or question switch
+  // Active lesson: either on current activity or closest preceding lesson in this module
+  const activeLesson: LearningLesson | undefined = (() => {
+    if (currentActivity?.lesson) return currentActivity.lesson;
+    for (let i = currentIndex; i >= 0; i--) {
+      if (module.activities[i]?.lesson) {
+        return module.activities[i].lesson;
+      }
+    }
+    return undefined;
+  })();
+
+  const hasUnacknowledgedLesson = !!(
+    currentActivity?.lesson && !acknowledgedLessons[currentActivity.lesson.id]
+  );
+  const showLessonView = hasUnacknowledgedLesson || (isReviewingLesson && !!activeLesson);
+
+  // Reset states on question switch or unmount
   useEffect(() => {
     parentSpeech.stop();
     setIsSpeaking(false);
@@ -50,6 +266,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
     setSelectedOptionId(null);
     setIsAnswered(false);
     setFeedback(null);
+    setIsReviewingLesson(false);
 
     // If sequence activity
     if (currentActivity.type === 'sequence' && currentActivity.sequenceSteps) {
@@ -142,8 +359,8 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
         : currentActivity.title
       : moduleTitle;
 
-  // On-demand speech strictly when child clicks the sound icon
-  const handleSpeak = () => {
+  // On-demand speech for questions
+  const handleSpeakQuestion = () => {
     if (isSpeaking) {
       parentSpeech.stop();
       setIsSpeaking(false);
@@ -160,6 +377,51 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
       () => setIsSpeaking(false),
       () => setIsSpeaking(false)
     );
+  };
+
+  // On-demand speech for lesson
+  const handleSpeakLesson = () => {
+    if (!activeLesson) return;
+    if (isSpeaking) {
+      parentSpeech.stop();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const lessonText = (() => {
+      if (activeLang === 'en') {
+        return activeLesson.audioTextEn || activeLesson.explanationEn || activeLesson.conceptTitleEn || '';
+      }
+      if (activeLang === 'ru') {
+        return activeLesson.audioTextRu || activeLesson.explanationRu || activeLesson.conceptTitleRu || '';
+      }
+      return activeLesson.audioTextAz || activeLesson.explanationAz || activeLesson.conceptTitleAz || '';
+    })();
+
+    if (!lessonText) return;
+
+    setIsSpeaking(true);
+    parentSpeech.speak(
+      lessonText,
+      activeLang,
+      () => setIsSpeaking(false),
+      () => setIsSpeaking(false)
+    );
+  };
+
+  const handleAcknowledgeLesson = () => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
+    if (activeLesson) {
+      setAcknowledgedLessons((prev) => ({ ...prev, [activeLesson.id]: true }));
+    }
+    setIsReviewingLesson(false);
+  };
+
+  const handleReviewLesson = () => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
+    setIsReviewingLesson(true);
   };
 
   const handleSelectOption = (opt: { id: string; text: string; isCorrect?: boolean; emoji?: string }) => {
@@ -236,6 +498,8 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
     setCurrentIndex(0);
     setScore(0);
     setIsFinished(false);
+    setAcknowledgedLessons({});
+    setIsReviewingLesson(false);
   };
 
   const handleModalClose = () => {
@@ -250,7 +514,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
         {/* Header Bar */}
         <div className={`p-4 sm:p-5 bg-gradient-to-r ${module.color} text-white flex items-center justify-between`}>
           <div className="flex items-center gap-3">
-            <span className="text-3xl sm:text-4xl filter drop-shadow">{module.emoji}</span>
+            <span className="text-3xl sm:text-4xl filter drop-shadow select-none">{module.emoji}</span>
             <div>
               <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">
                 {moduleTitle}
@@ -286,205 +550,332 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
         </div>
 
         {/* Body Content */}
-        <div className="flex-1 p-5 sm:p-8 overflow-y-auto flex flex-col justify-between">
+        <div className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto flex flex-col justify-between">
           {!isFinished && currentActivity ? (
             <div className="space-y-6">
-              {/* Question / Instruction Header */}
-              <div className="bg-amber-50/90 rounded-2xl p-4 sm:p-5 border border-amber-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                <div className="space-y-1.5 flex-1">
-                  <div className="flex items-center justify-between sm:justify-start gap-2 flex-wrap">
-                    <span className="text-[11px] font-extrabold text-amber-700 uppercase tracking-wide">
-                      {ui.task} {currentIndex + 1} / {module.activities.length}
-                    </span>
+              {/* ── A. LESSON VIEW: Shown before questions or when reviewing ── */}
+              {showLessonView && activeLesson ? (
+                <div className="space-y-5 animate-in fade-in zoom-in-95 duration-200">
+                  {/* Lesson Header Card */}
+                  <div className="bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border-2 border-amber-300 rounded-3xl p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="space-y-1 text-center sm:text-left flex-1">
+                      <div className="inline-flex items-center gap-1.5 bg-amber-500 text-white font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
+                        <span>🎓</span>
+                        <span>{ui.letsLearn}</span>
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 pt-1">
+                        {activeLang === 'en'
+                          ? activeLesson.conceptTitleEn || activeLesson.conceptTitleAz
+                          : activeLang === 'ru'
+                          ? activeLesson.conceptTitleRu || activeLesson.conceptTitleAz
+                          : activeLesson.conceptTitleAz}
+                      </h3>
+                    </div>
 
-                    {/* Trilingual Language Selector */}
-                    <div className="inline-flex items-center bg-amber-200/70 p-0.5 rounded-lg border border-amber-300/80">
-                      {(['az', 'en', 'ru'] as const).map((lng) => (
-                        <button
-                          key={lng}
-                          onClick={() => handleLanguageChange(lng)}
-                          className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase transition-all cursor-pointer ${
-                            activeLang === lng
-                              ? 'bg-amber-600 text-white shadow-xs'
-                              : 'text-amber-950/70 hover:bg-amber-300/60'
-                          }`}
-                        >
-                          {lng}
-                        </button>
-                      ))}
+                    <div className="flex items-center gap-2">
+                      {/* Trilingual Switcher */}
+                      <div className="inline-flex items-center bg-amber-200/80 p-0.5 rounded-lg border border-amber-300/80">
+                        {(['az', 'en', 'ru'] as const).map((lng) => (
+                          <button
+                            key={lng}
+                            onClick={() => handleLanguageChange(lng)}
+                            className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase transition-all cursor-pointer ${
+                              activeLang === lng
+                                ? 'bg-amber-600 text-white shadow-xs'
+                                : 'text-amber-950/70 hover:bg-amber-300/60'
+                            }`}
+                          >
+                            {lng}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Lesson Audio Playback Button (On-demand only) */}
+                      <button
+                        onClick={handleSpeakLesson}
+                        className={`p-3 rounded-2xl transition-all shadow-sm flex items-center justify-center cursor-pointer flex-shrink-0 ${
+                          isSpeaking
+                            ? 'bg-amber-500 text-white ring-4 ring-amber-300 animate-pulse'
+                            : 'bg-amber-400 hover:bg-amber-500 text-slate-900 hover:scale-105 active:scale-95'
+                        }`}
+                        title={isSpeaking ? 'Dayandır' : ui.listen}
+                      >
+                        {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                      </button>
                     </div>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-black text-slate-800 leading-snug">
-                    {questionText}
-                  </h3>
+                  {/* Visual Scene in Lesson (if present) */}
+                  {activeLesson.visualScene ? (
+                    <VisualSceneCard scene={activeLesson.visualScene} activeLang={activeLang} />
+                  ) : (
+                    /* Big Emojis Showcase */
+                    activeLesson.bigEmojis && activeLesson.bigEmojis.length > 0 && (
+                      <div className="bg-gradient-to-b from-amber-50/70 to-orange-50/50 rounded-3xl border-2 border-amber-200/80 p-6 flex items-center justify-center gap-4 sm:gap-6 flex-wrap shadow-inner">
+                        {activeLesson.bigEmojis.map((em, idx) => (
+                          <motion.div
+                            key={idx}
+                            whileHover={{ scale: 1.15, rotate: [0, -5, 5, 0] }}
+                            className="text-6xl sm:text-7xl md:text-8xl p-3 bg-white/90 rounded-3xl border-2 border-amber-200/80 shadow-md cursor-pointer filter drop-shadow select-none"
+                          >
+                            {em}
+                          </motion.div>
+                        ))}
+                      </div>
+                    )
+                  )}
+
+                  {/* Explanation Text */}
+                  <div className="bg-white rounded-2xl border-2 border-slate-200 p-4 sm:p-5 shadow-xs">
+                    <div className="flex items-start gap-3">
+                      <Lightbulb className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
+                      <p className="text-base sm:text-lg font-bold text-slate-800 leading-relaxed">
+                        {activeLang === 'en'
+                          ? activeLesson.explanationEn || activeLesson.explanationAz
+                          : activeLang === 'ru'
+                          ? activeLesson.explanationRu || activeLesson.explanationAz
+                          : activeLesson.explanationAz}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Understood Action Button */}
+                  <button
+                    onClick={handleAcknowledgeLesson}
+                    className="w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-black text-base sm:text-lg rounded-2xl shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-3 transition-transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                  >
+                    <span>{ui.understoodStartPractice}</span>
+                    <ArrowRight className="w-6 h-6" />
+                  </button>
                 </div>
+              ) : (
+                /* ── B. PRACTICE QUESTION VIEW: After lesson acknowledgement ── */
+                <div className="space-y-5 animate-in fade-in duration-150">
+                  {/* Question / Instruction Header */}
+                  <div className="bg-amber-50/90 rounded-2xl p-4 sm:p-5 border border-amber-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div className="space-y-1.5 flex-1">
+                      <div className="flex items-center justify-between sm:justify-start gap-2 flex-wrap">
+                        <span className="text-[11px] font-extrabold text-amber-700 uppercase tracking-wide">
+                          {ui.task} {currentIndex + 1} / {module.activities.length}
+                        </span>
 
-                {/* Səs işarəsi: Only speaks when tapped */}
-                <button
-                  onClick={handleSpeak}
-                  className={`p-3 rounded-2xl transition-all shadow-sm flex items-center justify-center cursor-pointer flex-shrink-0 self-end sm:self-center ${
-                    isSpeaking
-                      ? 'bg-amber-500 text-white ring-4 ring-amber-300 animate-pulse'
-                      : 'bg-amber-400 hover:bg-amber-500 text-slate-900 hover:scale-105 active:scale-95'
-                  }`}
-                  title={isSpeaking ? 'Dayandır' : ui.listen}
-                >
-                  {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                </button>
-              </div>
+                        {/* Review Lesson Button */}
+                        {activeLesson && (
+                          <button
+                            onClick={handleReviewLesson}
+                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase bg-amber-200 hover:bg-amber-300 text-amber-900 border border-amber-300/80 transition-all cursor-pointer"
+                            title={ui.viewLesson}
+                          >
+                            <BookOpen className="w-3 h-3" />
+                            <span>{ui.viewLesson}</span>
+                          </button>
+                        )}
 
-              {/* 1. Multiple Choice Options */}
-              {currentActivity.options && currentActivity.options.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-                  {currentActivity.options.map((opt) => {
-                    const isSelected = selectedOptionId === opt.id;
-                    const optionLabel = getOptionLabel(opt);
-                    return (
-                      <button
-                        key={opt.id}
-                        disabled={isAnswered}
-                        onClick={() => handleSelectOption(opt)}
-                        className={`p-4 sm:p-5 rounded-2xl border-2 transition-all flex flex-col items-center justify-center gap-2 cursor-pointer text-center ${
-                          isSelected
-                            ? opt.isCorrect
-                              ? 'bg-emerald-50 border-emerald-500 text-emerald-900 shadow-md scale-102'
-                              : 'bg-rose-50 border-rose-500 text-rose-900 scale-102'
-                            : 'bg-slate-50 border-slate-200 hover:bg-amber-50 hover:border-amber-300 text-slate-800'
+                        {/* Trilingual Language Selector */}
+                        <div className="inline-flex items-center bg-amber-200/70 p-0.5 rounded-lg border border-amber-300/80">
+                          {(['az', 'en', 'ru'] as const).map((lng) => (
+                            <button
+                              key={lng}
+                              onClick={() => handleLanguageChange(lng)}
+                              className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase transition-all cursor-pointer ${
+                                activeLang === lng
+                                  ? 'bg-amber-600 text-white shadow-xs'
+                                  : 'text-amber-950/70 hover:bg-amber-300/60'
+                              }`}
+                            >
+                              {lng}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <h3 className="text-base sm:text-lg font-black text-slate-800 leading-snug">
+                        {questionText}
+                      </h3>
+                    </div>
+
+                    {/* Səs işarəsi: Only speaks when tapped */}
+                    <button
+                      onClick={handleSpeakQuestion}
+                      className={`p-3 rounded-2xl transition-all shadow-sm flex items-center justify-center cursor-pointer flex-shrink-0 self-end sm:self-center ${
+                        isSpeaking
+                          ? 'bg-amber-500 text-white ring-4 ring-amber-300 animate-pulse'
+                          : 'bg-amber-400 hover:bg-amber-500 text-slate-900 hover:scale-105 active:scale-95'
+                      }`}
+                      title={isSpeaking ? 'Dayandır' : ui.listen}
+                    >
+                      {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                    </button>
+                  </div>
+
+                  {/* Visual Scene (Spatial Scene or Math Formula Display) */}
+                  {currentActivity.visualScene && (
+                    <VisualSceneCard scene={currentActivity.visualScene} activeLang={activeLang} />
+                  )}
+
+                  {/* 1. Multiple Choice Options (Super-Sized Emojis for Children) */}
+                  {currentActivity.options && currentActivity.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                      {currentActivity.options.map((opt) => {
+                        const isSelected = selectedOptionId === opt.id;
+                        const optionLabel = getOptionLabel(opt);
+                        return (
+                          <button
+                            key={opt.id}
+                            disabled={isAnswered}
+                            onClick={() => handleSelectOption(opt)}
+                            className={`min-h-[140px] sm:min-h-[160px] p-5 sm:p-6 rounded-3xl border-3 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer text-center group ${
+                              isSelected
+                                ? opt.isCorrect
+                                  ? 'bg-emerald-50 border-emerald-500 text-emerald-900 shadow-lg scale-102 ring-4 ring-emerald-200'
+                                  : 'bg-rose-50 border-rose-500 text-rose-900 scale-102 ring-4 ring-rose-200'
+                                : 'bg-slate-50/90 border-slate-200 hover:bg-amber-50 hover:border-amber-400 text-slate-800 shadow-sm hover:shadow-md'
+                            }`}
+                          >
+                            {opt.emoji && (
+                              <span className="text-6xl sm:text-7xl md:text-8xl select-none filter drop-shadow transform transition-transform group-hover:scale-110">
+                                {opt.emoji}
+                              </span>
+                            )}
+                            <span className="font-black text-base sm:text-lg leading-tight">
+                              {optionLabel}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* 2. Sentence Builder UI */}
+                  {currentActivity.type === 'sentence' && (
+                    <div className="space-y-4">
+                      <div className="min-h-[64px] p-3 rounded-2xl bg-amber-100/50 border-2 border-dashed border-amber-300 flex flex-wrap gap-2 items-center justify-center">
+                        {selectedWords.length === 0 ? (
+                          <span className="text-xs text-slate-400 font-bold">
+                            {ui.sentencePrompt}
+                          </span>
+                        ) : (
+                          selectedWords.map((word, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => handleRemoveWord(word)}
+                              className="px-4 py-2 bg-amber-400 text-slate-900 font-black rounded-xl text-sm sm:text-base shadow-sm hover:bg-amber-500 transition-all cursor-pointer"
+                            >
+                              {word} ✕
+                            </button>
+                          ))
+                        )}
+                      </div>
+
+                      <div className="flex flex-wrap gap-2.5 justify-center">
+                        {availableWords.map((word, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => handleWordClick(word)}
+                            disabled={isAnswered}
+                            className="px-4 py-2.5 bg-slate-100 hover:bg-amber-200 text-slate-800 font-black rounded-xl text-sm sm:text-base transition-all border border-slate-300 cursor-pointer shadow-xs"
+                          >
+                            {word}
+                          </button>
+                        ))}
+                      </div>
+
+                      {!isAnswered && selectedWords.length > 0 && (
+                        <div className="flex justify-center pt-2">
+                          <button
+                            onClick={checkSentence}
+                            className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-base rounded-2xl shadow-md transition-all cursor-pointer"
+                          >
+                            {ui.checkSentence}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* 3. Sequence Steps UI */}
+                  {currentActivity.type === 'sequence' && (
+                    <div className="space-y-3">
+                      <p className="text-xs font-bold text-slate-500 text-center">
+                        {ui.sequencePrompt}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {currentActivity.sequenceSteps?.map((step) => (
+                          <div
+                            key={step.id}
+                            className="p-4 rounded-2xl bg-sky-50 border border-sky-200 flex items-center gap-3.5 shadow-xs"
+                          >
+                            <span className="text-4xl select-none filter drop-shadow-xs">{step.emoji}</span>
+                            <span className="text-sm sm:text-base font-bold text-slate-800">
+                              {activeLang === 'en'
+                                ? step.textEn || step.text
+                                : activeLang === 'ru'
+                                ? step.textRu || step.text
+                                : step.text}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      {!isAnswered && (
+                        <div className="flex justify-center pt-3">
+                          <button
+                            onClick={() => {
+                              setIsAnswered(true);
+                              setScore((s) => s + 10);
+                              setFeedback({
+                                isCorrect: true,
+                                text: currentLocalizedExplanation || ui.correctAnswer,
+                              });
+                              addStars(1);
+                            }}
+                            className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-base rounded-2xl shadow-md cursor-pointer"
+                          >
+                            {ui.sequenceComplete}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Feedback Alert */}
+                  <AnimatePresence>
+                    {feedback && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className={`p-4 rounded-2xl flex items-center justify-between gap-3 text-sm font-black ${
+                          feedback.isCorrect
+                            ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
+                            : 'bg-rose-100 text-rose-900 border border-rose-300'
                         }`}
                       >
-                        {opt.emoji && <span className="text-4xl sm:text-5xl">{opt.emoji}</span>}
-                        <span className="font-extrabold text-sm sm:text-base">{optionLabel}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
+                        <div className="flex items-center gap-2">
+                          {feedback.isCorrect ? (
+                            <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                          ) : (
+                            <Sparkles className="w-5 h-5 text-rose-600 flex-shrink-0" />
+                          )}
+                          <span>{feedback.text}</span>
+                        </div>
 
-              {/* 2. Sentence Builder UI */}
-              {currentActivity.type === 'sentence' && (
-                <div className="space-y-4">
-                  <div className="min-h-[60px] p-3 rounded-2xl bg-amber-100/50 border-2 border-dashed border-amber-300 flex flex-wrap gap-2 items-center justify-center">
-                    {selectedWords.length === 0 ? (
-                      <span className="text-xs text-slate-400 font-bold">
-                        {ui.sentencePrompt}
-                      </span>
-                    ) : (
-                      selectedWords.map((word, idx) => (
                         <button
-                          key={idx}
-                          onClick={() => handleRemoveWord(word)}
-                          className="px-3.5 py-1.5 bg-amber-400 text-slate-900 font-black rounded-xl text-sm shadow-sm hover:bg-amber-500 transition-all cursor-pointer"
+                          onClick={handleNext}
+                          className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs sm:text-sm font-black flex items-center gap-1.5 shadow cursor-pointer flex-shrink-0"
                         >
-                          {word} ✕
+                          <span>{currentIndex < module.activities.length - 1 ? ui.next : ui.finish}</span>
+                          <ArrowRight className="w-4 h-4" />
                         </button>
-                      ))
+                      </motion.div>
                     )}
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {availableWords.map((word, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleWordClick(word)}
-                        disabled={isAnswered}
-                        className="px-4 py-2 bg-slate-100 hover:bg-amber-200 text-slate-800 font-bold rounded-xl text-sm transition-all border border-slate-300 cursor-pointer"
-                      >
-                        {word}
-                      </button>
-                    ))}
-                  </div>
-
-                  {!isAnswered && selectedWords.length > 0 && (
-                    <div className="flex justify-center pt-2">
-                      <button
-                        onClick={checkSentence}
-                        className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-sm rounded-2xl shadow-md transition-all cursor-pointer"
-                      >
-                        {ui.checkSentence}
-                      </button>
-                    </div>
-                  )}
+                  </AnimatePresence>
                 </div>
               )}
-
-              {/* 3. Sequence Steps UI */}
-              {currentActivity.type === 'sequence' && (
-                <div className="space-y-2">
-                  <p className="text-xs font-bold text-slate-500 text-center">
-                    {ui.sequencePrompt}
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {currentActivity.sequenceSteps?.map((step) => (
-                      <div
-                        key={step.id}
-                        className="p-3.5 rounded-xl bg-sky-50 border border-sky-200 flex items-center gap-3"
-                      >
-                        <span className="text-2xl">{step.emoji}</span>
-                        <span className="text-xs sm:text-sm font-bold text-slate-800">
-                          {activeLang === 'en' ? step.textEn || step.text : activeLang === 'ru' ? step.textRu || step.text : step.text}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  {!isAnswered && (
-                    <div className="flex justify-center pt-3">
-                      <button
-                        onClick={() => {
-                          setIsAnswered(true);
-                          setScore((s) => s + 10);
-                          setFeedback({
-                            isCorrect: true,
-                            text: currentLocalizedExplanation || ui.correctAnswer,
-                          });
-                          addStars(1);
-                        }}
-                        className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-sm rounded-2xl shadow-md cursor-pointer"
-                      >
-                        {ui.sequenceComplete}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Feedback Alert */}
-              <AnimatePresence>
-                {feedback && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className={`p-4 rounded-2xl flex items-center justify-between gap-3 text-sm font-black ${
-                      feedback.isCorrect
-                        ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
-                        : 'bg-rose-100 text-rose-900 border border-rose-300'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      {feedback.isCorrect ? (
-                        <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                      ) : (
-                        <Sparkles className="w-5 h-5 text-rose-600 flex-shrink-0" />
-                      )}
-                      <span>{feedback.text}</span>
-                    </div>
-
-                    <button
-                      onClick={handleNext}
-                      className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black flex items-center gap-1 shadow cursor-pointer flex-shrink-0"
-                    >
-                      <span>{currentIndex < module.activities.length - 1 ? ui.next : ui.finish}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           ) : (
             /* Finished View */
             <div className="text-center py-8 space-y-5">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-amber-400 flex items-center justify-center text-4xl shadow-xl shadow-amber-400/30 animate-bounce">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-amber-400 flex items-center justify-center text-4xl shadow-xl shadow-amber-400/30 animate-bounce select-none">
                 🏆
               </div>
               <div className="space-y-1">
@@ -500,14 +891,14 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
               <div className="flex items-center justify-center gap-3 pt-3">
                 <button
                   onClick={handleRestart}
-                  className="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs sm:text-sm flex items-center gap-2 cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>{ui.playAgain}</span>
                 </button>
                 <button
                   onClick={handleModalClose}
-                  className="px-6 py-2.5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs shadow-md shadow-amber-400/20 cursor-pointer"
+                  className="px-6 py-2.5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs sm:text-sm shadow-md shadow-amber-400/20 cursor-pointer"
                 >
                   {ui.backToHub}
                 </button>
