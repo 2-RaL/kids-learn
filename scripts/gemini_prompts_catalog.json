@@ -1,0 +1,477 @@
+{
+  "characters": {
+    "leyla": {
+      "name": "Leyla",
+      "gender": "girl",
+      "description": "6-year-old Azerbaijani girl with long brown hair in two neat pigtails tied with red ribbons, warm curious brown eyes, wearing a red hoodie, denim jeans, and clean sneakers"
+    },
+    "amara": {
+      "name": "Amara",
+      "gender": "girl",
+      "description": "6-year-old girl with dark curly afro puffs tied with yellow ribbons, warm dark skin, bright smiling eyes, wearing a sunny yellow shirt and denim overalls"
+    },
+    "mei": {
+      "name": "Mei",
+      "gender": "girl",
+      "description": "6-year-old East Asian girl with straight dark bob haircut, pink clips, expressive dark eyes, wearing a pastel pink sweater and pleated skirt"
+    },
+    "zara": {
+      "name": "Zara",
+      "gender": "girl",
+      "description": "6-year-old girl with a beautifully styled soft purple/lavender hijab, cheerful hazel eyes, wearing a teal modest tunic and trousers"
+    },
+    "tom": {
+      "name": "Tom",
+      "gender": "boy",
+      "description": "6-year-old boy with messy sandy blonde hair, bright blue eyes, wearing a royal blue hoodie and grey trousers"
+    },
+    "leo": {
+      "name": "Leo",
+      "gender": "boy",
+      "description": "6-year-old boy with wavy dark brown hair, warm amber eyes, wearing a vibrant green polo shirt and khaki shorts"
+    },
+    "ali": {
+      "name": "Ali",
+      "gender": "boy",
+      "description": "6-year-old Azerbaijani boy with neat dark brown hair, energetic brown eyes, wearing a navy blue athletic zip jacket and dark jeans"
+    },
+    "murad": {
+      "name": "Murad",
+      "gender": "boy",
+      "description": "6-year-old boy with styled chestnut brown hair, warm dark eyes, wearing an orange and white striped sporty shirt and denim pants"
+    }
+  },
+  "categories": {
+    "movement": {
+      "titleAz": "1. Hərəkətlər",
+      "commands": {
+        "sit": {
+          "labelAz": "Otur",
+          "fileSuffix": "_sit.png",
+          "actionDescription": "seated comfortably and cross-legged on a colorful cozy patterned round rug, smiling warmly with hands on lap, relaxed posture",
+          "props": "soft decorative woven carpet under the character",
+          "fx": "soft floor ambient glow"
+        },
+        "stand": {
+          "labelAz": "Dur / Ayağa qalx",
+          "fileSuffix": "_stand.png",
+          "actionDescription": "standing tall, upright, confident and poised, feet firmly on the ground, friendly warm smile, relaxed hands by sides",
+          "props": "none",
+          "fx": "subtle upright stance aura"
+        },
+        "run": {
+          "labelAz": "Qaç",
+          "fileSuffix": "_run.png",
+          "actionDescription": "in dynamic full sprint running motion, one leg forward with knee high, arms bent rhythmically in athletic running stride, energetic expression",
+          "props": "none",
+          "fx": "stylized 3D white speed motion lines and gentle cartoon dust puff at the feet"
+        },
+        "jump": {
+          "labelAz": "Tullan",
+          "fileSuffix": "_jump.png",
+          "actionDescription": "leaping high up into the air in pure joy, knees bent in mid-air tuck jump, arms raised high celebrating, thrilled laughing expression",
+          "props": "none",
+          "fx": "sparkling golden 3D stars around the character and small landing burst below"
+        },
+        "stop": {
+          "labelAz": "Dayan",
+          "fileSuffix": "_stop.png",
+          "actionDescription": "firmly stopping in place, extending one palm directly forward in a clear stop gesture, determined focused expression",
+          "props": "clean 3D bright red octagonal STOP sign beside or behind the character",
+          "fx": "subtle red stop accent rings"
+        },
+        "walk": {
+          "labelAz": "Yeri",
+          "fileSuffix": "_walk.png",
+          "actionDescription": "natural walking stride in side three-quarter profile, feet separated mid-step walking along nicely, arms swinging gently",
+          "props": "clear soft colorful stepping stone footsteps trailing behind",
+          "fx": "subtle path trail"
+        },
+        "walkForward": {
+          "labelAz": "İrəli yeri",
+          "fileSuffix": "_walkForward.png",
+          "actionDescription": "stepping energetically forward toward the viewer with welcoming open posture, one foot stepping forward",
+          "props": "vibrant 3D glossy emerald green forward arrow floating neatly on the ground showing direction",
+          "fx": "glowing green stepping path"
+        },
+        "walkBackward": {
+          "labelAz": "Geri yeri",
+          "fileSuffix": "_walkBackward.png",
+          "actionDescription": "stepping cautiously backward, looking over shoulder, feet in reverse walking step",
+          "props": "vibrant 3D glossy coral orange-red backward arrow on the ground pointing back",
+          "fx": "soft warm reverse trail"
+        },
+        "moveLeft": {
+          "labelAz": "Sola",
+          "fileSuffix": "_moveLeft.png",
+          "actionDescription": "sidestepping gracefully to the left side, torso tilted slightly left, leaning toward the left",
+          "props": "smooth 3D royal purple directional arrow pointing clearly to the left",
+          "fx": "subtle purple motion glide"
+        },
+        "moveRight": {
+          "labelAz": "Sağa",
+          "fileSuffix": "_moveRight.png",
+          "actionDescription": "sidestepping cheerfully to the right side, torso tilted slightly right, leaning toward the right",
+          "props": "smooth 3D bright amber orange directional arrow pointing clearly to the right",
+          "fx": "subtle orange motion glide"
+        },
+        "spin": {
+          "labelAz": "Dön",
+          "fileSuffix": "_spin.png",
+          "actionDescription": "spinning playfully around in a 360-degree twirl, arms outstretched balancing, head tilted with joyful dizzy smile",
+          "props": "none",
+          "fx": "magical swirling 3D cyan and yellow vortex ribbons with tiny twinkling stars orbiting the character"
+        },
+        "slide": {
+          "labelAz": "Sürüş",
+          "fileSuffix": "_slide.png",
+          "actionDescription": "seated happily inside a smooth curved rainbow playground slide, hands safely on the slide rails, sliding down quickly with wind in hair",
+          "props": "glossy vibrant curved children's playground slide",
+          "fx": "sparkling speed glitter along the slide"
+        },
+        "rideBike": {
+          "labelAz": "Sür - Velosiped",
+          "fileSuffix": "_rideBike.png",
+          "actionDescription": "properly mounted on a stylish children's bicycle, sitting on the saddle, both hands firmly gripping the handlebars, feet on the pedals, smiling looking forward riding",
+          "props": "sleek colorful 3D children's bicycle with training wheels and front bell",
+          "fx": "gentle wheel rotation motion blur"
+        }
+      }
+    },
+    "fun": {
+      "titleAz": "2. Əyləncə & Emosiyalar",
+      "commands": {
+        "laugh": {
+          "labelAz": "Gül",
+          "fileSuffix": "_laugh.png",
+          "actionDescription": "bursting into contagious cheerful laughter, wide beaming smile, eyes sparkling with pure happiness, hands clapping or holding tummy",
+          "props": "none",
+          "fx": "sparkling golden laugh sparkles and cheerful warm light"
+        },
+        "cry": {
+          "labelAz": "Ağla",
+          "fileSuffix": "_cry.png",
+          "actionDescription": "sad gentle weeping expression, pouting lips, small translucent blue teardrops rolling down cheeks, hands dabbing face",
+          "props": "none",
+          "fx": "gentle soft rain droplets and small blue tear sparkles"
+        },
+        "surprised": {
+          "labelAz": "Təəccüblən",
+          "fileSuffix": "_surprised.png",
+          "actionDescription": "eyes wide open in total astonishment and wonder, mouth open in an 'O' shape, hands pressed against cheeks in delightful shock",
+          "props": "none",
+          "fx": "vibrant 3D golden exclamation mark (!) and ripple shockwaves"
+        },
+        "think": {
+          "labelAz": "Düşün / Fikirləş",
+          "fileSuffix": "_think.png",
+          "actionDescription": "one hand resting thoughtfully under chin with index finger touching cheek, eyes looking upward to the side in deep reflection and curiosity",
+          "props": "fluffy semi-translucent 3D thought bubble containing a glowing bright yellow idea lightbulb",
+          "fx": "glowing warm rays from the lightbulb"
+        },
+        "wave": {
+          "labelAz": "Əl salla",
+          "fileSuffix": "_wave.png",
+          "actionDescription": "one hand raised high waving warmly in a friendly greeting, head tilted with a big welcoming smile",
+          "props": "none",
+          "fx": "sparkling hello light sparkles around the waving hand"
+        },
+        "clap": {
+          "labelAz": "Əl çal",
+          "fileSuffix": "_clap.png",
+          "actionDescription": "clapping hands together rhythmically in applause, glowing with excitement and appreciation, smiling brightly",
+          "props": "none",
+          "fx": "rhythmic expanding yellow soundwave rings and celebration stars between clapping palms"
+        },
+        "dance": {
+          "labelAz": "Oyna - Musiqi",
+          "fileSuffix": "_dance.png",
+          "actionDescription": "dancing gracefully in authentic Azerbaijani national costume (girls with velvet arxaliq vest with gold buta patterns, silk kelaghayi headscarf, silver belt, raised graceful arms; boys with traditional papakha hat, chokha with chest gazyrs, silver belt, proud Caucasian dance stance)",
+          "props": "none",
+          "fx": "floating 3D golden musical notes and festive dance sparkles"
+        },
+        "sing": {
+          "labelAz": "Oxu - Musiqi",
+          "fileSuffix": "_sing.png",
+          "actionDescription": "holding a metallic dynamic stage microphone in hand, singing passionately with mouth open, head raised joyfully",
+          "props": "modern glossy metallic microphone with wire or wireless base",
+          "fx": "colorful 3D floating music clefs, treble notes and glowing acoustic melody waves"
+        },
+        "playInstrument": {
+          "labelAz": "Çal - Musiqi",
+          "fileSuffix": "_playInstrument.png",
+          "actionDescription": "holding and strumming a beautiful acoustic wooden children's guitar with both hands, fingers on the frets and strings, rocking to the rhythm",
+          "props": "polished warm wooden acoustic guitar with colorful strap",
+          "fx": "vibrant musical note sparkles drifting from the guitar soundhole"
+        },
+        "playToy": {
+          "labelAz": "Oyna - Oyuncaq",
+          "fileSuffix": "_playToy.png",
+          "actionDescription": "sitting cross-legged on the floor playing joyfully with toys (girls holding a lovely fashion doll / boys holding a red toy car, with a plush teddy bear and wooden toy train nearby)",
+          "props": "plush teddy bear, wooden toy train with carriages, and a doll/toy car in hand",
+          "fx": "gentle playful sparkles"
+        },
+        "nod": {
+          "labelAz": "Bəli - baş",
+          "fileSuffix": "_nod.png",
+          "actionDescription": "nodding head affirmatively with an encouraging confident smile, giving a thumbs-up gesture with one hand",
+          "props": "large 3D glossy emerald green checkmark (✅) floating neatly beside the character",
+          "fx": "green success glow pulse"
+        },
+        "shakeHead": {
+          "labelAz": "Xeyr - baş",
+          "fileSuffix": "_shakeHead.png",
+          "actionDescription": "gently shaking head side to side in refusal, waving hands gently in front in a polite 'no thank you' gesture",
+          "props": "soft rounded 3D rose-pink cross mark (❌) floating cleanly beside the character",
+          "fx": "gentle soft ripple"
+        }
+      }
+    },
+    "daily": {
+      "titleAz": "3. Gündəlik Qulluq",
+      "commands": {
+        "wakeUp": {
+          "labelAz": "Dur / Oyan",
+          "fileSuffix": "_wakeUp.png",
+          "actionDescription": "sitting half-upright in a cozy wooden bed, colorful quilt over legs, yawning gently and stretching both arms up toward the sky, waking up refreshed",
+          "props": "cozy child bed with pillow and quilt, and a smiling classic ringing alarm clock on the nightstand",
+          "fx": "radiant morning sunbeam rays and ringing vibration waves"
+        },
+        "sleep": {
+          "labelAz": "Yat / Yuxu",
+          "fileSuffix": "_sleep.png",
+          "actionDescription": "fast asleep lying peacefully with head resting on a fluffy pastel blue pillow, eyes closed serenely, warm blanket tucked up to shoulders",
+          "props": "fluffy plush pillow and soft quilted blanket",
+          "fx": "gentle golden crescent moon, twinkling night stars, and floating 3D 'Zzz' sleep bubble"
+        },
+        "eat": {
+          "labelAz": "Yemək ye",
+          "fileSuffix": "_eat.png",
+          "actionDescription": "seated at a child dining table, holding a fresh crisp red apple in one hand and a spoon in the other, smiling happily enjoying delicious healthy meal",
+          "props": "small colorful dining bowl with nutritious soup/fruit, and a spoon",
+          "fx": "appetizing warm steam aroma wisps and sparkles"
+        },
+        "drink": {
+          "labelAz": "Su iç",
+          "fileSuffix": "_drink.png",
+          "actionDescription": "holding a clear glass tumbler of refreshing water with both hands, sipping through a colorful striped straw, fresh lemon slice on the rim",
+          "props": "clear glass cup with pure water, ice cubes, lemon slice, and striped bendy straw",
+          "fx": "crisp water splash droplets and refreshing condensation droplets"
+        },
+        "bathe": {
+          "labelAz": "Çim / Duş al",
+          "fileSuffix": "_bathe.png",
+          "actionDescription": "side profile under a modern bathroom shower head, fresh clean cascading water spray falling over head and shoulders, covered in rich soap lather",
+          "props": "sleek chrome shower head spraying water, and a bright yellow rubber duck floating nearby",
+          "fx": "translucent shimmering soap bubbles of all sizes and glistening water droplets"
+        },
+        "wash": {
+          "labelAz": "Əlini yu",
+          "fileSuffix": "_wash.png",
+          "actionDescription": "standing at a child-height ceramic washbasin, rubbing hands together thoroughly with rich white foaming soap lather under a running water tap",
+          "props": "modern ceramic sink washbasin with polished chrome faucet pouring clean flowing water",
+          "fx": "iridescent soap bubbles and sparkling clean splash droplets"
+        },
+        "comb": {
+          "labelAz": "Dara - Saçını",
+          "fileSuffix": "_comb.png",
+          "actionDescription": "holding a bright pastel hairbrush or comb in hand, actively and neatly brushing hair, looking in the mirror with a proud smile",
+          "props": "stylish ergonomic child hairbrush/comb",
+          "fx": "magical clean hair shine sparkles radiating from brushed hair"
+        },
+        "dress": {
+          "labelAz": "Geyin",
+          "fileSuffix": "_dress.png",
+          "actionDescription": "standing beside an open neat wardrobe closet, holding up a colorful freshly-pressed clean t-shirt on a wooden hanger, preparing outfit",
+          "props": "neat wooden clothes hanger with colorful folded t-shirts and clothes",
+          "fx": "clean fresh laundry sparkles"
+        }
+      }
+    },
+    "learning": {
+      "titleAz": "4. Öyrənmə & Yaradıcılıq",
+      "commands": {
+        "read": {
+          "labelAz": "Oxu - Kitab",
+          "fileSuffix": "_read.png",
+          "actionDescription": "holding open a large colorful illustrated fairy tale picture book with both hands, eyes glued to the pages with curiosity and wonder",
+          "props": "large hardcover open storybook with vivid illustrations on pages",
+          "fx": "magical floating story dust and alphabet letters rising from the pages"
+        },
+        "write": {
+          "labelAz": "Yaz",
+          "fileSuffix": "_write.png",
+          "actionDescription": "sitting at a small study desk, carefully gripping a yellow pencil, writing neat letters and sentences into an open lined notebook",
+          "props": "wooden desk, open lined school notebook, and sharpened pencil",
+          "fx": "subtle pencil stroke sparkles"
+        },
+        "draw": {
+          "labelAz": "Çək - Rəsm",
+          "fileSuffix": "_draw.png",
+          "actionDescription": "standing before an artist easel, holding a crayon or marker, drawing a beautiful vibrant rainbow and smiling sun on the paper board",
+          "props": "wooden artist easel with canvas holding a child's colorful drawing",
+          "fx": "rainbow arc glow and colorful art dust"
+        },
+        "paint": {
+          "labelAz": "Rənglə",
+          "fileSuffix": "_paint.png",
+          "actionDescription": "holding a wooden artist palette covered in blobs of red, blue, yellow paint in one hand, and a brush dripping paint in the other, smiling creatively",
+          "props": "classic oval artist paint palette with colorful paints and long paintbrush",
+          "fx": "playful colorful paint splashes and wet paint shine"
+        },
+        "cut": {
+          "labelAz": "Kəs - Qayçı",
+          "fileSuffix": "_cut.png",
+          "actionDescription": "carefully holding plastic safety scissors in hand, cutting out neat star and heart shapes from bright colored craft paper",
+          "props": "round-tip child safety scissors and sheets of red, blue, yellow origami craft paper",
+          "fx": "neat cut-out paper confetti and star cutouts floating"
+        },
+        "count": {
+          "labelAz": "Say",
+          "fileSuffix": "_count.png",
+          "actionDescription": "pointing at glowing numbered toy building blocks, counting on fingers with an enthusiastic mathematical look",
+          "props": "three large colorful wooden toy cubes with bold numbers '1', '2', '3' painted on them",
+          "fx": "floating glowing 3D numbers 1, 2, 3 in the air"
+        },
+        "talk": {
+          "labelAz": "Danış",
+          "fileSuffix": "_talk.png",
+          "actionDescription": "gesturing expressively with hands while speaking animatedly and warmly, mouth open forming words, engaging friendly face",
+          "props": "vibrant 3D speech bubble floating nearby with sound resonance ripples",
+          "fx": "pulsing acoustic speech wave rings"
+        },
+        "build": {
+          "labelAz": "Düzəlt / Quraşdır",
+          "fileSuffix": "_build.png",
+          "actionDescription": "sitting on the floor building a tall, impressive architectural tower of colorful interlocking Lego/wooden building blocks, placing the top piece carefully",
+          "props": "tall colorful tower made of plastic building blocks and wooden geometric cubes",
+          "fx": "sparkles of engineering achievement around the tower apex"
+        },
+        "point": {
+          "labelAz": "Göstər",
+          "fileSuffix": "_point.png",
+          "actionDescription": "extending arm and pointing index finger purposefully toward something exciting in the distance, focused eager expression",
+          "props": "clean 3D glowing bullseye target ring in the direction of the point",
+          "fx": "focused laser-like beam ring"
+        },
+        "stretch": {
+          "labelAz": "Gəril / Dartın",
+          "fileSuffix": "_stretch.png",
+          "actionDescription": "standing on tiptoes, reaching both hands straight up high into the air, elongating spine in a refreshing gymnastic stretch",
+          "props": "none",
+          "fx": "athletic energy glow and upward stretching arrow accents"
+        }
+      }
+    },
+    "social": {
+      "titleAz": "5. Sosial & Fəaliyyətlər",
+      "commands": {
+        "hug": {
+          "labelAz": "Qucaqla",
+          "fileSuffix": "_hug.png",
+          "actionDescription": "embracing a giant soft fluffy plush teddy bear in a warm, loving, gentle hug, eyes closed affectionately with head resting on the fur",
+          "props": "large lovable fluffy brown teddy bear",
+          "fx": "floating soft pink and red 3D love hearts"
+        },
+        "holdHands": {
+          "labelAz": "Əl-ələ tut",
+          "fileSuffix": "_holdHands.png",
+          "actionDescription": "extending both hands outward warmly to hold hands with a friend, friendly welcoming expression of togetherness",
+          "props": "none",
+          "fx": "colorful 3D friendship rainbow arc floating above hands"
+        },
+        "help": {
+          "labelAz": "Kömək et",
+          "fileSuffix": "_help.png",
+          "actionDescription": "reaching out a caring, supportive hand downward to help someone up, gentle compassionate and kind smile",
+          "props": "warm glowing red heart shield of care",
+          "fx": "supportive golden halos and heart sparkles"
+        },
+        "openDoor": {
+          "labelAz": "Aç - Qapı",
+          "fileSuffix": "_openDoor.png",
+          "actionDescription": "standing beside a charming wooden room door, hand turning the brass doorknob and swinging the door open toward a sunny garden view outside",
+          "props": "partially opened rustic paneled wooden door on hinges with brass handle",
+          "fx": "bright warm golden sunbeams streaming in through the open doorway"
+        },
+        "closeDoor": {
+          "labelAz": "Bağla - Qapı",
+          "fileSuffix": "_closeDoor.png",
+          "actionDescription": "standing facing a sturdy wooden bedroom door, extending hand to push the door gently and firmly until it latches shut",
+          "props": "closed neat paneled wooden door with brass doorknob and keyhole",
+          "fx": "neat latch soundwave accent"
+        },
+        "putAway": {
+          "labelAz": "Yerinə qoy",
+          "fileSuffix": "_putAway.png",
+          "actionDescription": "kneeling beside a tidy organized toy storage box, carefully placing a toy inside with two hands, keeping room neat",
+          "props": "colorful sturdy plastic toy storage bin filled with neatly arranged toys",
+          "fx": "tidiness cleanliness sparkles"
+        },
+        "collect": {
+          "labelAz": "Topla",
+          "fileSuffix": "_collect.png",
+          "actionDescription": "bending down to pick up scattered colorful play balls and toys from the floor, holding a woven basket full of collected items",
+          "props": "woven wicker basket holding colorful play balls and blocks",
+          "fx": "subtle collection rings"
+        },
+        "clean": {
+          "labelAz": "Təmizlə",
+          "fileSuffix": "_clean.png",
+          "actionDescription": "holding a small child broom and dustpan, cheerfully sweeping the floor with pride, maintaining spotless clean space",
+          "props": "colorful child broom and dustpan",
+          "fx": "dazzling bright white star clean glints on the swept floor"
+        },
+        "bring": {
+          "labelAz": "Gətir",
+          "fileSuffix": "_bring.png",
+          "actionDescription": "walking forward holding a beautifully wrapped gift box with a giant satin ribbon bow with both hands, presenting it with a joyful smile",
+          "props": "vibrant wrapped gift box with golden silk ribbon and bow",
+          "fx": "gift celebration sparkles"
+        },
+        "takeAway": {
+          "labelAz": "Apar",
+          "fileSuffix": "_takeAway.png",
+          "actionDescription": "carrying a cardboard package parcel securely in both hands, walking deliberately forward to deliver it",
+          "props": "neat cardboard parcel box with postal stamps and twine",
+          "fx": "forward movement arrows"
+        },
+        "carry": {
+          "labelAz": "Daşı",
+          "fileSuffix": "_carry.png",
+          "actionDescription": "wearing a stylish, colorful ergonomic school backpack on back with straps adjusted, standing proudly ready for school",
+          "props": "vibrant structured children's school backpack with side water bottle pouch",
+          "fx": "school excitement star glints"
+        },
+        "pull": {
+          "labelAz": "Dart",
+          "fileSuffix": "_pull.png",
+          "actionDescription": "gripping a pull-cord handle and leaning forward slightly, pulling a classic little red wooden four-wheeled wagon loaded with stuffed animals",
+          "props": "classic red wooden toy pull wagon with four black wheels and handle",
+          "fx": "motion trail behind the rolling wagon wheels"
+        },
+        "scatter": {
+          "labelAz": "Dağıt",
+          "fileSuffix": "_scatter.png",
+          "actionDescription": "tossing hands into the air in celebratory glee as colorful party confetti and streamer ribbons burst playfully everywhere",
+          "props": "none",
+          "fx": "spectacular festive explosion of multicolored confetti pieces and curled shiny ribbons"
+        },
+        "waterPlant": {
+          "labelAz": "Sula - Bitki",
+          "fileSuffix": "_waterPlant.png",
+          "actionDescription": "holding a cute pastel watering can tilted forward, pouring a gentle shower of water onto a thriving green potted plant with blossoming flower",
+          "props": "cute metal/plastic watering can with spout, and a clay flowerpot with blooming flower",
+          "fx": "sparkling crystal clear water droplets raining onto glossy green leaves"
+        },
+        "lightMatch": {
+          "labelAz": "Yandır - Kibrit / Şam",
+          "fileSuffix": "_lightMatch.png",
+          "actionDescription": "holding a classic decorative glass candle lantern, watching the warm flickering golden flame inside with gentle fascinated eyes",
+          "props": "vintage decorative metal and glass candle lantern with lit candle inside",
+          "fx": "radiant warm golden candlelight halo illuminating character face"
+        }
+      }
+    }
+  }
+}

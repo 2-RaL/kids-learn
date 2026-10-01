@@ -116,15 +116,19 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
     }
   }, [command]);
 
-  // 3-Level Robust Action Sprite Loader:
-  // Level 0: Dedicated command sprite (/assets/characters/${prefix}_${command}.png)
-  // Level 1: Base pose sprite (/assets/characters/${prefix}_${poseType}.png)
-  // Level 2: Safe standing fallback (/assets/characters/${prefix}_standing.png)
+  // 4-Level Robust Action Sprite Loader:
+  // Level 0: Master generated action (/generated-actions/${prefix}/${command}.png)
+  // Level 1: Dedicated command sprite (/assets/characters/${prefix}_${command}.png)
+  // Level 2: Base pose sprite (/assets/characters/${prefix}_${poseType}.png)
+  // Level 3: Safe standing fallback (/assets/characters/${prefix}_standing.png)
   const poseImage = useMemo(() => {
     if (imgFallbackLevel === 0) {
-      return `/assets/characters/${prefix}_${command}.png`;
+      return `/generated-actions/${prefix}/${command}.png`;
     }
     if (imgFallbackLevel === 1) {
+      return `/assets/characters/${prefix}_${command}.png`;
+    }
+    if (imgFallbackLevel === 2) {
       return `/assets/characters/${prefix}_${poseType}.png`;
     }
     return `/assets/characters/${prefix}_standing.png`;
@@ -879,6 +883,135 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
             transition={{ duration: 0.6, delay: duration * 0.7 }}
             className="absolute bottom-0 w-36 h-6 rounded-full bg-white/40 blur-sm pointer-events-none"
           />
+        )}
+
+        {/* Clean Application SVG / Vector Overlays (Section 7) */}
+        {command === 'stop' && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="absolute -top-3 -right-3 sm:-top-5 sm:-right-5 z-20 pointer-events-none drop-shadow-lg"
+          >
+            <svg className="w-14 h-14 sm:w-16 sm:h-16" viewBox="0 0 100 100">
+              <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" fill="#DC2626" stroke="#FFFFFF" strokeWidth="6" />
+              <text x="50" y="58" textAnchor="middle" fill="#FFFFFF" fontSize="22" fontWeight="bold" fontFamily="system-ui, sans-serif" letterSpacing="1">STOP</text>
+            </svg>
+          </motion.div>
+        )}
+
+        {command === 'nod' && (
+          <motion.div
+            initial={{ scale: 0, rotate: -20 }}
+            animate={{ scale: 1, rotate: 0 }}
+            className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white shadow-lg">
+              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+          </motion.div>
+        )}
+
+        {command === 'shakeHead' && (
+          <motion.div
+            initial={{ scale: 0, rotate: 20 }}
+            animate={{ scale: 1, rotate: 0 }}
+            className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-rose-500 border-2 border-white flex items-center justify-center text-white shadow-lg">
+              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+          </motion.div>
+        )}
+
+        {command === 'walkForward' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: [0, -6, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+            className="absolute -bottom-6 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="px-3 py-1.5 rounded-full bg-emerald-500/90 text-white font-bold flex items-center gap-1 shadow-md border border-white/50 text-xs sm:text-sm">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
+              <span>İrəli</span>
+            </div>
+          </motion.div>
+        )}
+
+        {command === 'walkBackward' && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: [0, 6, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+            className="absolute -bottom-6 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="px-3 py-1.5 rounded-full bg-orange-500/90 text-white font-bold flex items-center gap-1 shadow-md border border-white/50 text-xs sm:text-sm">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+              <span>Geriyə</span>
+            </div>
+          </motion.div>
+        )}
+
+        {command === 'moveLeft' && (
+          <motion.div
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: [0, -8, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+            className="absolute top-1/2 -left-8 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-purple-600 border-2 border-white flex items-center justify-center text-white shadow-lg">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </div>
+          </motion.div>
+        )}
+
+        {command === 'moveRight' && (
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: [0, 8, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+            className="absolute top-1/2 -right-8 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-amber-500 border-2 border-white flex items-center justify-center text-white shadow-lg">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </motion.div>
+        )}
+
+        {command === 'count' && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="absolute -top-3 -right-3 z-20 pointer-events-none drop-shadow-lg flex gap-1"
+          >
+            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded bg-red-500 text-white font-black text-sm sm:text-base flex items-center justify-center border-2 border-white shadow">1</span>
+            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded bg-yellow-500 text-white font-black text-sm sm:text-base flex items-center justify-center border-2 border-white shadow">2</span>
+            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded bg-blue-500 text-white font-black text-sm sm:text-base flex items-center justify-center border-2 border-white shadow">3</span>
+          </motion.div>
+        )}
+
+        {command === 'point' && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="absolute -top-3 -right-3 z-20 pointer-events-none drop-shadow-md"
+          >
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-4 border-rose-500 flex items-center justify-center bg-white/80 shadow-md">
+              <div className="w-3 h-3 rounded-full bg-rose-600" />
+            </div>
+          </motion.div>
         )}
 
         
