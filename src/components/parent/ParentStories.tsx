@@ -14,9 +14,10 @@ import { parentSpeech, type VoicePersona } from '../../utils/parentSpeech';
 
 interface ParentStoriesProps {
   selectedAge?: number | null;
+  onSelectAge?: (age: number | null) => void;
 }
 
-export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => {
+export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge, onSelectAge }) => {
   const { language, setLanguage } = useGameStore();
   const currentLang: Language = (language as Language) || 'az';
   const { token } = useAuthStore();
@@ -24,29 +25,41 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
   const [stories, setStories] = useState<MultilingualStory[]>(MULTILINGUAL_STORIES);
   const [activeStory, setActiveStory] = useState<MultilingualStory | null>(null);
   const [filterType, setFilterType] = useState<'all' | 'bedtime' | 'daytime'>('all');
+  const [internalAgeFilter, setInternalAgeFilter] = useState<number | null>(selectedAge ?? null);
   const [searchQuery, setSearchQuery] = useState('');
   const [fontSize, setFontSize] = useState<number>(18);
   const [isCozyNight, setIsCozyNight] = useState(false);
   const [voicePersona, setVoicePersona] = useState<VoicePersona>(parentSpeech.getVoicePersona());
 
-  // Fetch stories from database to sync with Admin Panel additions/updates
+  // Synchronize internalAgeFilter with external selectedAge prop when it changes
+  useEffect(() => {
+    if (selectedAge !== undefined) {
+      setInternalAgeFilter(selectedAge);
+    }
+  }, [selectedAge]);
+
+  const handleAgeChange = (age: number | null) => {
+    setInternalAgeFilter(age);
+    if (onSelectAge) {
+      onSelectAge(age);
+    }
+  };
+
+  // Fetch all stories from database without restricting by age so entire library is available
   useEffect(() => {
     fetchStories();
-  }, [selectedAge, token]);
+  }, [token]);
 
   const fetchStories = async () => {
-    if (!token) return;
     try {
-      let url = apiUrl('/api/parent/stories');
-      if (selectedAge) {
-        url += `?age=${selectedAge}`;
-      }
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const url = apiUrl('/api/parent/stories');
+      const headers: Record<string, string> = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const res = await fetch(url, { headers });
       if (res.ok) {
         const data = await res.json();
-        if (data.stories && data.stories.length > 0) {
+        if (data.stories && Array.isArray(data.stories) && data.stories.length > 0) {
           const mapped: MultilingualStory[] = data.stories.map((s: any) => {
             let parsedTr: any = null;
             if (s.translations) {
@@ -59,24 +72,30 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
 
             const rawParagraphs = s.full_story
               ? s.full_story.split(/\n\s*\n/).map((p: string) => p.trim()).filter(Boolean)
-              : [s.short_description || s.title];
+              : [s.short_description || s.title || ''];
 
-            const translations = parsedTr || {
-              az: {
-                title: s.title,
-                short_description: s.short_description || '',
-                paragraphs: rawParagraphs,
-              },
-              en: {
-                title: s.title,
-                short_description: s.short_description || '',
-                paragraphs: rawParagraphs,
-              },
-              ru: {
-                title: s.title,
-                short_description: s.short_description || '',
-                paragraphs: rawParagraphs,
-              },
+            const azTitle = parsedTr?.az?.title || s.title || '';
+            const azDesc = parsedTr?.az?.short_description || s.short_description || '';
+            const azParas = (parsedTr?.az?.paragraphs && Array.isArray(parsedTr.az.paragraphs) && parsedTr.az.paragraphs.length > 0)
+              ? parsedTr.az.paragraphs
+              : rawParagraphs;
+
+            const enTitle = parsedTr?.en?.title || s.title || '';
+            const enDesc = parsedTr?.en?.short_description || s.short_description || '';
+            const enParas = (parsedTr?.en?.paragraphs && Array.isArray(parsedTr.en.paragraphs) && parsedTr.en.paragraphs.length > 0)
+              ? parsedTr.en.paragraphs
+              : rawParagraphs;
+
+            const ruTitle = parsedTr?.ru?.title || s.title || '';
+            const ruDesc = parsedTr?.ru?.short_description || s.short_description || '';
+            const ruParas = (parsedTr?.ru?.paragraphs && Array.isArray(parsedTr.ru.paragraphs) && parsedTr.ru.paragraphs.length > 0)
+              ? parsedTr.ru.paragraphs
+              : rawParagraphs;
+
+            const translations = {
+              az: { title: azTitle, short_description: azDesc, paragraphs: azParas },
+              en: { title: enTitle, short_description: enDesc, paragraphs: enParas },
+              ru: { title: ruTitle, short_description: ruDesc, paragraphs: ruParas },
             };
 
             return {
@@ -84,18 +103,50 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
               min_age: s.min_age || 3,
               max_age: s.max_age || 12,
               is_bedtime: Boolean(s.is_bedtime),
-              category: s.is_bedtime ? 'bedtime' : 'daytime',
+              category: (s.is_bedtime ? 'bedtime' : 'daytime') as 'bedtime' | 'daytime',
               reading_duration_minutes: s.reading_duration_minutes || 5,
               cover_emoji: s.cover_emoji || (s.is_bedtime ? '🌙' : '📖'),
               translations,
             };
           });
+
+          // Merge custom admin stories from localStorage if any exist
+          try {
+            const localCustom = localStorage.getItem('custom_admin_stories');
+            if (localCustom) {
+              const parsed: any[] = JSON.parse(localCustom);
+              if (Array.isArray(parsed)) {
+                parsed.forEach(ls => {
+                  if (!mapped.some(m => m.id === ls.id)) {
+                    mapped.unshift(ls);
+                  }
+                });
+              }
+            }
+          } catch {}
+
           setStories(mapped);
+          return;
         }
       }
     } catch (err) {
       console.warn('Failed to fetch stories from API, using fallback:', err);
     }
+
+    // Fallback: MULTILINGUAL_STORIES + localStorage custom stories
+    try {
+      const localCustom = localStorage.getItem('custom_admin_stories');
+      if (localCustom) {
+        const parsed: any[] = JSON.parse(localCustom);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const combined = [...parsed, ...MULTILINGUAL_STORIES.filter(ms => !parsed.some(p => p.id === ms.id))];
+          setStories(combined);
+          return;
+        }
+      }
+    } catch {}
+
+    setStories(MULTILINGUAL_STORIES);
   };
 
   // Audio Playback State
@@ -197,8 +248,10 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
 
   // Filter stories by age, category and search term
   const filteredStories = stories.filter((story) => {
-    if (selectedAge && (selectedAge < story.min_age || selectedAge > story.max_age)) {
-      return false;
+    if (internalAgeFilter !== null && internalAgeFilter !== undefined) {
+      if (internalAgeFilter < story.min_age || internalAgeFilter > story.max_age) {
+        return false;
+      }
     }
     if (filterType === 'bedtime' && !story.is_bedtime) return false;
     if (filterType === 'daytime' && story.is_bedtime) return false;
@@ -213,11 +266,21 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
     return true;
   });
 
+  // Calculate dynamic counts based on the active age filter
+  const baseForCategoryCount = internalAgeFilter !== null
+    ? stories.filter(s => internalAgeFilter >= s.min_age && internalAgeFilter <= s.max_age)
+    : stories;
+  const bedtimeCount = baseForCategoryCount.filter(s => s.is_bedtime).length;
+  const daytimeCount = baseForCategoryCount.filter(s => !s.is_bedtime).length;
+
   // UI labels based on active language
   const defaultLabels = {
     heading: 'Nağıllar və Hekayələr',
     subheading: 'Hər yaş qrupu üçün 3 dildə zəngin və səsli nağıl xəzinəsi',
     all: 'Hamısı',
+    allAges: 'Bütün yaşlar',
+    ageFilter: 'Yaş qrupu',
+    clearFilter: 'Filtri təmizlə',
     bedtime: 'Gecə Nağılları',
     daytime: 'Gündüz Hekayələri',
     searchPlaceholder: 'Hekayə axtar...',
@@ -230,6 +293,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
     replay: 'Yenidən dinlə',
     endMessage: '✨ Nağılın sonu. Xoş xəyallar və şirin yuxular!',
     notFound: 'Bu seçim üçün hekayə tapılmadı',
+    resetFilters: 'Bütün hekayələri göstər',
     age: 'yaş',
     nightMode: 'Gecə rejimi',
     dayMode: 'Gündüz rejimi',
@@ -246,6 +310,9 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
       heading: 'Stories and Fairy Tales',
       subheading: 'Rich audio-narrated stories in 3 languages for all age groups',
       all: 'All',
+      allAges: 'All ages',
+      ageFilter: 'Age group',
+      clearFilter: 'Clear filter',
       bedtime: 'Bedtime Stories',
       daytime: 'Daytime Stories',
       searchPlaceholder: 'Search stories...',
@@ -258,6 +325,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
       replay: 'Replay',
       endMessage: '✨ The end of the story. Sweet dreams and happy thoughts!',
       notFound: 'No stories found for this selection',
+      resetFilters: 'Show all stories',
       age: 'years',
       nightMode: 'Night Mode',
       dayMode: 'Day Mode',
@@ -271,6 +339,9 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
       heading: 'Сказки и Истории',
       subheading: 'Увлекательные озвученные сказки на трёх языках для всех возрастов',
       all: 'Все',
+      allAges: 'Все возрасты',
+      ageFilter: 'Возрастная группа',
+      clearFilter: 'Сбросить фильтр',
       bedtime: 'Сказки на ночь',
       daytime: 'Дневные истории',
       searchPlaceholder: 'Поиск историй...',
@@ -283,6 +354,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
       replay: 'Сначала',
       endMessage: '✨ Конец сказки. Добрых снов и прекрасных мечтаний!',
       notFound: 'Истории по данному запросу не найдены',
+      resetFilters: 'Показать все истории',
       age: 'лет',
       nightMode: 'Ночной режим',
       dayMode: 'Дневной режим',
@@ -295,9 +367,9 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
   }[currentLang] || defaultLabels;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Top Header & Filters */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-3xl shadow-sm border border-slate-100">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-3xl shadow-sm border border-amber-200/50">
         <div>
           <h2 className="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2.5">
             <span className="text-2xl">📖</span>
@@ -319,7 +391,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              {labels.all} ({stories.length})
+              {labels.all} ({baseForCategoryCount.length})
             </button>
             <button
               onClick={() => setFilterType('bedtime')}
@@ -330,7 +402,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
               }`}
             >
               <Moon className="w-3.5 h-3.5 text-amber-300" />
-              <span>{labels.bedtime}</span>
+              <span>{labels.bedtime} ({bedtimeCount})</span>
             </button>
             <button
               onClick={() => setFilterType('daytime')}
@@ -341,7 +413,7 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
               }`}
             >
               <Sun className="w-3.5 h-3.5 text-white" />
-              <span>{labels.daytime}</span>
+              <span>{labels.daytime} ({daytimeCount})</span>
             </button>
           </div>
 
@@ -358,11 +430,69 @@ export const ParentStories: React.FC<ParentStoriesProps> = ({ selectedAge }) => 
         </div>
       </div>
 
+      {/* Age Filters Bar */}
+      <div className="flex flex-wrap items-center gap-1.5 p-2 sm:p-2.5 bg-white/90 backdrop-blur-md rounded-2xl border border-amber-200/60 shadow-xs">
+        <span className="text-xs font-black text-amber-950 px-2 flex items-center gap-1.5">
+          <span>🎯</span>
+          <span>{labels.ageFilter}:</span>
+        </span>
+        <button
+          onClick={() => handleAgeChange(null)}
+          className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+            internalAgeFilter === null
+              ? 'bg-amber-400 text-slate-900 shadow-sm'
+              : 'bg-amber-50/70 text-slate-700 hover:bg-amber-100 border border-amber-200/50'
+          }`}
+        >
+          {labels.allAges} ({stories.length})
+        </button>
+        {[
+          { label: '3-4 yaş', age: 4 },
+          { label: '5-6 yaş', age: 6 },
+          { label: '7-8 yaş', age: 8 },
+          { label: '9-10 yaş', age: 10 },
+          { label: '11-12 yaş', age: 12 },
+        ].map((range) => {
+          const count = stories.filter(s => range.age >= s.min_age && range.age <= s.max_age).length;
+          return (
+            <button
+              key={range.age}
+              onClick={() => handleAgeChange(range.age)}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                internalAgeFilter === range.age
+                  ? 'bg-amber-400 text-slate-900 shadow-sm font-black'
+                  : 'bg-amber-50/70 text-slate-700 hover:bg-amber-100 border border-amber-200/50'
+              }`}
+            >
+              {range.label} ({count})
+            </button>
+          );
+        })}
+        {internalAgeFilter !== null && (
+          <button
+            onClick={() => handleAgeChange(null)}
+            className="text-xs text-amber-700 hover:text-amber-900 underline ml-2 font-black cursor-pointer"
+          >
+            {labels.clearFilter}
+          </button>
+        )}
+      </div>
+
       {/* Stories Grid */}
       {filteredStories.length === 0 ? (
-        <div className="bg-white/60 rounded-3xl p-12 text-center border-2 border-dashed border-slate-200">
-          <div className="text-4xl mb-3">📚</div>
+        <div className="bg-white/70 rounded-3xl p-10 text-center border-2 border-dashed border-amber-200 space-y-3">
+          <div className="text-4xl">📚</div>
           <h3 className="text-base font-extrabold text-slate-700">{labels.notFound}</h3>
+          <button
+            onClick={() => {
+              handleAgeChange(null);
+              setFilterType('all');
+              setSearchQuery('');
+            }}
+            className="px-4 py-2 bg-amber-400 hover:bg-amber-500 text-slate-950 font-black rounded-xl text-xs shadow-sm cursor-pointer transition-colors"
+          >
+            {labels.resetFilters} ({stories.length})
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

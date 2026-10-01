@@ -371,7 +371,7 @@ router.put('/stories/:id', async (req, res) => {
         isBedtime ? 1 : 0,
         audioUrl || null,
         finalTranslations || null,
-        isPublished ? 1 : 0,
+        isPublished !== false ? 1 : 0,
         req.params.id,
       ]
     );

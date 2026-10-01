@@ -21,7 +21,7 @@ export const ParentPortal: React.FC = () => {
   const { language, setLanguage } = useGameStore();
   const currentLang = language || 'az';
   const [activeTab, setActiveTab] = useState<ParentTab>('dashboard');
-  const [selectedAge, setSelectedAge] = useState<number | null>(parentProfile?.child_age || null);
+  const [selectedAge, setSelectedAge] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const childDisplayName = parentProfile?.child_name || 'Dostumuz';
@@ -294,7 +294,7 @@ export const ParentPortal: React.FC = () => {
               <p className="text-xs font-bold text-slate-500 leading-tight">{navLabels.yourChild}</p>
               <p className="text-sm font-black text-slate-800 truncate">{childDisplayName}</p>
               <p className="text-[10px] font-bold text-amber-700">
-                {selectedAge ? `${selectedAge} ${currentLang === 'en' ? 'years' : currentLang === 'ru' ? 'лет' : 'yaş'}` : navLabels.allAges}
+                {parentProfile?.child_age ? `${parentProfile.child_age} ${currentLang === 'en' ? 'years' : currentLang === 'ru' ? 'лет' : 'yaş'}` : navLabels.allAges}
               </p>
             </div>
           </div>
@@ -379,7 +379,7 @@ export const ParentPortal: React.FC = () => {
           <div>
             <h2 className="text-sm font-black text-slate-800">{navLabels.portalTitle}</h2>
             <p className="text-[10px] text-slate-500 font-bold">
-              {childDisplayName} ({selectedAge ? `${selectedAge} yaş` : navLabels.allAges})
+              {childDisplayName} ({parentProfile?.child_age ? `${parentProfile.child_age} yaş` : navLabels.allAges})
             </p>
           </div>
         </div>
@@ -580,7 +580,7 @@ export const ParentPortal: React.FC = () => {
             </div>
           )}
 
-          {activeTab === 'stories' && <ParentStories selectedAge={selectedAge} />}
+          {activeTab === 'stories' && <ParentStories selectedAge={selectedAge} onSelectAge={setSelectedAge} />}
           {activeTab === 'videos' && <ParentVideos selectedAge={selectedAge} />}
           {activeTab === 'movement' && <ParentMovement />}
           {activeTab === 'logic' && <ParentLogic selectedAge={selectedAge} />}

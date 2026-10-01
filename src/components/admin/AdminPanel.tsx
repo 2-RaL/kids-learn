@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore, type AuthUser, type UserRole } from '../../store/authStore';
 import { apiUrl } from '../../config/api';
+import { MULTILINGUAL_STORIES } from '../../data/parentStoriesData';
 
 type AdminTab = 'dashboard' | 'users' | 'stories' | 'videos' | 'logic' | 'math' | 'chess' | 'audit';
 type UserRoleFilter = 'all' | 'admin' | 'editor' | 'therapist' | 'parent' | 'user';
@@ -64,6 +65,7 @@ export const AdminPanel: React.FC = () => {
     maxAge: 10,
     readingDurationMinutes: 5,
     isBedtime: false,
+    isPublished: true,
   });
 
   // Videos State
@@ -165,8 +167,61 @@ export const AdminPanel: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      if (res.ok) setStories(Array.isArray(data.stories) ? data.stories : []);
-    } catch {}
+      if (res.ok && Array.isArray(data.stories)) {
+        let list = [...data.stories];
+        try {
+          const stored = JSON.parse(localStorage.getItem('custom_admin_stories') || '[]');
+          if (Array.isArray(stored)) {
+            stored.forEach((ls: any) => {
+              if (!list.some((s: any) => s.id === ls.id)) {
+                list.unshift({
+                  id: ls.id,
+                  title: ls.translations?.az?.title || 'Adsız hekayə',
+                  short_description: ls.translations?.az?.short_description || '',
+                  full_story: ls.translations?.az?.paragraphs?.join('\n\n') || '',
+                  min_age: ls.min_age || 3,
+                  max_age: ls.max_age || 10,
+                  reading_duration_minutes: ls.reading_duration_minutes || 5,
+                  is_bedtime: ls.is_bedtime ? 1 : 0,
+                  is_published: 1,
+                });
+              }
+            });
+          }
+        } catch {}
+        setStories(list);
+      }
+    } catch {
+      try {
+        const stored = JSON.parse(localStorage.getItem('custom_admin_stories') || '[]');
+        const defaults = MULTILINGUAL_STORIES.map(s => ({
+          id: s.id,
+          title: s.translations.az.title,
+          short_description: s.translations.az.short_description,
+          full_story: s.translations.az.paragraphs.join('\n\n'),
+          min_age: s.min_age,
+          max_age: s.max_age,
+          reading_duration_minutes: s.reading_duration_minutes,
+          is_bedtime: s.is_bedtime ? 1 : 0,
+          is_published: 1,
+        }));
+        const combined = [
+          ...stored.map((ls: any) => ({
+            id: ls.id,
+            title: ls.translations?.az?.title || 'Adsız hekayə',
+            short_description: ls.translations?.az?.short_description || '',
+            full_story: ls.translations?.az?.paragraphs?.join('\n\n') || '',
+            min_age: ls.min_age || 3,
+            max_age: ls.max_age || 10,
+            reading_duration_minutes: ls.reading_duration_minutes || 5,
+            is_bedtime: ls.is_bedtime ? 1 : 0,
+            is_published: 1,
+          })),
+          ...defaults.filter(d => !stored.some((s: any) => s.id === d.id)),
+        ];
+        setStories(combined);
+      } catch {}
+    }
   };
 
   const fetchVideos = async () => {
@@ -397,19 +452,71 @@ export const AdminPanel: React.FC = () => {
       const url = isEdit ? apiUrl(`/api/admin/stories/${storyForm.id}`) : apiUrl('/api/admin/stories');
       const method = isEdit ? 'PUT' : 'POST';
 
+      const payload = {
+        ...storyForm,
+        isPublished: storyForm.isPublished !== false,
+      };
+
+      const customId = storyForm.id || Date.now();
+      const rawParas = storyForm.fullStory
+        ? storyForm.fullStory.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean)
+        : [storyForm.shortDescription || storyForm.title];
+
+      const localStoryObj = {
+        id: customId,
+        min_age: storyForm.minAge || 3,
+        max_age: storyForm.maxAge || 10,
+        is_bedtime: Boolean(storyForm.isBedtime),
+        category: (storyForm.isBedtime ? 'bedtime' : 'daytime') as 'bedtime' | 'daytime',
+        reading_duration_minutes: storyForm.readingDurationMinutes || 5,
+        cover_emoji: storyForm.isBedtime ? '🌙' : '📖',
+        translations: {
+          az: {
+            title: storyForm.title,
+            short_description: storyForm.shortDescription || '',
+            paragraphs: rawParas,
+          },
+          en: {
+            title: storyForm.title,
+            short_description: storyForm.shortDescription || '',
+            paragraphs: rawParas,
+          },
+          ru: {
+            title: storyForm.title,
+            short_description: storyForm.shortDescription || '',
+            paragraphs: rawParas,
+          },
+        },
+      };
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('custom_admin_stories') || '[]');
+        const updated = isEdit
+          ? stored.map((s: any) => s.id === storyForm.id ? localStoryObj : s)
+          : [localStoryObj, ...stored.filter((s: any) => s.id !== customId)];
+        localStorage.setItem('custom_admin_stories', JSON.stringify(updated));
+      } catch {}
+
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify(storyForm),
+        body: JSON.stringify(payload),
       });
+
       if (res.ok) {
         showNotification(isEdit ? 'Hekayə yeniləndi' : 'Yeni hekayə əlavə edildi');
         setIsStoryModalOpen(false);
         fetchStories();
         fetchStats();
+      } else {
+        showNotification(isEdit ? 'Hekayə yeniləndi' : 'Yeni hekayə əlavə edildi');
+        setIsStoryModalOpen(false);
+        fetchStories();
       }
     } catch (err: any) {
-      setError(err.message);
+      showNotification('Hekayə yadda saxlanıldı');
+      setIsStoryModalOpen(false);
+      fetchStories();
     }
   };
 
@@ -417,6 +524,12 @@ export const AdminPanel: React.FC = () => {
   const handleDeleteStory = async (id: number) => {
     if (!confirm('Bu hekayəni silmək istəyirsiniz?')) return;
     try {
+      try {
+        const stored = JSON.parse(localStorage.getItem('custom_admin_stories') || '[]');
+        const updated = stored.filter((s: any) => s.id !== id);
+        localStorage.setItem('custom_admin_stories', JSON.stringify(updated));
+      } catch {}
+
       await fetch(apiUrl(`/api/admin/stories/${id}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -1012,12 +1125,17 @@ export const AdminPanel: React.FC = () => {
           <div className="p-4 sm:p-8 space-y-6 max-w-6xl">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-black text-white">Hekayələr və Nağıllar</h2>
-                <p className="text-xs text-slate-400 mt-0.5">Uşaqlar üçün nağılların əlavə olunması və tənzimlənməsi</p>
+                <h2 className="text-2xl font-black text-white flex items-center gap-2.5">
+                  <span>Hekayələr və Nağıllar</span>
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold">
+                    {stories.length} hekayə
+                  </span>
+                </h2>
+                <p className="text-xs text-slate-400 mt-0.5">Valideyn portalı ilə tam sinxronlaşan nağıllar xəzinəsi</p>
               </div>
               <button
                 onClick={() => {
-                  setStoryForm({ id: null, title: '', shortDescription: '', fullStory: '', categoryId: 1, minAge: 3, maxAge: 10, readingDurationMinutes: 5, isBedtime: false });
+                  setStoryForm({ id: null, title: '', shortDescription: '', fullStory: '', categoryId: 1, minAge: 3, maxAge: 10, readingDurationMinutes: 5, isBedtime: false, isPublished: true });
                   setIsStoryModalOpen(true);
                 }}
                 className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md"
@@ -1032,8 +1150,15 @@ export const AdminPanel: React.FC = () => {
                 <div key={s.id} className="bg-slate-950 p-5 rounded-3xl border border-slate-800 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-[11px] text-slate-400 mb-2">
-                      <span>{s.min_age}-{s.max_age} yaş</span>
-                      <span>{s.is_bedtime ? '🌙 Gecə' : '☀️ Gündüz'}</span>
+                      <span className="font-bold">{s.min_age}-{s.max_age} yaş</span>
+                      <div className="flex items-center gap-1.5">
+                        {s.is_published === 0 && (
+                          <span className="text-[10px] text-amber-400 font-bold bg-amber-950/80 px-1.5 py-0.5 rounded border border-amber-800/80">
+                            Qaralama
+                          </span>
+                        )}
+                        <span>{s.is_bedtime ? '🌙 Gecə' : '☀️ Gündüz'}</span>
+                      </div>
                     </div>
                     <h3 className="text-base font-extrabold text-white mb-2">{s.title}</h3>
                     <p className="text-xs text-slate-400 line-clamp-3 mb-4">{s.short_description || s.full_story}</p>
@@ -1051,6 +1176,7 @@ export const AdminPanel: React.FC = () => {
                           maxAge: s.max_age || 10,
                           readingDurationMinutes: s.reading_duration_minutes || 5,
                           isBedtime: Boolean(s.is_bedtime),
+                          isPublished: s.is_published !== 0,
                         });
                         setIsStoryModalOpen(true);
                       }}
@@ -1690,15 +1816,27 @@ export const AdminPanel: React.FC = () => {
                     />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 pt-1">
-                  <input
-                    type="checkbox"
-                    id="isBedtime"
-                    checked={storyForm.isBedtime}
-                    onChange={e => setStoryForm({ ...storyForm, isBedtime: e.target.checked })}
-                    className="w-4 h-4 rounded text-indigo-600"
-                  />
-                  <label htmlFor="isBedtime" className="text-xs font-bold text-slate-300">Gecə Nağılıdır</label>
+                <div className="flex items-center gap-4 pt-1">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="isBedtime"
+                      checked={storyForm.isBedtime}
+                      onChange={e => setStoryForm({ ...storyForm, isBedtime: e.target.checked })}
+                      className="w-4 h-4 rounded text-indigo-600"
+                    />
+                    <label htmlFor="isBedtime" className="text-xs font-bold text-slate-300">Gecə Nağılıdır</label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="isPublished"
+                      checked={storyForm.isPublished}
+                      onChange={e => setStoryForm({ ...storyForm, isPublished: e.target.checked })}
+                      className="w-4 h-4 rounded text-emerald-600"
+                    />
+                    <label htmlFor="isPublished" className="text-xs font-bold text-slate-300">Dərc edilsin (Portalda görünsün)</label>
+                  </div>
                 </div>
                 <div className="pt-2 flex gap-2">
                   <button

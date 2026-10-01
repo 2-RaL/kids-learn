@@ -62,14 +62,16 @@ router.get('/stories', async (req, res) => {
       SELECT s.*, c.name_az AS category_name, c.icon AS category_icon 
       FROM stories s 
       LEFT JOIN story_categories c ON s.category_id = c.id 
-      WHERE s.is_published = 1
+      WHERE (s.is_published = 1 OR s.is_published IS NULL)
     `;
     const params = [];
 
-    if (age) {
+    if (age && age !== 'all' && age !== 'null' && age !== 'undefined') {
       const childAge = parseInt(age, 10);
-      query += ' AND s.min_age <= ? AND s.max_age >= ?';
-      params.push(childAge, childAge);
+      if (!isNaN(childAge)) {
+        query += ' AND s.min_age <= ? AND s.max_age >= ?';
+        params.push(childAge, childAge);
+      }
     }
     if (isBedtime !== undefined) {
       query += ' AND s.is_bedtime = ?';
@@ -99,7 +101,7 @@ router.get('/stories/:id', async (req, res) => {
       `SELECT s.*, c.name_az AS category_name, c.icon AS category_icon 
        FROM stories s 
        LEFT JOIN story_categories c ON s.category_id = c.id 
-       WHERE s.id = ? AND s.is_published = 1 LIMIT 1`,
+       WHERE s.id = ? AND (s.is_published = 1 OR s.is_published IS NULL) LIMIT 1`,
       [req.params.id]
     );
     if (rows.length === 0) return res.status(404).json({ error: 'Hekayə tapılmadı' });
