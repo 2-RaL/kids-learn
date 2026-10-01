@@ -223,13 +223,20 @@ export function cleanTextForSpeech(raw: string): string {
     ''
   );
 
-  // 4. Normalize excessive punctuation
+  // 4. Vocalize math and relational symbols for natural Azerbaijani speech reading
+  text = text.replace(/(\d+)\s*\+\s*(\d+)/g, '$1 üstəgəl $2');
+  text = text.replace(/(\d+)\s*=\s*(\d+)/g, '$1 bərabərdir $2');
+  text = text.replace(/(\d+)\s*-\s*(\d+)/g, '$1 çıxılsın $2');
+  text = text.replace(/\+/g, ' üstəgəl ');
+  text = text.replace(/=/g, ' bərabərdir ');
+
+  // 5. Normalize excessive punctuation
   text = text.replace(/[!]{2,}/g, '!');
   text = text.replace(/[?]{2,}/g, '?');
   text = text.replace(/\.{3,}/g, '…');
   text = text.replace(/^[•\-\*]\s+/gm, '');
 
-  // 5. Clean up multiple whitespaces
+  // 6. Clean up multiple whitespaces
   text = text.replace(/\s+/g, ' ').trim();
 
   return text;
@@ -282,8 +289,8 @@ class VoiceService {
   private heartbeatTimer: any = null;
   private sentenceTimer: any = null;
 
-  // Active voice persona (default: 'banu' - Female teacher/storyteller)
-  private persona: VoicePersona = 'banu';
+  // Active voice persona (default: 'babek' - Primary Azerbaijani teacher voice with full AZ character support)
+  private persona: VoicePersona = 'babek';
 
   // Story playlist
   private sentences: SentenceToken[] = [];
@@ -298,8 +305,13 @@ class VoiceService {
         const savedPersona = localStorage.getItem('parent_voice_persona');
         if (savedPersona === 'banu' || savedPersona === 'babek') {
           this.persona = savedPersona;
+        } else {
+          this.persona = 'babek';
+          localStorage.setItem('parent_voice_persona', 'babek');
         }
-      } catch {}
+      } catch {
+        this.persona = 'babek';
+      }
 
       if ('speechSynthesis' in window) {
         this.synth = window.speechSynthesis;
@@ -347,7 +359,8 @@ class VoiceService {
 
   /**
    * Deliberate Voice Selection Strategy.
-   * STRICT: Never returns an unrelated foreign voice (Turkish, Russian, English) for Azerbaijani!
+   * STRICT: Prioritizes Microsoft Babek / Babək for clear Azerbaijani delivery.
+   * Never returns an unrelated foreign voice (Turkish, Russian, English) for Azerbaijani!
    */
   public getBestVoice(lang: Language): SpeechSynthesisVoice | null {
     if (!this.synth) return null;
@@ -355,7 +368,20 @@ class VoiceService {
     if (voices.length === 0) return null;
 
     if (lang === 'az') {
-      // 1. Exact match for preferred persona in genuine Azerbaijani voice
+      // 1. High-priority Babek voice when preferred persona is 'babek'
+      if (this.persona === 'babek') {
+        const babekVoice = voices.find((v) => {
+          const name = v.name.toLowerCase();
+          const vLang = v.lang.toLowerCase();
+          return (
+            (name.includes('babek') || name.includes('babək')) &&
+            (vLang.startsWith('az') || name.includes('az') || name.includes('azerbaijan') || name.includes('azərbaycan'))
+          );
+        }) || voices.find((v) => v.name.toLowerCase().includes('babek') || v.name.toLowerCase().includes('babək'));
+        if (babekVoice) return babekVoice;
+      }
+
+      // 2. Exact match for preferred persona in genuine Azerbaijani voice
       const personaVoice = voices.find((v) => {
         const name = v.name.toLowerCase();
         const vLang = v.lang.toLowerCase();
@@ -364,7 +390,7 @@ class VoiceService {
       });
       if (personaVoice) return personaVoice;
 
-      // 2. High-quality Microsoft Natural Azerbaijani voices (Banu / Babek)
+      // 3. High-quality Microsoft Natural Azerbaijani voices (Babek / Banu)
       const azNatural = voices.find((v) => {
         const name = v.name.toLowerCase();
         const vLang = v.lang.toLowerCase();
@@ -375,7 +401,7 @@ class VoiceService {
       });
       if (azNatural) return azNatural;
 
-      // 3. Any genuine Azerbaijani browser voice
+      // 4. Any genuine Azerbaijani browser voice
       const anyAzVoice = voices.find((v) => {
         const name = v.name.toLowerCase();
         const vLang = v.lang.toLowerCase();

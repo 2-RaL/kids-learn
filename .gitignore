@@ -41,4 +41,10 @@ Desktop.ini
 server/data/
 server/src/
 
+# Scratch & Cache
+scratch/
+__pycache__/
+*.pyc
+
+
 

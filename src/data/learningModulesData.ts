@@ -1067,6 +1067,198 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Afərin! Pizza dilimi məhz üçbucaq şəklində kəsilir! 🍕",
         "explanationEn": "Well done! A pizza slice is shaped like a triangle! 🍕",
         "explanationRu": "Молодец! Кусочек пиццы нарезан треугольником! 🍕"
+      },
+      {
+        "id": "shp-square-1",
+        "title": "Kvadrat Qutu",
+        "titleEn": "Square Box",
+        "titleRu": "Квадратная коробка",
+        "lesson": {
+          "id": "shp-lesson-square",
+          "conceptTitleAz": "Kvadrat Fiqurunu Öyrənək!",
+          "conceptTitleEn": "Let's Learn the Square!",
+          "conceptTitleRu": "Учим фигуру Квадрат!",
+          "explanationAz": "Kvadratın 4 bərabər tərəfi və 4 küncü var! Pəncərə və ya hədiyyə qutusu kvadrata bənzəyir!",
+          "explanationEn": "A square has 4 equal sides and 4 corners! A window or gift box looks like a square!",
+          "explanationRu": "У квадрата 4 равные стороны и 4 угла! Окно или коробка похожи на квадрат!",
+          "bigEmojis": [
+            "🔲",
+            "📦",
+            "🖼️",
+            "⬛"
+          ],
+          "audioTextAz": "Kvadratın dörd bərabər tərəfi var. Qutu və pəncərə kvadrata bənzəyir.",
+          "audioTextEn": "A square has four equal sides. A box and window look like a square.",
+          "audioTextRu": "У квадрата четыре равные стороны. Коробка и окно похожи на квадрат."
+        },
+        "instruction": "Kvadrat formasında olan əşyanı tap.",
+        "instructionEn": "Find the square shaped item.",
+        "instructionRu": "Найди предмет квадратной формы.",
+        "type": "select",
+        "question": "Hansı əşya kvadrat formasındadır?",
+        "questionEn": "Which item has a square shape?",
+        "questionRu": "Какой предмет имеет форму квадрата?",
+        "options": [
+          {
+            "id": "opt-shp-box",
+            "text": "Hədiyyə Qutusu",
+            "textEn": "Gift Box",
+            "textRu": "Подарочная коробка",
+            "emoji": "📦",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-shp-ball",
+            "text": "Top",
+            "textEn": "Ball",
+            "textRu": "Мяч",
+            "emoji": "⚽",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-shp-egg",
+            "text": "Yumurta",
+            "textEn": "Egg",
+            "textRu": "Яйцо",
+            "emoji": "🥚",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "shp-square-window-2",
+        "title": "Kvadrat Pəncərə",
+        "titleEn": "Square Window",
+        "titleRu": "Квадратное окно",
+        "instruction": "Otaqdakı pəncərənin formasını seç.",
+        "instructionEn": "Select the shape of the room window.",
+        "instructionRu": "Выбери форму комнатного окна.",
+        "type": "select",
+        "question": "Dörd bərabər tərəfi olan pəncərə hansı fiqurdur?",
+        "questionEn": "What shape is a window with four equal sides?",
+        "questionRu": "Какая фигура у окна с четырьмя равными сторонами?",
+        "options": [
+          {
+            "id": "opt-shp-sq-corr",
+            "text": "Kvadrat",
+            "textEn": "Square",
+            "textRu": "Квадрат",
+            "emoji": "🔲",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-shp-sq-circ",
+            "text": "Dairə",
+            "textEn": "Circle",
+            "textRu": "Круг",
+            "emoji": "⭕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-shp-sq-tri",
+            "text": "Üçbucaq",
+            "textEn": "Triangle",
+            "textRu": "Треугольник",
+            "emoji": "🔺",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "shp-star-1",
+        "title": "Parlaq Ulduz",
+        "titleEn": "Shining Star",
+        "titleRu": "Сияющая звезда",
+        "lesson": {
+          "id": "shp-lesson-star",
+          "conceptTitleAz": "Parlaq Ulduz Fiqurunu Öyrənək!",
+          "conceptTitleEn": "Let's Learn the Star Shape!",
+          "conceptTitleRu": "Учим фигуру Звезда!",
+          "explanationAz": "Ulduzun parıldayan küncləri var! Gecə səmadakı ulduzlar və dəniz ulduzu bu formadadır!",
+          "explanationEn": "A star has shining points! Stars in the night sky and starfish look like this!",
+          "explanationRu": "У звезды сияющие лучи! Звезды в ночном небе и морская звезда имеют эту форму!",
+          "bigEmojis": [
+            "⭐",
+            "🌟",
+            "✨",
+            "🌠"
+          ],
+          "audioTextAz": "Ulduz göydə parıldayır. Onun beş küncü var.",
+          "audioTextEn": "The star shines in the sky. It has five points.",
+          "audioTextRu": "Звезда сияет в небе. У нее пять лучей."
+        },
+        "instruction": "Parıldayan ulduz fiqurunu seç.",
+        "instructionEn": "Select the shining star shape.",
+        "instructionRu": "Выбери сияющую фигуру звезды.",
+        "type": "select",
+        "question": "Hansı parlaq fiqur ulduzdur?",
+        "questionEn": "Which shining shape is a star?",
+        "questionRu": "Какая сияющая фигура — звезда?",
+        "options": [
+          {
+            "id": "opt-shp-star-corr",
+            "text": "Sarı Ulduz",
+            "textEn": "Yellow Star",
+            "textRu": "Желтая звезда",
+            "emoji": "⭐",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-shp-star-circ",
+            "text": "Dairə",
+            "textEn": "Circle",
+            "textRu": "Круг",
+            "emoji": "⭕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-shp-star-sq",
+            "text": "Kvadrat",
+            "textEn": "Square",
+            "textRu": "Квадрат",
+            "emoji": "⬛",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "shp-star-sea-2",
+        "title": "Dəniz Ulduzu",
+        "titleEn": "Starfish",
+        "titleRu": "Морская звезда",
+        "instruction": "Dəniz canlısının formasını tap.",
+        "instructionEn": "Find the shape of the sea creature.",
+        "instructionRu": "Найди форму морского обитателя.",
+        "type": "select",
+        "question": "Dəniz ulduzu hansı həndəsi formaya bənzəyir?",
+        "questionEn": "What shape does a starfish resemble?",
+        "questionRu": "На какую форму похожа морская звезда?",
+        "options": [
+          {
+            "id": "opt-shp-seastar-corr",
+            "text": "Ulduz",
+            "textEn": "Star",
+            "textRu": "Звезда",
+            "emoji": "⭐",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-shp-seastar-tri",
+            "text": "Üçbucaq",
+            "textEn": "Triangle",
+            "textRu": "Треугольник",
+            "emoji": "🔺",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-shp-seastar-box",
+            "text": "Kvadrat",
+            "textEn": "Square",
+            "textRu": "Квадрат",
+            "emoji": "🔲",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -1343,6 +1535,237 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Şirin yuxular! Çarpayıda yatıb qüvvət toplayırıq! 🛏️",
         "explanationEn": "Sweet dreams! We sleep in bed to regain energy! 🛏️",
         "explanationRu": "Сладких снов! В кровати мы спим и набираемся сил! 🛏️"
+      },
+      {
+        "id": "obj-school-1",
+        "title": "Rəngli Qələm",
+        "titleEn": "Color Pencil",
+        "titleRu": "Цветной карандаш",
+        "lesson": {
+          "id": "obj-lesson-school",
+          "conceptTitleAz": "Məktəb Əşyalarını Tanıyaq!",
+          "conceptTitleEn": "Let's Learn School Supplies!",
+          "conceptTitleRu": "Учим школьные вещи!",
+          "explanationAz": "Dərs oxumaq üçün kitab, qələm və çanta bizə kömək edir! Onları həmişə səliqəli saxlayırıq!",
+          "explanationEn": "Books, pencils, and backpacks help us study! We always keep them neat!",
+          "explanationRu": "Книги, карандаши и рюкзак помогают нам учиться! Мы содержим их в порядке!",
+          "bigEmojis": [
+            "🎒",
+            "✏️",
+            "📚",
+            "📐"
+          ],
+          "audioTextAz": "Kitab oxuyuruq, qələmlə yazırıq, çantaya yığırıq.",
+          "audioTextEn": "We read books, write with pencils, pack in backpack.",
+          "audioTextRu": "Читаем книги, пишем карандашом, складываем в рюкзак."
+        },
+        "instruction": "Yazı yazmaq üçün lazım olan əşyanı tap.",
+        "instructionEn": "Find the item used for writing.",
+        "instructionRu": "Найди предмет для письма.",
+        "type": "select",
+        "question": "Dəftərə rəsm çəkmək və yazmaq üçün nə işlədirik?",
+        "questionEn": "What do we use to draw and write in a notebook?",
+        "questionRu": "Что мы используем, чтобы рисовать и писать в тетради?",
+        "options": [
+          {
+            "id": "opt-obj-pencil",
+            "text": "Rəngli Qələm",
+            "textEn": "Color Pencil",
+            "textRu": "Цветной карандаш",
+            "emoji": "✏️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-obj-spoon",
+            "text": "Qaşıq",
+            "textEn": "Spoon",
+            "textRu": "Ложка",
+            "emoji": "🥄",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-obj-pillow",
+            "text": "Yastıq",
+            "textEn": "Pillow",
+            "textRu": "Подушка",
+            "emoji": "🛋️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "obj-school-bag-2",
+        "title": "Məktəb Çantası",
+        "titleEn": "Backpack",
+        "titleRu": "Рюкзак",
+        "instruction": "Kitabları daşımaq üçün əşyanı seç.",
+        "instructionEn": "Select the item for carrying books.",
+        "instructionRu": "Выбери предмет для ношения книг.",
+        "type": "select",
+        "question": "Dəftər və kitablarımızı hara yığırıq?",
+        "questionEn": "Where do we pack our notebooks and books?",
+        "questionRu": "Куда мы складываем тетради и книги?",
+        "options": [
+          {
+            "id": "opt-obj-bag-corr",
+            "text": "Məktəb Çantası",
+            "textEn": "School Backpack",
+            "textRu": "Школьный рюкзак",
+            "emoji": "🎒",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-obj-bag-plate",
+            "text": "Boşqab",
+            "textEn": "Plate",
+            "textRu": "Тарелка",
+            "emoji": "🍽️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-obj-bag-chair",
+            "text": "Stul",
+            "textEn": "Chair",
+            "textRu": "Стул",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "obj-school-book-3",
+        "title": "Maraqlı Kitab",
+        "titleEn": "Interesting Book",
+        "titleRu": "Интересная книга",
+        "instruction": "Nağıl oxunan əşyanı seç.",
+        "instructionEn": "Select the item used to read stories.",
+        "instructionRu": "Выбери предмет, из которого читают сказки.",
+        "type": "select",
+        "question": "Hansı əşyadan gözəl nağıllar oxuyuruq?",
+        "questionEn": "From which item do we read wonderful stories?",
+        "questionRu": "Из какого предмета мы читаем чудесные сказки?",
+        "options": [
+          {
+            "id": "opt-obj-book-corr",
+            "text": "Kitab",
+            "textEn": "Book",
+            "textRu": "Книга",
+            "emoji": "📚",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-obj-book-fork",
+            "text": "Çəngəl",
+            "textEn": "Fork",
+            "textRu": "Вилка",
+            "emoji": "🍴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-obj-book-clock",
+            "text": "Saat",
+            "textEn": "Clock",
+            "textRu": "Часы",
+            "emoji": "⏰",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "obj-toys-1",
+        "title": "Yumşaq Ayı",
+        "titleEn": "Teddy Bear",
+        "titleRu": "Плюшевый мишка",
+        "lesson": {
+          "id": "obj-lesson-toys",
+          "conceptTitleAz": "Oyuncaqlarımızı Tanıyaq!",
+          "conceptTitleEn": "Let's Learn About Toys!",
+          "conceptTitleRu": "Учим игрушки!",
+          "explanationAz": "Oyuncaqlar uşaqların ən yaxşı dostudur! Top tullanır, ayı qucaqlanır, maşın sürülür!",
+          "explanationEn": "Toys are a child best friends! The ball bounces, teddy hugs, car drives!",
+          "explanationRu": "Игрушки — лучшие друзья детей! Мяч прыгает, мишку обнимаем, машинка едет!",
+          "bigEmojis": [
+            "🧸",
+            "⚽",
+            "🚗",
+            "🧩"
+          ],
+          "audioTextAz": "Oyuncaqlarla oynayırıq və onları səliqəli saxlayırıq.",
+          "audioTextEn": "We play with toys and keep them tidy.",
+          "audioTextRu": "Мы играем с игрушками и убираем их на место."
+        },
+        "instruction": "Yumşaq oyuncağı seç.",
+        "instructionEn": "Select the soft plush toy.",
+        "instructionRu": "Выбери мягкую плюшевую игрушку.",
+        "type": "select",
+        "question": "Yatağa aparıb qucaqladığımız yumşaq oyuncaq hansıdır?",
+        "questionEn": "Which soft toy do we take to bed to hug?",
+        "questionRu": "Какую мягкую игрушку мы берем в кровать, чтобы обнять?",
+        "options": [
+          {
+            "id": "opt-obj-teddy",
+            "text": "Yumşaq Ayı",
+            "textEn": "Teddy Bear",
+            "textRu": "Плюшевый мишка",
+            "emoji": "🧸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-obj-notebook",
+            "text": "Dəftər",
+            "textEn": "Notebook",
+            "textRu": "Тетрадь",
+            "emoji": "📓",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-obj-cup",
+            "text": "Fincan",
+            "textEn": "Cup",
+            "textRu": "Чашка",
+            "emoji": "☕",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "obj-toys-ball-2",
+        "title": "Tullanan Top",
+        "titleEn": "Bouncing Ball",
+        "titleRu": "Прыгучий мяч",
+        "instruction": "Tullanan oyuncağı tap.",
+        "instructionEn": "Find the bouncing toy.",
+        "instructionRu": "Найди прыгучую игрушку.",
+        "type": "select",
+        "question": "Hansı oyuncağı yerə vuranda yuxarı tullanır?",
+        "questionEn": "Which toy bounces up when hit on the ground?",
+        "questionRu": "Какая игрушка подскакивает, когда ударяется о землю?",
+        "options": [
+          {
+            "id": "opt-obj-ball-corr",
+            "text": "Rəngli Top",
+            "textEn": "Colorful Ball",
+            "textRu": "Цветной мяч",
+            "emoji": "⚽",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-obj-ball-chair",
+            "text": "Stul",
+            "textEn": "Chair",
+            "textRu": "Стул",
+            "emoji": "🪑",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-obj-ball-door",
+            "text": "Qapı",
+            "textEn": "Door",
+            "textRu": "Дверь",
+            "emoji": "🚪",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -1619,6 +2042,237 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Möhtəşəm! Ayaqlarımız bizi hər yerə cəld aparır! 🦶",
         "explanationEn": "Awesome! Our feet carry us swiftly everywhere! 🦶",
         "explanationRu": "Замечательно! Ноги быстро переносят нас повсюду! 🦶"
+      },
+      {
+        "id": "bod-legs-1",
+        "title": "Ayaqlar və Qaçış",
+        "titleEn": "Legs and Running",
+        "titleRu": "Ноги и бег",
+        "lesson": {
+          "id": "bod-lesson-legs",
+          "conceptTitleAz": "Ayaqlarımızı və Hərəkəti Öyrənək!",
+          "conceptTitleEn": "Let's Learn Legs and Movement!",
+          "conceptTitleRu": "Учим ноги и движения!",
+          "explanationAz": "Ayaqlarımız sayəsində qaçırıq, tullanırıq və yeriyirik! Hər ayağımızda 5 barmaq var!",
+          "explanationEn": "Thanks to our legs we run, jump, and walk! Each foot has 5 toes!",
+          "explanationRu": "Благодаря ногам мы бегаем, прыгаем и ходим! На каждой ноге 5 пальчиков!",
+          "bigEmojis": [
+            "🦵",
+            "🦶",
+            "👟",
+            "🏃"
+          ],
+          "audioTextAz": "Ayaqlarımızla qaçırıq və tullanırıq.",
+          "audioTextEn": "With our legs we run and jump.",
+          "audioTextRu": "Ногами мы бегаем и прыгаем."
+        },
+        "instruction": "Qaçmaq üçün lazım olan bədən üzvünü seç.",
+        "instructionEn": "Select the body part needed for running.",
+        "instructionRu": "Выбери часть тела, необходимую для бега.",
+        "type": "select",
+        "question": "Qaçmaq və tullanmaq üçün bədənimizin hansı hissəsi lazımdır?",
+        "questionEn": "Which part of our body do we need to run and jump?",
+        "questionRu": "Какая часть тела нужна, чтобы бегать и прыгать?",
+        "options": [
+          {
+            "id": "opt-bod-legs-corr",
+            "text": "Ayaqlar",
+            "textEn": "Legs",
+            "textRu": "Ноги",
+            "emoji": "🦵",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-bod-ears",
+            "text": "Qulaqlar",
+            "textEn": "Ears",
+            "textRu": "Уши",
+            "emoji": "👂",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-bod-nose",
+            "text": "Burun",
+            "textEn": "Nose",
+            "textRu": "Нос",
+            "emoji": "👃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "bod-feet-shoes-2",
+        "title": "Ayaqqabı Geyinmək",
+        "titleEn": "Wearing Shoes",
+        "titleRu": "Обувание",
+        "instruction": "Ayaqqabının geyinildiyi yeri tap.",
+        "instructionEn": "Find where shoes are worn.",
+        "instructionRu": "Найди, куда надевают обувь.",
+        "type": "select",
+        "question": "Ayaqqabını bədənimizin harasına geyinirik?",
+        "questionEn": "Where on our body do we put shoes on?",
+        "questionRu": "Куда на теле мы надеваем обувь?",
+        "options": [
+          {
+            "id": "opt-bod-shoes-corr",
+            "text": "Ayağa",
+            "textEn": "Feet",
+            "textRu": "На ноги",
+            "emoji": "🦶",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-bod-shoes-head",
+            "text": "Başa",
+            "textEn": "Head",
+            "textRu": "На голову",
+            "emoji": "🧢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-bod-shoes-hands",
+            "text": "Ələ",
+            "textEn": "Hands",
+            "textRu": "На руки",
+            "emoji": "🧤",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "bod-toes-3",
+        "title": "Ayaq Barmaqları",
+        "titleEn": "Toes",
+        "titleRu": "Пальцы ног",
+        "instruction": "Ayaqdakı barmaqların sayını tap.",
+        "instructionEn": "Find the number of toes on one foot.",
+        "instructionRu": "Найди количество пальцев на одной ноге.",
+        "type": "select",
+        "question": "Bir ayağımızda neçə barmaq var?",
+        "questionEn": "How many toes are on one foot?",
+        "questionRu": "Сколько пальцев на одной ноге?",
+        "options": [
+          {
+            "id": "opt-bod-toes-corr",
+            "text": "5 Barmaq",
+            "textEn": "5 Toes",
+            "textRu": "5 пальцев",
+            "emoji": "🦶",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-bod-toes-2",
+            "text": "2 Barmaq",
+            "textEn": "2 Toes",
+            "textRu": "2 пальца",
+            "emoji": "✌️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-bod-toes-10",
+            "text": "10 Barmaq",
+            "textEn": "10 Toes",
+            "textRu": "10 пальцев",
+            "emoji": "🔟",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "bod-mouth-1",
+        "title": "Ağız və Təbəssüm",
+        "titleEn": "Mouth and Smile",
+        "titleRu": "Рот и улыбка",
+        "lesson": {
+          "id": "bod-lesson-mouth",
+          "conceptTitleAz": "Ağız, Dişlər və Gülümsəmə!",
+          "conceptTitleEn": "Mouth, Teeth and Smile!",
+          "conceptTitleRu": "Рот, зубы и улыбка!",
+          "explanationAz": "Ağzımızla danışırıq, dadlı yeməklər yeyirik və ağappaq dişlərimizlə gülümsəyirik!",
+          "explanationEn": "With our mouth we talk, eat delicious food, and smile with white teeth!",
+          "explanationRu": "Ртом мы говорим, кушаем вкусную еду и улыбаемся белоснежными зубками!",
+          "bigEmojis": [
+            "👄",
+            "🦷",
+            "👅",
+            "😁"
+          ],
+          "audioTextAz": "Ağzımızla danışırıq və dişlərimizlə gülümsəyirik.",
+          "audioTextEn": "We speak with our mouth and smile with our teeth.",
+          "audioTextRu": "Ртом мы говорим, а зубами улыбаемся."
+        },
+        "instruction": "Gülümsədiyimiz üz üzvünü seç.",
+        "instructionEn": "Select the face part we smile with.",
+        "instructionRu": "Выбери часть лица, которой мы улыбаемся.",
+        "type": "select",
+        "question": "Şad olanda nəyimizlə şirin gülümsəyirik?",
+        "questionEn": "What do we sweetly smile with when happy?",
+        "questionRu": "Чем мы радостно улыбаемся, когда счастливы?",
+        "options": [
+          {
+            "id": "opt-bod-mouth-corr",
+            "text": "Ağzımızla",
+            "textEn": "Mouth",
+            "textRu": "Ртом",
+            "emoji": "👄",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-bod-mouth-ear",
+            "text": "Qulağımızla",
+            "textEn": "Ear",
+            "textRu": "Ухом",
+            "emoji": "👂",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-bod-mouth-arm",
+            "text": "Qolumuzla",
+            "textEn": "Arm",
+            "textRu": "Рукой",
+            "emoji": "💪",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "bod-teeth-2",
+        "title": "Ağappaq Dişlər",
+        "titleEn": "White Teeth",
+        "titleRu": "Белые зубы",
+        "instruction": "Yeməyi çeynəyən orqanı tap.",
+        "instructionEn": "Find what chews food.",
+        "instructionRu": "Найди, чем пережевывают пищу.",
+        "type": "select",
+        "question": "Yeməyi çeynəmək üçün bizə nə kömək edir?",
+        "questionEn": "What helps us chew our food?",
+        "questionRu": "Что помогает нам пережевывать пищу?",
+        "options": [
+          {
+            "id": "opt-bod-teeth-corr",
+            "text": "Ağappaq Dişlərimiz",
+            "textEn": "White Teeth",
+            "textRu": "Белые зубки",
+            "emoji": "🦷",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-bod-teeth-eye",
+            "text": "Gözümüz",
+            "textEn": "Eye",
+            "textRu": "Глаз",
+            "emoji": "👁️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-bod-teeth-hair",
+            "text": "Saçımız",
+            "textEn": "Hair",
+            "textRu": "Волосы",
+            "emoji": "💇",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -1940,6 +2594,198 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Əla! Ağ dovşan qulaqlarını şəkləyib tullanır! 🐰🥕",
         "explanationEn": "Great! The bunny wiggles its ears and hops! 🐰🥕",
         "explanationRu": "Отлично! Белый зайчик шевелит ушками и прыгает! 🐰🥕"
+      },
+      {
+        "id": "ani-birds-1",
+        "title": "Şən Quş",
+        "titleEn": "Happy Bird",
+        "titleRu": "Веселая птичка",
+        "lesson": {
+          "id": "ani-lesson-birds",
+          "conceptTitleAz": "Quşları və Təbiət Dostlarını Öyrənək!",
+          "conceptTitleEn": "Let's Learn Birds and Nature Friends!",
+          "conceptTitleRu": "Учим птиц и друзей природы!",
+          "explanationAz": "Quşların qanadları var, göydə uçurlar və şən mahnılar oxuyurlar! Cik-cik edirlər!",
+          "explanationEn": "Birds have wings, fly in the sky, and sing happy songs! Chirp chirp!",
+          "explanationRu": "У птиц есть крылья, они летают в небе и поют веселые песенки! Чик-чирик!",
+          "bigEmojis": [
+            "🐦",
+            "🦉",
+            "🦆",
+            "🦅"
+          ],
+          "audioTextAz": "Quşlar qanad çalıb göydə uçur və cik-cik edir.",
+          "audioTextEn": "Birds flap their wings, fly in the sky, and chirp.",
+          "audioTextRu": "Птицы машут крыльями, летают в небе и чирикают."
+        },
+        "instruction": "Göydə uçan quşu tap.",
+        "instructionEn": "Find the bird flying in the sky.",
+        "instructionRu": "Найди птицу, летающую в небе.",
+        "type": "select",
+        "question": "Göydə qanad çalıb uçan canlı hansıdır?",
+        "questionEn": "Which creature flaps wings and flies in the sky?",
+        "questionRu": "Кто машет крыльями и летает в небе?",
+        "options": [
+          {
+            "id": "opt-ani-sparrow",
+            "text": "Balaca Quş",
+            "textEn": "Little Bird",
+            "textRu": "Маленькая птичка",
+            "emoji": "🐦",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-ani-turtle",
+            "text": "Tısbağa",
+            "textEn": "Turtle",
+            "textRu": "Черепаха",
+            "emoji": "🐢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-ani-cat",
+            "text": "Pişik",
+            "textEn": "Cat",
+            "textRu": "Кошка",
+            "emoji": "🐱",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "ani-birds-duck-2",
+        "title": "Göldə Üzən Ördək",
+        "titleEn": "Swimming Duck",
+        "titleRu": "Утка на пруду",
+        "instruction": "Suda üzən quşu tap.",
+        "instructionEn": "Find the swimming bird.",
+        "instructionRu": "Найди водоплавающую птицу.",
+        "type": "select",
+        "question": "Suda üzən və \"vak-vak\" edən quş hansıdır?",
+        "questionEn": "Which bird swims in water and says quack quack?",
+        "questionRu": "Какая птица плавает в воде и говорит кря-кря?",
+        "options": [
+          {
+            "id": "opt-ani-duck-corr",
+            "text": "Ördək",
+            "textEn": "Duck",
+            "textRu": "Утка",
+            "emoji": "🦆",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-ani-duck-dog",
+            "text": "İt",
+            "textEn": "Dog",
+            "textRu": "Собака",
+            "emoji": "🐶",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-ani-duck-horse",
+            "text": "At",
+            "textEn": "Horse",
+            "textRu": "Лошадь",
+            "emoji": "🐴",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "ani-sea-fish-1",
+        "title": "Qızıl Balıq",
+        "titleEn": "Goldfish",
+        "titleRu": "Золотая рыбка",
+        "lesson": {
+          "id": "ani-lesson-sea",
+          "conceptTitleAz": "Dəniz Canlıları və Balıqlar!",
+          "conceptTitleEn": "Sea Creatures and Fishes!",
+          "conceptTitleRu": "Морские обитатели и рыбки!",
+          "explanationAz": "Dənizdə və çayda balıqlar, delfinlər üzür! Onlar suyun altında nəfəs alır və üzgəcləri var!",
+          "explanationEn": "Fishes and dolphins swim in sea and river! They have fins and breathe underwater!",
+          "explanationRu": "В море и реке плавают рыбы и дельфины! У них плавники, они дышат под водой!",
+          "bigEmojis": [
+            "🐟",
+            "🐬",
+            "🐙",
+            "🐳"
+          ],
+          "audioTextAz": "Balıqlar suda üzgəcləri ilə üzürlər.",
+          "audioTextEn": "Fishes swim in water with their fins.",
+          "audioTextRu": "Рыбки плавают в воде с помощью плавников."
+        },
+        "instruction": "Suda üzən balığı seç.",
+        "instructionEn": "Select the fish swimming in water.",
+        "instructionRu": "Выбери рыбу, плавающую в воде.",
+        "type": "select",
+        "question": "Suda üzgəcləri ilə üzən sevimli canlı hansıdır?",
+        "questionEn": "Which lovely creature swims in water with fins?",
+        "questionRu": "Кто плавает в воде с плавниками?",
+        "options": [
+          {
+            "id": "opt-ani-fish-corr",
+            "text": "Qızıl Balıq",
+            "textEn": "Goldfish",
+            "textRu": "Золотая рыбка",
+            "emoji": "🐟",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-ani-fish-rabbit",
+            "text": "Dovşan",
+            "textEn": "Rabbit",
+            "textRu": "Кролик",
+            "emoji": "🐰",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-ani-fish-hen",
+            "text": "Toyuq",
+            "textEn": "Hen",
+            "textRu": "Курица",
+            "emoji": "🐔",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "ani-sea-dolphin-2",
+        "title": "Ağıllı Delfin",
+        "titleEn": "Clever Dolphin",
+        "titleRu": "Умный дельфин",
+        "instruction": "Dəniz dostumuzu tap.",
+        "instructionEn": "Find our sea friend.",
+        "instructionRu": "Найди нашего морского друга.",
+        "type": "select",
+        "question": "Dənizdə şən tullanan və üzən dostumuz hansıdır?",
+        "questionEn": "Which friend joyfully jumps and swims in the sea?",
+        "questionRu": "Какой друг весело прыгает и плавает в море?",
+        "options": [
+          {
+            "id": "opt-ani-dolphin-corr",
+            "text": "Delfin",
+            "textEn": "Dolphin",
+            "textRu": "Дельфин",
+            "emoji": "🐬",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-ani-dolphin-bear",
+            "text": "Ayı",
+            "textEn": "Bear",
+            "textRu": "Медведь",
+            "emoji": "🐻",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-ani-dolphin-lion",
+            "text": "Şir",
+            "textEn": "Lion",
+            "textRu": "Лев",
+            "emoji": "🦁",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -2216,6 +3062,237 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Yaşıl xiyar çox təravətlidir! 🥒",
         "explanationEn": "Super! Green cucumbers are so refreshing! 🥒",
         "explanationRu": "Супер! Зеленый огурец очень освежает! 🥒"
+      },
+      {
+        "id": "fav-strawberry-1",
+        "title": "Şirin Çiyələk",
+        "titleEn": "Sweet Strawberry",
+        "titleRu": "Сладкая клубника",
+        "lesson": {
+          "id": "fav-lesson-berries",
+          "conceptTitleAz": "Şirin Giləmeyvələri Öyrənək!",
+          "conceptTitleEn": "Let's Learn Sweet Berries!",
+          "conceptTitleRu": "Учим сладкие ягоды!",
+          "explanationAz": "Çiyələk, banan və üzüm çox dadlı və vitaminlidir! Bizi güclü və sağlam edir!",
+          "explanationEn": "Strawberries, bananas, and grapes are delicious and packed with vitamins!",
+          "explanationRu": "Клубника, бананы и виноград очень вкусные и полны витаминов!",
+          "bigEmojis": [
+            "🍓",
+            "🍌",
+            "🍇",
+            "🍉"
+          ],
+          "audioTextAz": "Çiyələk qırmızı və çox şirindir. Vitaminlərlə zəngindir.",
+          "audioTextEn": "Strawberry is red and very sweet. It is rich in vitamins.",
+          "audioTextRu": "Клубника красная и очень сладкая. Богата витаминами."
+        },
+        "instruction": "Şirin qırmızı giləmeyvəni seç.",
+        "instructionEn": "Select the sweet red berry.",
+        "instructionRu": "Выбери сладкую красную ягоду.",
+        "type": "select",
+        "question": "Qırmızı rəngdə, nöqtəli və şirin giləmeyvə hansıdır?",
+        "questionEn": "Which red, spotted, and sweet berry is this?",
+        "questionRu": "Какая ягода красная, в крапинку и сладкая?",
+        "options": [
+          {
+            "id": "opt-fav-straw",
+            "text": "Çiyələk",
+            "textEn": "Strawberry",
+            "textRu": "Клубника",
+            "emoji": "🍓",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fav-cucum",
+            "text": "Xiyar",
+            "textEn": "Cucumber",
+            "textRu": "Огурец",
+            "emoji": "🥒",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fav-potato",
+            "text": "Kartof",
+            "textEn": "Potato",
+            "textRu": "Картофель",
+            "emoji": "🥔",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fav-banana-2",
+        "title": "Sarı Banan",
+        "titleEn": "Yellow Banana",
+        "titleRu": "Желтый банан",
+        "instruction": "Sarı və şirin meyvəni tap.",
+        "instructionEn": "Find the yellow sweet fruit.",
+        "instructionRu": "Найди желтый сладкий фрукт.",
+        "type": "select",
+        "question": "Meymunların çox sevdiyi sarı meyvə hansıdır?",
+        "questionEn": "Which yellow fruit do monkeys love?",
+        "questionRu": "Какой желтый фрукт очень любят обезьянки?",
+        "options": [
+          {
+            "id": "opt-fav-banana-corr",
+            "text": "Banan",
+            "textEn": "Banana",
+            "textRu": "Банан",
+            "emoji": "🍌",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fav-banana-carrot",
+            "text": "Kök",
+            "textEn": "Carrot",
+            "textRu": "Морковь",
+            "emoji": "🥕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fav-banana-tomat",
+            "text": "Pomidor",
+            "textEn": "Tomato",
+            "textRu": "Помидор",
+            "emoji": "🍅",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fav-grapes-3",
+        "title": "Şirəli Üzüm",
+        "titleEn": "Juicy Grapes",
+        "titleRu": "Сочный виноград",
+        "instruction": "Salxımlı meyvəni seç.",
+        "instructionEn": "Select the cluster fruit.",
+        "instructionRu": "Выбери ягоды гроздьями.",
+        "type": "select",
+        "question": "Salxım şəklində böyüyən şirin giləmeyvə hansıdır?",
+        "questionEn": "Which sweet berry grows in bunches?",
+        "questionRu": "Какая сладкая ягода растет гроздьями?",
+        "options": [
+          {
+            "id": "opt-fav-grapes-corr",
+            "text": "Üzüm",
+            "textEn": "Grapes",
+            "textRu": "Виноград",
+            "emoji": "🍇",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fav-grapes-onion",
+            "text": "Soğan",
+            "textEn": "Onion",
+            "textRu": "Лук",
+            "emoji": "🧅",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fav-grapes-cabb",
+            "text": "Kələm",
+            "textEn": "Cabbage",
+            "textRu": "Капуста",
+            "emoji": "🥬",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fav-potato-1",
+        "title": "Bostan Kartofu",
+        "titleEn": "Garden Potato",
+        "titleRu": "Картофель",
+        "lesson": {
+          "id": "fav-lesson-vegetables",
+          "conceptTitleAz": "Faydalı Tərəvəzləri Öyrənək!",
+          "conceptTitleEn": "Let's Learn Healthy Vegetables!",
+          "conceptTitleRu": "Учим полезные овощи!",
+          "explanationAz": "Kələm, xiyar və kartofdan analarımız dadlı şorba və salat hazırlayır!",
+          "explanationEn": "Mothers make delicious soup and salad from potatoes, cucumbers, and cabbage!",
+          "explanationRu": "Мамы готовят вкусный суп и салат из картошки, огурцов и капусты!",
+          "bigEmojis": [
+            "🥔",
+            "🥒",
+            "🥬",
+            "🥦"
+          ],
+          "audioTextAz": "Kartof və tərəvəzlər bədənimizi gücləndirir.",
+          "audioTextEn": "Potatoes and vegetables strengthen our body.",
+          "audioTextRu": "Картофель и овощи укрепляют наш организм."
+        },
+        "instruction": "Torpaq altında yetişən tərəvəzi tap.",
+        "instructionEn": "Find the vegetable grown underground.",
+        "instructionRu": "Найди овощ, растущий под землей.",
+        "type": "select",
+        "question": "Torpağın altında böyüyən, dadlı püresi olan tərəvəz hansıdır?",
+        "questionEn": "Which vegetable grows underground and makes tasty puree?",
+        "questionRu": "Какой овощ растет под землей и из него делают пюре?",
+        "options": [
+          {
+            "id": "opt-fav-potato-corr",
+            "text": "Kartof",
+            "textEn": "Potato",
+            "textRu": "Картофель",
+            "emoji": "🥔",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fav-potato-apple",
+            "text": "Alma",
+            "textEn": "Apple",
+            "textRu": "Яблоко",
+            "emoji": "🍎",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fav-potato-cherry",
+            "text": "Albalı",
+            "textEn": "Cherry",
+            "textRu": "Вишня",
+            "emoji": "🍒",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fav-cucumber-2",
+        "title": "Yaşıl Xiyar",
+        "titleEn": "Green Cucumber",
+        "titleRu": "Зеленый огурец",
+        "instruction": "Təravətli yaşıl tərəvəzi tap.",
+        "instructionEn": "Find the fresh green vegetable.",
+        "instructionRu": "Найди свежий зеленый овощ.",
+        "type": "select",
+        "question": "Yaşıl, xırçıltılı və təravətli tərəvəz hansıdır?",
+        "questionEn": "Which vegetable is green, crunchy, and fresh?",
+        "questionRu": "Какой овощ зеленый, хрустящий и свежий?",
+        "options": [
+          {
+            "id": "opt-fav-cuc-corr",
+            "text": "Xiyar",
+            "textEn": "Cucumber",
+            "textRu": "Огурец",
+            "emoji": "🥒",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fav-cuc-lemon",
+            "text": "Limon",
+            "textEn": "Lemon",
+            "textRu": "Лимон",
+            "emoji": "🍋",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fav-cuc-peach",
+            "text": "Şaftalı",
+            "textEn": "Peach",
+            "textRu": "Персик",
+            "emoji": "🍑",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -2492,6 +3569,237 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Bəli! Velosiped sürmək həm əyləncəli, həm də çox faydalıdır! 🚲",
         "explanationEn": "Yes! Riding a bicycle is both fun and very healthy! 🚲",
         "explanationRu": "Да! Кататься на велосипеде весело и очень полезно! 🚲"
+      },
+      {
+        "id": "tra-ship-1",
+        "title": "Böyük Gəmi",
+        "titleEn": "Big Ship",
+        "titleRu": "Большой корабль",
+        "lesson": {
+          "id": "tra-lesson-water",
+          "conceptTitleAz": "Su Nəqliyyatını Öyrənək!",
+          "conceptTitleEn": "Let's Learn Water Transport!",
+          "conceptTitleRu": "Учим водный транспорт!",
+          "explanationAz": "Mavilər dənizində böyük gəmilər və kiçik qayıqlar üzür! İnsanları və yükləri daşıyırlar!",
+          "explanationEn": "Big ships and boats sail the blue seas! They carry passengers and cargo!",
+          "explanationRu": "По синему морю плывут большие корабли и лодки! Они перевозят людей и грузы!",
+          "bigEmojis": [
+            "🚢",
+            "🚤",
+            "⛵",
+            "🛳️"
+          ],
+          "audioTextAz": "Gəmilər dənizdə və okeanda üzür.",
+          "audioTextEn": "Ships sail in the sea and ocean.",
+          "audioTextRu": "Корабли плывут по морю и океану."
+        },
+        "instruction": "Dənizdə üzən nəqliyyatı tap.",
+        "instructionEn": "Find the transport sailing in the sea.",
+        "instructionRu": "Найди транспорт, плавающий в море.",
+        "type": "select",
+        "question": "Dənizdə və okeanda üzən böyük nəqliyyat vasitəsi hansıdır?",
+        "questionEn": "Which large transport vehicle sails in seas and oceans?",
+        "questionRu": "Какой большой транспорт плавает по морям и океанам?",
+        "options": [
+          {
+            "id": "opt-tra-ship",
+            "text": "Böyük Gəmi",
+            "textEn": "Big Ship",
+            "textRu": "Большой корабль",
+            "emoji": "🚢",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-tra-car",
+            "text": "Avtomobil",
+            "textEn": "Car",
+            "textRu": "Автомобиль",
+            "emoji": "🚗",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-tra-bike",
+            "text": "Velosiped",
+            "textEn": "Bicycle",
+            "textRu": "Велосипед",
+            "emoji": "🚲",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "tra-boat-2",
+        "title": "Avarlı Qayıq",
+        "titleEn": "Rowing Boat",
+        "titleRu": "Весельная лодка",
+        "instruction": "Çayda üzən qayığı seç.",
+        "instructionEn": "Select the boat sailing in river.",
+        "instructionRu": "Выбери лодку, плывущую по реке.",
+        "type": "select",
+        "question": "Avar çəkərək çayda üzdüyümüz nəqliyyat hansıdır?",
+        "questionEn": "Which transport do we row in the river?",
+        "questionRu": "На каком транспорте мы гребем веслами по реке?",
+        "options": [
+          {
+            "id": "opt-tra-boat-corr",
+            "text": "Qayıq",
+            "textEn": "Boat",
+            "textRu": "Лодка",
+            "emoji": "🚤",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-tra-boat-plane",
+            "text": "Təyyarə",
+            "textEn": "Airplane",
+            "textRu": "Самолет",
+            "emoji": "✈️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-tra-boat-bus",
+            "text": "Avtobus",
+            "textEn": "Bus",
+            "textRu": "Автобус",
+            "emoji": "🚌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "tra-sail-3",
+        "title": "Yelkənli Gəmi",
+        "titleEn": "Sailboat",
+        "titleRu": "Парусник",
+        "instruction": "Küləklə üzən yelkənli vasitəni tap.",
+        "instructionEn": "Find the wind-powered sailing vessel.",
+        "instructionRu": "Найди судно, плывущее от ветра.",
+        "type": "select",
+        "question": "Küləyin köməyi ilə üzən yelkənli nəqliyyat hansıdır?",
+        "questionEn": "Which sailing transport moves with the help of wind?",
+        "questionRu": "Какой парусный транспорт движется с помощью ветра?",
+        "options": [
+          {
+            "id": "opt-tra-sail-corr",
+            "text": "Yelkənli Gəmi",
+            "textEn": "Sailboat",
+            "textRu": "Парусник",
+            "emoji": "⛵",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-tra-sail-train",
+            "text": "Qatar",
+            "textEn": "Train",
+            "textRu": "Поезд",
+            "emoji": "🚂",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-tra-sail-tram",
+            "text": "Tramvay",
+            "textEn": "Tram",
+            "textRu": "Трамвай",
+            "emoji": "🚊",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "tra-rescue-fire-1",
+        "title": "Yanğınsöndürən Maşın",
+        "titleEn": "Fire Truck",
+        "titleRu": "Пожарная машина",
+        "lesson": {
+          "id": "tra-lesson-rescue",
+          "conceptTitleAz": "Xilasedici Xüsusi Avtomobillər!",
+          "conceptTitleEn": "Emergency Rescue Vehicles!",
+          "conceptTitleRu": "Специальные спасательные машины!",
+          "explanationAz": "Təcili yardım xəstələrə kömək edir, yanğınsöndürən yanğını söndürür, polis asayişi qoruyur!",
+          "explanationEn": "Ambulance helps sick people, fire truck extinguishes fires, police keeps safety!",
+          "explanationRu": "Скорая помощь помогает больным, пожарная тушит огонь, полиция бережет порядок!",
+          "bigEmojis": [
+            "🚑",
+            "🚒",
+            "🚓",
+            "🚨"
+          ],
+          "audioTextAz": "Xilasedici maşınlar insanlara köməyə tələsir.",
+          "audioTextEn": "Rescue vehicles rush to help people.",
+          "audioTextRu": "Спасательные машины спешат на помощь людям."
+        },
+        "instruction": "Yanğını söndürməyə gedən maşını seç.",
+        "instructionEn": "Select the fire fighting truck.",
+        "instructionRu": "Выбери пожарную машину.",
+        "type": "select",
+        "question": "Qırmızı rəngdə olan və yanğını söndürməyə tələsən maşın hansıdır?",
+        "questionEn": "Which red vehicle rushes to extinguish fires?",
+        "questionRu": "Какая красная машина спешит тушить пожар?",
+        "options": [
+          {
+            "id": "opt-tra-fire-corr",
+            "text": "Yanğınsöndürən Maşın",
+            "textEn": "Fire Truck",
+            "textRu": "Пожарная машина",
+            "emoji": "🚒",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-tra-fire-taxi",
+            "text": "Taksi",
+            "textEn": "Taxi",
+            "textRu": "Такси",
+            "emoji": "🚕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-tra-fire-tractor",
+            "text": "Traktor",
+            "textEn": "Tractor",
+            "textRu": "Трактор",
+            "emoji": "🚜",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "tra-rescue-ambulance-2",
+        "title": "Təcili Yardım Maşını",
+        "titleEn": "Ambulance",
+        "titleRu": "Скорая помощь",
+        "instruction": "Xəstələrə kömək edən avtomobili tap.",
+        "instructionEn": "Find the vehicle that helps sick people.",
+        "instructionRu": "Найди автомобиль, помогающий больным.",
+        "type": "select",
+        "question": "Həkimləri xəstələrin köməyinə tələsdirən maşın hansıdır?",
+        "questionEn": "Which vehicle rushes doctors to help patients?",
+        "questionRu": "Какая машина везет врачей на помощь больным?",
+        "options": [
+          {
+            "id": "opt-tra-amb-corr",
+            "text": "Təcili Yardım",
+            "textEn": "Ambulance",
+            "textRu": "Скорая помощь",
+            "emoji": "🚑",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-tra-amb-truck",
+            "text": "Yük Maşını",
+            "textEn": "Cargo Truck",
+            "textRu": "Грузовик",
+            "emoji": "🚛",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-tra-amb-moto",
+            "text": "Motosiklet",
+            "textEn": "Motorcycle",
+            "textRu": "Мотоцикл",
+            "emoji": "🏍️",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -2768,6 +4076,237 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Aşpaz ən ləzzətli yeməkləri sevgi ilə bişirir! 👨‍🍳🍲",
         "explanationEn": "Super! Chefs cook the most delicious food with love! 👨‍🍳🍲",
         "explanationRu": "Супер! Повар с любовью готовит самые вкусные блюда! 👨‍🍳🍲"
+      },
+      {
+        "id": "prf-firefighter-1",
+        "title": "Cəsur Yanğınsöndürən",
+        "titleEn": "Brave Firefighter",
+        "titleRu": "Смелый пожарный",
+        "lesson": {
+          "id": "prf-lesson-heroes",
+          "conceptTitleAz": "Qəhrəman Peşələri Öyrənək!",
+          "conceptTitleEn": "Let's Learn Heroic Professions!",
+          "conceptTitleRu": "Учим профессии героев!",
+          "explanationAz": "Yanğınsöndürən alovu su ilə söndürür! Polis küçələrdə təhlükəsizliyi qoruyur!",
+          "explanationEn": "Firefighters put out fires with water! Police officers keep streets safe!",
+          "explanationRu": "Пожарный тушит огонь водой! Полицейский охраняет безопасность на улицах!",
+          "bigEmojis": [
+            "👨‍🚒",
+            "👮",
+            "🚒",
+            "🛡️"
+          ],
+          "audioTextAz": "Yanğınsöndürən yanğını söndürür, insanları xilas edir.",
+          "audioTextEn": "Firefighter puts out fire and saves people.",
+          "audioTextRu": "Пожарный тушит огонь и спасает людей."
+        },
+        "instruction": "Yanğını söndürən peşə sahibini seç.",
+        "instructionEn": "Select the professional who puts out fire.",
+        "instructionRu": "Выбери профессию человека, тушащего пожары.",
+        "type": "select",
+        "question": "Yanğını söndürən cəsur peşə sahibi kimdir?",
+        "questionEn": "Who is the brave professional who puts out fires?",
+        "questionRu": "Кто этот смелый человек, который тушит огонь?",
+        "options": [
+          {
+            "id": "opt-prf-fire-corr",
+            "text": "Yanğınsöndürən",
+            "textEn": "Firefighter",
+            "textRu": "Пожарный",
+            "emoji": "👨‍🚒",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-prf-fire-tailor",
+            "text": "Dərzi",
+            "textEn": "Tailor",
+            "textRu": "Портной",
+            "emoji": "🧵",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-prf-fire-barber",
+            "text": "Bərbər",
+            "textEn": "Barber",
+            "textRu": "Парикмахер",
+            "emoji": "💇",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "prf-police-2",
+        "title": "Cəsur Polis",
+        "titleEn": "Police Officer",
+        "titleRu": "Полицейский",
+        "instruction": "Qaydaları qoruyan peşə sahibini tap.",
+        "instructionEn": "Find the professional who protects rules.",
+        "instructionRu": "Найди профессию человека, охраняющего порядок.",
+        "type": "select",
+        "question": "Yol qaydalarına və asayişə nəzarət edən kimdir?",
+        "questionEn": "Who oversees traffic rules and safety?",
+        "questionRu": "Кто следит за правилами дороги и порядком?",
+        "options": [
+          {
+            "id": "opt-prf-police-corr",
+            "text": "Polis",
+            "textEn": "Police Officer",
+            "textRu": "Полицейский",
+            "emoji": "👮",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-prf-police-artist",
+            "text": "Rəssam",
+            "textEn": "Painter",
+            "textRu": "Художник",
+            "emoji": "🎨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-prf-police-music",
+            "text": "Musiqiçi",
+            "textEn": "Musician",
+            "textRu": "Музыкант",
+            "emoji": "🎻",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "prf-fire-tool-3",
+        "title": "Yanğın Şlanqı",
+        "titleEn": "Fire Hose",
+        "titleRu": "Пожарный шланг",
+        "instruction": "Yanğını söndürən aləti seç.",
+        "instructionEn": "Select the tool for extinguishing fire.",
+        "instructionRu": "Выбери инструмент для тушения огня.",
+        "type": "select",
+        "question": "Yanğınsöndürən alovu söndürmək üçün nə istifadə edir?",
+        "questionEn": "What does a firefighter use to extinguish fire?",
+        "questionRu": "Что использует пожарный для тушения огня?",
+        "options": [
+          {
+            "id": "opt-prf-hose-corr",
+            "text": "Su Şlanqı",
+            "textEn": "Water Hose",
+            "textRu": "Водяной шланг",
+            "emoji": "💦",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-prf-hose-pen",
+            "text": "Qələm",
+            "textEn": "Pen",
+            "textRu": "Ручка",
+            "emoji": "✏️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-prf-hose-spoon",
+            "text": "Qaşıq",
+            "textEn": "Spoon",
+            "textRu": "Ложка",
+            "emoji": "🥄",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "prf-chef-1",
+        "title": "Usta Aşpaz",
+        "titleEn": "Master Chef",
+        "titleRu": "Мастер-повар",
+        "lesson": {
+          "id": "prf-lesson-creators",
+          "conceptTitleAz": "Dadlı Yeməklər və Evlər Yaradanlar!",
+          "conceptTitleEn": "Creators of Tasty Meals and Buildings!",
+          "conceptTitleRu": "Создатели вкусной еды и зданий!",
+          "explanationAz": "Aşpaz mətbəxdə ləzzətli yeməklər bişirir! Bənna və inşaatçı isə möhkəm binalar tikir!",
+          "explanationEn": "A chef cooks delicious food in the kitchen! Builders construct sturdy buildings!",
+          "explanationRu": "Повар готовит вкусную еду на кухне! Строитель строит крепкие дома!",
+          "bigEmojis": [
+            "👨‍🍳",
+            "👷",
+            "🍲",
+            "🏢"
+          ],
+          "audioTextAz": "Aşpaz ləzzətli yeməklər bişirir.",
+          "audioTextEn": "Chef cooks delicious meals.",
+          "audioTextRu": "Повар готовит вкусные блюда."
+        },
+        "instruction": "Dadlı yeməklər bişirən peşə sahibini seç.",
+        "instructionEn": "Select the professional who cooks tasty meals.",
+        "instructionRu": "Выбери профессию человека, готовящего вкусную еду.",
+        "type": "select",
+        "question": "Restoranda dadlı şorba və yeməklər bişirən kimdir?",
+        "questionEn": "Who cooks delicious soup and meals in a restaurant?",
+        "questionRu": "Кто готовит вкусный суп и еду в ресторане?",
+        "options": [
+          {
+            "id": "opt-prf-chef-corr",
+            "text": "Aşpaz",
+            "textEn": "Chef",
+            "textRu": "Повар",
+            "emoji": "👨‍🍳",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-prf-chef-doc",
+            "text": "Həkim",
+            "textEn": "Doctor",
+            "textRu": "Врач",
+            "emoji": "🩺",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-prf-chef-astro",
+            "text": "Kosmonavt",
+            "textEn": "Astronaut",
+            "textRu": "Космонавт",
+            "emoji": "🧑‍🚀",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "prf-builder-2",
+        "title": "İnşaatçı Bənna",
+        "titleEn": "Construction Builder",
+        "titleRu": "Строитель",
+        "instruction": "Ev tikən peşə sahibini tap.",
+        "instructionEn": "Find the professional who builds houses.",
+        "instructionRu": "Найди профессию человека, строящего дома.",
+        "type": "select",
+        "question": "Kərpiclərlə hündür və gözəl binalar tikən kimdir?",
+        "questionEn": "Who builds tall and beautiful buildings with bricks?",
+        "questionRu": "Кто строит высокие красивые здания из кирпича?",
+        "options": [
+          {
+            "id": "opt-prf-build-corr",
+            "text": "İnşaatçı Bənna",
+            "textEn": "Builder",
+            "textRu": "Строитель",
+            "emoji": "👷",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-prf-build-teach",
+            "text": "Müəllim",
+            "textEn": "Teacher",
+            "textRu": "Учитель",
+            "emoji": "👩‍🏫",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-prf-build-sail",
+            "text": "Dənizçi",
+            "textEn": "Sailor",
+            "textRu": "Моряк",
+            "emoji": "⚓",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -2999,6 +4538,276 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Babamız həmişə bizə xeyirxahlıq öyrədir! 👴❤️",
         "explanationEn": "Super! Grandfather always inspires kindness! 👴❤️",
         "explanationRu": "Супер! Дедушка всегда учит доброте и заботе! 👴❤️"
+      },
+      {
+        "id": "fam-brother-1",
+        "title": "Sevimli Qardaş",
+        "titleEn": "Dear Brother",
+        "titleRu": "Любимый брат",
+        "lesson": {
+          "id": "fam-lesson-siblings",
+          "conceptTitleAz": "Qardaş və Bacılarımız!",
+          "conceptTitleEn": "Brothers and Sisters!",
+          "conceptTitleRu": "Братья и сестры!",
+          "explanationAz": "Qardaş və bacı ilə birlikdə oynayırıq, oyuncaqlarımızı bölüşürük və bir-birimizə kömək edirik!",
+          "explanationEn": "We play with our brother and sister, share our toys, and help each other!",
+          "explanationRu": "С братом и сестрой мы играем, делимся игрушками и помогаем друг другу!",
+          "bigEmojis": [
+            "👦",
+            "👧",
+            "🤝",
+            "🎈"
+          ],
+          "audioTextAz": "Qardaş və bacı bir-biri ilə mehriban oynayır.",
+          "audioTextEn": "Brother and sister play friendly together.",
+          "audioTextRu": "Брат и сестра дружно играют вместе."
+        },
+        "instruction": "Qardaş ailə üzvünü seç.",
+        "instructionEn": "Select the brother family member.",
+        "instructionRu": "Выбери члена семьи — брата.",
+        "type": "select",
+        "question": "Bizim sevimli oğlan ailə üzvümüz kimdir?",
+        "questionEn": "Who is our beloved boy family member?",
+        "questionRu": "Кто наш любимый член семьи мальчик?",
+        "options": [
+          {
+            "id": "opt-fam-bro-corr",
+            "text": "Qardaş",
+            "textEn": "Brother",
+            "textRu": "Брат",
+            "emoji": "👦",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fam-bro-neigh",
+            "text": "Qonşu",
+            "textEn": "Neighbor",
+            "textRu": "Сосед",
+            "emoji": "🚶",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fam-bro-strang",
+            "text": "Yad Adam",
+            "textEn": "Stranger",
+            "textRu": "Незнакомец",
+            "emoji": "👤",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fam-sister-2",
+        "title": "Mehriban Bacı",
+        "titleEn": "Kind Sister",
+        "titleRu": "Добрая сестра",
+        "instruction": "Bacı ailə üzvünü tap.",
+        "instructionEn": "Find the sister family member.",
+        "instructionRu": "Найди члена семьи — сестру.",
+        "type": "select",
+        "question": "Bizim mehriban qız ailə üzvümüz kimdir?",
+        "questionEn": "Who is our kind girl family member?",
+        "questionRu": "Кто наш добрый член семьи девочка?",
+        "options": [
+          {
+            "id": "opt-fam-sis-corr",
+            "text": "Bacı",
+            "textEn": "Sister",
+            "textRu": "Сестра",
+            "emoji": "👧",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fam-sis-hero",
+            "text": "Qəhrəman",
+            "textEn": "Hero",
+            "textRu": "Герой",
+            "emoji": "🦸",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fam-sis-seller",
+            "text": "Satıcı",
+            "textEn": "Shopkeeper",
+            "textRu": "Продавец",
+            "emoji": "🏪",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fam-share-3",
+        "title": "Oyuncaqları Bölüşmək",
+        "titleEn": "Sharing Toys",
+        "titleRu": "Делиться игрушками",
+        "instruction": "Ailədə düzgün davranışı seç.",
+        "instructionEn": "Select the right behavior in family.",
+        "instructionRu": "Выбери правильное поведение в семье.",
+        "type": "select",
+        "question": "Qardaş və bacı ilə necə rəftar etməliyik?",
+        "questionEn": "How should we behave with brother and sister?",
+        "questionRu": "Как мы должны обращаться с братом и сестрой?",
+        "options": [
+          {
+            "id": "opt-fam-share-corr",
+            "text": "Mehriban olmalı və bölüşməliyik",
+            "textEn": "Be kind and share",
+            "textRu": "Быть дружными и делиться",
+            "emoji": "🤝",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fam-share-hide",
+            "text": "Oyuncaqları gizlətməliyik",
+            "textEn": "Hide toys",
+            "textRu": "Прятать игрушки",
+            "emoji": "🙈",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fam-share-fight",
+            "text": "Küsüşməliyik",
+            "textEn": "Quarrel",
+            "textRu": "Ссориться",
+            "emoji": "😠",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fam-hug-1",
+        "title": "Mehriban Qucaqlaşma",
+        "titleEn": "Warm Hug",
+        "titleRu": "Теплые объятия",
+        "lesson": {
+          "id": "fam-lesson-love",
+          "conceptTitleAz": "Ailədə Sevgi və Qayğı!",
+          "conceptTitleEn": "Love and Care in the Family!",
+          "conceptTitleRu": "Любовь и забота в семье!",
+          "explanationAz": "Ailə bizim ən böyük sərvətimizdir! Bir-birimizi qucaqlayırıq, sevirik və kömək edirik!",
+          "explanationEn": "Family is our greatest treasure! We hug, love, and support each other!",
+          "explanationRu": "Семья — наше самое главное сокровище! Мы обнимаем, любим и поддерживаем друг друга!",
+          "bigEmojis": [
+            "👨‍👩‍👧‍👦",
+            "❤️",
+            "🏠",
+            "🫂"
+          ],
+          "audioTextAz": "Ailəmizi sevirik və bir-birimizə qayğı göstəririk.",
+          "audioTextEn": "We love our family and care for each other.",
+          "audioTextRu": "Мы любим нашу семью и заботимся друг о друге."
+        },
+        "instruction": "Sevgi göstərmək yolunu seç.",
+        "instructionEn": "Select the way to show love.",
+        "instructionRu": "Выбери способ проявить любовь.",
+        "type": "select",
+        "question": "Ailə üzvlərimizi sevdiyimizi necə göstəririk?",
+        "questionEn": "How do we show that we love our family members?",
+        "questionRu": "Как мы показываем любовь к членам семьи?",
+        "options": [
+          {
+            "id": "opt-fam-hug-corr",
+            "text": "Mehribanlıqla qucaqlayaraq",
+            "textEn": "With a warm hug",
+            "textRu": "Теплыми объятиями",
+            "emoji": "❤️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fam-hug-shout",
+            "text": "Qışqıraraq",
+            "textEn": "By shouting",
+            "textRu": "Криками",
+            "emoji": "📢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fam-hug-slam",
+            "text": "Qapını çırparaq",
+            "textEn": "Slamming door",
+            "textRu": "Хлопая дверью",
+            "emoji": "🚪",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fam-help-mom-2",
+        "title": "Anaya Kömək",
+        "titleEn": "Helping Mom",
+        "titleRu": "Помощь маме",
+        "instruction": "Evdə kömək etməyi tap.",
+        "instructionEn": "Find how to help at home.",
+        "instructionRu": "Найди, как помочь дома.",
+        "type": "select",
+        "question": "Anamıza evdə necə kömək edə bilərik?",
+        "questionEn": "How can we help our mother at home?",
+        "questionRu": "Как мы можем помочь маме дома?",
+        "options": [
+          {
+            "id": "opt-fam-mom-corr",
+            "text": "Oyuncaqları səliqəyə yığaraq",
+            "textEn": "By tidying up toys",
+            "textRu": "Убирая игрушки",
+            "emoji": "🧸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fam-mom-mess",
+            "text": "Otağı dağıdaraq",
+            "textEn": "Making a mess",
+            "textRu": "Разбрасывая вещи",
+            "emoji": "🗑️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fam-mom-lazy",
+            "text": "Tənbəllik edərək",
+            "textEn": "Being lazy",
+            "textRu": "Ленясь",
+            "emoji": "😴",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "fam-dinner-together-3",
+        "title": "Ailəvi Şam Yeməyi",
+        "titleEn": "Family Dinner",
+        "titleRu": "Семейный ужин",
+        "instruction": "Birlikdə vaxt keçirməyi seç.",
+        "instructionEn": "Select spending time together.",
+        "instructionRu": "Выбери проведение времени вместе.",
+        "type": "select",
+        "question": "Bütün ailə birlikdə nə edəndə çox sevinir?",
+        "questionEn": "When does the whole family feel happy together?",
+        "questionRu": "Когда вся семья радуется вместе?",
+        "options": [
+          {
+            "id": "opt-fam-din-corr",
+            "text": "Birlikdə süfrə arxasında oturanda",
+            "textEn": "Sitting together at dinner",
+            "textRu": "Сидя вместе за ужином",
+            "emoji": "🍽️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-fam-din-alone",
+            "text": "Hamı tək qalanda",
+            "textEn": "When everyone is alone",
+            "textRu": "Когда все поодиночке",
+            "emoji": "👤",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-fam-din-dark",
+            "text": "Qaranlıqda oturanda",
+            "textEn": "Sitting in the dark",
+            "textRu": "Сидя в темноте",
+            "emoji": "🌑",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -3212,6 +5021,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Möhtəşəm! Əl sallayaraq dostlarımıza mehribanlıq göstəririk! 👋❤️",
         "explanationEn": "Awesome! Waving our hand shows warmth to friends! 👋❤️",
         "explanationRu": "Замечательно! Взмахом руки мы приветствуем друзей! 👋❤️"
+      },
+      {
+        "id": "cmd-jump-1",
+        "title": "Yuxarı Tullan",
+        "titleEn": "Jump Up",
+        "titleRu": "Прыгай вверх",
+        "lesson": {
+          "id": "cmd-lesson-actions",
+          "conceptTitleAz": "Şən və Fəal Komandalar!",
+          "conceptTitleEn": "Fun and Active Commands!",
+          "conceptTitleRu": "Веселые активные команды!",
+          "explanationAz": "Bədənimiz hər bir komandanı asanlıqla yerinə yetirir! Tullanırıq, əl çalırıq, gülümsəyirik!",
+          "explanationEn": "Our body easily performs every command! We jump, clap, and smile!",
+          "explanationRu": "Наше тело легко выполняет каждую команду! Мы прыгаем, хлопаем и улыбаемся!",
+          "bigEmojis": [
+            "🏃",
+            "👏",
+            "😄",
+            "🛑"
+          ],
+          "audioTextAz": "Komandanı diqqətlə dinlə və sevinclə yerinə yetir.",
+          "audioTextEn": "Listen carefully to the command and perform with joy.",
+          "audioTextRu": "Внимательно слушай команду и с радостью выполняй."
+        },
+        "instruction": "Tullanmaq komandasını tap.",
+        "instructionEn": "Find the jumping command.",
+        "instructionRu": "Найди команду прыжка.",
+        "type": "command",
+        "question": "Yerində 3 dəfə yuxarı tullan!",
+        "questionEn": "Jump up 3 times on the spot!",
+        "questionRu": "Подпрыгни 3 раза на месте!",
+        "options": [
+          {
+            "id": "opt-cmd-jump-corr",
+            "text": "Tullanmaq",
+            "textEn": "Jumping",
+            "textRu": "Прыгать",
+            "emoji": "🦘",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-jump-sleep",
+            "text": "Yatmaq",
+            "textEn": "Sleeping",
+            "textRu": "Спать",
+            "emoji": "😴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-jump-sit",
+            "text": "Oturmaq",
+            "textEn": "Sitting",
+            "textRu": "Сидеть",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd-smile-2",
+        "title": "Gözəl Gülümsə",
+        "titleEn": "Smile Sweetly",
+        "titleRu": "Улыбнись",
+        "instruction": "Gülümsəmək komandasını yerinə yetir.",
+        "instructionEn": "Perform the smiling command.",
+        "instructionRu": "Выполни команду улыбки.",
+        "type": "command",
+        "question": "Gözəl təbəssümlə gülümsə!",
+        "questionEn": "Smile with a lovely smile!",
+        "questionRu": "Улыбнись красивой улыбкой!",
+        "options": [
+          {
+            "id": "opt-cmd-sml-corr",
+            "text": "Gülümsəmək",
+            "textEn": "Smiling",
+            "textRu": "Улыбаться",
+            "emoji": "😄",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-sml-cry",
+            "text": "Ağlamaq",
+            "textEn": "Crying",
+            "textRu": "Плакать",
+            "emoji": "😢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-sml-frown",
+            "text": "Qaşqabaq tökmək",
+            "textEn": "Frowning",
+            "textRu": "Хмуриться",
+            "emoji": "😠",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd-stop-3",
+        "title": "Yerində Dayan",
+        "titleEn": "Stop on the spot",
+        "titleRu": "Остановись на месте",
+        "instruction": "Dayanmaq komandasını seç.",
+        "instructionEn": "Select the stop command.",
+        "instructionRu": "Выбери команду остановки.",
+        "type": "command",
+        "question": "Olduğun yerdə hərəkətsiz dayan!",
+        "questionEn": "Freeze and stop on the spot!",
+        "questionRu": "Замри и остановись на месте!",
+        "options": [
+          {
+            "id": "opt-cmd-stp-corr",
+            "text": "Dayanmaq",
+            "textEn": "Stopping",
+            "textRu": "Остановиться",
+            "emoji": "🛑",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-stp-run",
+            "text": "Qaçmaq",
+            "textEn": "Running",
+            "textRu": "Бежать",
+            "emoji": "🏃",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-stp-spin",
+            "text": "Fırlanmaq",
+            "textEn": "Spinning",
+            "textRu": "Кружиться",
+            "emoji": "🌀",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd-touch-nose-4",
+        "title": "Burnuna Toxun",
+        "titleEn": "Touch Your Nose",
+        "titleRu": "Дотронься до носа",
+        "instruction": "Burnuna toxunmaq komandasını tap.",
+        "instructionEn": "Find touch nose command.",
+        "instructionRu": "Найди команду дотронуться до носа.",
+        "type": "command",
+        "question": "Barmağınla ehmalca burnuna toxun!",
+        "questionEn": "Gently touch your nose with your finger!",
+        "questionRu": "Осторожно дотронься пальчиком до носика!",
+        "options": [
+          {
+            "id": "opt-cmd-nose-corr",
+            "text": "Burnuna toxunmaq",
+            "textEn": "Touching nose",
+            "textRu": "Трогать нос",
+            "emoji": "👃",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-nose-hide",
+            "text": "Gözü yummaq",
+            "textEn": "Closing eyes",
+            "textRu": "Закрывать глаза",
+            "emoji": "🙈",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-nose-run",
+            "text": "Qaçmaq",
+            "textEn": "Running",
+            "textRu": "Убегать",
+            "emoji": "🏃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd-march-7",
+        "title": "Yerində Addımla",
+        "titleEn": "March on the Spot",
+        "titleRu": "Шагай на месте",
+        "instruction": "Yerində addımlamaq komandasını tap.",
+        "instructionEn": "Find march on spot command.",
+        "instructionRu": "Найди команду шагать на месте.",
+        "type": "command",
+        "question": "Əsgər kimi yerində şən addımla!",
+        "questionEn": "March happily on the spot like a soldier!",
+        "questionRu": "Шагай весело на месте как солдатик!",
+        "options": [
+          {
+            "id": "opt-cmd-march-corr",
+            "text": "Yerində addımlamaq",
+            "textEn": "Marching on spot",
+            "textRu": "Шагать на месте",
+            "emoji": "🚶",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-march-sit",
+            "text": "Oturmaq",
+            "textEn": "Sitting",
+            "textRu": "Сидеть",
+            "emoji": "🪑",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-march-sleep",
+            "text": "Yatmaq",
+            "textEn": "Sleeping",
+            "textRu": "Спать",
+            "emoji": "😴",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd-look-up-5",
+        "title": "Yuxarı Bax",
+        "titleEn": "Look Up",
+        "titleRu": "Посмотри вверх",
+        "instruction": "Yuxarı baxmaq komandasını seç.",
+        "instructionEn": "Select look up command.",
+        "instructionRu": "Выбери команду посмотреть вверх.",
+        "type": "command",
+        "question": "Başını yuxarı qaldır və səmaya bax!",
+        "questionEn": "Raise your head and look up at the sky!",
+        "questionRu": "Подними голову и посмотри вверх на небо!",
+        "options": [
+          {
+            "id": "opt-cmd-up-corr",
+            "text": "Yuxarı baxmaq",
+            "textEn": "Looking up",
+            "textRu": "Смотреть вверх",
+            "emoji": "☁️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-up-down",
+            "text": "Aşağı baxmaq",
+            "textEn": "Looking down",
+            "textRu": "Смотреть вниз",
+            "emoji": "👣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-up-shut",
+            "text": "Gözü bağlamaq",
+            "textEn": "Shutting eyes",
+            "textRu": "Закрывать глаза",
+            "emoji": "🙈",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd-listen-6",
+        "title": "Diqqətlə Dinlə",
+        "titleEn": "Listen Carefully",
+        "titleRu": "Слушай внимательно",
+        "instruction": "Qulaq asmaq komandasını tap.",
+        "instructionEn": "Find listen command.",
+        "instructionRu": "Найди команду слушать.",
+        "type": "command",
+        "question": "Əlini qulağına apar və diqqətlə dinlə!",
+        "questionEn": "Put hand to ear and listen carefully!",
+        "questionRu": "Поднеси руку к уху и внимательно слушай!",
+        "options": [
+          {
+            "id": "opt-cmd-lst-corr",
+            "text": "Qulaq asmaq",
+            "textEn": "Listening",
+            "textRu": "Слушать",
+            "emoji": "👂",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd-lst-mouth",
+            "text": "Ağzı açmaq",
+            "textEn": "Opening mouth",
+            "textRu": "Открывать рот",
+            "emoji": "👄",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd-lst-jump",
+            "text": "Tullanmaq",
+            "textEn": "Jumping",
+            "textRu": "Прыгать",
+            "emoji": "🦘",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -3425,6 +5525,258 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Afərin! Kitabları həmişə rəfdə səliqəli saxlayırıq! 📖📚",
         "explanationEn": "Well done! We always keep books tidy on shelves! 📖📚",
         "explanationRu": "Молодец! Книги всегда аккуратно хранятся на полках! 📖📚"
+      },
+      {
+        "id": "cmd2-clap-sit-1",
+        "title": "Əl Çal və Otur",
+        "titleEn": "Clap and Sit",
+        "titleRu": "Хлопни и сядь",
+        "lesson": {
+          "id": "cmd2-lesson-daily",
+          "conceptTitleAz": "İki Ardıcıl Hərəkəti Birlikdə Edək!",
+          "conceptTitleEn": "Two Consecutive Actions Together!",
+          "conceptTitleRu": "Два последовательных действия вместе!",
+          "explanationAz": "Birinci komandanı bitirdikdən dərhal sonra ikinci komandanı edirik! Əvvəlcə əl çal, sonra otur!",
+          "explanationEn": "Right after finishing the first command, do the second! First clap, then sit!",
+          "explanationRu": "Сразу после первой команды выполняем вторую! Сначала хлопни, потом сядь!",
+          "bigEmojis": [
+            "👏",
+            "➔",
+            "🪑",
+            "🎯"
+          ],
+          "audioTextAz": "Əvvəlcə əl çal, sonra stulda otur.",
+          "audioTextEn": "First clap your hands, then sit on the chair.",
+          "audioTextRu": "Сначала хлопни в ладоши, затем сядь на стул."
+        },
+        "instruction": "Ardıcıl iki hərəkəti seç.",
+        "instructionEn": "Select two consecutive movements.",
+        "instructionRu": "Выбери два последовательных движения.",
+        "type": "select",
+        "question": "Əvvəlcə əl çal, sonra stulda otur!",
+        "questionEn": "First clap your hands, then sit on the chair!",
+        "questionRu": "Сначала хлопни в ладоши, потом сядь на стул!",
+        "options": [
+          {
+            "id": "opt-cmd2-cs-corr",
+            "text": "Əl çalmaq və oturmaq",
+            "textEn": "Clap and sit",
+            "textRu": "Хлопнуть и сесть",
+            "emoji": "👏🪑",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd2-cs-only",
+            "text": "Yalnız oturmaq",
+            "textEn": "Only sit",
+            "textRu": "Только сесть",
+            "emoji": "🪑",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd2-cs-sleep",
+            "text": "Yalnız yatmaq",
+            "textEn": "Only sleep",
+            "textRu": "Только спать",
+            "emoji": "😴",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd2-stand-turn-2",
+        "title": "Qalx və Fırlan",
+        "titleEn": "Stand and Spin",
+        "titleRu": "Встань и повернись",
+        "instruction": "Ayağa qalxıb fırlanmaq komandasını tap.",
+        "instructionEn": "Find stand up and spin command.",
+        "instructionRu": "Найди команду встать и повернуться.",
+        "type": "select",
+        "question": "Ayağa dur və yerində bir dəfə fırlan!",
+        "questionEn": "Stand up and spin once on the spot!",
+        "questionRu": "Встань и один раз повернись вокруг себя!",
+        "options": [
+          {
+            "id": "opt-cmd2-st-corr",
+            "text": "Durmaq və fırlanmaq",
+            "textEn": "Stand and spin",
+            "textRu": "Встать и повернуться",
+            "emoji": "🧍🌀",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd2-st-run",
+            "text": "Qaçmaq və tullanmaq",
+            "textEn": "Run and jump",
+            "textRu": "Бежать и прыгать",
+            "emoji": "🏃🦘",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd2-st-sit",
+            "text": "Oturmaq və susmaq",
+            "textEn": "Sit and be quiet",
+            "textRu": "Сесть и молчать",
+            "emoji": "🪑🤫",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd2-draw-color-3",
+        "title": "Çək və Rənglə",
+        "titleEn": "Draw and Color",
+        "titleRu": "Нарисуй и раскрась",
+        "instruction": "Şəkil çəkib rəngləmək komandasını seç.",
+        "instructionEn": "Select draw and color command.",
+        "instructionRu": "Выбери команду нарисовать и раскрасить.",
+        "type": "select",
+        "question": "Vərəqdə günəş çək və sarı rənglə!",
+        "questionEn": "Draw a sun on paper and color it yellow!",
+        "questionRu": "Нарисуй солнце на бумаге и раскрась желтым!",
+        "options": [
+          {
+            "id": "opt-cmd2-dc-corr",
+            "text": "Çəkmək və boyamaq",
+            "textEn": "Draw and color",
+            "textRu": "Нарисовать и раскрасить",
+            "emoji": "✏️🎨",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd2-dc-cut",
+            "text": "Yalnız kəsmək",
+            "textEn": "Only cut",
+            "textRu": "Только резать",
+            "emoji": "✂️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd2-dc-tear",
+            "text": "Kağızı cırmaq",
+            "textEn": "Tear paper",
+            "textRu": "Рвать бумагу",
+            "emoji": "📄",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd2-open-close-4",
+        "title": "Qapını Aç və Bağla",
+        "titleEn": "Open and Close Door",
+        "titleRu": "Открой и закрой дверь",
+        "instruction": "Qapı komandasını yerinə yetir.",
+        "instructionEn": "Perform door command.",
+        "instructionRu": "Выполни команду с дверью.",
+        "type": "select",
+        "question": "Qapını aç və yavaşca bağla!",
+        "questionEn": "Open the door and close it gently!",
+        "questionRu": "Открой дверь и аккуратно закрой!",
+        "options": [
+          {
+            "id": "opt-cmd2-oc-corr",
+            "text": "Açmaq və bağlamaq",
+            "textEn": "Open and close",
+            "textRu": "Открыть и закрыть",
+            "emoji": "🚪🔓",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd2-oc-run",
+            "text": "Yalnız qaçmaq",
+            "textEn": "Only run",
+            "textRu": "Только бежать",
+            "emoji": "🏃",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd2-oc-knock",
+            "text": "Qapını döymək",
+            "textEn": "Knock door",
+            "textRu": "Стучать в дверь",
+            "emoji": "✊",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd2-wash-dry-5",
+        "title": "Əli Yu və Qurula",
+        "titleEn": "Wash and Dry Hands",
+        "titleRu": "Помой и вытри руки",
+        "instruction": "Əllərin təmizlik komandasını tap.",
+        "instructionEn": "Find hands washing command.",
+        "instructionRu": "Найди команду мытья рук.",
+        "type": "select",
+        "question": "Əllərini sabunla yu və dəsmalla qurula!",
+        "questionEn": "Wash your hands with soap and dry with towel!",
+        "questionRu": "Помой руки с мылом и вытри полотенцем!",
+        "options": [
+          {
+            "id": "opt-cmd2-wd-corr",
+            "text": "Yumaq və qurulamaq",
+            "textEn": "Wash and dry",
+            "textRu": "Помыть и вытереть",
+            "emoji": "🧼🧴",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd2-wd-pour",
+            "text": "Yalnız su tökmək",
+            "textEn": "Only pour water",
+            "textRu": "Только лить воду",
+            "emoji": "💧",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd2-wd-dirty",
+            "text": "Çirkli saxlamaq",
+            "textEn": "Keep dirty",
+            "textRu": "Оставить грязными",
+            "emoji": "❌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmd2-ball-catch-6",
+        "title": "Topu At və Tut",
+        "titleEn": "Throw and Catch Ball",
+        "titleRu": "Брось и поймай мяч",
+        "instruction": "Top oyunu komandasını seç.",
+        "instructionEn": "Select ball game command.",
+        "instructionRu": "Выбери команду игры с мячом.",
+        "type": "select",
+        "question": "Topu yuxarı at və iki əlinlə tut!",
+        "questionEn": "Throw the ball up and catch with both hands!",
+        "questionRu": "Брось мяч вверх и поймай двумя руками!",
+        "options": [
+          {
+            "id": "opt-cmd2-tc-corr",
+            "text": "Atmaq və tutmaq",
+            "textEn": "Throw and catch",
+            "textRu": "Бросить и поймать",
+            "emoji": "⚽🤲",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-cmd2-tc-kick",
+            "text": "Təpiklə vurmaq",
+            "textEn": "Kick away",
+            "textRu": "Пнуть ногой",
+            "emoji": "👟",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-cmd2-tc-hide",
+            "text": "Topu gizlətmək",
+            "textEn": "Hide ball",
+            "textRu": "Спрятать мяч",
+            "emoji": "📦",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -3692,6 +6044,330 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Möhtəşəm! Ayıcıq qutunun yanında əyləşib! 🧸👉📦",
         "explanationEn": "Awesome! The teddy bear is sitting beside the box! 🧸👉📦",
         "explanationRu": "Замечательно! Мишка сидит рядом с коробкой! 🧸👉📦"
+      },
+      {
+        "id": "space-front-car-1",
+        "title": "Maşının Qabağında",
+        "titleEn": "In front of car",
+        "titleRu": "Перед машиной",
+        "lesson": {
+          "id": "space-lesson-front-back",
+          "conceptTitleAz": "Qabağında və Arxasında Anlayışları!",
+          "conceptTitleEn": "In Front and Behind Concepts!",
+          "conceptTitleRu": "Понятия «Впереди» и «Сзади»!",
+          "explanationAz": "Əşyalar kiminsə qabağında və ya arxasında dura bilər! Şəklə baxaq və yerini tapaq!",
+          "explanationEn": "Objects can stand in front of or behind someone! Look at the picture and find the spot!",
+          "explanationRu": "Предметы могут стоять перед кем-то или сзади! Посмотрим на картинку и найдем!",
+          "bigEmojis": [
+            "🚗",
+            "🧍",
+            "🌳",
+            "📦"
+          ],
+          "audioTextAz": "Uşaq maşının qabağında dayanıb.",
+          "audioTextEn": "The child is standing in front of the car.",
+          "audioTextRu": "Ребенок стоит перед машиной."
+        },
+        "visualScene": {
+          "type": "spatial",
+          "containerEmoji": "🚗",
+          "itemEmoji": "🧍",
+          "position": "beside",
+          "captionAz": "Şəkil: Uşaq avtomobilin qabağında dayanıb",
+          "captionEn": "Scene: The child is in front of the car",
+          "captionRu": "Картинка: Ребенок перед машиной"
+        },
+        "instruction": "Şəklə baxıb mövqeyi tap.",
+        "instructionEn": "Look at the picture and find position.",
+        "instructionRu": "Посмотри на картинку и найди положение.",
+        "type": "select",
+        "question": "Şəklə bax: Uşaq avtomobilin harasındadır?",
+        "questionEn": "Look at the picture: Where is the child relative to the car?",
+        "questionRu": "Посмотри на картинку: Где ребенок по отношению к машине?",
+        "options": [
+          {
+            "id": "opt-spc-front-corr",
+            "text": "Qabağında",
+            "textEn": "In front of",
+            "textRu": "Впереди / Спереди",
+            "emoji": "➡️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-spc-front-back",
+            "text": "Arxasında",
+            "textEn": "Behind",
+            "textRu": "Сзади",
+            "emoji": "⬅️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-spc-front-under",
+            "text": "Altında",
+            "textEn": "Under",
+            "textRu": "Внизу / Под",
+            "emoji": "⬇️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "space-behind-tree-2",
+        "title": "Ağacın Arxasında",
+        "titleEn": "Behind the tree",
+        "titleRu": "За деревом",
+        "visualScene": {
+          "type": "spatial",
+          "containerEmoji": "🌳",
+          "itemEmoji": "🐰",
+          "position": "beside",
+          "captionAz": "Şəkil: Dovşan böyük ağacın arxasında gizlənib",
+          "captionEn": "Scene: Rabbit is hidden behind the big tree",
+          "captionRu": "Картинка: Кролик спрятался за деревом"
+        },
+        "instruction": "Dovşanın gizləndiyi yeri seç.",
+        "instructionEn": "Select where the rabbit is hidden.",
+        "instructionRu": "Выбери, где спрятался кролик.",
+        "type": "select",
+        "question": "Şəklə bax: Dovşan ağacın harasında gizlənib?",
+        "questionEn": "Look at the scene: Where is the rabbit hiding relative to tree?",
+        "questionRu": "Посмотри на картинку: Где кролик прячется за деревом?",
+        "options": [
+          {
+            "id": "opt-spc-behind-corr",
+            "text": "Arxasında",
+            "textEn": "Behind",
+            "textRu": "Сзади / За ним",
+            "emoji": "⬅️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-spc-behind-on",
+            "text": "Üstündə",
+            "textEn": "On top",
+            "textRu": "Наверху",
+            "emoji": "⬆️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-spc-behind-in",
+            "text": "İçində",
+            "textEn": "Inside",
+            "textRu": "Внутри",
+            "emoji": "📦",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "space-front-house-3",
+        "title": "Evin Qabağında Çiçək",
+        "titleEn": "Flower in front of house",
+        "titleRu": "Цветок перед домом",
+        "visualScene": {
+          "type": "spatial",
+          "containerEmoji": "🏠",
+          "itemEmoji": "🌷",
+          "position": "beside",
+          "captionAz": "Şəkil: Gözəl gül evin qabağında bitib",
+          "captionEn": "Scene: Beautiful flower grew in front of the house",
+          "captionRu": "Картинка: Красивый цветок растет перед домом"
+        },
+        "instruction": "Gülün yerini müəyyən et.",
+        "instructionEn": "Identify the flower location.",
+        "instructionRu": "Определи место цветка.",
+        "type": "select",
+        "question": "Şəklə bax: Gözəl çiçək evin harasındadır?",
+        "questionEn": "Look at picture: Where is the flower relative to the house?",
+        "questionRu": "Где цветок по отношению к дому?",
+        "options": [
+          {
+            "id": "opt-spc-flw-front",
+            "text": "Qabağında",
+            "textEn": "In front of",
+            "textRu": "Перед домом",
+            "emoji": "🌷",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-spc-flw-under",
+            "text": "Altında",
+            "textEn": "Underneath",
+            "textRu": "Под домом",
+            "emoji": "⬇️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-spc-flw-in",
+            "text": "İçində",
+            "textEn": "Inside",
+            "textRu": "Внутри",
+            "emoji": "🚪",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "space-above-cloud-4",
+        "title": "Göydə Yuxarıda",
+        "titleEn": "High up in sky",
+        "titleRu": "Вверху в небе",
+        "lesson": {
+          "id": "space-lesson-up-down",
+          "conceptTitleAz": "Yuxarıda və Aşağıda Anlayışları!",
+          "conceptTitleEn": "Above and Below Concepts!",
+          "conceptTitleRu": "Понятия «Вверху» и «Внизу»!",
+          "explanationAz": "Təyyarə və quşlar göydə yuxarıda uçur! Balaca qarışqa isə yerdə aşağıda yeriyir!",
+          "explanationEn": "Airplanes and birds fly high above! The little ant walks down on the ground!",
+          "explanationRu": "Самолет и птицы летают высоко вверху! А муравей ползает внизу по земле!",
+          "bigEmojis": [
+            "☁️",
+            "✈️",
+            "🌷",
+            "🐜"
+          ],
+          "audioTextAz": "Təyyarə yuxarıda uçur, çiçəklər aşağıda bitir.",
+          "audioTextEn": "The plane flies above, flowers grow below.",
+          "audioTextRu": "Самолет летит вверху, цветы растут внизу."
+        },
+        "visualScene": {
+          "type": "spatial",
+          "containerEmoji": "☁️",
+          "itemEmoji": "✈️",
+          "position": "on",
+          "captionAz": "Şəkil: Təyyarə buludların yuxarısında uçur",
+          "captionEn": "Scene: Airplane is flying above clouds",
+          "captionRu": "Картинка: Самолет летит над облаками"
+        },
+        "instruction": "Təyyarənin mövqeyini tap.",
+        "instructionEn": "Find airplane position.",
+        "instructionRu": "Найди положение самолета.",
+        "type": "select",
+        "question": "Şəklə bax: Təyyarə buludların harasındadır?",
+        "questionEn": "Where is the airplane relative to the clouds?",
+        "questionRu": "Где самолет по отношению к облакам?",
+        "options": [
+          {
+            "id": "opt-spc-up-corr",
+            "text": "Yuxarıda",
+            "textEn": "Above / Up",
+            "textRu": "Вверху / Над",
+            "emoji": "⬆️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-spc-up-down",
+            "text": "Aşağıda",
+            "textEn": "Below / Down",
+            "textRu": "Внизу / Под",
+            "emoji": "⬇️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-spc-up-in",
+            "text": "İçində",
+            "textEn": "Inside",
+            "textRu": "Внутри",
+            "emoji": "📦",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "space-below-ground-5",
+        "title": "Yerdə Aşağıda",
+        "titleEn": "Down on ground",
+        "titleRu": "Внизу на земле",
+        "visualScene": {
+          "type": "spatial",
+          "containerEmoji": "🌳",
+          "itemEmoji": "🐜",
+          "position": "under",
+          "captionAz": "Şəkil: Qarışqa ağacın dibində yerdə aşağıdadır",
+          "captionEn": "Scene: Ant is down on the ground by the tree",
+          "captionRu": "Картинка: Муравей внизу на земле у дерева"
+        },
+        "instruction": "Qarışqanın yerini seç.",
+        "instructionEn": "Select ant location.",
+        "instructionRu": "Выбери место муравья.",
+        "type": "select",
+        "question": "Şəklə bax: Balaca qarışqa haradadır?",
+        "questionEn": "Where is the little ant located?",
+        "questionRu": "Где находится маленький муравей?",
+        "options": [
+          {
+            "id": "opt-spc-down-corr",
+            "text": "Aşağıda",
+            "textEn": "Below / Down",
+            "textRu": "Внизу",
+            "emoji": "⬇️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-spc-down-up",
+            "text": "Yuxarıda göydə",
+            "textEn": "Up in sky",
+            "textRu": "Вверху в небе",
+            "emoji": "☁️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-spc-down-star",
+            "text": "Ulduzlarda",
+            "textEn": "In stars",
+            "textRu": "В звездах",
+            "emoji": "⭐",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "space-lamp-table-6",
+        "title": "Masanın Yuxarısında Lampa",
+        "titleEn": "Lamp above table",
+        "titleRu": "Лампа над столом",
+        "visualScene": {
+          "type": "spatial",
+          "containerEmoji": "🪵",
+          "itemEmoji": "💡",
+          "position": "on",
+          "captionAz": "Şəkil: Çilçıraq masanın yuxarısından asılıb",
+          "captionEn": "Scene: Lamp is hanging above the table",
+          "captionRu": "Картинка: Лампа висит над столом"
+        },
+        "instruction": "Lampanın mövqeyini tap.",
+        "instructionEn": "Find lamp position.",
+        "instructionRu": "Найди положение лампы.",
+        "type": "select",
+        "question": "Şəklə bax: İşıq saçan lampa masanın harasındadır?",
+        "questionEn": "Where is the lamp relative to the table?",
+        "questionRu": "Где лампа по отношению к столу?",
+        "options": [
+          {
+            "id": "opt-spc-lamp-up",
+            "text": "Yuxarıda",
+            "textEn": "Above",
+            "textRu": "Вверху / Сверху",
+            "emoji": "💡",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-spc-lamp-under",
+            "text": "Altında",
+            "textEn": "Underneath",
+            "textRu": "Снизу / Под",
+            "emoji": "⬇️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-spc-lamp-side",
+            "text": "Yanında",
+            "textEn": "Beside",
+            "textRu": "Сбоку",
+            "emoji": "↔️",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -3971,6 +6647,348 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Göbələk yerdə bitir və çox alçaqdır! 🍄",
         "explanationEn": "Super! The mushroom grows close to the ground and is short! 🍄",
         "explanationRu": "Супер! Грибок растет у самой земли и он низенький! 🍄"
+      },
+      {
+        "id": "size-train-car-1",
+        "title": "Uzun Qatar və Qısa Maşın",
+        "titleEn": "Long Train and Short Car",
+        "titleRu": "Длинный поезд и короткая машина",
+        "lesson": {
+          "id": "size-lesson-length",
+          "conceptTitleAz": "Uzun və Qısa Ölçüləri Öyrənək!",
+          "conceptTitleEn": "Long and Short Lengths!",
+          "conceptTitleRu": "Учим понятия «Длинный» и «Короткий»!",
+          "explanationAz": "Qatar uzundur, minik maşını isə qısadır! Zürafənin boynu da uzundur!",
+          "explanationEn": "A train is long, a car is short! A giraffe neck is also long!",
+          "explanationRu": "Поезд длинный, а легковая машина короткая! Шея у жирафа тоже длинная!",
+          "bigEmojis": [
+            "🚂",
+            "🚗",
+            "📏",
+            "🦒"
+          ],
+          "audioTextAz": "Qatar uzundur, minik maşını isə qısadır.",
+          "audioTextEn": "The train is long, the car is short.",
+          "audioTextRu": "Поезд длинный, а легковая машина короткая."
+        },
+        "visualScene": {
+          "type": "comparison",
+          "leftItem": {
+            "emoji": "🚂",
+            "labelAz": "Qatar",
+            "labelEn": "Train",
+            "labelRu": "Поезд",
+            "size": "huge"
+          },
+          "rightItem": {
+            "emoji": "🚗",
+            "labelAz": "Avtomobil",
+            "labelEn": "Car",
+            "labelRu": "Машина",
+            "size": "small"
+          },
+          "captionAz": "Müqayisə et: Qatar çox uzundur, avtomobil isə qısadır",
+          "captionEn": "Compare: Train is long, car is short",
+          "captionRu": "Сравни: Поезд длинный, машина короткая"
+        },
+        "instruction": "Daha uzun olan nəqliyyatı seç.",
+        "instructionEn": "Select the longer transport.",
+        "instructionRu": "Выбери более длинный транспорт.",
+        "type": "select",
+        "question": "Şəklə bax: Qatar və avtomobili müqayisə et: Hansı daha uzundur?",
+        "questionEn": "Look at scene: Compare train and car: Which one is longer?",
+        "questionRu": "Посмотри на картинку: Какой транспорт длиннее?",
+        "options": [
+          {
+            "id": "opt-siz-train",
+            "text": "Uzun Qatar",
+            "textEn": "Long Train",
+            "textRu": "Длинный поезд",
+            "emoji": "🚂",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-siz-car",
+            "text": "Qısa Avtomobil",
+            "textEn": "Short Car",
+            "textRu": "Короткая машина",
+            "emoji": "🚗",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "size-pencil-short-2",
+        "title": "Qısa Qələm",
+        "titleEn": "Short Pencil",
+        "titleRu": "Короткий карандаш",
+        "visualScene": {
+          "type": "comparison",
+          "leftItem": {
+            "emoji": "📏",
+            "labelAz": "Uzun Xətkeş",
+            "labelEn": "Long Ruler",
+            "labelRu": "Длинная линейка",
+            "size": "huge"
+          },
+          "rightItem": {
+            "emoji": "✏️",
+            "labelAz": "Balaca Qələm",
+            "labelEn": "Short Pencil",
+            "labelRu": "Короткий карандаш",
+            "size": "small"
+          },
+          "captionAz": "Müqayisə: Xətkeş uzundur, yonulmuş qələm isə qısadır",
+          "captionEn": "Compare: Ruler is long, sharpened pencil is short",
+          "captionRu": "Сравнение: Линейка длинная, карандаш короткий"
+        },
+        "instruction": "Qısa olan əşyanı tap.",
+        "instructionEn": "Find the shorter item.",
+        "instructionRu": "Найди более короткий предмет.",
+        "type": "select",
+        "question": "Xətkeş və qələmə bax: Hansı daha qısadır?",
+        "questionEn": "Look at ruler and pencil: Which one is shorter?",
+        "questionRu": "Посмотри на линейку и карандаш: Какой предмет короче?",
+        "options": [
+          {
+            "id": "opt-siz-penc-corr",
+            "text": "Qısa Qələm",
+            "textEn": "Short Pencil",
+            "textRu": "Короткий карандаш",
+            "emoji": "✏️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-siz-penc-ruler",
+            "text": "Uzun Xətkeş",
+            "textEn": "Long Ruler",
+            "textRu": "Длинная линейка",
+            "emoji": "📏",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "size-snake-worm-3",
+        "title": "Uzun İlan və Balaca Qurd",
+        "titleEn": "Long Snake and Small Worm",
+        "titleRu": "Длинная змея и червяк",
+        "visualScene": {
+          "type": "comparison",
+          "leftItem": {
+            "emoji": "🐍",
+            "labelAz": "Uzun İlan",
+            "labelEn": "Long Snake",
+            "labelRu": "Длинная змея",
+            "size": "large"
+          },
+          "rightItem": {
+            "emoji": "🪱",
+            "labelAz": "Qısa Soxulcan",
+            "labelEn": "Short Worm",
+            "labelRu": "Короткий червяк",
+            "size": "small"
+          },
+          "captionAz": "Müqayisə: İlan uzundur, soxulcan isə qısadır",
+          "captionEn": "Compare: Snake is long, worm is short",
+          "captionRu": "Сравнение: Змея длинная, червяк короткий"
+        },
+        "instruction": "Uzun olan canlı seç.",
+        "instructionEn": "Select the longer animal.",
+        "instructionRu": "Выбери более длинное животное.",
+        "type": "select",
+        "question": "İlan və soxulcana bax: Hansı daha uzundur?",
+        "questionEn": "Look at snake and worm: Which is longer?",
+        "questionRu": "Посмотри на змею и червяка: Кто длиннее?",
+        "options": [
+          {
+            "id": "opt-siz-snake-corr",
+            "text": "Uzun İlan",
+            "textEn": "Long Snake",
+            "textRu": "Длинная змея",
+            "emoji": "🐍",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-siz-snake-worm",
+            "text": "Qısa Soxulcan",
+            "textEn": "Short Worm",
+            "textRu": "Короткий червяк",
+            "emoji": "🪱",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "size-elephant-feather-4",
+        "title": "Ağır Fil və Yüngül Tük",
+        "titleEn": "Heavy Elephant and Light Feather",
+        "titleRu": "Тяжелый слон и легкое перышко",
+        "lesson": {
+          "id": "size-lesson-weight",
+          "conceptTitleAz": "Ağır və Yüngül Çəkiləri Öyrənək!",
+          "conceptTitleEn": "Heavy and Light Weights!",
+          "conceptTitleRu": "Учим понятия «Тяжелый» и «Легкий»!",
+          "explanationAz": "Böyük fil çox ağırdır, quş tükü isə çox yüngüldür! Daş ağırdır, şar yüngüldür!",
+          "explanationEn": "A big elephant is heavy, a feather is very light! Stone is heavy, balloon is light!",
+          "explanationRu": "Большой слон тяжелый, а перышко очень легкое! Камень тяжелый, шарик легкий!",
+          "bigEmojis": [
+            "🐘",
+            "🪶",
+            "⚖️",
+            "🪨"
+          ],
+          "audioTextAz": "Fil ağırdır, quş tükü isə yüngüldür.",
+          "audioTextEn": "The elephant is heavy, the feather is light.",
+          "audioTextRu": "Слон тяжелый, а перышко легкое."
+        },
+        "visualScene": {
+          "type": "comparison",
+          "leftItem": {
+            "emoji": "🐘",
+            "labelAz": "Ağır Fil",
+            "labelEn": "Heavy Elephant",
+            "labelRu": "Тяжелый слон",
+            "size": "huge"
+          },
+          "rightItem": {
+            "emoji": "🪶",
+            "labelAz": "Yüngül Tük",
+            "labelEn": "Light Feather",
+            "labelRu": "Легкое перо",
+            "size": "tiny"
+          },
+          "captionAz": "Çəki müqayisəsi: Fil çox ağırdır, quş tükü isə yüngüldür",
+          "captionEn": "Weight compare: Elephant is heavy, feather is light",
+          "captionRu": "Сравнение веса: Слон тяжелый, перо легкое"
+        },
+        "instruction": "Ağır olan heyvanı seç.",
+        "instructionEn": "Select the heavy animal.",
+        "instructionRu": "Выбери тяжелое животное.",
+        "type": "select",
+        "question": "Fil və quş tükünə bax: Hansı daha ağırdır?",
+        "questionEn": "Look at elephant and feather: Which is heavier?",
+        "questionRu": "Посмотри на слона и перо: Кто тяжелее?",
+        "options": [
+          {
+            "id": "opt-siz-eleph-corr",
+            "text": "Ağır Fil",
+            "textEn": "Heavy Elephant",
+            "textRu": "Тяжелый слон",
+            "emoji": "🐘",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-siz-eleph-feat",
+            "text": "Yüngül Tük",
+            "textEn": "Light Feather",
+            "textRu": "Легкое перо",
+            "emoji": "🪶",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "size-balloon-stone-5",
+        "title": "Uçan Yüngül Şar",
+        "titleEn": "Flying Light Balloon",
+        "titleRu": "Легкий летающий шарик",
+        "visualScene": {
+          "type": "comparison",
+          "leftItem": {
+            "emoji": "🎈",
+            "labelAz": "Yüngül Şar",
+            "labelEn": "Light Balloon",
+            "labelRu": "Легкий шар",
+            "size": "medium"
+          },
+          "rightItem": {
+            "emoji": "🪨",
+            "labelAz": "Ağır Daş",
+            "labelEn": "Heavy Stone",
+            "labelRu": "Тяжелый камень",
+            "size": "medium"
+          },
+          "captionAz": "Müqayisə: Şar havada uçur çünki yüngüldür",
+          "captionEn": "Compare: Balloon flies because it is light",
+          "captionRu": "Сравнение: Шарик летает, потому что легкий"
+        },
+        "instruction": "Havada uçan yüngül əşyanı tap.",
+        "instructionEn": "Find the light flying item.",
+        "instructionRu": "Найди легкий летающий предмет.",
+        "type": "select",
+        "question": "Şar və daşa bax: Hansı havada uçacaq qədər yüngüldür?",
+        "questionEn": "Look at balloon and stone: Which is light enough to fly in the air?",
+        "questionRu": "Посмотри на шарик и камень: Что настолько легкое, чтобы летать в воздухе?",
+        "options": [
+          {
+            "id": "opt-siz-bal-corr",
+            "text": "Yüngül Şar",
+            "textEn": "Light Balloon",
+            "textRu": "Легкий шарик",
+            "emoji": "🎈",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-siz-bal-stone",
+            "text": "Ağır Daş",
+            "textEn": "Heavy Stone",
+            "textRu": "Тяжелый камень",
+            "emoji": "🪨",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "size-watermelon-apple-6",
+        "title": "Ağır Qarpız və Yüngül Alma",
+        "titleEn": "Watermelon and Apple",
+        "titleRu": "Арбуз и яблоко",
+        "visualScene": {
+          "type": "comparison",
+          "leftItem": {
+            "emoji": "🍉",
+            "labelAz": "Böyük Qarpız",
+            "labelEn": "Big Watermelon",
+            "labelRu": "Большой арбуз",
+            "size": "huge"
+          },
+          "rightItem": {
+            "emoji": "🍎",
+            "labelAz": "Kiçik Alma",
+            "labelEn": "Small Apple",
+            "labelRu": "Маленькое яблоко",
+            "size": "small"
+          },
+          "captionAz": "Meyvə müqayisəsi: Qarpız almadan daha ağırdır",
+          "captionEn": "Fruit compare: Watermelon is heavier than apple",
+          "captionRu": "Сравнение: Арбуз тяжелее яблока"
+        },
+        "instruction": "Daha ağır olan meyvəni seç.",
+        "instructionEn": "Select the heavier fruit.",
+        "instructionRu": "Выбери более тяжелый плод.",
+        "type": "select",
+        "question": "Qarpız və almanı müqayisə et: Hansı daha ağırdır?",
+        "questionEn": "Compare watermelon and apple: Which one is heavier?",
+        "questionRu": "Сравни арбуз и яблоко: Что тяжелее?",
+        "options": [
+          {
+            "id": "opt-siz-wm-corr",
+            "text": "Ağır Qarpız",
+            "textEn": "Heavy Watermelon",
+            "textRu": "Тяжелый арбуз",
+            "emoji": "🍉",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-siz-wm-app",
+            "text": "Yüngül Alma",
+            "textEn": "Light Apple",
+            "textRu": "Легкое яблоко",
+            "emoji": "🍎",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -4256,6 +7274,244 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Sabunla yuyulmuş əllər tərtəmizdir! 🧼✨",
         "explanationEn": "Super! Hands washed with soap are squeaky clean! 🧼✨",
         "explanationRu": "Супер! Вымытые с мылом ручки сияют чистотой! 🧼✨"
+      },
+      {
+        "id": "opp-door-open-1",
+        "title": "Açıq Qapı",
+        "titleEn": "Open Door",
+        "titleRu": "Открытая дверь",
+        "lesson": {
+          "id": "opp-lesson-open-closed",
+          "conceptTitleAz": "Açıq və Bağlı Əks Anlayışları!",
+          "conceptTitleEn": "Open and Closed Opposites!",
+          "conceptTitleRu": "Противоположности «Открытый» и «Закрытый»!",
+          "explanationAz": "Qapı açıq da ola bilər, bağlı da! Kitab açıq olanda oxuyuruq, bağlı olanda rəfə qoyuruq!",
+          "explanationEn": "A door can be open or closed! When a book is open we read, when closed we shelve it!",
+          "explanationRu": "Дверь бывает открытой и закрытой! Открытую книгу читаем, закрытую ставим на полку!",
+          "bigEmojis": [
+            "🚪",
+            "📖",
+            "📦",
+            "🔓"
+          ],
+          "audioTextAz": "Qapı açıq və bağlı ola bilər.",
+          "audioTextEn": "A door can be open or closed.",
+          "audioTextRu": "Дверь может быть открытой или закрытой."
+        },
+        "instruction": "Açıq vəziyyəti tap.",
+        "instructionEn": "Find open state.",
+        "instructionRu": "Найди открытое состояние.",
+        "type": "select",
+        "question": "Evə girmək üçün qapı necə olmalıdır?",
+        "questionEn": "How should the door be to enter the house?",
+        "questionRu": "Какой должна быть дверь, чтобы войти в дом?",
+        "options": [
+          {
+            "id": "opt-opp-door-open",
+            "text": "Açıq",
+            "textEn": "Open",
+            "textRu": "Открытой",
+            "emoji": "🚪",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-opp-door-close",
+            "text": "Bağlı",
+            "textEn": "Closed",
+            "textRu": "Закрытой",
+            "emoji": "🔒",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "opp-book-closed-2",
+        "title": "Bağlı Kitab",
+        "titleEn": "Closed Book",
+        "titleRu": "Закрытая книга",
+        "instruction": "Dərsi bitirdikdən sonrakı halı tap.",
+        "instructionEn": "Find state after finishing lesson.",
+        "instructionRu": "Найди состояние после окончания урока.",
+        "type": "select",
+        "question": "Dərsi bitirdikdən sonra kitabı necə edirik?",
+        "questionEn": "What do we do with the book after finishing our study?",
+        "questionRu": "Что мы делаем с книгой после окончания урока?",
+        "options": [
+          {
+            "id": "opt-opp-bk-close",
+            "text": "Bağlayırıq",
+            "textEn": "Close it",
+            "textRu": "Закрываем",
+            "emoji": "📕",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-opp-bk-open",
+            "text": "Açıq qoyuruq",
+            "textEn": "Leave open",
+            "textRu": "Оставляем открытой",
+            "emoji": "📖",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "opp-box-open-3",
+        "title": "Açıq Hədiyyə Qutusu",
+        "titleEn": "Open Gift Box",
+        "titleRu": "Открытая коробка",
+        "instruction": "Qutunun vəziyyətini seç.",
+        "instructionEn": "Select box state.",
+        "instructionRu": "Выбери состояние коробки.",
+        "type": "select",
+        "question": "İçindəki hədiyyəni görmək üçün qutunun qapağı necə olmalıdır?",
+        "questionEn": "How should the box lid be to see the gift inside?",
+        "questionRu": "Какой должна быть крышка коробки, чтобы увидеть подарок?",
+        "options": [
+          {
+            "id": "opt-opp-bx-open",
+            "text": "Açıq",
+            "textEn": "Open",
+            "textRu": "Открытой",
+            "emoji": "📦",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-opp-bx-shut",
+            "text": "Bağlı",
+            "textEn": "Closed",
+            "textRu": "Закрытой",
+            "emoji": "🔒",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "opp-sweet-honey-4",
+        "title": "Şirin Bal və Turş Limon",
+        "titleEn": "Sweet Honey and Sour Lemon",
+        "titleRu": "Сладкий мед и кислый лимон",
+        "lesson": {
+          "id": "opp-lesson-tastes",
+          "conceptTitleAz": "Dadlar və Vəziyyətlər: Şirin, Turş, Dolu, Boş!",
+          "conceptTitleEn": "Tastes and States: Sweet, Sour, Full, Empty!",
+          "conceptTitleRu": "Вкусы и состояния: Сладкий, кислый, полный, пустой!",
+          "explanationAz": "Bal şirindir, limon isə turşdur! Fincan südlə dolu da ola bilər, boş da!",
+          "explanationEn": "Honey is sweet, lemon is sour! A cup can be full of milk or empty!",
+          "explanationRu": "Мед сладкий, а лимон кислый! Чашка может быть полной молока или пустой!",
+          "bigEmojis": [
+            "🍯",
+            "🍋",
+            "🥛",
+            "🫗"
+          ],
+          "audioTextAz": "Bal şirindir, limon isə turşdur.",
+          "audioTextEn": "Honey is sweet, lemon is sour.",
+          "audioTextRu": "Мед сладкий, а лимон кислый."
+        },
+        "instruction": "Şirin dadı tap.",
+        "instructionEn": "Find the sweet taste.",
+        "instructionRu": "Найди сладкий вкус.",
+        "type": "select",
+        "question": "Limon turşdur, bəs balın dadı necədir?",
+        "questionEn": "Lemon is sour, but how does honey taste?",
+        "questionRu": "Лимон кислый, а какой на вкус мед?",
+        "options": [
+          {
+            "id": "opt-opp-tst-sweet",
+            "text": "Şirindir",
+            "textEn": "Sweet",
+            "textRu": "Сладкий",
+            "emoji": "🍯",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-opp-tst-bitter",
+            "text": "Acıdır",
+            "textEn": "Bitter",
+            "textRu": "Горький",
+            "emoji": "🌶️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-opp-tst-salty",
+            "text": "Duzludur",
+            "textEn": "Salty",
+            "textRu": "Соленый",
+            "emoji": "🧂",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "opp-full-glass-5",
+        "title": "Dolu Stəkan",
+        "titleEn": "Full Glass",
+        "titleRu": "Полный стакан",
+        "instruction": "Dolu olan stəkanı tap.",
+        "instructionEn": "Find the full glass.",
+        "instructionRu": "Найди полный стакан.",
+        "type": "select",
+        "question": "Ləzzətli şirə ilə dolu olan stəkan hansıdır?",
+        "questionEn": "Which glass is full of delicious juice?",
+        "questionRu": "Какой стакан полон вкусного сока?",
+        "options": [
+          {
+            "id": "opt-opp-gls-full",
+            "text": "Dolu Stəkan",
+            "textEn": "Full Glass",
+            "textRu": "Полный стакан",
+            "emoji": "🧃",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-opp-gls-empty",
+            "text": "Boş Stəkan",
+            "textEn": "Empty Glass",
+            "textRu": "Пустой стакан",
+            "emoji": "🫗",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "opp-up-down-6",
+        "title": "Yuxarı və Aşağı",
+        "titleEn": "Up and Down",
+        "titleRu": "Вверх и вниз",
+        "instruction": "Əks istiqaməti seç.",
+        "instructionEn": "Select opposite direction.",
+        "instructionRu": "Выбери противоположное направление.",
+        "type": "select",
+        "question": "\"Yuxarı\" sözünün əksi hansıdır?",
+        "questionEn": "What is the opposite of \"Up\"?",
+        "questionRu": "Что противоположно слову «Вверх»?",
+        "options": [
+          {
+            "id": "opt-opp-dir-down",
+            "text": "Aşağı",
+            "textEn": "Down",
+            "textRu": "Вниз",
+            "emoji": "⬇️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-opp-dir-hot",
+            "text": "İsti",
+            "textEn": "Hot",
+            "textRu": "Горячий",
+            "emoji": "🔥",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-opp-dir-night",
+            "text": "Gecə",
+            "textEn": "Night",
+            "textRu": "Ночь",
+            "emoji": "🌙",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -4545,6 +7801,220 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Möhtəşəm! 10 tam bir onluqdur! 🔟🎉",
         "explanationEn": "Awesome! 10 is a full ten! 🔟🎉",
         "explanationRu": "Замечательно! 10 — это целый десяток! 🔟🎉"
+      },
+      {
+        "id": "num-stars-6",
+        "title": "6 Parlaq Ulduz",
+        "titleEn": "6 Bright Stars",
+        "titleRu": "6 ярких звезд",
+        "lesson": {
+          "id": "num-lesson-6-10",
+          "conceptTitleAz": "6-dan 10-a Qədər Saymağı Öyrənək!",
+          "conceptTitleEn": "Let's Count from 6 to 10!",
+          "conceptTitleRu": "Учимся считать от 6 до 10!",
+          "explanationAz": "İki əlimizdə cəmi 10 barmaq var! 6, 7, 8, 9 və 10! Gəl birlikdə sayaq!",
+          "explanationEn": "We have 10 fingers on both hands! 6, 7, 8, 9, and 10! Let count together!",
+          "explanationRu": "На двух руках всего 10 пальцев! 6, 7, 8, 9 и 10! Давай посчитаем вместе!",
+          "bigEmojis": [
+            "6️⃣",
+            "7️⃣",
+            "8️⃣",
+            "9️⃣",
+            "🔟"
+          ],
+          "audioTextAz": "Altı, yeddi, səkkiz, doqquz, on. On barmağımız var.",
+          "audioTextEn": "Six, seven, eight, nine, ten. We have ten fingers.",
+          "audioTextRu": "Шесть, семь, восемь, девять, десять. У нас десять пальцев."
+        },
+        "instruction": "Göydəki 6 ulduzu say.",
+        "instructionEn": "Count the 6 stars in the sky.",
+        "instructionRu": "Посчитай 6 звезд в небе.",
+        "type": "select",
+        "question": "Göydəki 6 ulduzu say və düzgün rəqəmi seç: ⭐⭐⭐⭐⭐⭐",
+        "questionEn": "Count the 6 stars and choose the right number: ⭐⭐⭐⭐⭐⭐",
+        "questionRu": "Посчитай 6 звезд и выбери правильную цифру: ⭐⭐⭐⭐⭐⭐",
+        "options": [
+          {
+            "id": "opt-num-6",
+            "text": "6 Ulduz",
+            "textEn": "6 Stars",
+            "textRu": "6 звезд",
+            "emoji": "6️⃣",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-num-6-4",
+            "text": "4 Ulduz",
+            "textEn": "4 Stars",
+            "textRu": "4 звезды",
+            "emoji": "4️⃣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-num-6-2",
+            "text": "2 Ulduz",
+            "textEn": "2 Stars",
+            "textRu": "2 звезды",
+            "emoji": "2️⃣",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "num-flowers-7",
+        "title": "7 Rəngli Çiçək",
+        "titleEn": "7 Colorful Flowers",
+        "titleRu": "7 цветков",
+        "instruction": "Bağdakı 7 çiçəyi say.",
+        "instructionEn": "Count 7 flowers in garden.",
+        "instructionRu": "Посчитай 7 цветков в саду.",
+        "type": "select",
+        "question": "Çiçəkləri say: 🌸🌸🌸🌸🌸🌸🌸 — Neçə dənədir?",
+        "questionEn": "Count flowers: 🌸🌸🌸🌸🌸🌸🌸 — How many are there?",
+        "questionRu": "Посчитай цветы: 🌸🌸🌸🌸🌸🌸🌸 — Сколько их?",
+        "options": [
+          {
+            "id": "opt-num-7",
+            "text": "7 Çiçək",
+            "textEn": "7 Flowers",
+            "textRu": "7 цветков",
+            "emoji": "7️⃣",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-num-7-5",
+            "text": "5 Çiçək",
+            "textEn": "5 Flowers",
+            "textRu": "5 цветков",
+            "emoji": "5️⃣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-num-7-3",
+            "text": "3 Çiçək",
+            "textEn": "3 Flowers",
+            "textRu": "3 цветка",
+            "emoji": "3️⃣",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "num-pencils-8",
+        "title": "8 Rəngli Qələm",
+        "titleEn": "8 Pencils",
+        "titleRu": "8 карандашей",
+        "instruction": "Qələmləri say.",
+        "instructionEn": "Count the pencils.",
+        "instructionRu": "Посчитай карандаши.",
+        "type": "select",
+        "question": "Qutuda 8 qələm var: ✏️✏️✏️✏️✏️✏️✏️✏️ — Hansı rəqəmdir?",
+        "questionEn": "There are 8 pencils: ✏️✏️✏️✏️✏️✏️✏️✏️ — What number?",
+        "questionRu": "В коробке 8 карандашей: ✏️✏️✏️✏️✏️✏️✏️✏️ — Какая цифра?",
+        "options": [
+          {
+            "id": "opt-num-8",
+            "text": "8 Qələm",
+            "textEn": "8 Pencils",
+            "textRu": "8 карандашей",
+            "emoji": "8️⃣",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-num-8-6",
+            "text": "6 Qələm",
+            "textEn": "6 Pencils",
+            "textRu": "6 карандашей",
+            "emoji": "6️⃣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-num-8-9",
+            "text": "9 Qələm",
+            "textEn": "9 Pencils",
+            "textRu": "9 карандашей",
+            "emoji": "9️⃣",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "num-balloons-9",
+        "title": "9 Şar",
+        "titleEn": "9 Balloons",
+        "titleRu": "9 шариков",
+        "instruction": "Şarları say.",
+        "instructionEn": "Count the balloons.",
+        "instructionRu": "Посчитай шарики.",
+        "type": "select",
+        "question": "Uşağın əlində 9 şar var: 🎈🎈🎈🎈🎈🎈🎈🎈🎈 — Hansı rəqəmdir?",
+        "questionEn": "Child holds 9 balloons: 🎈🎈🎈🎈🎈🎈🎈🎈🎈 — What number?",
+        "questionRu": "У ребенка 9 шаров: 🎈🎈🎈🎈🎈🎈🎈🎈🎈 — Какая цифра?",
+        "options": [
+          {
+            "id": "opt-num-9",
+            "text": "9 Şar",
+            "textEn": "9 Balloons",
+            "textRu": "9 шаров",
+            "emoji": "9️⃣",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-num-9-7",
+            "text": "7 Şar",
+            "textEn": "7 Balloons",
+            "textRu": "7 шаров",
+            "emoji": "7️⃣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-num-9-4",
+            "text": "4 Şar",
+            "textEn": "4 Balloons",
+            "textRu": "4 шара",
+            "emoji": "4️⃣",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "num-fingers-10",
+        "title": "10 Barmaq",
+        "titleEn": "10 Fingers",
+        "titleRu": "10 пальцев",
+        "instruction": "İki əlin barmaqlarını say.",
+        "instructionEn": "Count fingers on both hands.",
+        "instructionRu": "Посчитай пальцы на обеих руках.",
+        "type": "select",
+        "question": "İki əlimizdə cəmi neçə barmaq var? 🖐️ + 🖐️ = ?",
+        "questionEn": "How many fingers in total on both hands? 🖐️ + 🖐️ = ?",
+        "questionRu": "Сколько пальцев на двух руках всего? 🖐️ + 🖐️ = ?",
+        "options": [
+          {
+            "id": "opt-num-10",
+            "text": "10 Barmaq",
+            "textEn": "10 Fingers",
+            "textRu": "10 пальцев",
+            "emoji": "🔟",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-num-10-5",
+            "text": "5 Barmaq",
+            "textEn": "5 Fingers",
+            "textRu": "5 пальцев",
+            "emoji": "5️⃣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-num-10-8",
+            "text": "8 Barmaq",
+            "textEn": "8 Fingers",
+            "textRu": "8 пальцев",
+            "emoji": "8️⃣",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -4776,6 +8246,276 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! 'Dovşan' sözü 'D' hərfi ilə başlayır! 🐰🅳",
         "explanationEn": "Super! 'Dovşan' starts with letter 'D'! 🐰🅳",
         "explanationRu": "Супер! Слово «Довшан» начинается с буквы «Д»! 🐰🅳"
+      },
+      {
+        "id": "let-e-house-1",
+        "title": "'E' Hərfi və Ev",
+        "titleEn": "'E' Letter and House",
+        "titleRu": "Буква 'E' и Дом",
+        "lesson": {
+          "id": "let-lesson-e-ae",
+          "conceptTitleAz": "'E' və 'Ə' Hərflərini Öyrənək!",
+          "conceptTitleEn": "Let's Learn Letters 'E' and 'Ə'!",
+          "conceptTitleRu": "Учим буквы 'E' и 'Ə'!",
+          "explanationAz": "'E' hərfi Ev sözünün baş hərfidir! 'Ə' hərfi isə Əlcək sözünün baş hərfidir!",
+          "explanationEn": "Letter 'E' starts the word Ev (House)! Letter 'Ə' starts Əlcək (Glove)!",
+          "explanationRu": "С буквы 'E' начинается слово Ev (Дом), а с 'Ə' — Əlcək (Перчатка)!",
+          "bigEmojis": [
+            "🏠",
+            "🧤",
+            "🔤",
+            "✨"
+          ],
+          "audioTextAz": "E hərfi ilə ev, Ə hərfi ilə əlcək sözü başlayır.",
+          "audioTextEn": "Letter E starts house, letter Ə starts glove.",
+          "audioTextRu": "С буквы E начинается дом, с буквы Ə — перчатка."
+        },
+        "instruction": "'E' hərfi ilə başlayan sözü seç.",
+        "instructionEn": "Select the word starting with 'E'.",
+        "instructionRu": "Выбери слово на букву 'E'.",
+        "type": "select",
+        "question": "'E' hərfi ilə başlayan hansı sözdür?",
+        "questionEn": "Which word starts with letter 'E'?",
+        "questionRu": "Какое слово начинается на букву 'E'?",
+        "options": [
+          {
+            "id": "opt-let-e-corr",
+            "text": "Ev",
+            "textEn": "House (Ev)",
+            "textRu": "Дом (Ev)",
+            "emoji": "🏠",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-let-e-ball",
+            "text": "Top",
+            "textEn": "Ball",
+            "textRu": "Мяч",
+            "emoji": "⚽",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-let-e-apple",
+            "text": "Alma",
+            "textEn": "Apple",
+            "textRu": "Яблоко",
+            "emoji": "🍎",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "let-ae-glove-2",
+        "title": "'Ə' Hərfi və Əlcək",
+        "titleEn": "'Ə' Letter and Glove",
+        "titleRu": "Буква 'Ə' и перчатка",
+        "instruction": "'Ə' hərfi ilə başlayan əşyanı tap.",
+        "instructionEn": "Find the item starting with 'Ə'.",
+        "instructionRu": "Найди предмет на букву 'Ə'.",
+        "type": "select",
+        "question": "'Ə' hərfi ilə başlayan hansı sözdür?",
+        "questionEn": "Which word starts with letter 'Ə'?",
+        "questionRu": "Какое слово начинается на букву 'Ə'?",
+        "options": [
+          {
+            "id": "opt-let-ae-corr",
+            "text": "Əlcək",
+            "textEn": "Glove (Əlcək)",
+            "textRu": "Перчатка (Əlcək)",
+            "emoji": "🧤",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-let-ae-fish",
+            "text": "Balıq",
+            "textEn": "Fish",
+            "textRu": "Рыба",
+            "emoji": "🐟",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-let-ae-pen",
+            "text": "Qələm",
+            "textEn": "Pen",
+            "textRu": "Карандаш",
+            "emoji": "✏️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "let-ae-hand-3",
+        "title": "'Ə' Hərfi və Əl",
+        "titleEn": "'Ə' Letter and Hand",
+        "titleRu": "Буква 'Ə' и рука",
+        "instruction": "'Ə' ilə başlayan bədən üzvünü tap.",
+        "instructionEn": "Find the body part starting with 'Ə'.",
+        "instructionRu": "Найди часть тела на букву 'Ə'.",
+        "type": "select",
+        "question": "Bədənimizin hansı hissəsi 'Ə' hərfi ilə başlayır?",
+        "questionEn": "Which body part starts with letter 'Ə'?",
+        "questionRu": "Какая часть тела начинается на букву 'Ə'?",
+        "options": [
+          {
+            "id": "opt-let-hand-corr",
+            "text": "Əl",
+            "textEn": "Hand (Əl)",
+            "textRu": "Рука (Əl)",
+            "emoji": "✋",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-let-hand-eye",
+            "text": "Göz",
+            "textEn": "Eye",
+            "textRu": "Глаз",
+            "emoji": "👁️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-let-hand-ear",
+            "text": "Qulaq",
+            "textEn": "Ear",
+            "textRu": "Ухо",
+            "emoji": "👂",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "let-m-car-4",
+        "title": "'M' Hərfi və Maşın",
+        "titleEn": "'M' Letter and Car",
+        "titleRu": "Буква 'M' и машина",
+        "lesson": {
+          "id": "let-lesson-m-s-t",
+          "conceptTitleAz": "'M', 'S' və 'T' Hərflərini Öyrənək!",
+          "conceptTitleEn": "Let's Learn Letters 'M', 'S' and 'T'!",
+          "conceptTitleRu": "Учим буквы 'M', 'S' и 'T'!",
+          "explanationAz": "'M' - Maşın, 'S' - Saat, 'T' - Top! Bu hərflərlə çoxlu maraqlı sözlər başlayır!",
+          "explanationEn": "'M' is for Car (Maşın), 'S' for Clock (Saat), 'T' for Ball (Top)!",
+          "explanationRu": "'M' — Maşın (Машина), 'S' — Saat (Часы), 'T' — Top (Мяч)!",
+          "bigEmojis": [
+            "🚗",
+            "⏰",
+            "⚽",
+            "📚"
+          ],
+          "audioTextAz": "M hərfi ilə maşın, S ilə saat, T ilə top sözü başlayır.",
+          "audioTextEn": "M starts car, S starts clock, T starts ball.",
+          "audioTextRu": "С M начинается машина, с S — часы, с T — мяч."
+        },
+        "instruction": "'M' hərfi ilə başlayan nəqliyyatı seç.",
+        "instructionEn": "Select transport starting with 'M'.",
+        "instructionRu": "Выбери транспорт на букву 'M'.",
+        "type": "select",
+        "question": "'M' hərfi ilə hansı nəqliyyat başlayır?",
+        "questionEn": "Which transport starts with letter 'M'?",
+        "questionRu": "Какой транспорт начинается на букву 'M'?",
+        "options": [
+          {
+            "id": "opt-let-car-corr",
+            "text": "Maşın",
+            "textEn": "Car (Maşın)",
+            "textRu": "Машина (Maşın)",
+            "emoji": "🚗",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-let-car-plane",
+            "text": "Təyyarə",
+            "textEn": "Plane",
+            "textRu": "Самолет",
+            "emoji": "✈️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-let-car-ship",
+            "text": "Gəmi",
+            "textEn": "Ship",
+            "textRu": "Корабль",
+            "emoji": "🚢",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "let-s-clock-5",
+        "title": "'S' Hərfi və Saat",
+        "titleEn": "'S' Letter and Clock",
+        "titleRu": "Буква 'S' и часы",
+        "instruction": "'S' hərfi ilə başlayan əşyanı tap.",
+        "instructionEn": "Find the item starting with 'S'.",
+        "instructionRu": "Найди предмет на букву 'S'.",
+        "type": "select",
+        "question": "Vaxtı göstərən və 'S' ilə başlayan əşya hansıdır?",
+        "questionEn": "Which item shows time and starts with 'S'?",
+        "questionRu": "Какой предмет показывает время и начинается на 'S'?",
+        "options": [
+          {
+            "id": "opt-let-clk-corr",
+            "text": "Saat",
+            "textEn": "Clock (Saat)",
+            "textRu": "Часы (Saat)",
+            "emoji": "⏰",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-let-clk-bk",
+            "text": "Kitab",
+            "textEn": "Book",
+            "textRu": "Книга",
+            "emoji": "📚",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-let-clk-ch",
+            "text": "Stul",
+            "textEn": "Chair",
+            "textRu": "Стул",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "let-t-ball-6",
+        "title": "'T' Hərfi və Top",
+        "titleEn": "'T' Letter and Ball",
+        "titleRu": "Буква 'T' и мяч",
+        "instruction": "'T' hərfi ilə başlayan oyuncağı seç.",
+        "instructionEn": "Select toy starting with 'T'.",
+        "instructionRu": "Выбери игрушку на букву 'T'.",
+        "type": "select",
+        "question": "'T' hərfi ilə hansı sevimli oyuncaq başlayır?",
+        "questionEn": "Which favorite toy starts with letter 'T'?",
+        "questionRu": "Какая любимая игрушка начинается на букву 'T'?",
+        "options": [
+          {
+            "id": "opt-let-ball-corr",
+            "text": "Top",
+            "textEn": "Ball (Top)",
+            "textRu": "Мяч (Top)",
+            "emoji": "⚽",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-let-ball-doll",
+            "text": "Kukla",
+            "textEn": "Doll",
+            "textRu": "Кукла",
+            "emoji": "🪆",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-let-ball-bear",
+            "text": "Ayı",
+            "textEn": "Bear",
+            "textRu": "Мишка",
+            "emoji": "🧸",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -4989,6 +8729,258 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Bəli! Yağış damcıları 'Tıp-tıp' edib təbiəti sulayır! 💧🌱",
         "explanationEn": "Yes! Raindrops go 'Drip-drop' watering nature! 💧🌱",
         "explanationRu": "Да! Дождевые капли стучат «Кап-кап», поливая природу! 💧🌱"
+      },
+      {
+        "id": "snd-cat-meow-1",
+        "title": "Pişiyin Səsi: Miyau",
+        "titleEn": "Cat Sound: Meow",
+        "titleRu": "Звук кошки: Мяу",
+        "lesson": {
+          "id": "snd-lesson-living",
+          "conceptTitleAz": "Ev Heyvanlarının Səslərini Öyrənək!",
+          "conceptTitleEn": "Let's Learn Animal Sounds!",
+          "conceptTitleRu": "Учим звуки домашних животных!",
+          "explanationAz": "Pişik 'Miyau' edir, it 'Hav-hav' hürür, xoruz 'Qu-qulu-qu' banlayır!",
+          "explanationEn": "Cat says Meow, dog says Woof, rooster says Cock-a-doodle-doo!",
+          "explanationRu": "Кошка говорит «Мяу», собака лает «Гав-гав», петушок поет «Ку-ка-ре-ку»!",
+          "bigEmojis": [
+            "🐱",
+            "🐶",
+            "🐓",
+            "🦆"
+          ],
+          "audioTextAz": "Pişik miyau edir, it hav-hav hürür.",
+          "audioTextEn": "Cat says meow, dog barks woof.",
+          "audioTextRu": "Кошка мяукает, собака лает гав-гав."
+        },
+        "instruction": "Miyau səsini çıxaran heyvanı tap.",
+        "instructionEn": "Find animal making meow sound.",
+        "instructionRu": "Найди животное, издающее звук мяу.",
+        "type": "audio-identify",
+        "question": "Hansı sevimli heyvan \"Miyau-miyau\" deyir?",
+        "questionEn": "Which cute animal says \"Meow meow\"?",
+        "questionRu": "Какое милое животное говорит «Мяу-мяу»?",
+        "options": [
+          {
+            "id": "opt-snd-cat",
+            "text": "Pişik",
+            "textEn": "Cat",
+            "textRu": "Кошка",
+            "emoji": "🐱",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-snd-cow",
+            "text": "İnək",
+            "textEn": "Cow",
+            "textRu": "Корова",
+            "emoji": "🐮",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-snd-dog",
+            "text": "İt",
+            "textEn": "Dog",
+            "textRu": "Собака",
+            "emoji": "🐶",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "snd-dog-bark-2",
+        "title": "İtin Səsi: Hav-hav",
+        "titleEn": "Dog Bark: Woof",
+        "titleRu": "Лай собаки: Гав-гав",
+        "instruction": "Hürən heyvanı tap.",
+        "instructionEn": "Find barking animal.",
+        "instructionRu": "Найди лающее животное.",
+        "type": "audio-identify",
+        "question": "Evi qoruyan və \"Hav-hav\" edən dostumuz kimdir?",
+        "questionEn": "Who guards the house and says \"Woof woof\"?",
+        "questionRu": "Кто охраняет дом и говорит «Гав-гав»?",
+        "options": [
+          {
+            "id": "opt-snd-dog-corr",
+            "text": "İt",
+            "textEn": "Dog",
+            "textRu": "Собака",
+            "emoji": "🐶",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-snd-dog-hen",
+            "text": "Toyuq",
+            "textEn": "Hen",
+            "textRu": "Курица",
+            "emoji": "🐔",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-snd-dog-lamb",
+            "text": "Quzu",
+            "textEn": "Lamb",
+            "textRu": "Ягненок",
+            "emoji": "🐑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "snd-rooster-crow-3",
+        "title": "Xoruzun Səsi: Qu-qulu-qu",
+        "titleEn": "Rooster Crow",
+        "titleRu": "Пение петуха: Ку-ка-ре-ку",
+        "instruction": "Səhər banlayan quşu seç.",
+        "instructionEn": "Select the morning crowing bird.",
+        "instructionRu": "Выбери утреннего петушка.",
+        "type": "audio-identify",
+        "question": "Səhər tezdən \"Qu-qulu-qu\" deyib bizi oyadan kimdir?",
+        "questionEn": "Who wakes us up in the morning saying \"Cock-a-doodle-doo\"?",
+        "questionRu": "Кто будит нас рано утром, крича «Ку-ка-ре-ку»?",
+        "options": [
+          {
+            "id": "opt-snd-roo-corr",
+            "text": "Xoruz",
+            "textEn": "Rooster",
+            "textRu": "Петушок",
+            "emoji": "🐓",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-snd-roo-duck",
+            "text": "Ördək",
+            "textEn": "Duck",
+            "textRu": "Утка",
+            "emoji": "🦆",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-snd-roo-frog",
+            "text": "Qurbağa",
+            "textEn": "Frog",
+            "textRu": "Лягушка",
+            "emoji": "🐸",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "snd-cow-moo-4",
+        "title": "İnəyin Səsi: Mooo",
+        "titleEn": "Cow Moo",
+        "titleRu": "Мычание коровы: Мууу",
+        "instruction": "Möhkəm moo deyən heyvanı tap.",
+        "instructionEn": "Find the animal that moos.",
+        "instructionRu": "Найди животное, которое мычит.",
+        "type": "audio-identify",
+        "question": "Bizə dadlı süd verən və \"Mooo\" deyən heyvan hansıdır?",
+        "questionEn": "Which animal gives us tasty milk and says \"Mooo\"?",
+        "questionRu": "Какое животное дает вкусное молоко и мычит «Мууу»?",
+        "options": [
+          {
+            "id": "opt-snd-cow-corr",
+            "text": "İnək",
+            "textEn": "Cow",
+            "textRu": "Корова",
+            "emoji": "🐮",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-snd-cow-horse",
+            "text": "At",
+            "textEn": "Horse",
+            "textRu": "Лошадь",
+            "emoji": "🐴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-snd-cow-cat",
+            "text": "Pişik",
+            "textEn": "Cat",
+            "textRu": "Кошка",
+            "emoji": "🐱",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "snd-frog-croak-5",
+        "title": "Qurbağanın Səsi: Qur-qur",
+        "titleEn": "Frog Croak",
+        "titleRu": "Кваканье лягушки: Ква-ква",
+        "instruction": "Quruldama səsini çıxaran canlı tap.",
+        "instructionEn": "Find croaking creature.",
+        "instructionRu": "Найди квакающее существо.",
+        "type": "audio-identify",
+        "question": "Göldə tullanan və \"Qur-qur\" edən canlı hansıdır?",
+        "questionEn": "Which creature jumps in the pond and croaks?",
+        "questionRu": "Кто прыгает в пруду и квакает?",
+        "options": [
+          {
+            "id": "opt-snd-frg-corr",
+            "text": "Qurbağa",
+            "textEn": "Frog",
+            "textRu": "Лягушка",
+            "emoji": "🐸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-snd-frg-fish",
+            "text": "Balıq",
+            "textEn": "Fish",
+            "textRu": "Рыба",
+            "emoji": "🐟",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-snd-frg-snake",
+            "text": "İlan",
+            "textEn": "Snake",
+            "textRu": "Змея",
+            "emoji": "🐍",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "snd-sheep-baa-6",
+        "title": "Quzunun Səsi: Məə-məə",
+        "titleEn": "Sheep Baa",
+        "titleRu": "Блеяние овечки: Бее-бее",
+        "instruction": "Məə deyən quzunu tap.",
+        "instructionEn": "Find the lamb saying baa.",
+        "instructionRu": "Найди овечку, которая блеет.",
+        "type": "audio-identify",
+        "question": "Çəmənlikdə \"Məə-məə\" edən sevimli canlı hansıdır?",
+        "questionEn": "Which cute animal says \"Baa baa\" on the meadow?",
+        "questionRu": "Какое милое животное блеет «Бее-бее» на лугу?",
+        "options": [
+          {
+            "id": "opt-snd-shp-corr",
+            "text": "Quzu və Qoyun",
+            "textEn": "Lamb & Sheep",
+            "textRu": "Овечка",
+            "emoji": "🐑",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-snd-shp-lion",
+            "text": "Şir",
+            "textEn": "Lion",
+            "textRu": "Лев",
+            "emoji": "🦁",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-snd-shp-eleph",
+            "text": "Fil",
+            "textEn": "Elephant",
+            "textRu": "Слон",
+            "emoji": "🐘",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -5202,6 +9194,258 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Əla! Payızda yarpaqlar qızılı xalça kimi yerə səpələnir! 🍂🍁",
         "explanationEn": "Great! In autumn leaves scatter like a golden carpet! 🍂🍁",
         "explanationRu": "Отлично! Осенью листья устилают землю золотым ковром! 🍂🍁"
+      },
+      {
+        "id": "voc-sweet-candy-1",
+        "title": "Şirin Konfet",
+        "titleEn": "Sweet Candy",
+        "titleRu": "Сладкая конфета",
+        "lesson": {
+          "id": "voc-lesson-qualities",
+          "conceptTitleAz": "Əşyaların Əlamətlərini Öyrənək!",
+          "conceptTitleEn": "Let's Learn Object Qualities!",
+          "conceptTitleRu": "Учим качества предметов!",
+          "explanationAz": "Əşyalar şirin, yumşaq, parıldayan və sürətli ola bilər! Bu sözlər dünyamızı gözəl izah edir!",
+          "explanationEn": "Objects can be sweet, soft, shining, and fast! These words describe our world!",
+          "explanationRu": "Предметы могут быть сладкими, мягкими, сияющими и быстрыми!",
+          "bigEmojis": [
+            "🍬",
+            "☀️",
+            "🧸",
+            "⚡"
+          ],
+          "audioTextAz": "Konfet şirindir, yastıq yumşaqdır, ulduz parlaqdır.",
+          "audioTextEn": "Candy is sweet, pillow is soft, star is bright.",
+          "audioTextRu": "Конфета сладкая, подушка мягкая, звезда яркая."
+        },
+        "instruction": "Konfetin dadını bildirən sözü seç.",
+        "instructionEn": "Select word describing candy taste.",
+        "instructionRu": "Выбери слово, описывающее вкус конфеты.",
+        "type": "select",
+        "question": "Konfetin dadı necədir?",
+        "questionEn": "How does candy taste?",
+        "questionRu": "Какой вкус у конфеты?",
+        "options": [
+          {
+            "id": "opt-voc-candy-sweet",
+            "text": "Şirindir",
+            "textEn": "Sweet",
+            "textRu": "Сладкий",
+            "emoji": "🍬",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-voc-candy-sour",
+            "text": "Acıdır",
+            "textEn": "Bitter",
+            "textRu": "Горький",
+            "emoji": "🌶️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-voc-candy-salt",
+            "text": "Duzludur",
+            "textEn": "Salty",
+            "textRu": "Соленый",
+            "emoji": "🧂",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "voc-soft-pillow-2",
+        "title": "Yumşaq Yastıq",
+        "titleEn": "Soft Pillow",
+        "titleRu": "Мягкая подушка",
+        "instruction": "Yastığın xüsusiyyətini tap.",
+        "instructionEn": "Find pillow quality.",
+        "instructionRu": "Найди свойство подушки.",
+        "type": "select",
+        "question": "Yastıq toxunanda necə hiss olunur?",
+        "questionEn": "How does a pillow feel when touched?",
+        "questionRu": "Какая подушка на ощупь?",
+        "options": [
+          {
+            "id": "opt-voc-pil-soft",
+            "text": "Yumşaqdır",
+            "textEn": "Soft",
+            "textRu": "Мягкая",
+            "emoji": "🛋️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-voc-pil-hard",
+            "text": "Daş kimidir",
+            "textEn": "Hard as stone",
+            "textRu": "Каменная",
+            "emoji": "🪨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-voc-pil-sharp",
+            "text": "İtidir",
+            "textEn": "Sharp",
+            "textRu": "Острая",
+            "emoji": "🗡️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "voc-fast-cheetah-3",
+        "title": "Sürətli Çita",
+        "titleEn": "Fast Cheetah",
+        "titleRu": "Быстрый гепард",
+        "instruction": "Sürət sözünü tap.",
+        "instructionEn": "Find speed word.",
+        "instructionRu": "Найди слово скорости.",
+        "type": "select",
+        "question": "Çita meşədə necə qaçır?",
+        "questionEn": "How does a cheetah run?",
+        "questionRu": "Как бегает гепард?",
+        "options": [
+          {
+            "id": "opt-voc-cht-fast",
+            "text": "Çox sürətlidir",
+            "textEn": "Very fast",
+            "textRu": "Очень быстро",
+            "emoji": "⚡",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-voc-cht-slow",
+            "text": "Yavaşdır",
+            "textEn": "Slow",
+            "textRu": "Медленно",
+            "emoji": "🐢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-voc-cht-stop",
+            "text": "Tərpənmir",
+            "textEn": "Still",
+            "textRu": "Неподвижно",
+            "emoji": "🛑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "voc-bright-star-4",
+        "title": "Parlaq Ulduz",
+        "titleEn": "Bright Star",
+        "titleRu": "Яркая звезда",
+        "instruction": "Ulduzun əlamətini tap.",
+        "instructionEn": "Find star quality.",
+        "instructionRu": "Найди свойство звезды.",
+        "type": "select",
+        "question": "Gecə səmada ulduz necə görünür?",
+        "questionEn": "How does a star look in the night sky?",
+        "questionRu": "Как выглядит звезда в ночном небе?",
+        "options": [
+          {
+            "id": "opt-voc-str-bright",
+            "text": "Parlaqdır",
+            "textEn": "Bright",
+            "textRu": "Яркая",
+            "emoji": "✨",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-voc-str-dark",
+            "text": "Qaranlıqdır",
+            "textEn": "Dark",
+            "textRu": "Темная",
+            "emoji": "🌑",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-voc-str-dim",
+            "text": "Görünməzdir",
+            "textEn": "Invisible",
+            "textRu": "Невидимая",
+            "emoji": "🌫️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "voc-fragrant-rose-5",
+        "title": "Ətirli Gül",
+        "titleEn": "Fragrant Rose",
+        "titleRu": "Ароматная роза",
+        "instruction": "Gülün xüsusiyyətini tap.",
+        "instructionEn": "Find rose quality.",
+        "instructionRu": "Найди свойство розы.",
+        "type": "select",
+        "question": "Bağdakı qızılgülün xüsusiyyəti nədir?",
+        "questionEn": "What is the quality of a garden rose?",
+        "questionRu": "Какое свойство у садовой розы?",
+        "options": [
+          {
+            "id": "opt-voc-rose-frag",
+            "text": "Gözəl ətirlidir",
+            "textEn": "Fragrant",
+            "textRu": "Ароматная",
+            "emoji": "🌹",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-voc-rose-sour",
+            "text": "Turşdur",
+            "textEn": "Sour",
+            "textRu": "Кислая",
+            "emoji": "🍋",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-voc-rose-salty",
+            "text": "Duzludur",
+            "textEn": "Salty",
+            "textRu": "Соленая",
+            "emoji": "🧂",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "voc-cold-ice-6",
+        "title": "Soyuq Buz",
+        "titleEn": "Cold Ice",
+        "titleRu": "Холодный лед",
+        "instruction": "Buzun temperaturunu seç.",
+        "instructionEn": "Select ice temperature.",
+        "instructionRu": "Выбери температуру льда.",
+        "type": "select",
+        "question": "Buz və dondurma toxunanda necə hiss olunur?",
+        "questionEn": "How do ice and ice-cream feel when touched?",
+        "questionRu": "Какой на ощупь лед и мороженое?",
+        "options": [
+          {
+            "id": "opt-voc-ice-cold",
+            "text": "Soyuqdur",
+            "textEn": "Cold",
+            "textRu": "Холодный",
+            "emoji": "🧊",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-voc-ice-hot",
+            "text": "Qaynardır",
+            "textEn": "Boiling hot",
+            "textRu": "Горячий",
+            "emoji": "🔥",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-voc-ice-warm",
+            "text": "İlıqdır",
+            "textEn": "Lukewarm",
+            "textRu": "Теплый",
+            "emoji": "☕",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -5337,6 +9581,220 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Parlaq günəş dünyamızı işıqlandırır! ☀️✨",
         "explanationEn": "Super! The bright sun illuminates our world! ☀️✨",
         "explanationRu": "Супер! Яркое солнце освещает весь мир! ☀️✨"
+      },
+      {
+        "id": "sent-dog-barks-1",
+        "title": "İt Hürür",
+        "titleEn": "Dog Barks",
+        "titleRu": "Собака лает",
+        "lesson": {
+          "id": "sent-lesson-daily",
+          "conceptTitleAz": "Gözəl və Düzgün Cümlələr Quraq!",
+          "conceptTitleEn": "Let's Build Great Sentences!",
+          "conceptTitleRu": "Строим красивые предложения!",
+          "explanationAz": "Sözləri ardıcıl düzdükdə aydın fikir yaranır! 'İt həyətdə hürür'!",
+          "explanationEn": "Words in order create clear meaning! 'Dog barks in the yard'!",
+          "explanationRu": "Слова по порядку создают ясную мысль! «Собака лает во дворе»!",
+          "bigEmojis": [
+            "🐶",
+            "👦",
+            "🎨",
+            "📝"
+          ],
+          "audioTextAz": "Sözləri ardıcıl düzüb cümlə qururuq.",
+          "audioTextEn": "We arrange words in order to build sentences.",
+          "audioTextRu": "Мы складываем слова по порядку, чтобы составить предложение."
+        },
+        "instruction": "Sözləri ardıcıl düzərək cümlə qur.",
+        "instructionEn": "Arrange words to build sentence.",
+        "instructionRu": "Сложи слова по порядку, чтобы составить предложение.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: İt həyətdə hürür",
+        "questionEn": "Build sentence: Dog barks in yard",
+        "questionRu": "Составь предложение: Собака лает во дворе",
+        "sentenceWords": [
+          "İt",
+          "həyətdə",
+          "hürür"
+        ],
+        "sentenceWordsEn": [
+          "Dog",
+          "barks",
+          "in yard"
+        ],
+        "sentenceWordsRu": [
+          "Собака",
+          "лает",
+          "во дворе"
+        ]
+      },
+      {
+        "id": "sent-girl-paints-2",
+        "title": "Qız Şəkil Çəkir",
+        "titleEn": "Girl Paints Picture",
+        "titleRu": "Девочка рисует картину",
+        "instruction": "Sözləri seçərək cümlə qur.",
+        "instructionEn": "Select words to build sentence.",
+        "instructionRu": "Выбери слова и составь предложение.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: Qız şəkil çəkir",
+        "questionEn": "Build sentence: Girl draws picture",
+        "questionRu": "Составь предложение: Девочка рисует картину",
+        "sentenceWords": [
+          "Qız",
+          "şəkil",
+          "çəkir"
+        ],
+        "sentenceWordsEn": [
+          "Girl",
+          "draws",
+          "picture"
+        ],
+        "sentenceWordsRu": [
+          "Девочка",
+          "рисует",
+          "картину"
+        ]
+      },
+      {
+        "id": "sent-birds-fly-3",
+        "title": "Quşlar Göydə Uçur",
+        "titleEn": "Birds Fly in Sky",
+        "titleRu": "Птицы летят в небе",
+        "instruction": "Cümləni tamamla.",
+        "instructionEn": "Complete the sentence.",
+        "instructionRu": "Заверши предложение.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: Quşlar göydə uçur",
+        "questionEn": "Build sentence: Birds fly in the sky",
+        "questionRu": "Составь предложение: Птицы летят в небе",
+        "sentenceWords": [
+          "Quşlar",
+          "göydə",
+          "uçur"
+        ],
+        "sentenceWordsEn": [
+          "Birds",
+          "fly",
+          "in sky"
+        ],
+        "sentenceWordsRu": [
+          "Птицы",
+          "летят",
+          "в небе"
+        ]
+      },
+      {
+        "id": "sent-mom-cooks-4",
+        "title": "Ana Yemək Bişirir",
+        "titleEn": "Mom Cooks Food",
+        "titleRu": "Мама готовит еду",
+        "instruction": "Sözləri ardıcıllıqla qoy.",
+        "instructionEn": "Put words in sequence.",
+        "instructionRu": "Поставь слова по порядку.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: Ana yemək bişirir",
+        "questionEn": "Build sentence: Mom cooks food",
+        "questionRu": "Составь предложение: Мама готовит еду",
+        "sentenceWords": [
+          "Ana",
+          "yemək",
+          "bişirir"
+        ],
+        "sentenceWordsEn": [
+          "Mom",
+          "cooks",
+          "food"
+        ],
+        "sentenceWordsRu": [
+          "Мама",
+          "готовит",
+          "еду"
+        ]
+      },
+      {
+        "id": "sent-boy-ball-5",
+        "title": "Əli Top Oynayır",
+        "titleEn": "Ali Plays Ball",
+        "titleRu": "Али играет в мяч",
+        "instruction": "Sözləri düz.",
+        "instructionEn": "Arrange words.",
+        "instructionRu": "Расставь слова.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: Əli top oynayır",
+        "questionEn": "Build sentence: Ali plays with ball",
+        "questionRu": "Составь предложение: Али играет в мяч",
+        "sentenceWords": [
+          "Əli",
+          "top",
+          "oynayır"
+        ],
+        "sentenceWordsEn": [
+          "Ali",
+          "plays",
+          "with ball"
+        ],
+        "sentenceWordsRu": [
+          "Али",
+          "играет",
+          "в мяч"
+        ]
+      },
+      {
+        "id": "sent-fish-swim-6",
+        "title": "Balıq Suda Üzür",
+        "titleEn": "Fish Swims in Water",
+        "titleRu": "Рыба плавает в воде",
+        "instruction": "Cümləni qur.",
+        "instructionEn": "Build sentence.",
+        "instructionRu": "Составь предложение.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: Balıq suda üzür",
+        "questionEn": "Build sentence: Fish swims in water",
+        "questionRu": "Составь предложение: Рыба плавает в воде",
+        "sentenceWords": [
+          "Balıq",
+          "suda",
+          "üzür"
+        ],
+        "sentenceWordsEn": [
+          "Fish",
+          "swims",
+          "in water"
+        ],
+        "sentenceWordsRu": [
+          "Рыба",
+          "плавает",
+          "в воде"
+        ]
+      },
+      {
+        "id": "sent-sun-warm-7",
+        "title": "Günəş Yeri İ пле isidir",
+        "titleEn": "Sun Warms Earth",
+        "titleRu": "Солнце греет землю",
+        "instruction": "Cümləni birləşdir.",
+        "instructionEn": "Join the sentence.",
+        "instructionRu": "Соедини предложение.",
+        "type": "sentence",
+        "question": "Cümləni düzəlt: Günəş yeri isidir",
+        "questionEn": "Build sentence: Sun warms the earth",
+        "questionRu": "Составь предложение: Солнце греет землю",
+        "sentenceWords": [
+          "Günəş",
+          "yeri",
+          "isidir"
+        ],
+        "sentenceWordsEn": [
+          "Sun",
+          "warms",
+          "the earth"
+        ],
+        "sentenceWordsRu": [
+          "Солнце",
+          "греет",
+          "землю"
+        ]
       }
     ]
   },
@@ -5505,6 +9963,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Düzdür! Gecə sakitlik düşəndə yatıb enerji toplayırıq! 🌙🛌",
         "explanationEn": "Correct! At peaceful night we sleep to restore our energy! 🌙🛌",
         "explanationRu": "Правильно! Ночью в тишине мы спим и набираемся сил! 🌙🛌"
+      },
+      {
+        "id": "qa-who-treats-1",
+        "title": "Bizi Kim Müalicə Edir?",
+        "titleEn": "Who Treats Us?",
+        "titleRu": "Кто нас лечит?",
+        "lesson": {
+          "id": "qa-lesson-why-how",
+          "conceptTitleAz": "Suallara Düzgün Cavab Verək!",
+          "conceptTitleEn": "Let's Answer Questions Correctly!",
+          "conceptTitleRu": "Правильно отвечаем на вопросы!",
+          "explanationAz": "'Kim?' canlıları, 'Nə ilə?' alətləri, 'Harada?' məkanı bildirir! Diqqətlə dinləyək!",
+          "explanationEn": "'Who?' refers to persons, 'With what?' to tools, 'Where?' to places!",
+          "explanationRu": "«Кто?» обозначает одушевленные предметы, «Чем?» — инструменты, «Где?» — место!",
+          "bigEmojis": [
+            "❓",
+            "💡",
+            "🗣️",
+            "🎯"
+          ],
+          "audioTextAz": "Sualları dinləyirik və düzgün cavab veririk.",
+          "audioTextEn": "We listen to questions and give correct answers.",
+          "audioTextRu": "Слушаем вопросы и даем правильные ответы."
+        },
+        "instruction": "Sualın cavabını tap.",
+        "instructionEn": "Find answer to question.",
+        "instructionRu": "Найди ответ на вопрос.",
+        "type": "select",
+        "question": "Xəstələnəndə bizi kim müalicə edir?",
+        "questionEn": "Who treats us when we get sick?",
+        "questionRu": "Кто лечит нас, когда мы болеем?",
+        "options": [
+          {
+            "id": "opt-qa-doc-corr",
+            "text": "Həkim",
+            "textEn": "Doctor",
+            "textRu": "Врач",
+            "emoji": "🩺",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-doc-drv",
+            "text": "Sürücü",
+            "textEn": "Driver",
+            "textRu": "Водитель",
+            "emoji": "🚗",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-doc-carp",
+            "text": "Dülgər",
+            "textEn": "Carpenter",
+            "textRu": "Плотник",
+            "emoji": "🪚",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "qa-what-spoon-2",
+        "title": "Şorbanı Nə İlə İçirik?",
+        "titleEn": "What do we eat soup with?",
+        "titleRu": "Чем мы едим суп?",
+        "instruction": "Aləti tap.",
+        "instructionEn": "Find the tool.",
+        "instructionRu": "Найди прибор.",
+        "type": "select",
+        "question": "Dadlı şorbanı nə ilə içirik?",
+        "questionEn": "What do we eat delicious soup with?",
+        "questionRu": "Чем мы едим вкусный суп?",
+        "options": [
+          {
+            "id": "opt-qa-spn-corr",
+            "text": "Qaşıqla",
+            "textEn": "With spoon",
+            "textRu": "Ложкой",
+            "emoji": "🥄",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-spn-fork",
+            "text": "Çəngəllə",
+            "textEn": "With fork",
+            "textRu": "Вилкой",
+            "emoji": "🍴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-spn-pen",
+            "text": "Qələmlə",
+            "textEn": "With pen",
+            "textRu": "Карандашом",
+            "emoji": "✏️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "qa-where-books-3",
+        "title": "Kitabları Hara Qoyuruq?",
+        "titleEn": "Where do we put books?",
+        "titleRu": "Куда мы кладем книги?",
+        "instruction": "Yeri seç.",
+        "instructionEn": "Select place.",
+        "instructionRu": "Выбери место.",
+        "type": "select",
+        "question": "Kitabları oxuduqdan sonra hara qoyuruq?",
+        "questionEn": "Where do we place books after reading?",
+        "questionRu": "Куда мы кладем книги после чтения?",
+        "options": [
+          {
+            "id": "opt-qa-bk-shelf",
+            "text": "Kitab rəfinə",
+            "textEn": "On bookshelf",
+            "textRu": "На книжную полку",
+            "emoji": "📚",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-bk-bed",
+            "text": "Çarpayının altına",
+            "textEn": "Under bed",
+            "textRu": "Под кровать",
+            "emoji": "🛏️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-bk-floor",
+            "text": "Döşəməyə",
+            "textEn": "On the floor",
+            "textRu": "На пол",
+            "emoji": "👣",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "qa-why-wash-4",
+        "title": "Əlləri Niyə Yuyuruq?",
+        "titleEn": "Why do we wash hands?",
+        "titleRu": "Зачем мы моем руки?",
+        "instruction": "Səbəbi tap.",
+        "instructionEn": "Find reason.",
+        "instructionRu": "Найди причину.",
+        "type": "select",
+        "question": "Yeməkdən əvvəl əllərimizi niyə yuyuruq?",
+        "questionEn": "Why do we wash our hands before eating?",
+        "questionRu": "Зачем мы моем руки перед едой?",
+        "options": [
+          {
+            "id": "opt-qa-wsh-corr",
+            "text": "Təmiz və sağlam olmaq üçün",
+            "textEn": "To be clean & healthy",
+            "textRu": "Чтобы быть чистыми и здоровыми",
+            "emoji": "🧼",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-wsh-play",
+            "text": "Su ilə oynamaq üçün",
+            "textEn": "To play with water",
+            "textRu": "Играть с водой",
+            "emoji": "💦",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-wsh-time",
+            "text": "Vaxt keçirmək üçün",
+            "textEn": "To spend time",
+            "textRu": "Тратить время",
+            "emoji": "⏰",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "qa-when-stars-5",
+        "title": "Ulduzları Nə Vaxt Görürük?",
+        "titleEn": "When do we see stars?",
+        "titleRu": "Когда мы видим звезды?",
+        "instruction": "Zamanı tap.",
+        "instructionEn": "Find time.",
+        "instructionRu": "Найди время.",
+        "type": "select",
+        "question": "Ulduzları və ayı nə vaxt görürük?",
+        "questionEn": "When do we see stars and moon?",
+        "questionRu": "Когда мы видим звезды и луну?",
+        "options": [
+          {
+            "id": "opt-qa-str-night",
+            "text": "Gecə vaxtı",
+            "textEn": "At night",
+            "textRu": "Ночью",
+            "emoji": "🌙",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-str-noon",
+            "text": "Günorta",
+            "textEn": "At noon",
+            "textRu": "В полдень",
+            "emoji": "☀️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-str-morn",
+            "text": "Səhər tezdən",
+            "textEn": "Early morning",
+            "textRu": "Ранним утром",
+            "emoji": "🌅",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "qa-who-teaches-6",
+        "title": "Bizə Dərs Deyən Kimdir?",
+        "titleEn": "Who teaches us?",
+        "titleRu": "Кто учит нас?",
+        "instruction": "Müəllimi tap.",
+        "instructionEn": "Find teacher.",
+        "instructionRu": "Найди учителя.",
+        "type": "select",
+        "question": "Məktəbdə bizə bilik verən və öyrədən kimdir?",
+        "questionEn": "Who gives us knowledge and teaches in school?",
+        "questionRu": "Кто дает нам знания и учит в школе?",
+        "options": [
+          {
+            "id": "opt-qa-tch-corr",
+            "text": "Müəllim",
+            "textEn": "Teacher",
+            "textRu": "Учитель",
+            "emoji": "👩‍🏫",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-tch-build",
+            "text": "İnşaatçı",
+            "textEn": "Builder",
+            "textRu": "Строитель",
+            "emoji": "👷",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-tch-police",
+            "text": "Polis",
+            "textEn": "Police",
+            "textRu": "Полицейский",
+            "emoji": "👮",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "qa-what-umbrella-7",
+        "title": "Yağışda Nə Açırıq?",
+        "titleEn": "What do we open in rain?",
+        "titleRu": "Что открываем в дождь?",
+        "instruction": "Çətiri tap.",
+        "instructionEn": "Find umbrella.",
+        "instructionRu": "Найди зонт.",
+        "type": "select",
+        "question": "Yağış yağanda islanmamaq üçün nə açırıq?",
+        "questionEn": "What do we open to stay dry in rain?",
+        "questionRu": "Что мы открываем в дождь, чтобы не промокнуть?",
+        "options": [
+          {
+            "id": "opt-qa-umb-corr",
+            "text": "Çətir",
+            "textEn": "Umbrella",
+            "textRu": "Зонт",
+            "emoji": "☂️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-qa-umb-bk",
+            "text": "Kitab",
+            "textEn": "Book",
+            "textRu": "Книгу",
+            "emoji": "📖",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-qa-umb-bag",
+            "text": "Çanta",
+            "textEn": "Bag",
+            "textRu": "Сумку",
+            "emoji": "🎒",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -5667,6 +10416,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Səhər təmizliyi və yeməyi günümüzü gümrah edir! ☀️🍳",
         "explanationEn": "Super! Fresh hygiene and breakfast power our whole day! ☀️🍳",
         "explanationRu": "Супер! Утренняя гигиена и завтрак заряжают бодростью на весь день! ☀️🍳"
+      },
+      {
+        "id": "seq-brush-teeth-1",
+        "title": "Diş Fırçalamaq Sırası",
+        "titleEn": "Teeth Brushing Steps",
+        "titleRu": "Шаги чистки зубов",
+        "lesson": {
+          "id": "seq-lesson-steps",
+          "conceptTitleAz": "Hər İşin Öz Ardıcıllığı Var!",
+          "conceptTitleEn": "Everything Has Its Sequence!",
+          "conceptTitleRu": "У всего есть своя последовательность!",
+          "explanationAz": "Birinci, ikinci və üçüncü addım! Ardıcıllığı düzgün qurduqda hər şey qaydasında olur!",
+          "explanationEn": "Step 1, step 2, step 3! Doing things in order makes everything right!",
+          "explanationRu": "Шаг 1, шаг 2, шаг 3! Правильный порядок помогает сделать всё отлично!",
+          "bigEmojis": [
+            "1️⃣",
+            "2️⃣",
+            "3️⃣",
+            "🏆"
+          ],
+          "audioTextAz": "Addımları ardıcıl düzürük.",
+          "audioTextEn": "We arrange steps in order.",
+          "audioTextRu": "Расставляем шаги по порядку."
+        },
+        "instruction": "Diş təmizliyi addımlarını ardıcıl düz.",
+        "instructionEn": "Order teeth brushing steps.",
+        "instructionRu": "Расставь шаги чистки зубов по порядку.",
+        "type": "sequence",
+        "question": "Diş fırçalamaq addımlarını düzgün sıraya qoy:",
+        "questionEn": "Put the teeth brushing steps in order:",
+        "questionRu": "Расставь этапы чистки зубов по порядку:",
+        "sequenceSteps": [
+          {
+            "id": "sq-bt-1",
+            "text": "Fırçaya pasta vur",
+            "textEn": "Put paste on brush",
+            "textRu": "Нанеси пасту на щетку",
+            "order": 1,
+            "emoji": "🪥"
+          },
+          {
+            "id": "sq-bt-2",
+            "text": "Dişlərini fırçala",
+            "textEn": "Brush your teeth",
+            "textRu": "Почисти зубы",
+            "order": 2,
+            "emoji": "🦷"
+          },
+          {
+            "id": "sq-bt-3",
+            "text": "Ağzını su ilə yaxala",
+            "textEn": "Rinse mouth with water",
+            "textRu": "Сполосни рот водой",
+            "order": 3,
+            "emoji": "💧"
+          }
+        ]
+      },
+      {
+        "id": "seq-eat-banana-2",
+        "title": "Banan Yemək Sırası",
+        "titleEn": "Eating Banana Steps",
+        "titleRu": "Как кушать банан",
+        "instruction": "Addımları ardıcıl düz.",
+        "instructionEn": "Order steps.",
+        "instructionRu": "Упорядочи шаги.",
+        "type": "sequence",
+        "question": "Banan yemək addımlarını ardıcıllıqla qoy:",
+        "questionEn": "Put banana eating steps in order:",
+        "questionRu": "Поставь шаги поедания банана по порядку:",
+        "sequenceSteps": [
+          {
+            "id": "sq-bn-1",
+            "text": "Bananı götür",
+            "textEn": "Take banana",
+            "textRu": "Возьми банан",
+            "order": 1,
+            "emoji": "🍌"
+          },
+          {
+            "id": "sq-bn-2",
+            "text": "Qabığını soy",
+            "textEn": "Peel it",
+            "textRu": "Очисти от кожуры",
+            "order": 2,
+            "emoji": "🖐️"
+          },
+          {
+            "id": "sq-bn-3",
+            "text": "Nuşla ye",
+            "textEn": "Enjoy eating",
+            "textRu": "С удовольствием съешь",
+            "order": 3,
+            "emoji": "😋"
+          }
+        ]
+      },
+      {
+        "id": "seq-paint-pic-3",
+        "title": "Şəkil Çəkmək Sırası",
+        "titleEn": "Painting Steps",
+        "titleRu": "Шаги рисования",
+        "instruction": "Rəsm çəkmək ardıcıllığını qur.",
+        "instructionEn": "Order painting steps.",
+        "instructionRu": "Упорядочи шаги рисования.",
+        "type": "sequence",
+        "question": "Rəsm çəkmək addımlarını düzgün sıraya qoy:",
+        "questionEn": "Order painting steps:",
+        "questionRu": "Поставь шаги рисования по порядку:",
+        "sequenceSteps": [
+          {
+            "id": "sq-pt-1",
+            "text": "Ağ vərəqi qoy",
+            "textEn": "Place paper",
+            "textRu": "Положи лист",
+            "order": 1,
+            "emoji": "📄"
+          },
+          {
+            "id": "sq-pt-2",
+            "text": "Qələmlə çək",
+            "textEn": "Draw with pencil",
+            "textRu": "Нарисуй карандашом",
+            "order": 2,
+            "emoji": "✏️"
+          },
+          {
+            "id": "sq-pt-3",
+            "text": "Boya ilə rənglə",
+            "textEn": "Color with paint",
+            "textRu": "Раскрась красками",
+            "order": 3,
+            "emoji": "🎨"
+          }
+        ]
+      },
+      {
+        "id": "seq-make-bed-4",
+        "title": "Səhər Çarpayını Düzəltmək",
+        "titleEn": "Make Bed Steps",
+        "titleRu": "Заправить постель",
+        "instruction": "Addımları ardıcıl düz.",
+        "instructionEn": "Order steps.",
+        "instructionRu": "Упорядочи шаги.",
+        "type": "sequence",
+        "question": "Səhər oyanmaq addımlarını düz:",
+        "questionEn": "Order morning wake-up steps:",
+        "questionRu": "Упорядочи шаги утреннего подъема:",
+        "sequenceSteps": [
+          {
+            "id": "sq-mb-1",
+            "text": "Yuxudan oyan",
+            "textEn": "Wake up",
+            "textRu": "Проснись",
+            "order": 1,
+            "emoji": "⏰"
+          },
+          {
+            "id": "sq-mb-2",
+            "text": "Yataqdan qalx",
+            "textEn": "Get up",
+            "textRu": "Встань с кровати",
+            "order": 2,
+            "emoji": "🧍"
+          },
+          {
+            "id": "sq-mb-3",
+            "text": "Çarpayını səliqəyə sal",
+            "textEn": "Make the bed",
+            "textRu": "Заправь постель",
+            "order": 3,
+            "emoji": "🛏️"
+          }
+        ]
+      },
+      {
+        "id": "seq-wear-shoes-5",
+        "title": "Ayaqqabı Geyinmək",
+        "titleEn": "Putting Shoes On",
+        "titleRu": "Обувание обуви",
+        "instruction": "Sıranı qur.",
+        "instructionEn": "Order steps.",
+        "instructionRu": "Построй порядок.",
+        "type": "sequence",
+        "question": "Ayaqqabı geyinmək ardıcıllığı:",
+        "questionEn": "Shoes wearing order:",
+        "questionRu": "Порядок обувания:",
+        "sequenceSteps": [
+          {
+            "id": "sq-ws-1",
+            "text": "Corabı geyin",
+            "textEn": "Put socks on",
+            "textRu": "Надень носки",
+            "order": 1,
+            "emoji": "🧦"
+          },
+          {
+            "id": "sq-ws-2",
+            "text": "Ayaqqabını geyin",
+            "textEn": "Put shoes on",
+            "textRu": "Надень обувь",
+            "order": 2,
+            "emoji": "👟"
+          },
+          {
+            "id": "sq-ws-3",
+            "text": "Bağını bağla",
+            "textEn": "Tie laces",
+            "textRu": "Завяжи шнурки",
+            "order": 3,
+            "emoji": "🎀"
+          }
+        ]
+      },
+      {
+        "id": "seq-build-tower-6",
+        "title": "Qala Qurmaq",
+        "titleEn": "Building Tower",
+        "titleRu": "Постройка башни",
+        "instruction": "Kubikləri ardıcıl düz.",
+        "instructionEn": "Order blocks.",
+        "instructionRu": "Расставь кубики.",
+        "type": "sequence",
+        "question": "Kubiklərlə qala qurmaq sırası:",
+        "questionEn": "Order for building a tower:",
+        "questionRu": "Порядок постройки башни:",
+        "sequenceSteps": [
+          {
+            "id": "sq-bt-b1",
+            "text": "Alt kubikləri qoy",
+            "textEn": "Place base blocks",
+            "textRu": "Положи нижние кубики",
+            "order": 1,
+            "emoji": "🧱"
+          },
+          {
+            "id": "sq-bt-b2",
+            "text": "Üstə kubik düz",
+            "textEn": "Stack blocks on top",
+            "textRu": "Сложи кубики сверху",
+            "order": 2,
+            "emoji": "🏗️"
+          },
+          {
+            "id": "sq-bt-b3",
+            "text": "Qalanı tamamla",
+            "textEn": "Finish tower",
+            "textRu": "Заверши башню",
+            "order": 3,
+            "emoji": "🏰"
+          }
+        ]
+      },
+      {
+        "id": "seq-wash-hands-full-7",
+        "title": "Əl Yumaq Qaydası",
+        "titleEn": "Handwashing Routine",
+        "titleRu": "Мытье рук",
+        "instruction": "Təmizlik addımlarını sırala.",
+        "instructionEn": "Sequence hygiene steps.",
+        "instructionRu": "Расставь шаги гигиены.",
+        "type": "sequence",
+        "question": "Əlləri yumaq addımlarını düzgün sıraya qoy:",
+        "questionEn": "Order handwashing steps:",
+        "questionRu": "Поставь шаги мытья рук по порядку:",
+        "sequenceSteps": [
+          {
+            "id": "sq-wh-1",
+            "text": "Əli islat və sabunla",
+            "textEn": "Wet and soap hands",
+            "textRu": "Намочи и намыль руки",
+            "order": 1,
+            "emoji": "🧼"
+          },
+          {
+            "id": "sq-wh-2",
+            "text": "Yaxşıca köpükləndir",
+            "textEn": "Lather well",
+            "textRu": "Хорошо вспень",
+            "order": 2,
+            "emoji": "🫧"
+          },
+          {
+            "id": "sq-wh-3",
+            "text": "Su ilə yu və qurula",
+            "textEn": "Rinse and dry",
+            "textRu": "Смой и вытри",
+            "order": 3,
+            "emoji": "🧴"
+          }
+        ]
       }
     ]
   },
@@ -5835,6 +10875,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Sehrli ulduzlar hər tərəfə sevinc saçdı! ✨🎈",
         "explanationEn": "Super! Magic stars filled the room with joy! ✨🎈",
         "explanationRu": "Супер! Волшебные звездочки озарили всё вокруг радостью! ✨🎈"
+      },
+      {
+        "id": "st-cat-fish-1",
+        "title": "Pişik və Balıq",
+        "titleEn": "Cat and Fish",
+        "titleRu": "Кошка и рыбка",
+        "lesson": {
+          "id": "st-lesson-creative",
+          "conceptTitleAz": "Şəkillərə Baxaq və Hekayə Quraq!",
+          "conceptTitleEn": "Let's Look at Pictures and Build Stories!",
+          "conceptTitleRu": "Смотрим на картинки и строим рассказ!",
+          "explanationAz": "Hər şəkildə kiçik bir macəra gizlənib! Əvvəl nə oldu, sonra nə baş verdi, sonda necə bitdi?",
+          "explanationEn": "Every picture hides a little adventure! What happened first, next, and in the end?",
+          "explanationRu": "В каждой картинке спрятана сказка! Что было сначала, потом и в конце?",
+          "bigEmojis": [
+            "🖼️",
+            "📖",
+            "🦊",
+            "✨"
+          ],
+          "audioTextAz": "Şəkillərə baxıb maraqlı hekayə qururuq.",
+          "audioTextEn": "We look at pictures and build exciting stories.",
+          "audioTextRu": "Смотрим на картинки и сочиняем интересную историю."
+        },
+        "instruction": "Hekayənin davamını tap.",
+        "instructionEn": "Find story continuation.",
+        "instructionRu": "Найди продолжение истории.",
+        "type": "select",
+        "question": "Pişik akvariuma maraqla baxır. O nə etmək istəyir?",
+        "questionEn": "The cat watches aquarium with interest. What does it want?",
+        "questionRu": "Кошка с интересом смотрит в аквариум. Что она хочет?",
+        "options": [
+          {
+            "id": "opt-st-cf-watch",
+            "text": "Rəngli balığı seyr etmək",
+            "textEn": "Watch colorful fish",
+            "textRu": "Наблюдать за рыбкой",
+            "emoji": "🐟",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-cf-run",
+            "text": "Çölə qaçmaq",
+            "textEn": "Run outside",
+            "textRu": "Убежать на улицу",
+            "emoji": "🚪",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-cf-sleep",
+            "text": "Yuxuya getmək",
+            "textEn": "Go to sleep",
+            "textRu": "Уснуть",
+            "emoji": "😴",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "st-puppy-joy-2",
+        "title": "Balaca Küçüyün Sevinci",
+        "titleEn": "Puppy Joy",
+        "titleRu": "Радость щенка",
+        "instruction": "Hekayənin sonunu seç.",
+        "instructionEn": "Select story ending.",
+        "instructionRu": "Выбери конец рассказа.",
+        "type": "select",
+        "question": "Küçüyün anası gələndə küçük nə etdi?",
+        "questionEn": "What did the puppy do when mother arrived?",
+        "questionRu": "Что сделал щенок, когда пришла мама?",
+        "options": [
+          {
+            "id": "opt-st-pj-tail",
+            "text": "Sevindi və quyruğunu buladı",
+            "textEn": "Wagged tail with joy",
+            "textRu": "Обрадовался и завилял хвостом",
+            "emoji": "🐶",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-pj-cry",
+            "text": "Ağladı və qaçdı",
+            "textEn": "Cried and ran",
+            "textRu": "Заплакал и убежал",
+            "emoji": "😢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-pj-ang",
+            "text": "Hirsli baxdı",
+            "textEn": "Looked angry",
+            "textRu": "Разозлился",
+            "emoji": "😠",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "st-bird-nest-3",
+        "title": "Quşun İsti Yuvası",
+        "titleEn": "Warm Bird Nest",
+        "titleRu": "Теплое гнездышко",
+        "instruction": "Quşun nə qurduğunu tap.",
+        "instructionEn": "Find what bird built.",
+        "instructionRu": "Найди, что построила птица.",
+        "type": "select",
+        "question": "Quş ağacın budağında balaları üçün nə qurdu?",
+        "questionEn": "What did the bird build on tree for its chicks?",
+        "questionRu": "Что птица построила на ветке для птенцов?",
+        "options": [
+          {
+            "id": "opt-st-bn-nest",
+            "text": "İsti və rahat yuva",
+            "textEn": "Warm cozy nest",
+            "textRu": "Теплое уютное гнездо",
+            "emoji": "🪹",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-bn-car",
+            "text": "Maşın",
+            "textEn": "Car",
+            "textRu": "Машину",
+            "emoji": "🚗",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-bn-tent",
+            "text": "Çadır",
+            "textEn": "Tent",
+            "textRu": "Палатку",
+            "emoji": "⛺",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "st-boy-kite-4",
+        "title": "Küləkdə Çərpələng",
+        "titleEn": "Kite in Wind",
+        "titleRu": "Воздушный змей",
+        "instruction": "Küləkdə uçan əşyanı tap.",
+        "instructionEn": "Find object flying in wind.",
+        "instructionRu": "Найди предмет в ветре.",
+        "type": "select",
+        "question": "Külək əsəndə Əli göyə nə uçurdu?",
+        "questionEn": "What did Ali fly in the sky when wind blew?",
+        "questionRu": "Что запустил Али в небо, когда подул ветер?",
+        "options": [
+          {
+            "id": "opt-st-kt-corr",
+            "text": "Rəngarəng çərpələng",
+            "textEn": "Colorful kite",
+            "textRu": "Разноцветного змея",
+            "emoji": "🪁",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-kt-stn",
+            "text": "Ağır daş",
+            "textEn": "Heavy stone",
+            "textRu": "Тяжелый камень",
+            "emoji": "🪨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-kt-bk",
+            "text": "Dəftər",
+            "textEn": "Notebook",
+            "textRu": "Тетрадь",
+            "emoji": "📓",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "st-ant-leaf-5",
+        "title": "Qarışqa və Yarpaq",
+        "titleEn": "Ant and Leaf",
+        "titleRu": "Муравей и лист",
+        "instruction": "Qarışqanın sığınacağını seç.",
+        "instructionEn": "Select ant shelter.",
+        "instructionRu": "Выбери укрытие муравья.",
+        "type": "select",
+        "question": "Yağış yağanda balaca qarışqa harada gizləndi?",
+        "questionEn": "Where did the little ant hide when it rained?",
+        "questionRu": "Где спрятался муравей, когда пошел дождь?",
+        "options": [
+          {
+            "id": "opt-st-ant-leaf",
+            "text": "Geniş yaşıl yarpağın altında",
+            "textEn": "Under a big green leaf",
+            "textRu": "Под большим зеленым листом",
+            "emoji": "🍃",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-ant-pond",
+            "text": "Dərin gölün içində",
+            "textEn": "Inside deep pond",
+            "textRu": "В глубоком пруду",
+            "emoji": "💧",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-ant-sky",
+            "text": "Buludun üstündə",
+            "textEn": "On the cloud",
+            "textRu": "На облаке",
+            "emoji": "☁️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "st-frog-pond-6",
+        "title": "Şən Qurbağa",
+        "titleEn": "Playful Frog",
+        "titleRu": "Веселая лягушка",
+        "instruction": "Qurbağanın hərəkətini tap.",
+        "instructionEn": "Find frog action.",
+        "instructionRu": "Найди действие лягушки.",
+        "type": "select",
+        "question": "Qurbağa yarpağın üstündən hara tullandı?",
+        "questionEn": "Where did the frog jump from the leaf?",
+        "questionRu": "Куда прыгнула лягушка с кувшинки?",
+        "options": [
+          {
+            "id": "opt-st-frg-water",
+            "text": "Suya şappıltı ilə tullandı",
+            "textEn": "Splashed into water",
+            "textRu": "Плюхнулась в воду",
+            "emoji": "💧",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-frg-moon",
+            "text": "Aya doğru uçdu",
+            "textEn": "Flew to moon",
+            "textRu": "Полетела на луну",
+            "emoji": "🌙",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-frg-tree",
+            "text": "Ağacın zirvəsinə çıxdı",
+            "textEn": "Climbed tree",
+            "textRu": "Залезла на дерево",
+            "emoji": "🌳",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "st-friends-picnic-7",
+        "title": "Dostların Pikniki",
+        "titleEn": "Friends Picnic",
+        "titleRu": "Пикник друзей",
+        "instruction": "Hekayənin sonunu tap.",
+        "instructionEn": "Find story ending.",
+        "instructionRu": "Найди финал рассказа.",
+        "type": "select",
+        "question": "Uşaqlar meşə kənarında nə təşkil etdilər?",
+        "questionEn": "What did the children organize by the forest?",
+        "questionRu": "Что устроили дети на опушке леса?",
+        "options": [
+          {
+            "id": "opt-st-pic-corr",
+            "text": "Şən piknik və çay süfrəsi",
+            "textEn": "Fun picnic & tea party",
+            "textRu": "Веселый пикник и чаепитие",
+            "emoji": "🧺",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-st-pic-sleep",
+            "text": "Qış yuxusu",
+            "textEn": "Winter sleep",
+            "textRu": "Зимнюю спячку",
+            "emoji": "❄️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-st-pic-fight",
+            "text": "Mübahisə",
+            "textEn": "Argument",
+            "textRu": "Ссору",
+            "emoji": "😠",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -6048,6 +11379,258 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Sakit olmaq qəlbimizə rahatlıq verir! 😌💖",
         "explanationEn": "Super! Feeling calm brings sweet harmony! 😌💖",
         "explanationRu": "Супер! Спокойствие приносит умиротворение и тепло! 😌💖"
+      },
+      {
+        "id": "emo-gift-happy-1",
+        "title": "Hədiyyə Sevinci",
+        "titleEn": "Gift Joy",
+        "titleRu": "Радость от подарка",
+        "lesson": {
+          "id": "emo-lesson-all",
+          "conceptTitleAz": "Bütün Hisslərimizi Tanıyaq!",
+          "conceptTitleEn": "Recognizing All Our Feelings!",
+          "conceptTitleRu": "Распознаем все наши чувства!",
+          "explanationAz": "Bəzən sevinirik, bəzən kədərlənirik, bəzən təəccüblənirik! Hissləri sözlə ifadə etmək çox vacibdir!",
+          "explanationEn": "Sometimes we are happy, sometimes sad, sometimes surprised! Expressing feelings is very important!",
+          "explanationRu": "Иногда мы радуемся, иногда грустим, иногда удивляемся! Важно выражать чувства словами!",
+          "bigEmojis": [
+            "😊",
+            "😢",
+            "😮",
+            "😌"
+          ],
+          "audioTextAz": "Hisslərimizi başa düşürük və ifadə edirik.",
+          "audioTextEn": "We understand and express our feelings.",
+          "audioTextRu": "Мы понимаем и выражаем свои чувства."
+        },
+        "instruction": "Emosiyanı seç.",
+        "instructionEn": "Select emotion.",
+        "instructionRu": "Выбери эмоцию.",
+        "type": "select",
+        "question": "Sənə gözəl hədiyyə verəndə hansı hissi keçirirsən?",
+        "questionEn": "What feeling do you have when receiving a nice gift?",
+        "questionRu": "Что ты чувствуешь, когда тебе дарят подарок?",
+        "options": [
+          {
+            "id": "opt-emo-gft-joy",
+            "text": "Sevinc və xoşbəxtlik",
+            "textEn": "Joy and happiness",
+            "textRu": "Радость и счастье",
+            "emoji": "😊",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-emo-gft-fear",
+            "text": "Qorxu",
+            "textEn": "Fear",
+            "textRu": "Страх",
+            "emoji": "😨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-emo-gft-ang",
+            "text": "Qəzəb",
+            "textEn": "Anger",
+            "textRu": "Злость",
+            "emoji": "😡",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "emo-broken-toy-2",
+        "title": "Sınmış Oyuncaq",
+        "titleEn": "Broken Toy",
+        "titleRu": "Сломанная игрушка",
+        "instruction": "Hissi tap.",
+        "instructionEn": "Find feeling.",
+        "instructionRu": "Найди чувство.",
+        "type": "select",
+        "question": "Sevimli oyuncaq qırılanda uşaq necə hiss edir?",
+        "questionEn": "How does a child feel when a favorite toy breaks?",
+        "questionRu": "Что чувствует ребенок, когда ломается любимая игрушка?",
+        "options": [
+          {
+            "id": "opt-emo-brk-sad",
+            "text": "Kədərli və məyus",
+            "textEn": "Sad and upset",
+            "textRu": "Грустно и печально",
+            "emoji": "😢",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-emo-brk-joy",
+            "text": "Çox şad",
+            "textEn": "Very happy",
+            "textRu": "Очень весело",
+            "emoji": "😄",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-emo-brk-proud",
+            "text": "Qürurlu",
+            "textEn": "Proud",
+            "textRu": "Гордо",
+            "emoji": "😎",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "emo-firework-surprise-3",
+        "title": "Atəşfəşanlıq Təəccübü",
+        "titleEn": "Firework Surprise",
+        "titleRu": "Удивление от салюта",
+        "instruction": "Simanı seç.",
+        "instructionEn": "Select facial expression.",
+        "instructionRu": "Выбери выражение лица.",
+        "type": "select",
+        "question": "Gözlənilmədən atəşfəşanlıq görəndə hansı sima yaranır?",
+        "questionEn": "What expression appears when seeing unexpected fireworks?",
+        "questionRu": "Какое лицо бывает при неожиданном салюте?",
+        "options": [
+          {
+            "id": "opt-emo-fw-surp",
+            "text": "Təəccüb və heyranlıq",
+            "textEn": "Surprise & wonder",
+            "textRu": "Удивление и восторг",
+            "emoji": "😮",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-emo-fw-sleep",
+            "text": "Yuxulu",
+            "textEn": "Sleepy",
+            "textRu": "Сонное",
+            "emoji": "😴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-emo-fw-frown",
+            "text": "Qəzəbli",
+            "textEn": "Angry",
+            "textRu": "Сердитое",
+            "emoji": "😠",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "emo-calm-sleep-4",
+        "title": "Sakit Layla",
+        "titleEn": "Peaceful Lullaby",
+        "titleRu": "Спокойная колыбельная",
+        "instruction": "Hissi tap.",
+        "instructionEn": "Find feeling.",
+        "instructionRu": "Найди чувство.",
+        "type": "select",
+        "question": "Ananın laylasını dinləyərkən uşaq necə hiss edir?",
+        "questionEn": "How does a child feel listening to mothers lullaby?",
+        "questionRu": "Что чувствует ребенок под мамину колыбельную?",
+        "options": [
+          {
+            "id": "opt-emo-clm-peace",
+            "text": "Sakit və dinc",
+            "textEn": "Calm and peaceful",
+            "textRu": "Спокойно и мирно",
+            "emoji": "😌",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-emo-clm-fear",
+            "text": "Qorxmuş",
+            "textEn": "Scared",
+            "textRu": "Испуганно",
+            "emoji": "😨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-emo-clm-ang",
+            "text": "Hirsli",
+            "textEn": "Angry",
+            "textRu": "Сердито",
+            "emoji": "😡",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "emo-fear-dark-5",
+        "title": "Qaranlıqda Qorxu",
+        "titleEn": "Fear in Dark",
+        "titleRu": "Страх в темноте",
+        "instruction": "Emosiyanı müəyyən et.",
+        "instructionEn": "Identify emotion.",
+        "instructionRu": "Определи эмоцию.",
+        "type": "select",
+        "question": "Qaranlıq otaqda tək qalanda bəzən nə hiss edə bilərik?",
+        "questionEn": "What can we sometimes feel alone in the dark?",
+        "questionRu": "Что мы иногда чувствуем в темноте?",
+        "options": [
+          {
+            "id": "opt-emo-drk-fear",
+            "text": "Qorxu",
+            "textEn": "Fear",
+            "textRu": "Страх",
+            "emoji": "😨",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-emo-drk-joy",
+            "text": "Sevinc",
+            "textEn": "Joy",
+            "textRu": "Радость",
+            "emoji": "😄",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-emo-drk-proud",
+            "text": "Qürur",
+            "textEn": "Pride",
+            "textRu": "Гордость",
+            "emoji": "🦁",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "emo-brave-help-6",
+        "title": "Cəsarət və Qürur",
+        "titleEn": "Bravery and Pride",
+        "titleRu": "Смелость и гордость",
+        "instruction": "Müsbət hissi tap.",
+        "instructionEn": "Find positive feeling.",
+        "instructionRu": "Найди положительное чувство.",
+        "type": "select",
+        "question": "Dostumuza kömək edəndə və çətinliyi keçəndə necə hiss edirik?",
+        "questionEn": "How do we feel when helping a friend and overcoming challenge?",
+        "questionRu": "Что мы чувствуем, помогая другу и преодолевая трудности?",
+        "options": [
+          {
+            "id": "opt-emo-brv-proud",
+            "text": "Cəsur və qürurlu",
+            "textEn": "Brave and proud",
+            "textRu": "Смело и гордо",
+            "emoji": "🦁",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-emo-brv-scare",
+            "text": "Qorxaq",
+            "textEn": "Cowardly",
+            "textRu": "Трусливо",
+            "emoji": "🙈",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-emo-brv-lazy",
+            "text": "Tənbəl",
+            "textEn": "Lazy",
+            "textRu": "Лениво",
+            "emoji": "😴",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -6216,6 +11799,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Möhtəşəm! 'Zəhmət olmasa' hər qapını açan sehrli kəlmədir! 💖✨",
         "explanationEn": "Awesome! 'Please' is a magic key that opens every door! 💖✨",
         "explanationRu": "Замечательно! «Пожалуйста» — волшебный ключ к добрым сердцам! 💖✨"
+      },
+      {
+        "id": "soc-sorry-1",
+        "title": "Üzr İstəmək",
+        "titleEn": "Saying Sorry",
+        "titleRu": "Извинения",
+        "lesson": {
+          "id": "soc-lesson-kindness",
+          "conceptTitleAz": "Nəzakət və Mehribanlıq Sözləri!",
+          "conceptTitleEn": "Words of Politeness and Kindness!",
+          "conceptTitleRu": "Вежливые и добрые слова!",
+          "explanationAz": "Sehrli sözlər: 'Bağışlayın', 'Zəhmət olmasa', 'Çox sağ olun'! Mehriban olmaq hamını sevindirir!",
+          "explanationEn": "Magic words: 'Sorry', 'Please', 'Thank you'! Kindness makes everyone happy!",
+          "explanationRu": "Волшебные слова: «Извините», «Пожалуйста», «Спасибо»! Доброта радует всех!",
+          "bigEmojis": [
+            "🤝",
+            "💖",
+            "✨",
+            "🌸"
+          ],
+          "audioTextAz": "Nəzakətli sözlərdən istifadə edirik və mehriban oluruq.",
+          "audioTextEn": "We use polite words and stay kind.",
+          "audioTextRu": "Мы используем вежливые слова и остаемся добрыми."
+        },
+        "instruction": "Düzgün nəzakətli sözü seç.",
+        "instructionEn": "Select polite word.",
+        "instructionRu": "Выбери вежливое слово.",
+        "type": "select",
+        "question": "Səhvən dostumuza toxunanda nə deməliyik?",
+        "questionEn": "What should we say if we accidentally bump into a friend?",
+        "questionRu": "Что сказать, если случайно задели друга?",
+        "options": [
+          {
+            "id": "opt-soc-sry-corr",
+            "text": "Bağışlayın, üzr istəyirəm",
+            "textEn": "Sorry, excuse me",
+            "textRu": "Извините, простите",
+            "emoji": "🤝",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-sry-shout",
+            "text": "Qışqırmaq",
+            "textEn": "Shout",
+            "textRu": "Кричать",
+            "emoji": "📢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-sry-run",
+            "text": "Qaçıb getmək",
+            "textEn": "Run away",
+            "textRu": "Убежать",
+            "emoji": "🏃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "soc-goodbye-2",
+        "title": "Sağollaşmaq",
+        "titleEn": "Saying Goodbye",
+        "titleRu": "Прощание",
+        "instruction": "Ayrılanda deyilən sözü tap.",
+        "instructionEn": "Find parting word.",
+        "instructionRu": "Найди слово прощания.",
+        "type": "select",
+        "question": "Dostumuzla görüşüb ayrılanda nə deyirik?",
+        "questionEn": "What do we say when parting with a friend?",
+        "questionRu": "Что мы говорим при расставании с другом?",
+        "options": [
+          {
+            "id": "opt-soc-gb-corr",
+            "text": "Sağ ol, hələlik!",
+            "textEn": "Goodbye, see you!",
+            "textRu": "До свидания, пока!",
+            "emoji": "👋",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-gb-come",
+            "text": "Gəl bura!",
+            "textEn": "Come here!",
+            "textRu": "Иди сюда!",
+            "emoji": "👉",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-gb-sit",
+            "text": "Otur!",
+            "textEn": "Sit!",
+            "textRu": "Сиди!",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "soc-listen-3",
+        "title": "Diqqətlə Dinləmək",
+        "titleEn": "Listening Carefully",
+        "titleRu": "Внимательно слушать",
+        "instruction": "Düzgün davranışı seç.",
+        "instructionEn": "Select right behavior.",
+        "instructionRu": "Выбери правильное поведение.",
+        "type": "select",
+        "question": "Başqası danışanda biz nə etməliyik?",
+        "questionEn": "What should we do when someone else is talking?",
+        "questionRu": "Что нужно делать, когда говорит другой?",
+        "options": [
+          {
+            "id": "opt-soc-lst-corr",
+            "text": "Səbirlə qulaq asmalıyıq",
+            "textEn": "Listen patiently",
+            "textRu": "Терпеливо слушать",
+            "emoji": "👂",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-lst-cut",
+            "text": "Sözünü kəsməliyik",
+            "textEn": "Interrupt",
+            "textRu": "Перебивать",
+            "emoji": "🗣️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-lst-shout",
+            "text": "Qışqırmalıyıq",
+            "textEn": "Shout",
+            "textRu": "Кричать",
+            "emoji": "📢",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "soc-help-elder-4",
+        "title": "Böyüklərə Kömək",
+        "titleEn": "Helping Elders",
+        "titleRu": "Помощь старшим",
+        "instruction": "Xeyirxah hərəkəti seç.",
+        "instructionEn": "Select kind action.",
+        "instructionRu": "Выбери доброе действие.",
+        "type": "select",
+        "question": "Nənəyə ağır çantanı daşımaqda necə davranmalıyıq?",
+        "questionEn": "How should we act when grandma carries a heavy bag?",
+        "questionRu": "Как поступить, когда бабушка несет тяжелую сумку?",
+        "options": [
+          {
+            "id": "opt-soc-eld-corr",
+            "text": "Kömək təklif etməliyik",
+            "textEn": "Offer help",
+            "textRu": "Предложить помощь",
+            "emoji": "👵",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-eld-ignore",
+            "text": "Baxıb keçməliyik",
+            "textEn": "Pass by",
+            "textRu": "Пройти мимо",
+            "emoji": "🚶",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-eld-laugh",
+            "text": "Gülməliyik",
+            "textEn": "Laugh",
+            "textRu": "Смеяться",
+            "emoji": "😆",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "soc-share-snack-5",
+        "title": "Şirniyyatı Bölüşmək",
+        "titleEn": "Sharing Snack",
+        "titleRu": "Делиться угощением",
+        "instruction": "Bölüşməyi seç.",
+        "instructionEn": "Select sharing.",
+        "instructionRu": "Выбери делиться.",
+        "type": "select",
+        "question": "Yoldaşımızın peçenyesi olmayanda nə edirik?",
+        "questionEn": "What do we do when our friend has no cookie?",
+        "questionRu": "Что сделать, если у друга нет печенья?",
+        "options": [
+          {
+            "id": "opt-soc-snk-share",
+            "text": "Paylaşırıq və təklif edirik",
+            "textEn": "Share and offer",
+            "textRu": "Поделиться и предложить",
+            "emoji": "🍪",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-snk-alone",
+            "text": "Tək yeyirik",
+            "textEn": "Eat alone",
+            "textRu": "Съесть в одиночку",
+            "emoji": "🙈",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-snk-hide",
+            "text": "Gizlədirik",
+            "textEn": "Hide it",
+            "textRu": "Спрятать",
+            "emoji": "📦",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "soc-congratulate-6",
+        "title": "Qələbəni Təbrik Etmək",
+        "titleEn": "Congratulating Win",
+        "titleRu": "Поздравление с победой",
+        "instruction": "Dostcasına reaksiyanı tap.",
+        "instructionEn": "Find friendly reaction.",
+        "instructionRu": "Найди дружелюбную реакцию.",
+        "type": "select",
+        "question": "Dostumuz oyunda qalib gələndə nə edirik?",
+        "questionEn": "What do we do when a friend wins the game?",
+        "questionRu": "Что сделать, когда друг победил в игре?",
+        "options": [
+          {
+            "id": "opt-soc-cng-corr",
+            "text": "\"Təbrik edirəm!\" deyib əl çalırıq",
+            "textEn": "Say congrats and clap",
+            "textRu": "Поздравить и похлопать",
+            "emoji": "👏",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-cng-pout",
+            "text": "Küsürük",
+            "textEn": "Pout",
+            "textRu": "Обидеться",
+            "emoji": "😒",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-cng-cry",
+            "text": "Ağlayırıq",
+            "textEn": "Cry",
+            "textRu": "Заплакать",
+            "emoji": "😢",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "soc-ask-politely-7",
+        "title": "Nəzakətlə İcazə Almaq",
+        "titleEn": "Asking Politely",
+        "titleRu": "Вежливая просьба",
+        "instruction": "Nəzakətli müraciəti seç.",
+        "instructionEn": "Select polite request.",
+        "instructionRu": "Выбери вежливую просьбу.",
+        "type": "select",
+        "question": "Qələmi götürmək üçün necə icazə alırıq?",
+        "questionEn": "How do we ask for permission to take a pencil?",
+        "questionRu": "Как вежливо попросить карандаш?",
+        "options": [
+          {
+            "id": "opt-soc-ask-corr",
+            "text": "\"Zəhmət olmasa, qələmi verə bilərsən?\"",
+            "textEn": "\"Please, may I have pencil?\"",
+            "textRu": "«Пожалуйста, можно взять?»",
+            "emoji": "✏️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-soc-ask-snatch",
+            "text": "Əlindən dartıb alırıq",
+            "textEn": "Snatch from hand",
+            "textRu": "Вырвать из рук",
+            "emoji": "✋",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-soc-ask-shout",
+            "text": "Qışqırırıq",
+            "textEn": "Shout",
+            "textRu": "Кричать",
+            "emoji": "📢",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -6384,6 +12258,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Qaydalara əməl edəndə oyun hamıya zövq verir! 🎯🎉",
         "explanationEn": "Super! Following rules makes games fun for everyone! 🎯🎉",
         "explanationRu": "Супер! Игра по правилам приносит радость всем! 🎯🎉"
+      },
+      {
+        "id": "trn-swing-1",
+        "title": "Yelləncəkdə Növbə",
+        "titleEn": "Swing Turn",
+        "titleRu": "Очередь на качелях",
+        "lesson": {
+          "id": "trn-lesson-patience",
+          "conceptTitleAz": "Səbirlə Növbə Gözləyirik!",
+          "conceptTitleEn": "Waiting for Our Turn Patiently!",
+          "conceptTitleRu": "Терпеливо ждем своей очереди!",
+          "explanationAz": "Hamı növbəsini gözlədikdə oyun daha maraqlı və ədalətli olur! Heç kim incimir!",
+          "explanationEn": "When everyone takes turns, the game is fair and fun! Nobody gets hurt!",
+          "explanationRu": "Когда все соблюдают очередь, игра честная и веселая! Никто не обижается!",
+          "bigEmojis": [
+            "⏳",
+            "🎲",
+            "🛝",
+            "🤝"
+          ],
+          "audioTextAz": "Növbəmizi səbirlə gözləyirik.",
+          "audioTextEn": "We wait for our turn patiently.",
+          "audioTextRu": "Мы терпеливо ждем своей очереди."
+        },
+        "instruction": "Düzgün davranışı seç.",
+        "instructionEn": "Select right action.",
+        "instructionRu": "Выбери правильное действие.",
+        "type": "select",
+        "question": "Yelləncəkdə başqa uşaq yellənir. Sən nə etməlisən?",
+        "questionEn": "Another child is on the swing. What should you do?",
+        "questionRu": "На качелях качается другой ребенок. Что ты сделаешь?",
+        "options": [
+          {
+            "id": "opt-trn-swg-wait",
+            "text": "Növbəni səbirlə gözləməlisən",
+            "textEn": "Wait patiently",
+            "textRu": "Терпеливо ждать очереди",
+            "emoji": "⏳",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-swg-push",
+            "text": "Onu itələməlisən",
+            "textEn": "Push them",
+            "textRu": "Толкнуть его",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-swg-cry",
+            "text": "Ağlamalısan",
+            "textEn": "Cry",
+            "textRu": "Плакать",
+            "emoji": "😢",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "trn-water-cooler-2",
+        "title": "Su İçmək Növbəsi",
+        "titleEn": "Water Cooler Queue",
+        "titleRu": "Очередь за водой",
+        "instruction": "Növbə qaydasını tap.",
+        "instructionEn": "Find queue rule.",
+        "instructionRu": "Найди правило очереди.",
+        "type": "select",
+        "question": "Su içmək üçün növbəyə duranda necə davranırıq?",
+        "questionEn": "How do we behave in line for water?",
+        "questionRu": "Как вести себя в очереди за водой?",
+        "options": [
+          {
+            "id": "opt-trn-wt-line",
+            "text": "Növbədə arxada sakit dururuq",
+            "textEn": "Stand quietly in line",
+            "textRu": "Спокойно стоять в очереди",
+            "emoji": "🚰",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-wt-push",
+            "text": "Hamını itələyirik",
+            "textEn": "Push everyone",
+            "textRu": "Всех толкать",
+            "emoji": "🏃",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-wt-jump",
+            "text": "Qabağa qaçırıq",
+            "textEn": "Cut the line",
+            "textRu": "Лезть вперед",
+            "emoji": "❌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "trn-hand-class-3",
+        "title": "Əl Qaldırıb Danışmaq",
+        "titleEn": "Raising Hand to Speak",
+        "titleRu": "Поднимать руку",
+        "instruction": "Dərsdə qaydanı seç.",
+        "instructionEn": "Select classroom rule.",
+        "instructionRu": "Выбери правило на уроке.",
+        "type": "select",
+        "question": "Dərsdə cavab vermək istəyəndə nə edirik?",
+        "questionEn": "What do we do to answer in class?",
+        "questionRu": "Что сделать, чтобы ответить на уроке?",
+        "options": [
+          {
+            "id": "opt-trn-hd-raise",
+            "text": "Əlimizi qaldırıb gözləyirik",
+            "textEn": "Raise hand & wait",
+            "textRu": "Поднять руку и ждать",
+            "emoji": "✋",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-hd-shout",
+            "text": "Yerdən qışqırırıq",
+            "textEn": "Shout from seat",
+            "textRu": "Выкрикивать с места",
+            "emoji": "📢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-hd-jump",
+            "text": "Ayağa tullanırıq",
+            "textEn": "Jump up",
+            "textRu": "Вскакивать",
+            "emoji": "🦘",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "trn-dice-turn-4",
+        "title": "Oyunda Zər Atmaq",
+        "titleEn": "Rolling Dice",
+        "titleRu": "Бросок кубика",
+        "instruction": "Oyun qaydasını tap.",
+        "instructionEn": "Find game rule.",
+        "instructionRu": "Найди правило игры.",
+        "type": "select",
+        "question": "Masaüstü oyunda zəri kim atmalıdır?",
+        "questionEn": "Who rolls the dice in a board game?",
+        "questionRu": "Кто бросает кубик в настольной игре?",
+        "options": [
+          {
+            "id": "opt-trn-dc-turn",
+            "text": "Növbəsi çatan oyunçu",
+            "textEn": "Whose turn it is",
+            "textRu": "Игрок, чья очередь",
+            "emoji": "🎲",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-dc-all",
+            "text": "Hamı eyni anda",
+            "textEn": "Everyone at once",
+            "textRu": "Все одновременно",
+            "emoji": "👥",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-dc-one",
+            "text": "Yalnız bir nəfər",
+            "textEn": "Only one person",
+            "textRu": "Только один человек",
+            "emoji": "👤",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "trn-bus-enter-5",
+        "title": "Avtobusa Növbə ilə Minmək",
+        "titleEn": "Boarding Bus in Queue",
+        "titleRu": "Посадка в автобус по очереди",
+        "instruction": "Nəqliyyata minmə qaydası.",
+        "instructionEn": "Bus boarding rule.",
+        "instructionRu": "Правило посадки в автобус.",
+        "type": "select",
+        "question": "Avtobusa minərkən necə hərəkət edirik?",
+        "questionEn": "How do we enter the bus?",
+        "questionRu": "Как заходить в автобус?",
+        "options": [
+          {
+            "id": "opt-trn-bus-line",
+            "text": "Bir-bir, növbə ilə minirik",
+            "textEn": "One by one in turn",
+            "textRu": "По одному, по очереди",
+            "emoji": "🚌",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-bus-push",
+            "text": "İtələşirik",
+            "textEn": "Pushing",
+            "textRu": "Толкаясь",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-bus-crowd",
+            "text": "Qapıda sıxışırıq",
+            "textEn": "Crowding door",
+            "textRu": "Сбиваясь в дверях",
+            "emoji": "🚪",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "trn-toy-pass-6",
+        "title": "Oyuncağı Dostuna Ötürmək",
+        "titleEn": "Passing Toy to Friend",
+        "titleRu": "Передать игрушку другу",
+        "instruction": "Oyun bitəndə nə edirik.",
+        "instructionEn": "What to do when done playing.",
+        "instructionRu": "Что делать, когда поиграл.",
+        "type": "select",
+        "question": "Oyuncaqla oynayıb qurtardıqdan sonra nə edirik?",
+        "questionEn": "What to do after playing with a toy?",
+        "questionRu": "Что делать, закончив играть с игрушкой?",
+        "options": [
+          {
+            "id": "opt-trn-ps-give",
+            "text": "Növbəti dostumuza veririk",
+            "textEn": "Pass to next friend",
+            "textRu": "Передать следующему другу",
+            "emoji": "🧸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-ps-take",
+            "text": "Evə aparırıq",
+            "textEn": "Take home",
+            "textRu": "Унести домой",
+            "emoji": "🏠",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-ps-break",
+            "text": "Qırırıq",
+            "textEn": "Break it",
+            "textRu": "Сломать",
+            "emoji": "🔨",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "trn-fair-play-7",
+        "title": "Ədalətli Oyun",
+        "titleEn": "Fair Play",
+        "titleRu": "Честная игра",
+        "instruction": "Növbənin faydasını tap.",
+        "instructionEn": "Benefit of turn-taking.",
+        "instructionRu": "Польза соблюдения очереди.",
+        "type": "select",
+        "question": "Növbə gözləmək nəyə kömək edir?",
+        "questionEn": "What does waiting for turns help with?",
+        "questionRu": "Чему помогает соблюдение очереди?",
+        "options": [
+          {
+            "id": "opt-trn-fr-corr",
+            "text": "Oyunun ədalətli və dostcasına olmasına",
+            "textEn": "Fair and friendly game",
+            "textRu": "Честной и дружной игре",
+            "emoji": "🌟",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-trn-fr-time",
+            "text": "Vaxtın itməsinə",
+            "textEn": "Wasting time",
+            "textRu": "Потере времени",
+            "emoji": "⏳",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-trn-fr-sad",
+            "text": "Hamının küsməsinə",
+            "textEn": "Everyone being upset",
+            "textRu": "Всеобщей обиде",
+            "emoji": "😢",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -6552,6 +12717,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Əla! Otağımız həmişə təmiz və səliqəli olmalıdır! 📦✨",
         "explanationEn": "Great! Our room must always stay tidy and neat! 📦✨",
         "explanationRu": "Отлично! Наша комната всегда должна быть чистой и аккуратной! 📦✨"
+      },
+      {
+        "id": "rt-exercise-1",
+        "title": "Səhər Gimnastikası",
+        "titleEn": "Morning Exercise",
+        "titleRu": "Утренняя зарядка",
+        "lesson": {
+          "id": "rt-lesson-schedule",
+          "conceptTitleAz": "Gündəlik Gözəl Rejimimiz!",
+          "conceptTitleEn": "Our Great Daily Schedule!",
+          "conceptTitleRu": "Наш прекрасный распорядок дня!",
+          "explanationAz": "Səhər oyanırıq, idman edirik, dərslərimizi oxuyuruq və vaxtında yatırıq! Rejim bizi güclü edir!",
+          "explanationEn": "We wake up, exercise, study, and sleep on time! Routine keeps us strong!",
+          "explanationRu": "Утром встаем, делаем зарядку, учимся и вовремя ложимся спать! Режим делает нас сильнее!",
+          "bigEmojis": [
+            "⏰",
+            "🌅",
+            "🥪",
+            "🌙"
+          ],
+          "audioTextAz": "Səhər idmanı bədənimizi gücləndirir və yuxunu qovur.",
+          "audioTextEn": "Morning exercise strengthens our body and wakes us up.",
+          "audioTextRu": "Утренняя зарядка укрепляет тело и прогоняет сон."
+        },
+        "instruction": "Səhər hərəkətini seç.",
+        "instructionEn": "Select morning action.",
+        "instructionRu": "Выбери утреннее действие.",
+        "type": "select",
+        "question": "Səhər yuxudan durduqdan sonra bədənimizi oyatmaq üçün nə edirik?",
+        "questionEn": "What do we do in the morning to wake up our body?",
+        "questionRu": "Что мы делаем утром, чтобы взбодриться?",
+        "options": [
+          {
+            "id": "opt-rt-ex-corr",
+            "text": "Şən səhər gimnastikası",
+            "textEn": "Morning exercise",
+            "textRu": "Утреннюю зарядку",
+            "emoji": "🤸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-ex-sleep",
+            "text": "Yenidən yatırıq",
+            "textEn": "Sleep again",
+            "textRu": "Спим дальше",
+            "emoji": "😴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-ex-tv",
+            "text": "Televizora baxırıq",
+            "textEn": "Watch TV",
+            "textRu": "Смотрим телевизор",
+            "emoji": "📺",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "rt-breakfast-2",
+        "title": "Faydalı Səhər Yeməyi",
+        "titleEn": "Healthy Breakfast",
+        "titleRu": "Полезный завтрак",
+        "instruction": "Səhər enerjisini seç.",
+        "instructionEn": "Select morning energy.",
+        "instructionRu": "Выбери утреннюю энергию.",
+        "type": "select",
+        "question": "Günə enerjili başlamaq üçün səhər nə etməliyik?",
+        "questionEn": "What should we do to start the day with energy?",
+        "questionRu": "Что нужно сделать, чтобы начать день с энергией?",
+        "options": [
+          {
+            "id": "opt-rt-bf-corr",
+            "text": "Dadlı və faydalı səhər yeməyi",
+            "textEn": "Healthy breakfast",
+            "textRu": "Вкусный полезный завтрак",
+            "emoji": "🍳",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-bf-skip",
+            "text": "Heç nə yeməmək",
+            "textEn": "Skip food",
+            "textRu": "Ничего не есть",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-bf-candy",
+            "text": "Yalnız şirniyyat yemək",
+            "textEn": "Only sweets",
+            "textRu": "Есть только сладости",
+            "emoji": "🍬",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "rt-school-prep-3",
+        "title": "Məktəbə Hazırlıq",
+        "titleEn": "School Preparation",
+        "titleRu": "Сборы в школу",
+        "instruction": "Dərsə hazırlığı tap.",
+        "instructionEn": "Find school prep.",
+        "instructionRu": "Найди сборы на учебу.",
+        "type": "select",
+        "question": "Məktəbə və ya bağçaya getməzdən əvvəl nəyi yoxlayırıq?",
+        "questionEn": "What do we check before going to school or kindergarten?",
+        "questionRu": "Что мы проверяем перед уходом в школу или садик?",
+        "options": [
+          {
+            "id": "opt-rt-sch-bag",
+            "text": "Çantamızı və dəftərlərimizi",
+            "textEn": "Backpack and notebooks",
+            "textRu": "Рюкзак и тетради",
+            "emoji": "🎒",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-sch-toy",
+            "text": "Oyuncaq qutusunu",
+            "textEn": "Toy box",
+            "textRu": "Коробку с игрушками",
+            "emoji": "🧸",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-sch-pil",
+            "text": "Yastığımızı",
+            "textEn": "Pillow",
+            "textRu": "Подушку",
+            "emoji": "🛋️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "rt-lunch-time-4",
+        "title": "Günorta Naharı",
+        "titleEn": "Lunch Time",
+        "titleRu": "Обед",
+        "instruction": "Nahar qaydasını seç.",
+        "instructionEn": "Select lunch rule.",
+        "instructionRu": "Выбери правило обеда.",
+        "type": "select",
+        "question": "Günorta dərsdən qayıdanda nə edirik?",
+        "questionEn": "What do we do returning from school at noon?",
+        "questionRu": "Что мы делаем, возвращаясь со школы днем?",
+        "options": [
+          {
+            "id": "opt-rt-ln-corr",
+            "text": "Əlləri yuyub dadlı nahar edirik",
+            "textEn": "Wash hands and eat lunch",
+            "textRu": "Моем руки и обедаем",
+            "emoji": "🍲",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-ln-dirt",
+            "text": "Çirkli əllərlə gəzirik",
+            "textEn": "Walk with dirty hands",
+            "textRu": "Ходим с грязными руками",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-ln-run",
+            "text": "Dərhal küçəyə qaçırıq",
+            "textEn": "Run outside immediately",
+            "textRu": "Сразу бежим на улицу",
+            "emoji": "🏃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "rt-homework-5",
+        "title": "Dərsləri Hazırlamaq",
+        "titleEn": "Doing Homework",
+        "titleRu": "Уроки",
+        "instruction": "Dərs oxumağı tap.",
+        "instructionEn": "Find studying.",
+        "instructionRu": "Найди выполнение уроков.",
+        "type": "select",
+        "question": "Dərslərimizi necə hazırlayırıq?",
+        "questionEn": "How do we do our homework?",
+        "questionRu": "Как мы делаем уроки?",
+        "options": [
+          {
+            "id": "opt-rt-hw-corr",
+            "text": "Səliqəli və diqqətlə",
+            "textEn": "Neatly and carefully",
+            "textRu": "Аккуратно и внимательно",
+            "emoji": "📖",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-hw-hurry",
+            "text": "Tələsik və yarımçıq",
+            "textEn": "Hastily and half-done",
+            "textRu": "В спешке и кое-как",
+            "emoji": "💨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-hw-skip",
+            "text": "Heç etmirik",
+            "textEn": "Do not do it",
+            "textRu": "Вообще не делаем",
+            "emoji": "❌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "rt-evening-bath-6",
+        "title": "İlıq Axşam Çimüşü",
+        "titleEn": "Evening Bath",
+        "titleRu": "Вечерняя ванна",
+        "instruction": "Təmizlik vaxtını tap.",
+        "instructionEn": "Find bath time.",
+        "instructionRu": "Найди время купания.",
+        "type": "select",
+        "question": "Yatmazdan əvvəl təmizlənmək üçün nə edirik?",
+        "questionEn": "What do we do to freshen up before bedtime?",
+        "questionRu": "Что мы делаем перед сном для чистоты?",
+        "options": [
+          {
+            "id": "opt-rt-bth-corr",
+            "text": "İlıq duş qəbul edirik",
+            "textEn": "Take warm shower",
+            "textRu": "Принимаем теплый душ",
+            "emoji": "🛁",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-bth-sand",
+            "text": "Qumda oynayırıq",
+            "textEn": "Play in sand",
+            "textRu": "Играем в песке",
+            "emoji": "🏖️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-bth-jump",
+            "text": "Çarpayıda tullanırıq",
+            "textEn": "Jump on bed",
+            "textRu": "Прыгаем на кровати",
+            "emoji": "🛏️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "rt-bedtime-story-7",
+        "title": "Gecə Nağılı",
+        "titleEn": "Bedtime Story",
+        "titleRu": "Сказка на ночь",
+        "instruction": "Yuxudan əvvəlki vaxtı tap.",
+        "instructionEn": "Find bedtime activity.",
+        "instructionRu": "Найди занятие перед сном.",
+        "type": "select",
+        "question": "Yatağa uzananda ana bizə nə oxuyur?",
+        "questionEn": "What does mother read when we go to bed?",
+        "questionRu": "Что мама читает нам в кровати перед сном?",
+        "options": [
+          {
+            "id": "opt-rt-bed-story",
+            "text": "Sehrli və dinc nağıl",
+            "textEn": "Magical bedtime story",
+            "textRu": "Волшебную сказку на ночь",
+            "emoji": "📖",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-rt-bed-loud",
+            "text": "Yüksək səsli mahnı",
+            "textEn": "Loud music",
+            "textRu": "Громкую музыку",
+            "emoji": "📢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-rt-bed-scary",
+            "text": "Qorxulu hekayə",
+            "textEn": "Scary story",
+            "textRu": "Страшилку",
+            "emoji": "👻",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -6720,6 +13176,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Fırçalanmış dişlər parlaq və tam sağlamdır! 🪥🦷✨",
         "explanationEn": "Super! Brushed teeth shine white and stay healthy! 🪥🦷✨",
         "explanationRu": "Супер! Почищенные зубки сияют белизной и здоровьем! 🪥🦷✨"
+      },
+      {
+        "id": "slf-buttons-1",
+        "title": "Köynəyin Düymələri",
+        "titleEn": "Shirt Buttons",
+        "titleRu": "Пуговицы рубашки",
+        "lesson": {
+          "id": "slf-lesson-habits",
+          "conceptTitleAz": "Özümüzə Qulluq Etməyi Bacarırıq!",
+          "conceptTitleEn": "We Can Care for Ourselves!",
+          "conceptTitleRu": "Мы умеем ухаживать за собой!",
+          "explanationAz": "Özümüz geyinirik, saçımızı darayırıq, otağımızı yığışdırırıq! Biz artıq böyümüşük!",
+          "explanationEn": "We dress ourselves, comb our hair, tidy our room! We are growing up!",
+          "explanationRu": "Мы сами одеваемся, причесываемся, убираем комнату! Мы уже взрослые!",
+          "bigEmojis": [
+            "👕",
+            "🪮",
+            "🪥",
+            "🧼"
+          ],
+          "audioTextAz": "Özümüz geyinirik və səliqəli oluruq.",
+          "audioTextEn": "We dress ourselves and stay neat.",
+          "audioTextRu": "Мы одеваемся сами и аккуратно выглядим."
+        },
+        "instruction": "Geyinmə vərdişini tap.",
+        "instructionEn": "Find dressing habit.",
+        "instructionRu": "Найди навык одевания.",
+        "type": "select",
+        "question": "Səhər geyinərkən köynəyin düymələrini necə edirik?",
+        "questionEn": "How do we handle shirt buttons in the morning?",
+        "questionRu": "Что мы делаем с пуговицами на рубашке утром?",
+        "options": [
+          {
+            "id": "opt-slf-btn-corr",
+            "text": "Özümüz səliqə ilə bağlayırıq",
+            "textEn": "Button up neatly ourselves",
+            "textRu": "Аккуратно застегиваем сами",
+            "emoji": "👔",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-btn-tear",
+            "text": "Qoparıb atırıq",
+            "textEn": "Tear off",
+            "textRu": "Отрываем",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-btn-open",
+            "text": "Həmişə açıq qoyuruq",
+            "textEn": "Leave open",
+            "textRu": "Оставляем расстегнутыми",
+            "emoji": "👕",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "slf-wash-face-2",
+        "title": "Səhər Üz Yumaq",
+        "titleEn": "Washing Face",
+        "titleRu": "Умывание лица",
+        "instruction": "Təmizlik vasitəsini seç.",
+        "instructionEn": "Select hygiene item.",
+        "instructionRu": "Выбери предмет гигиены.",
+        "type": "select",
+        "question": "Səhər yuxudan oyananda üzümüzü nə ilə yuyuruq?",
+        "questionEn": "What do we wash our face with in the morning?",
+        "questionRu": "Чем мы умываем лицо утром?",
+        "options": [
+          {
+            "id": "opt-slf-fc-corr",
+            "text": "Təmiz su və sabunla",
+            "textEn": "Clean water & soap",
+            "textRu": "Чистой водой и мылом",
+            "emoji": "🧼",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-fc-dirt",
+            "text": "Çirkli bezlə",
+            "textEn": "Dirty cloth",
+            "textRu": "Грязной тряпкой",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-fc-juice",
+            "text": "Meyvə şirəsi ilə",
+            "textEn": "Fruit juice",
+            "textRu": "Соком",
+            "emoji": "🧃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "slf-hanky-3",
+        "title": "Cib Dəsmalı",
+        "titleEn": "Pocket Handkerchief",
+        "titleRu": "Носовой платок",
+        "instruction": "Dəsmalı seç.",
+        "instructionEn": "Select handkerchief.",
+        "instructionRu": "Выбери платок.",
+        "type": "select",
+        "question": "Asqıranda və ya burnumuz axanda nə işlədirik?",
+        "questionEn": "What do we use when sneezing or blowing nose?",
+        "questionRu": "Что использовать при чихании или насморке?",
+        "options": [
+          {
+            "id": "opt-slf-hnk-corr",
+            "text": "Təmiz cib dəsmalı",
+            "textEn": "Clean handkerchief",
+            "textRu": "Чистый платок / салфетку",
+            "emoji": "🤧",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-hnk-sleeve",
+            "text": "Köynəyin qolu",
+            "textEn": "Shirt sleeve",
+            "textRu": "Рукав рубашки",
+            "emoji": "👕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-hnk-hand",
+            "text": "Əlin arxası",
+            "textEn": "Back of hand",
+            "textRu": "Ладонь",
+            "emoji": "✋",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "slf-clean-shoes-4",
+        "title": "Ayaqqabı Təmizliyi",
+        "titleEn": "Shoe Care",
+        "titleRu": "Чистка обуви",
+        "instruction": "Ayaqqabıya qulluğu seç.",
+        "instructionEn": "Select shoe care.",
+        "instructionRu": "Выбери уход за обувью.",
+        "type": "select",
+        "question": "Küçədən evə gələndə ayaqqabılarımızı nə edirik?",
+        "questionEn": "What do we do with shoes coming home from street?",
+        "questionRu": "Что делать с обувью, придя с улицы домой?",
+        "options": [
+          {
+            "id": "opt-slf-shs-corr",
+            "text": "Silirik və yerinə qoyuruq",
+            "textEn": "Wipe and place in spot",
+            "textRu": "Протираем и ставим на место",
+            "emoji": "👟",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-shs-bed",
+            "text": "Çarpayıya atırıq",
+            "textEn": "Throw on bed",
+            "textRu": "Бросаем на кровать",
+            "emoji": "🛏️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-shs-rug",
+            "text": "Xalçanın ortasına qoyuruq",
+            "textEn": "Leave on carpet",
+            "textRu": "Оставляем посреди ковра",
+            "emoji": "❌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "slf-cut-nails-5",
+        "title": "Dırnaq Qayğısı",
+        "titleEn": "Nail Care",
+        "titleRu": "Уход за ногтями",
+        "instruction": "Dırnaq qaydasını tap.",
+        "instructionEn": "Find nail rule.",
+        "instructionRu": "Найди правило для ногтей.",
+        "type": "select",
+        "question": "Dırnaqların təmiz qalması üçün nə edilməlidir?",
+        "questionEn": "What should be done to keep nails clean?",
+        "questionRu": "Что делать, чтобы ногти оставались чистыми?",
+        "options": [
+          {
+            "id": "opt-slf-nl-corr",
+            "text": "Dırnaqlar vaxtında kəsilməlidir",
+            "textEn": "Cut nails on time",
+            "textRu": "Вовремя стричь ногти",
+            "emoji": "✂️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-nl-bite",
+            "text": "Dırnaqlar çeynənməlidir",
+            "textEn": "Bite nails",
+            "textRu": "Грызть ногти",
+            "emoji": "😬",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-nl-dirt",
+            "text": "Çirkli saxlanmalıdır",
+            "textEn": "Keep dirty",
+            "textRu": "Оставлять грязными",
+            "emoji": "❌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "slf-drink-water-6",
+        "title": "Təmiz Su İçmək",
+        "titleEn": "Drinking Pure Water",
+        "titleRu": "Пить чистую воду",
+        "instruction": "Sağlam içkini seç.",
+        "instructionEn": "Select healthy drink.",
+        "instructionRu": "Выбери полезный напиток.",
+        "type": "select",
+        "question": "Sağlam və gümrah olmaq üçün gün ərzində nə içirik?",
+        "questionEn": "What do we drink during the day to stay healthy?",
+        "questionRu": "Что нужно пить в течение дня для здоровья?",
+        "options": [
+          {
+            "id": "opt-slf-wt-corr",
+            "text": "Bol təmiz su",
+            "textEn": "Plenty of clean water",
+            "textRu": "Много чистой воды",
+            "emoji": "💧",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-wt-soda",
+            "text": "Yalnız qazlı şirin sular",
+            "textEn": "Only sweet soda",
+            "textRu": "Только сладкую газировку",
+            "emoji": "🥤",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-wt-cold",
+            "text": "Buz parçaları",
+            "textEn": "Ice chunks",
+            "textRu": "Кусочки льда",
+            "emoji": "🧊",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "slf-tidy-room-7",
+        "title": "Otağı Səliqəyə Salmaq",
+        "titleEn": "Tidying the Room",
+        "titleRu": "Уборка в комнате",
+        "instruction": "Səliqəli vərdişi tap.",
+        "instructionEn": "Find neat habit.",
+        "instructionRu": "Найди аккуратную привычку.",
+        "type": "select",
+        "question": "Oyun bitdikdən sonra otağımızı necə qoyuruq?",
+        "questionEn": "How do we leave our room after playing?",
+        "questionRu": "Как оставить комнату после игры?",
+        "options": [
+          {
+            "id": "opt-slf-td-corr",
+            "text": "Oyuncaqları səliqə ilə yığırıq",
+            "textEn": "Tidy toys neatly",
+            "textRu": "Аккуратно убираем игрушки",
+            "emoji": "🧸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-slf-td-mess",
+            "text": "Yerdə dağınıq qoyuruq",
+            "textEn": "Leave mess on floor",
+            "textRu": "Оставляем разбросанными",
+            "emoji": "🗑️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-slf-td-hide",
+            "text": "Çarpayının altına atırıq",
+            "textEn": "Shove under bed",
+            "textRu": "Запихиваем под кровать",
+            "emoji": "🛏️",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -6949,6 +13696,265 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! İti alətlər oyuncaq deyil və ehtiyat tələb edir! ✂️🛡️",
         "explanationEn": "Super! Sharp tools are not toys and require caution! ✂️🛡️",
         "explanationRu": "Супер! Острые инструменты не игрушка и требуют осторожности! ✂️🛡️"
+      },
+      {
+        "id": "saf-traffic-yellow-1",
+        "title": "İşıqforda Sarı İşıq",
+        "titleEn": "Yellow Traffic Light",
+        "titleRu": "Желтый свет светофора",
+        "visualScene": {
+          "type": "traffic",
+          "activeLight": "yellow",
+          "captionAz": "İşıqfor: Sarı işıq yanır — HAZIRLAŞ!",
+          "captionEn": "Traffic Light: Yellow light shines — GET READY!",
+          "captionRu": "Светофор: Желтый свет горит — ПРИГОТОВЬСЯ!"
+        },
+        "instruction": "İşıqforun sarı işığının qaydasını tap.",
+        "instructionEn": "Find yellow light rule.",
+        "instructionRu": "Найди правило желтого сигнала светофора.",
+        "type": "select",
+        "question": "Şəklə bax: İşıqforun sarı işığı yananda nə etməliyik?",
+        "questionEn": "Look at scene: What must we do when yellow traffic light turns on?",
+        "questionRu": "Посмотри на картинку: Что делать при желтом сигнале светофора?",
+        "options": [
+          {
+            "id": "opt-saf-yel-corr",
+            "text": "Hazırlaşmalıyıq (⚠️)",
+            "textEn": "Get ready (⚠️)",
+            "textRu": "Приготовиться (⚠️)",
+            "emoji": "⚠️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-saf-yel-run",
+            "text": "Qaçmalıyıq",
+            "textEn": "Run fast",
+            "textRu": "Бежать",
+            "emoji": "🏃",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-saf-yel-sleep",
+            "text": "Gözümüzü yummalıyıq",
+            "textEn": "Close eyes",
+            "textRu": "Закрыть глаза",
+            "emoji": "🙈",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "saf-crosswalk-zebra-2",
+        "title": "Piyada Keçidi (Zebra)",
+        "titleEn": "Pedestrian Crosswalk",
+        "titleRu": "Пешеходный переход",
+        "instruction": "Təhlükəsiz keçid yolunu seç.",
+        "instructionEn": "Select safe crossing path.",
+        "instructionRu": "Выбери безопасный путь перехода.",
+        "type": "select",
+        "question": "Küçədə yolu hansı xətlərin üstü ilə təhlükəsiz keçirik?",
+        "questionEn": "Where do we safely cross the street?",
+        "questionRu": "По каким полосам безопасно переходить дорогу?",
+        "options": [
+          {
+            "id": "opt-saf-crw-corr",
+            "text": "Piyada keçidi (Zebra) ilə",
+            "textEn": "Crosswalk (Zebra)",
+            "textRu": "По пешеходному переходу",
+            "emoji": "🦓",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-saf-crw-mid",
+            "text": "Maşınların arasından",
+            "textEn": "Between cars",
+            "textRu": "Между машинами",
+            "emoji": "🚗",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-saf-crw-fast",
+            "text": "Yolun istənilən yerindən",
+            "textEn": "Anywhere on road",
+            "textRu": "В любом месте",
+            "emoji": "🏃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "saf-socket-plug-3",
+        "title": "Elektrik Rozetkası",
+        "titleEn": "Electric Socket Warning",
+        "titleRu": "Электрическая розетка",
+        "lesson": {
+          "id": "saf-lesson-home-street",
+          "conceptTitleAz": "Evdə və Küçədə Təhlükəsizlik!",
+          "conceptTitleEn": "Safety at Home and on Streets!",
+          "conceptTitleRu": "Безопасность дома и на улице!",
+          "explanationAz": "Qaynar çaydana və elektrik rozetkasına toxunmuruq! Pəncərədən sallanmırıq və yad adamlarla getmirik!",
+          "explanationEn": "Do not touch hot kettles and power sockets! Never lean out windows and never go with strangers!",
+          "explanationRu": "Не трогаем горячий чайник и розетки! Не высовываемся из окон и не уходим с незнакомцами!",
+          "bigEmojis": [
+            "🔌",
+            "🪟",
+            "🛑",
+            "⚠️"
+          ],
+          "audioTextAz": "Elektrik rozetkasına toxunmaq təhlükəlidir.",
+          "audioTextEn": "Touching electric sockets is dangerous.",
+          "audioTextRu": "Трогать розетки опасно."
+        },
+        "instruction": "Təhlükəsizlik qaydasını tap.",
+        "instructionEn": "Find safety rule.",
+        "instructionRu": "Найди правило безопасности.",
+        "type": "select",
+        "question": "Elektrik rozetkasına nə etmək qəti qadağandır?",
+        "questionEn": "What is strictly forbidden with an electric socket?",
+        "questionRu": "Что строго запрещено делать с розеткой?",
+        "options": [
+          {
+            "id": "opt-saf-sck-corr",
+            "text": "Barmaq və əşya soxmaq",
+            "textEn": "Inserting fingers or objects",
+            "textRu": "Вставлять пальцы и предметы",
+            "emoji": "🚫",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-saf-sck-pic",
+            "text": "Şəkil çəkmək",
+            "textEn": "Drawing picture",
+            "textRu": "Рисовать",
+            "emoji": "🎨",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-saf-sck-dist",
+            "text": "Uzaqdan baxmaq",
+            "textEn": "Looking from afar",
+            "textRu": "Смотреть издалека",
+            "emoji": "👁️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "saf-window-balcony-4",
+        "title": "Pəncərə və Balkon",
+        "titleEn": "Window and Balcony",
+        "titleRu": "Окно и балкон",
+        "instruction": "Pəncərə qaydasını seç.",
+        "instructionEn": "Select window rule.",
+        "instructionRu": "Выбери правило у окна.",
+        "type": "select",
+        "question": "Açıq pəncərə və ya balkonda necə davranmalıyıq?",
+        "questionEn": "How should we behave near an open window or balcony?",
+        "questionRu": "Как вести себя у открытого окна или балкона?",
+        "options": [
+          {
+            "id": "opt-saf-wnd-corr",
+            "text": "Pəncərədən heç vaxt sallanmamalıyıq",
+            "textEn": "Never lean out the window",
+            "textRu": "Никогда не высовываться из окна",
+            "emoji": "🪟",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-saf-wnd-climb",
+            "text": "Pəncərəyə dırmaşmalıyıq",
+            "textEn": "Climb on sill",
+            "textRu": "Залезать на подоконник",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-saf-wnd-jump",
+            "text": "Aşağı baxıb tullanmalıyıq",
+            "textEn": "Jump down",
+            "textRu": "Прыгать вниз",
+            "emoji": "🏃",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "saf-stranger-danger-5",
+        "title": "Yad Adamlarla Danışmamaq",
+        "titleEn": "Stranger Safety",
+        "titleRu": "Незнакомые люди",
+        "instruction": "Küçədə yad adam qaydasını seç.",
+        "instructionEn": "Select stranger safety rule.",
+        "instructionRu": "Выбери правило общения с незнакомцами.",
+        "type": "select",
+        "question": "Küçədə tanımadığımız adam bizi çağırsa və konfet versə nə edirik?",
+        "questionEn": "What do we do if a stranger calls us and offers candy?",
+        "questionRu": "Что делать, если незнакомец зовет с собой и предлагает конфету?",
+        "options": [
+          {
+            "id": "opt-saf-str-corr",
+            "text": "Qətiyyən getmirik, böyüklərə deyirik",
+            "textEn": "Never go, tell adults",
+            "textRu": "Ни за что не идти, сказать взрослым",
+            "emoji": "🛑",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-saf-str-go",
+            "text": "Onunla gedirik",
+            "textEn": "Go with him",
+            "textRu": "Пойти с ним",
+            "emoji": "🚶",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-saf-str-take",
+            "text": "Konfeti alıb yeyirik",
+            "textEn": "Take candy and eat",
+            "textRu": "Взять конфету",
+            "emoji": "🍬",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "saf-medicine-warning-6",
+        "title": "Dərmanlar Konfet Deyil",
+        "titleEn": "Medicine Warning",
+        "titleRu": "Лекарства — не конфеты",
+        "instruction": "Dərman qaydasını tap.",
+        "instructionEn": "Find medicine rule.",
+        "instructionRu": "Найди правило обращения с лекарствами.",
+        "type": "select",
+        "question": "Evdəki dərmanları kimin icazəsi olmadan qəbul etmək olmaz?",
+        "questionEn": "Without whose permission must medicines never be taken?",
+        "questionRu": "Без чьего разрешения нельзя принимать лекарства?",
+        "options": [
+          {
+            "id": "opt-saf-med-corr",
+            "text": "Valideynlərin və həkimin",
+            "textEn": "Parents and doctor",
+            "textRu": "Родителей и врача",
+            "emoji": "💊",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-saf-med-free",
+            "text": "İstədiyimiz vaxt içərik",
+            "textEn": "Take whenever",
+            "textRu": "Можно пить когда угодно",
+            "emoji": "❌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-saf-med-candy",
+            "text": "Konfet kimi yeyərik",
+            "textEn": "Eat like candy",
+            "textRu": "Кушать как конфеты",
+            "emoji": "🍬",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -7109,6 +14115,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Dəqiq baxdın və eyni ulduzu tapdın! ⭐✨",
         "explanationEn": "Super! Your sharp eyes found the matching star! ⭐✨",
         "explanationRu": "Супер! Твой зоркий взгляд нашел точно такую же звезду! ⭐✨"
+      },
+      {
+        "id": "att-find-cat-1",
+        "title": "Ev Heyvanını Tap",
+        "titleEn": "Find Domestic Pet",
+        "titleRu": "Найди домашнего питомца",
+        "lesson": {
+          "id": "att-lesson-focus",
+          "conceptTitleAz": "Diqqətli və Müşahidəçi Olaq!",
+          "conceptTitleEn": "Be Attentive and Observant!",
+          "conceptTitleRu": "Будем внимательными и наблюдательными!",
+          "explanationAz": "Şəkillərə diqqətlə baxırıq! Nə dəyişdi, nə çatışmır, hansı əşya fərqlidir? Diqqətli baxsaq, dərhal taparıq!",
+          "explanationEn": "Look closely at pictures! What changed, what is missing, what is different? Observe carefully to find it!",
+          "explanationRu": "Внимательно смотрим на картинки! Что изменилось, чего не хватает, что отличается?",
+          "bigEmojis": [
+            "🔍",
+            "🧐",
+            "💡",
+            "🧠"
+          ],
+          "audioTextAz": "Diqqətlə baxırıq və fərqi tapırıq.",
+          "audioTextEn": "We look carefully and find the difference.",
+          "audioTextRu": "Внимательно смотрим и находим отличие."
+        },
+        "instruction": "Şəkildə ev heyvanını tap.",
+        "instructionEn": "Find the domestic pet.",
+        "instructionRu": "Найди домашнего питомца.",
+        "type": "select",
+        "question": "Bu heyvanların içində hansı ev heyvanıdır?",
+        "questionEn": "Which one of these animals is a domestic pet?",
+        "questionRu": "Какое из этих животных домашнее?",
+        "options": [
+          {
+            "id": "opt-att-pet-cat",
+            "text": "Ev Pişiyi",
+            "textEn": "Cat",
+            "textRu": "Кошка",
+            "emoji": "🐱",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-pet-tiger",
+            "text": "Vəhşi Pələng",
+            "textEn": "Tiger",
+            "textRu": "Тигр",
+            "emoji": "🐅",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-pet-croc",
+            "text": "Timsah",
+            "textEn": "Crocodile",
+            "textRu": "Крокодил",
+            "emoji": "🐊",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "att-fruit-basket-2",
+        "title": "Səbətdə Artıq Olan",
+        "titleEn": "Odd One in Basket",
+        "titleRu": "Лишнее в корзине",
+        "instruction": "Meyvələrin içində tərəvəzi tap.",
+        "instructionEn": "Find vegetable among fruits.",
+        "instructionRu": "Найди овощ среди фруктов.",
+        "type": "select",
+        "question": "Səbətdə alma, armud və banan var. Hansı tərəvəz bura səhv düşüb?",
+        "questionEn": "In the fruit basket with apples and bananas, which vegetable is mistakenly there?",
+        "questionRu": "В корзине яблоки и бананы. Какой овощ попал туда по ошибке?",
+        "options": [
+          {
+            "id": "opt-att-bsk-carrot",
+            "text": "Kök",
+            "textEn": "Carrot",
+            "textRu": "Морковь",
+            "emoji": "🥕",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-bsk-apple",
+            "text": "Alma",
+            "textEn": "Apple",
+            "textRu": "Яблоко",
+            "emoji": "🍎",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-bsk-banana",
+            "text": "Banan",
+            "textEn": "Banana",
+            "textRu": "Банан",
+            "emoji": "🍌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "att-find-pair-3",
+        "title": "Çəkmənin Cütünü Tap",
+        "titleEn": "Find Matching Boot",
+        "titleRu": "Найди пару сапогу",
+        "instruction": "Eyni olan cütü seç.",
+        "instructionEn": "Select matching pair.",
+        "instructionRu": "Выбери подходящую пару.",
+        "type": "select",
+        "question": "Qırmızı çəkmənin tayını tap: 👢",
+        "questionEn": "Find the matching red boot: 👢",
+        "questionRu": "Найди пару красному сапогу: 👢",
+        "options": [
+          {
+            "id": "opt-att-bt-pair",
+            "text": "Qırmızı Çəkmə",
+            "textEn": "Red Boot",
+            "textRu": "Красный сапог",
+            "emoji": "👢",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-bt-glove",
+            "text": "Mavi Əlcək",
+            "textEn": "Blue Glove",
+            "textRu": "Синяя перчатка",
+            "emoji": "🧤",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-bt-hat",
+            "text": "Yaşıl Papaq",
+            "textEn": "Green Hat",
+            "textRu": "Зеленая шляпа",
+            "emoji": "👒",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "att-missing-wheel-4",
+        "title": "Maşının Təkəri",
+        "titleEn": "Car Wheel",
+        "titleRu": "Колесо машины",
+        "instruction": "Çatışmayan vacib hissəni tap.",
+        "instructionEn": "Find essential missing part.",
+        "instructionRu": "Найди недостающую часть.",
+        "type": "select",
+        "question": "Avtomobilin getməsi üçün mütləq nəyi olmalıdır?",
+        "questionEn": "What must a car have to drive?",
+        "questionRu": "Что обязательно должно быть у машины, чтобы ехать?",
+        "options": [
+          {
+            "id": "opt-att-whl-wheel",
+            "text": "Təkərləri",
+            "textEn": "Wheels",
+            "textRu": "Колеса",
+            "emoji": "🛞",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-whl-wings",
+            "text": "Qanadları",
+            "textEn": "Wings",
+            "textRu": "Крылья",
+            "emoji": "🪽",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-whl-sail",
+            "text": "Yelkəni",
+            "textEn": "Sail",
+            "textRu": "Парус",
+            "emoji": "⛵",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "att-size-order-5",
+        "title": "Ən Balacanı Tap",
+        "titleEn": "Find the Smallest",
+        "titleRu": "Найди самый маленький",
+        "instruction": "Ən kiçik əşyanı seç.",
+        "instructionEn": "Select the smallest item.",
+        "instructionRu": "Выбери самый маленький предмет.",
+        "type": "select",
+        "question": "Bu əşyaların içində ən kiçiyi hansıdır?",
+        "questionEn": "Which item among these is the smallest?",
+        "questionRu": "Какой предмет из этих самый маленький?",
+        "options": [
+          {
+            "id": "opt-att-pea-corr",
+            "text": "Balaca yaşıl noxud",
+            "textEn": "Tiny green pea",
+            "textRu": "Маленькая горошина",
+            "emoji": "🟢",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-pea-melon",
+            "text": "Böyük qarpız",
+            "textEn": "Big watermelon",
+            "textRu": "Большой арбуз",
+            "emoji": "🍉",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-pea-apple",
+            "text": "Orta alma",
+            "textEn": "Medium apple",
+            "textRu": "Среднее яблоко",
+            "emoji": "🍎",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "att-color-difference-6",
+        "title": "Fərqli Rəngi Tap",
+        "titleEn": "Find Different Color",
+        "titleRu": "Найди другой цвет",
+        "instruction": "Fərqli topu tap.",
+        "instructionEn": "Find odd ball.",
+        "instructionRu": "Найди мяч другого цвета.",
+        "type": "select",
+        "question": "Sarı topların içində fərqli olan hansıdır? 🟡🟡🔵🟡",
+        "questionEn": "Which ball is different among yellow ones? 🟡🟡🔵🟡",
+        "questionRu": "Какой мяч отличается среди желтых? 🟡🟡🔵🟡",
+        "options": [
+          {
+            "id": "opt-att-blu-corr",
+            "text": "Göy Top",
+            "textEn": "Blue Ball",
+            "textRu": "Синий мяч",
+            "emoji": "🔵",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-blu-yel",
+            "text": "Sarı Top",
+            "textEn": "Yellow Ball",
+            "textRu": "Желтый мяч",
+            "emoji": "🟡",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-blu-star",
+            "text": "Ulduz",
+            "textEn": "Star",
+            "textRu": "Звезда",
+            "emoji": "⭐",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "att-shadow-rabbit-7",
+        "title": "Uzun Qulaqlı Kölgə",
+        "titleEn": "Long-eared Shadow",
+        "titleRu": "Тень с длинными ушами",
+        "instruction": "Kölgənin sahibini tap.",
+        "instructionEn": "Find shadow owner.",
+        "instructionRu": "Найди хозяина тени.",
+        "type": "select",
+        "question": "Uzun qulaqlı şən kölgə hansı heyvana məxsusdur?",
+        "questionEn": "Whose shadow has long ears?",
+        "questionRu": "Чья это тень с длинными ушками?",
+        "options": [
+          {
+            "id": "opt-att-rbt-corr",
+            "text": "Dovşan",
+            "textEn": "Rabbit",
+            "textRu": "Кролик",
+            "emoji": "🐰",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-att-rbt-turt",
+            "text": "Tısbağa",
+            "textEn": "Turtle",
+            "textRu": "Черепаха",
+            "emoji": "🐢",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-att-rbt-fish",
+            "text": "Balıq",
+            "textEn": "Fish",
+            "textRu": "Рыбка",
+            "emoji": "🐟",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -7277,6 +14574,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Şeypur bayramlarda uca səslə ifa edir! 🎺🎉",
         "explanationEn": "Super! The trumpet blares joyfully at celebrations! 🎺🎉",
         "explanationRu": "Супер! Труба празднично звучит на парадах! 🎺🎉"
+      },
+      {
+        "id": "aud-thunder-1",
+        "title": "Şimşək Gurultusu",
+        "titleEn": "Thunder Rumble",
+        "titleRu": "Гром",
+        "lesson": {
+          "id": "aud-lesson-rhythm",
+          "conceptTitleAz": "Səsləri Dinləyək və Ritmi Hiss Edək!",
+          "conceptTitleEn": "Let's Listen to Sounds and Feel Rhythm!",
+          "conceptTitleRu": "Слушаем звуки и чувствуем ритм!",
+          "explanationAz": "Bəzi səslər bərk, bəzi səslər astadır! Şimşək bərk guruldayır, pıçıltı isə asta eşidilir!",
+          "explanationEn": "Some sounds are loud, some are soft! Thunder is loud, whisper is soft!",
+          "explanationRu": "Некоторые звуки громкие, некоторые тихие! Гром гремит громко, шепот слышен тихо!",
+          "bigEmojis": [
+            "🎵",
+            "🥁",
+            "🔔",
+            "🎶"
+          ],
+          "audioTextAz": "Bərk və asta səsləri dinləyib fərqləndiririk.",
+          "audioTextEn": "We listen and distinguish loud and quiet sounds.",
+          "audioTextRu": "Слушаем и различаем громкие и тихие звуки."
+        },
+        "instruction": "Gur səsi tap.",
+        "instructionEn": "Find loud sound.",
+        "instructionRu": "Найди громкий звук.",
+        "type": "select",
+        "question": "Göydə şimşək çaxanda hansı gur səs eşidilir?",
+        "questionEn": "What loud sound is heard when lightning strikes?",
+        "questionRu": "Какой громкий звук слышен при грозе?",
+        "options": [
+          {
+            "id": "opt-aud-thn-corr",
+            "text": "Bərk gurultu: Qum-qum!",
+            "textEn": "Loud rumble: Boom!",
+            "textRu": "Громкий грохот: Бабах!",
+            "emoji": "⚡",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-thn-whisp",
+            "text": "Asta pıçıltı",
+            "textEn": "Soft whisper",
+            "textRu": "Тихий шепот",
+            "emoji": "🤫",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-thn-chirp",
+            "text": "Cik-cik",
+            "textEn": "Chirp chirp",
+            "textRu": "Чик-чирик",
+            "emoji": "🐥",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "aud-whisper-2",
+        "title": "Asta Pıçıltı",
+        "titleEn": "Quiet Whisper",
+        "titleRu": "Тихий шепот",
+        "instruction": "Asta səsi seç.",
+        "instructionEn": "Select quiet sound.",
+        "instructionRu": "Выбери тихий звук.",
+        "type": "select",
+        "question": "Biri gizli söz deyəndə necə danışır?",
+        "questionEn": "How does someone speak when sharing a secret?",
+        "questionRu": "Как говорят, когда делятся секретом?",
+        "options": [
+          {
+            "id": "opt-aud-whs-corr",
+            "text": "Asta pıçıltı ilə",
+            "textEn": "Quiet whisper",
+            "textRu": "Тихим шепотом",
+            "emoji": "🤫",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-whs-horn",
+            "text": "Şeypur kimi bərk",
+            "textEn": "Loud like horn",
+            "textRu": "Громко как труба",
+            "emoji": "🎺",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-whs-drum",
+            "text": "Baraban kimi",
+            "textEn": "Like drum",
+            "textRu": "Как барабан",
+            "emoji": "🥁",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "aud-door-knock-3",
+        "title": "Qapı Döyülməsi",
+        "titleEn": "Door Knock",
+        "titleRu": "Стук в дверь",
+        "instruction": "Qapının səsini tap.",
+        "instructionEn": "Find door sound.",
+        "instructionRu": "Найди звук двери.",
+        "type": "select",
+        "question": "Qapı döyüləndə hansı səs çıxır?",
+        "questionEn": "What sound comes when someone knocks on the door?",
+        "questionRu": "Какой звук, когда стучат в дверь?",
+        "options": [
+          {
+            "id": "opt-aud-knk-corr",
+            "text": "Taq-taq-taq!",
+            "textEn": "Knock knock!",
+            "textRu": "Тук-тук-тук!",
+            "emoji": "🚪",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-knk-whr",
+            "text": "Vııı-vııı",
+            "textEn": "Vroom vroom",
+            "textRu": "Вжж-вжж",
+            "emoji": "🚗",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-knk-drip",
+            "text": "Şır-şır",
+            "textEn": "Drip drop",
+            "textRu": "Кап-кап",
+            "emoji": "💧",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "aud-guitar-strum-4",
+        "title": "Gözəl Gitara",
+        "titleEn": "Guitar Strings",
+        "titleRu": "Гитара",
+        "instruction": "Simli musiqi alətini tap.",
+        "instructionEn": "Find string instrument.",
+        "instructionRu": "Найди струнный инструмент.",
+        "type": "select",
+        "question": "Barmaqla simlərinə toxunduqda gözəl musiqi çalan alət hansıdır?",
+        "questionEn": "Which instrument plays music when fingers strum strings?",
+        "questionRu": "Какой инструмент играет красивую музыку, когда перебирают струны?",
+        "options": [
+          {
+            "id": "opt-aud-gtr-corr",
+            "text": "Gitara",
+            "textEn": "Guitar",
+            "textRu": "Гитара",
+            "emoji": "🎸",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-gtr-drum",
+            "text": "Baraban",
+            "textEn": "Drum",
+            "textRu": "Барабан",
+            "emoji": "🥁",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-gtr-horn",
+            "text": "Şeypur",
+            "textEn": "Horn",
+            "textRu": "Труба",
+            "emoji": "🪈",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "aud-car-horn-5",
+        "title": "Avtomobil Siqnalı",
+        "titleEn": "Car Horn",
+        "titleRu": "Автомобильный сигнал",
+        "instruction": "Maşın siqnalını tap.",
+        "instructionEn": "Find car horn.",
+        "instructionRu": "Найди автомобильный сигнал.",
+        "type": "select",
+        "question": "Yolda xəbərdarlıq edən avtomobil siqnalı necə səslənir?",
+        "questionEn": "How does a car horn sound on the road?",
+        "questionRu": "Как звучит автомобильный клаксон на дороге?",
+        "options": [
+          {
+            "id": "opt-aud-hrn-corr",
+            "text": "Bip-biiip!",
+            "textEn": "Beep beep!",
+            "textRu": "Бип-бииип!",
+            "emoji": "🚗",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-hrn-coo",
+            "text": "Qu-qu",
+            "textEn": "Coo-coo",
+            "textRu": "Ку-ку",
+            "emoji": "🐦",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-hrn-drip",
+            "text": "Tıp-tıp",
+            "textEn": "Tip-tip",
+            "textRu": "Кап-кап",
+            "emoji": "💧",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "aud-water-splash-6",
+        "title": "Su Şappıltısı",
+        "titleEn": "Water Splash",
+        "titleRu": "Всплеск воды",
+        "instruction": "Suyun səsini tap.",
+        "instructionEn": "Find splash sound.",
+        "instructionRu": "Найди звук всплеска.",
+        "type": "select",
+        "question": "Suya daş atanda hansı səs eşidilir?",
+        "questionEn": "What sound is heard when throwing stone in water?",
+        "questionRu": "Какой звук, когда бросаешь камень в воду?",
+        "options": [
+          {
+            "id": "opt-aud-spl-corr",
+            "text": "Şappıltı: Şapp!",
+            "textEn": "Splash: Plop!",
+            "textRu": "Всплеск: Бульк!",
+            "emoji": "💦",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-spl-chirp",
+            "text": "Cik-cik",
+            "textEn": "Chirp",
+            "textRu": "Чик-чирик",
+            "emoji": "🐤",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-spl-buzz",
+            "text": "Vzzz-vzzz",
+            "textEn": "Buzz",
+            "textRu": "Жжжж",
+            "emoji": "🐝",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "aud-applause-clap-7",
+        "title": "Gur Alqışlar",
+        "titleEn": "Loud Applause",
+        "titleRu": "Громкие аплодисменты",
+        "instruction": "Alqış səsini tap.",
+        "instructionEn": "Find applause sound.",
+        "instructionRu": "Найди звук аплодисментов.",
+        "type": "select",
+        "question": "Uşaqlar şeir oxuyub bitirdikdə hamı necə səs çıxarır?",
+        "questionEn": "What sound does everyone make after reciting poem?",
+        "questionRu": "Какие звуки издают все после прочтения стихотворения?",
+        "options": [
+          {
+            "id": "opt-aud-clp-corr",
+            "text": "Gur alqışlar: Şaq-şaq!",
+            "textEn": "Loud applause: Clap clap!",
+            "textRu": "Громкие аплодисменты: Хлоп-хлоп!",
+            "emoji": "👏",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-aud-clp-silent",
+            "text": "Tam sükut",
+            "textEn": "Complete silence",
+            "textRu": "Полная тишина",
+            "emoji": "🤫",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-aud-clp-snore",
+            "text": "Xoruldamaq",
+            "textEn": "Snoring",
+            "textRu": "Храп",
+            "emoji": "😴",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -7508,6 +15096,360 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Əla! Arı dalğalı xətlə gülün üstünə qondu və nektar topladı! 🐝🌸🍯",
         "explanationEn": "Great! The bee followed the wave to the flower and collected nectar! 🐝🌸🍯",
         "explanationRu": "Отлично! Пчелка по волне прилетела прямо к цветку за нектаром! 🐝🌸🍯"
+      },
+      {
+        "id": "mot-trace-circle-sun-1",
+        "title": "Günəşin Dairəvi Xətti",
+        "titleEn": "Sun Circle Tracing",
+        "titleRu": "Круг вокруг солнца",
+        "lesson": {
+          "id": "mot-lesson-curves",
+          "conceptTitleAz": "Əyri və Dairəvi Cizgiləri Çəkək!",
+          "conceptTitleEn": "Let's Trace Curves and Circles!",
+          "conceptTitleRu": "Рисуем кривые и круговые линии!",
+          "explanationAz": "Barmağımızla xətləri izləyirik! Dairəvi fırlanırıq, dalğalarla üzürük, ziqzaqla qalxırıq!",
+          "explanationEn": "We trace lines with our fingers! Circles, waves, and zigzags help our handwriting!",
+          "explanationRu": "Пальчиком ведем по линиям! Круги, волны и зигзаги готовят руку к письму!",
+          "bigEmojis": [
+            "🌀",
+            "⭕",
+            "〰️",
+            "✍️"
+          ],
+          "audioTextAz": "Barmağımızla xətləri diqqətlə izləyirik.",
+          "audioTextEn": "We trace lines carefully with our finger.",
+          "audioTextRu": "Пальчиком аккуратно ведем по линиям."
+        },
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "☀️",
+          "targetEmoji": "🌻",
+          "pathType": "loop",
+          "captionAz": "Barmaq hərəkəti: Günəşdən günəbaxana doğru dairəvi cizgi",
+          "captionEn": "Finger tracing: Circular loop from sun to sunflower",
+          "captionRu": "Движение пальца: Круговая линия от солнца к подсолнуху"
+        },
+        "instruction": "Barmağınla dairəvi cizgini izlə.",
+        "instructionEn": "Trace circular line with finger.",
+        "instructionRu": "Проведи пальчиком по круговой линии.",
+        "type": "select",
+        "question": "Şəklə bax: Günəşin ətrafında hansı xətt var?",
+        "questionEn": "Look at scene: What path leads from sun to sunflower?",
+        "questionRu": "Какая линия ведет от солнца к подсолнуху?",
+        "options": [
+          {
+            "id": "opt-mot-cr-loop",
+            "text": "Dairəvi Halqa Xətti",
+            "textEn": "Circular Loop",
+            "textRu": "Круговая линия",
+            "emoji": "⭕",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-cr-zig",
+            "text": "Ziqzaq Xətt",
+            "textEn": "Zigzag",
+            "textRu": "Зигзаг",
+            "emoji": "⚡",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-cr-dot",
+            "text": "Nöqtə",
+            "textEn": "Dot",
+            "textRu": "Точка",
+            "emoji": "▪️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mot-trace-spiral-snail-2",
+        "title": "İlbizin Spiral Evi",
+        "titleEn": "Snail Spiral",
+        "titleRu": "Спираль улитки",
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "🐌",
+          "targetEmoji": "🌿",
+          "pathType": "loop",
+          "captionAz": "Barmaq hərəkəti: İlbizin çanağı üzrə spiral cizgi",
+          "captionEn": "Finger tracing: Spiral path along snail shell",
+          "captionRu": "Движение пальца: Спиральная линия по панцирю улитки"
+        },
+        "instruction": "Spiral xətti barmağınla tamamla.",
+        "instructionEn": "Trace spiral path with finger.",
+        "instructionRu": "Проведи по спирали пальчиком.",
+        "type": "select",
+        "question": "İlbizin çanağı hansı formadadır?",
+        "questionEn": "What shape is the snail shell?",
+        "questionRu": "Какая форма у панциря улитки?",
+        "options": [
+          {
+            "id": "opt-mot-snl-spiral",
+            "text": "Qıvrım Spiral",
+            "textEn": "Spiral",
+            "textRu": "Спираль",
+            "emoji": "🌀",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-snl-str",
+            "text": "Düz Xətt",
+            "textEn": "Straight line",
+            "textRu": "Прямая",
+            "emoji": "➖",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-snl-sq",
+            "text": "Kvadrat",
+            "textEn": "Square",
+            "textRu": "Квадрат",
+            "emoji": "🔲",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mot-trace-lightning-3",
+        "title": "İldırım Ziqzaqı",
+        "titleEn": "Lightning Zigzag",
+        "titleRu": "Зигзаг молнии",
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "☁️",
+          "targetEmoji": "🌲",
+          "pathType": "zigzag",
+          "captionAz": "Barmaq hərəkəti: Buluddan meşəyə doğru ziqzaq cizgi",
+          "captionEn": "Finger tracing: Zigzag path from cloud to forest",
+          "captionRu": "Движение пальца: Зигзаг от тучи к лесу"
+        },
+        "instruction": "Ziqzaq xətti barmaqla çək.",
+        "instructionEn": "Trace zigzag path with finger.",
+        "instructionRu": "Проведи пальчиком зигзаг.",
+        "type": "select",
+        "question": "Şəklə bax: Buluddan meşəyə hansı xətt enir?",
+        "questionEn": "Which path descends from cloud to forest?",
+        "questionRu": "Какая линия спускается от тучи к лесу?",
+        "options": [
+          {
+            "id": "opt-mot-lgt-zig",
+            "text": "İti Ziqzaq Xətt",
+            "textEn": "Sharp Zigzag",
+            "textRu": "Острый зигзаг",
+            "emoji": "⚡",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-lgt-circ",
+            "text": "Dairəvi Xətt",
+            "textEn": "Circle",
+            "textRu": "Круг",
+            "emoji": "⭕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-lgt-sq",
+            "text": "Kvadrat Xətt",
+            "textEn": "Square",
+            "textRu": "Квадратная",
+            "emoji": "⬛",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mot-trace-fish-wave-4",
+        "title": "Dəniz Dalğası",
+        "titleEn": "Sea Wave",
+        "titleRu": "Морская волна",
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "🐟",
+          "targetEmoji": "🏝️",
+          "pathType": "wave",
+          "captionAz": "Barmaq hərəkəti: Balığın adaya doğru dalğalı üzüşü",
+          "captionEn": "Finger tracing: Wavy path from fish to island",
+          "captionRu": "Движение пальца: Волнистая линия от рыбки к острову"
+        },
+        "instruction": "Dalğalı xətti barmaqla çək.",
+        "instructionEn": "Trace wavy path.",
+        "instructionRu": "Проведи волнистую линию.",
+        "type": "select",
+        "question": "Dənizdə balıq hansı xətlə üzür?",
+        "questionEn": "What line does the fish swim along in sea?",
+        "questionRu": "По какой линии плывет рыбка в море?",
+        "options": [
+          {
+            "id": "opt-mot-fsh-wave",
+            "text": "Dalğalı Xətt",
+            "textEn": "Wavy Line",
+            "textRu": "Волнистая линия",
+            "emoji": "🌊",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-fsh-str",
+            "text": "Düz Xətt",
+            "textEn": "Straight line",
+            "textRu": "Прямая",
+            "emoji": "➖",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-fsh-box",
+            "text": "Qutu Xətt",
+            "textEn": "Box line",
+            "textRu": "Коробка",
+            "emoji": "📦",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mot-trace-mountain-5",
+        "title": "Dağ Zirvələri",
+        "titleEn": "Mountain Peaks",
+        "titleRu": "Горные вершины",
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "🏕️",
+          "targetEmoji": "🏔️",
+          "pathType": "zigzag",
+          "captionAz": "Barmaq hərəkəti: Düşərgədən dağ zirvəsinə ziqzaq dırmaşmaq",
+          "captionEn": "Finger tracing: Climbing zigzag to mountain peak",
+          "captionRu": "Движение пальца: Подъем зигзагом к вершине горы"
+        },
+        "instruction": "Dağa doğru xətti izlə.",
+        "instructionEn": "Trace path to mountain.",
+        "instructionRu": "Проведи линию к горе.",
+        "type": "select",
+        "question": "Dağın zirvəsinə qalxan künclü cizgi hansıdır?",
+        "questionEn": "Which pointed line climbs to mountain peak?",
+        "questionRu": "Какая линия поднимается к вершине горы?",
+        "options": [
+          {
+            "id": "opt-mot-mnt-zig",
+            "text": "Ziqzaq Xətt",
+            "textEn": "Zigzag Line",
+            "textRu": "Зигзагообразная линия",
+            "emoji": "⛰️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-mnt-loop",
+            "text": "Halqa Xətti",
+            "textEn": "Loop",
+            "textRu": "Петля",
+            "emoji": "⭕",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-mnt-dot",
+            "text": "Nöqtə",
+            "textEn": "Dot",
+            "textRu": "Точка",
+            "emoji": "▪️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mot-trace-butterfly-6",
+        "title": "Kəpənəyin Qıvrım Yolu",
+        "titleEn": "Butterfly Swirl",
+        "titleRu": "Полет бабочки",
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "🦋",
+          "targetEmoji": "🌺",
+          "pathType": "wave",
+          "captionAz": "Barmaq hərəkəti: Kəpənəkdən çiçəyə dalğalı uçuş",
+          "captionEn": "Finger tracing: Wavy flutter from butterfly to flower",
+          "captionRu": "Движение пальца: Волнистый полет бабочки к цветку"
+        },
+        "instruction": "Kəpənəyin yolunu barmaqla çək.",
+        "instructionEn": "Trace butterfly path with finger.",
+        "instructionRu": "Проведи пальчиком путь бабочки.",
+        "type": "select",
+        "question": "Kəpənək çiçəyə doğru necə uçur?",
+        "questionEn": "How does butterfly fly to the flower?",
+        "questionRu": "Как бабочка летит к цветку?",
+        "options": [
+          {
+            "id": "opt-mot-btf-wave",
+            "text": "Dalğalı və şən xətlə",
+            "textEn": "Wavy playful line",
+            "textRu": "Волнистой веселой линией",
+            "emoji": "〰️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-btf-stop",
+            "text": "Hərəkətsiz",
+            "textEn": "Motionless",
+            "textRu": "Неподвижно",
+            "emoji": "🛑",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-btf-down",
+            "text": "Aşağı düz",
+            "textEn": "Straight down",
+            "textRu": "Прямо вниз",
+            "emoji": "⬇️",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mot-trace-plane-loop-7",
+        "title": "Təyyarə Halqası",
+        "titleEn": "Airplane Loop",
+        "titleRu": "Петля самолета",
+        "visualScene": {
+          "type": "tracing",
+          "startEmoji": "✈️",
+          "targetEmoji": "🛬",
+          "pathType": "loop",
+          "captionAz": "Barmaq hərəkəti: Təyyarənin göydə çəkdiyi halqavari xətt",
+          "captionEn": "Finger tracing: Loop path in the sky to landing",
+          "captionRu": "Движение пальца: Петля самолета в небе к посадке"
+        },
+        "instruction": "Halqavari xətti barmaqla çək.",
+        "instructionEn": "Trace loop path.",
+        "instructionRu": "Проведи петлю пальчиком.",
+        "type": "select",
+        "question": "Təyyarə enişdən əvvəl göydə hansı fiquru cızır?",
+        "questionEn": "What shape does the plane draw before landing?",
+        "questionRu": "Какую фигуру описывает самолет перед посадкой?",
+        "options": [
+          {
+            "id": "opt-mot-pln-loop",
+            "text": "Gözəl Halqa Xətti",
+            "textEn": "Loop line",
+            "textRu": "Красивую петлю",
+            "emoji": "➰",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mot-pln-cube",
+            "text": "Kub",
+            "textEn": "Cube",
+            "textRu": "Куб",
+            "emoji": "🧊",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mot-pln-cross",
+            "text": "Xaç",
+            "textEn": "Cross",
+            "textRu": "Крест",
+            "emoji": "✖️",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -7676,6 +15618,297 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Göylərə dartındıqca boyumuz hündür və qamətimiz düz olur! ☀️🧍✨",
         "explanationEn": "Super! Stretching tall helps us grow upright and healthy! ☀️🧍✨",
         "explanationRu": "Супер! Потягивания вверх делают осанку ровной и помогают расти! ☀️🧍✨"
+      },
+      {
+        "id": "mov-run-place-1",
+        "title": "Yerində Qaçış",
+        "titleEn": "Run in Place",
+        "titleRu": "Бег на месте",
+        "lesson": {
+          "id": "mov-lesson-energy",
+          "conceptTitleAz": "Sağlam və Çevik Hərəkətlər!",
+          "conceptTitleEn": "Healthy and Agile Movements!",
+          "conceptTitleRu": "Здоровые и ловкие движения!",
+          "explanationAz": "İdman hərəkətləri ürəyimizi sevindirir və əzələlərimizi gücləndirir! Hərəkətdə sağlamlıq var!",
+          "explanationEn": "Exercises bring joy to our heart and strengthen muscles! Movement is health!",
+          "explanationRu": "Упражнения радуют сердце и укрепляют мышцы! Движение — это здоровье!",
+          "bigEmojis": [
+            "🤸",
+            "🏃",
+            "🧘",
+            "🕺"
+          ],
+          "audioTextAz": "Hərəkət edirik, güclü və sağlam oluruq.",
+          "audioTextEn": "We move, get strong and stay healthy.",
+          "audioTextRu": "Мы двигаемся, становимся сильными и здоровыми."
+        },
+        "instruction": "Yerində qaçış hərəkətini et.",
+        "instructionEn": "Run in place.",
+        "instructionRu": "Беги на месте.",
+        "type": "command",
+        "question": "Olduğun yerdə 5 saniyə sürətlə qaç!",
+        "questionEn": "Run in place fast for 5 seconds!",
+        "questionRu": "Беги быстро на месте 5 секунд!",
+        "options": [
+          {
+            "id": "opt-mov-run-corr",
+            "text": "Qaçmaq",
+            "textEn": "Running",
+            "textRu": "Бежать",
+            "emoji": "🏃",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-run-lie",
+            "text": "Uzanmaq",
+            "textEn": "Lying down",
+            "textRu": "Лежать",
+            "emoji": "🛌",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-run-freeze",
+            "text": "Donub qalmaq",
+            "textEn": "Freezing",
+            "textRu": "Замереть",
+            "emoji": "🛑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mov-touch-toes-2",
+        "title": "Əyil və Toxun",
+        "titleEn": "Bend and Touch Toes",
+        "titleRu": "Наклонись к носочкам",
+        "instruction": "Əyilmək hərəkətini yerinə yetir.",
+        "instructionEn": "Perform bending.",
+        "instructionRu": "Выполни наклон.",
+        "type": "command",
+        "question": "Dizlərini bükmədən əyil və ayaq barmaqlarına toxun!",
+        "questionEn": "Bend down without bending knees and touch toes!",
+        "questionRu": "Наклонись не сгибая колени и коснись пальцев ног!",
+        "options": [
+          {
+            "id": "opt-mov-toe-bend",
+            "text": "Əyilmək",
+            "textEn": "Bending",
+            "textRu": "Наклониться",
+            "emoji": "🙇",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-toe-jump",
+            "text": "Tullanmaq",
+            "textEn": "Jumping",
+            "textRu": "Прыгать",
+            "emoji": "🦘",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-toe-spin",
+            "text": "Fırlanmaq",
+            "textEn": "Spinning",
+            "textRu": "Кружиться",
+            "emoji": "🌀",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mov-star-jump-3",
+        "title": "Ulduz Tullanışı",
+        "titleEn": "Star Jump",
+        "titleRu": "Прыжок звездочка",
+        "instruction": "Ulduz hərəkətini et.",
+        "instructionEn": "Do star jump.",
+        "instructionRu": "Сделай прыжок-звездочку.",
+        "type": "command",
+        "question": "Qollarını və ayaqlarını geniş açıb ulduz kimi tullan!",
+        "questionEn": "Spread arms and legs wide and jump like a star!",
+        "questionRu": "Широко расставь руки и ноги и подпрыгни как звездочка!",
+        "options": [
+          {
+            "id": "opt-mov-str-corr",
+            "text": "Ulduz tullanışı",
+            "textEn": "Star jump",
+            "textRu": "Прыжок звездочкой",
+            "emoji": "⭐",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-str-sleep",
+            "text": "Yuxuya getmək",
+            "textEn": "Sleep",
+            "textRu": "Спать",
+            "emoji": "😴",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-str-sit",
+            "text": "Oturmaq",
+            "textEn": "Sit",
+            "textRu": "Сидеть",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mov-spin-circle-4",
+        "title": "Yerində Fırlan",
+        "titleEn": "Spin Around",
+        "titleRu": "Покружись",
+        "instruction": "Fırlanmaq komandası.",
+        "instructionEn": "Spin command.",
+        "instructionRu": "Команда покружиться.",
+        "type": "command",
+        "question": "Yerində yavaşca bir tam dairə vuraraq fırlan!",
+        "questionEn": "Spin around slowly one full circle on the spot!",
+        "questionRu": "Медленно покружись один раз вокруг себя!",
+        "options": [
+          {
+            "id": "opt-mov-spn-corr",
+            "text": "Fırlanmaq",
+            "textEn": "Spinning",
+            "textRu": "Кружиться",
+            "emoji": "🌀",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-spn-str",
+            "text": "Düz getmək",
+            "textEn": "Walk straight",
+            "textRu": "Идти прямо",
+            "emoji": "🚶",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-spn-shut",
+            "text": "Gözü yummaq",
+            "textEn": "Close eyes",
+            "textRu": "Закрыть глаза",
+            "emoji": "🙈",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mov-balance-stork-5",
+        "title": "Bir Ayaqda Leylək",
+        "titleEn": "Stork on One Foot",
+        "titleRu": "Аист на одной ноге",
+        "instruction": "Müvazinət saxla.",
+        "instructionEn": "Keep balance.",
+        "instructionRu": "Держи равновесие.",
+        "type": "command",
+        "question": "Bir ayağın üstündə leylək kimi 5 saniyə dayan!",
+        "questionEn": "Stand on one foot like a stork for 5 seconds!",
+        "questionRu": "Постой на одной ноге как аист 5 секунд!",
+        "options": [
+          {
+            "id": "opt-mov-stk-corr",
+            "text": "Bir ayaqda durmaq",
+            "textEn": "Stand on one foot",
+            "textRu": "Стоять на одной ноге",
+            "emoji": "🦩",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-stk-run",
+            "text": "Qaçmaq",
+            "textEn": "Run",
+            "textRu": "Бежать",
+            "emoji": "🏃",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-stk-sit",
+            "text": "Oturmaq",
+            "textEn": "Sit",
+            "textRu": "Сесть",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mov-march-soldier-6",
+        "title": "Cəsur Addımla",
+        "titleEn": "Marching Steps",
+        "titleRu": "Маршируй",
+        "instruction": "Dizləri qaldıraraq addımla.",
+        "instructionEn": "March lifting knees.",
+        "instructionRu": "Маршируй поднимая колени.",
+        "type": "command",
+        "question": "Dizlərini hündürə qaldıraraq yerində addımla!",
+        "questionEn": "March on the spot lifting your knees high!",
+        "questionRu": "Маршируй на месте, высоко поднимая колени!",
+        "options": [
+          {
+            "id": "opt-mov-mch-corr",
+            "text": "Cəsur addımlamaq",
+            "textEn": "Brave marching",
+            "textRu": "Маршировать",
+            "emoji": "💂",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-mch-crw",
+            "text": "Sürünmək",
+            "textEn": "Crawl",
+            "textRu": "Ползать",
+            "emoji": "🐛",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-mch-swg",
+            "text": "Yellənmək",
+            "textEn": "Swing",
+            "textRu": "Качаться",
+            "emoji": "🪑",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "mov-happy-dance-7",
+        "title": "Şən Rəqs",
+        "titleEn": "Happy Dance",
+        "titleRu": "Веселый танец",
+        "instruction": "Rəqs etmək komandası.",
+        "instructionEn": "Dance command.",
+        "instructionRu": "Команда танцевать.",
+        "type": "command",
+        "question": "Şən musiqi sədaları altında sevinclə rəqs et!",
+        "questionEn": "Joyfully dance to the happy music!",
+        "questionRu": "Весело потанцуй под музыку!",
+        "options": [
+          {
+            "id": "opt-mov-dnc-corr",
+            "text": "Şən rəqs etmək",
+            "textEn": "Happy dance",
+            "textRu": "Весело танцевать",
+            "emoji": "🕺",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-mov-dnc-sit",
+            "text": "Susub oturmaq",
+            "textEn": "Sit quietly",
+            "textRu": "Сидеть тихо",
+            "emoji": "🤫",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-mov-dnc-frz",
+            "text": "Donub qalmaq",
+            "textEn": "Freeze",
+            "textRu": "Замереть",
+            "emoji": "🧊",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   },
@@ -8698,6 +16931,258 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
         "explanation": "Super! Qardan adam düzəldib yerkökündən burun qoyuruq! ☃️🥕❄️",
         "explanationEn": "Super! We build a snowman and give him a carrot nose! ☃️🥕❄️",
         "explanationRu": "Супер! Мы лепим снеговика с носом-морковкой! ☃️🥕❄️"
+      },
+      {
+        "id": "log-cow-milk-1",
+        "title": "Süd Haradan Gəlir?",
+        "titleEn": "Where Milk Comes From?",
+        "titleRu": "Откуда берется молоко?",
+        "lesson": {
+          "id": "log-lesson-connections",
+          "conceptTitleAz": "Məntiqi Fikirləşək və Əlaqələri Tapaq!",
+          "conceptTitleEn": "Let's Think Logically and Find Connections!",
+          "conceptTitleRu": "Думаем логически и находим связи!",
+          "explanationAz": "Hər əşyanın öz yeri, hər hadisənin öz səbəbi var! Nə nədən hazırlanır? Kim harada yaşayır?",
+          "explanationEn": "Everything has its place and cause! What is made from what? Who lives where?",
+          "explanationRu": "У каждой вещи свое место и причина! Что из чего сделано? Кто где живет?",
+          "bigEmojis": [
+            "🧠",
+            "💡",
+            "🧩",
+            "🎯"
+          ],
+          "audioTextAz": "Məntiqi əlaqələri tapırıq və fikirləşirik.",
+          "audioTextEn": "We find logical connections and think.",
+          "audioTextRu": "Находим логические связи и размышляем."
+        },
+        "instruction": "Məntiqi əlaqəni tap.",
+        "instructionEn": "Find logical connection.",
+        "instructionRu": "Найди логическую связь.",
+        "type": "select",
+        "question": "Dadlı və ağ süd bizə hansı heyvandan gəlir?",
+        "questionEn": "Which animal gives us tasty white milk?",
+        "questionRu": "Какое животное дает нам вкусное белое молоко?",
+        "options": [
+          {
+            "id": "opt-log-mlk-cow",
+            "text": "İnəkdən",
+            "textEn": "From cow",
+            "textRu": "От коровы",
+            "emoji": "🐮",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-log-mlk-hen",
+            "text": "Toyuqdan",
+            "textEn": "From hen",
+            "textRu": "От курицы",
+            "emoji": "🐔",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-log-mlk-cat",
+            "text": "Pişikdən",
+            "textEn": "From cat",
+            "textRu": "От кошки",
+            "emoji": "🐱",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "log-wool-sweater-2",
+        "title": "İsti Yun Sviter",
+        "titleEn": "Warm Wool Sweater",
+        "titleRu": "Теплый шерстяной свитер",
+        "instruction": "Yun ilə əlaqəli əşyanı tap.",
+        "instructionEn": "Find item made of wool.",
+        "instructionRu": "Найди вещь из шерсти.",
+        "type": "select",
+        "question": "Qoyunun yumşaq yunundan nə toxuyurlar?",
+        "questionEn": "What is knitted from sheep soft wool?",
+        "questionRu": "Что вяжут из мягкой овечьей шерсти?",
+        "options": [
+          {
+            "id": "opt-log-wol-swt",
+            "text": "İsti sviter və corab",
+            "textEn": "Warm sweater & socks",
+            "textRu": "Теплый свитер и носки",
+            "emoji": "🧶",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-log-wol-gls",
+            "text": "Şüşə stəkan",
+            "textEn": "Glass cup",
+            "textRu": "Стеклянный стакан",
+            "emoji": "🥛",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-log-wol-door",
+            "text": "Dəmir qapı",
+            "textEn": "Iron door",
+            "textRu": "Железную дверь",
+            "emoji": "🚪",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "log-bird-nest-3",
+        "title": "Quşun Evi",
+        "titleEn": "Bird Home",
+        "titleRu": "Дом птицы",
+        "instruction": "Quşun yumurtasını qoruduğu yeri seç.",
+        "instructionEn": "Select where bird protects eggs.",
+        "instructionRu": "Выбери, где птица хранит яйца.",
+        "type": "select",
+        "question": "Quş öz yumurtalarını və balalarını harada qoruyur?",
+        "questionEn": "Where does the bird protect its eggs and chicks?",
+        "questionRu": "Где птица оберегает яйца и птенцов?",
+        "options": [
+          {
+            "id": "opt-log-nst-corr",
+            "text": "Ağacdakı yuvada",
+            "textEn": "In tree nest",
+            "textRu": "В гнезде на дереве",
+            "emoji": "🪹",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-log-nst-well",
+            "text": "Su quyusunda",
+            "textEn": "In water well",
+            "textRu": "В колодце",
+            "emoji": "🪣",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-log-nst-car",
+            "text": "Avtomobilin içində",
+            "textEn": "Inside car",
+            "textRu": "В машине",
+            "emoji": "🚗",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "log-odd-out-car-4",
+        "title": "Sırada Artıq Əşya",
+        "titleEn": "Odd One in Group",
+        "titleRu": "Лишний предмет в группе",
+        "instruction": "Artıq olanı tap.",
+        "instructionEn": "Find odd item.",
+        "instructionRu": "Найди лишнее.",
+        "type": "select",
+        "question": "Bu sırada artıq olan hansıdır? (Alma, Armud, Banan, Avtomobil)",
+        "questionEn": "Which one is odd in this list? (Apple, Pear, Banana, Car)",
+        "questionRu": "Что лишнее в этом ряду? (Яблоко, Груша, Банан, Машина)",
+        "options": [
+          {
+            "id": "opt-log-odd-car",
+            "text": "Avtomobil (çünki nəqliyyatdır)",
+            "textEn": "Car (it is transport)",
+            "textRu": "Машина (так как это транспорт)",
+            "emoji": "🚗",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-log-odd-apple",
+            "text": "Alma",
+            "textEn": "Apple",
+            "textRu": "Яблоко",
+            "emoji": "🍎",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-log-odd-banana",
+            "text": "Banan",
+            "textEn": "Banana",
+            "textRu": "Банан",
+            "emoji": "🍌",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "log-sunglasses-5",
+        "title": "Günəşdən Qorunmaq",
+        "titleEn": "Sun Protection",
+        "titleRu": "Защита от солнца",
+        "instruction": "Günəş əşyasını tap.",
+        "instructionEn": "Find sun protection item.",
+        "instructionRu": "Найди предмет защиты от солнца.",
+        "type": "select",
+        "question": "Parlaq yay günəşindən gözlərimizi qorumaq üçün nə taxırıq?",
+        "questionEn": "What do we wear to protect eyes from bright sun?",
+        "questionRu": "Что мы надеваем для защиты глаз от яркого солнца?",
+        "options": [
+          {
+            "id": "opt-log-sng-corr",
+            "text": "Gün eynəyi",
+            "textEn": "Sunglasses",
+            "textRu": "Солнцезащитные очки",
+            "emoji": "🕶️",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-log-sng-glove",
+            "text": "Əlcək",
+            "textEn": "Gloves",
+            "textRu": "Перчатки",
+            "emoji": "🧤",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-log-sng-scarf",
+            "text": "Qalın şərf",
+            "textEn": "Scarf",
+            "textRu": "Шарф",
+            "emoji": "🧣",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "log-key-lock-6",
+        "title": "Qıfıl və Açar",
+        "titleEn": "Key and Lock",
+        "titleRu": "Замок и ключ",
+        "instruction": "Qıfılı açan əşyanı seç.",
+        "instructionEn": "Select item that opens lock.",
+        "instructionRu": "Выбери предмет, открывающий замок.",
+        "type": "select",
+        "question": "Qapıdakı qıfılı açmaq üçün bizə nə lazımdır?",
+        "questionEn": "What do we need to unlock a door lock?",
+        "questionRu": "Что нужно, чтобы открыть замок на двери?",
+        "options": [
+          {
+            "id": "opt-log-key-corr",
+            "text": "Açar",
+            "textEn": "Key",
+            "textRu": "Ключ",
+            "emoji": "🔑",
+            "isCorrect": true
+          },
+          {
+            "id": "opt-log-key-pen",
+            "text": "Qələm",
+            "textEn": "Pen",
+            "textRu": "Карандаш",
+            "emoji": "✏️",
+            "isCorrect": false
+          },
+          {
+            "id": "opt-log-key-spn",
+            "text": "Qaşıq",
+            "textEn": "Spoon",
+            "textRu": "Ложка",
+            "emoji": "🥄",
+            "isCorrect": false
+          }
+        ]
       }
     ]
   }

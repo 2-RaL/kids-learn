@@ -4565,6 +4565,5829 @@ export const ACTIVITY_TRANSLATIONS: Record<string, LocalizedActivityData> = {
       "en": "Super! We build a snowman and give him a carrot nose! ☃️🥕❄️",
       "ru": "Супер! Мы лепим снеговика с носом-морковкой! ☃️🥕❄️"
     }
+  },
+  "shp-square-1": {
+    "question": {
+      "az": "Hansı əşya kvadrat formasındadır?",
+      "en": "Which item has a square shape?",
+      "ru": "Какой предмет имеет форму квадрата?"
+    },
+    "instruction": {
+      "az": "Kvadrat formasında olan əşyanı tap.",
+      "en": "Find the square shaped item.",
+      "ru": "Найди предмет квадратной формы."
+    },
+    "options": {
+      "Hədiyyə Qutusu": {
+        "en": "Gift Box",
+        "ru": "Подарочная коробка"
+      },
+      "Top": {
+        "en": "Ball",
+        "ru": "Мяч"
+      },
+      "Yumurta": {
+        "en": "Egg",
+        "ru": "Яйцо"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "shp-square-window-2": {
+    "question": {
+      "az": "Dörd bərabər tərəfi olan pəncərə hansı fiqurdur?",
+      "en": "What shape is a window with four equal sides?",
+      "ru": "Какая фигура у окна с четырьмя равными сторонами?"
+    },
+    "instruction": {
+      "az": "Otaqdakı pəncərənin formasını seç.",
+      "en": "Select the shape of the room window.",
+      "ru": "Выбери форму комнатного окна."
+    },
+    "options": {
+      "Kvadrat": {
+        "en": "Square",
+        "ru": "Квадрат"
+      },
+      "Dairə": {
+        "en": "Circle",
+        "ru": "Круг"
+      },
+      "Üçbucaq": {
+        "en": "Triangle",
+        "ru": "Треугольник"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "shp-star-1": {
+    "question": {
+      "az": "Hansı parlaq fiqur ulduzdur?",
+      "en": "Which shining shape is a star?",
+      "ru": "Какая сияющая фигура — звезда?"
+    },
+    "instruction": {
+      "az": "Parıldayan ulduz fiqurunu seç.",
+      "en": "Select the shining star shape.",
+      "ru": "Выбери сияющую фигуру звезды."
+    },
+    "options": {
+      "Sarı Ulduz": {
+        "en": "Yellow Star",
+        "ru": "Желтая звезда"
+      },
+      "Dairə": {
+        "en": "Circle",
+        "ru": "Круг"
+      },
+      "Kvadrat": {
+        "en": "Square",
+        "ru": "Квадрат"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "shp-star-sea-2": {
+    "question": {
+      "az": "Dəniz ulduzu hansı həndəsi formaya bənzəyir?",
+      "en": "What shape does a starfish resemble?",
+      "ru": "На какую форму похожа морская звезда?"
+    },
+    "instruction": {
+      "az": "Dəniz canlısının formasını tap.",
+      "en": "Find the shape of the sea creature.",
+      "ru": "Найди форму морского обитателя."
+    },
+    "options": {
+      "Ulduz": {
+        "en": "Star",
+        "ru": "Звезда"
+      },
+      "Üçbucaq": {
+        "en": "Triangle",
+        "ru": "Треугольник"
+      },
+      "Kvadrat": {
+        "en": "Square",
+        "ru": "Квадрат"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "obj-school-1": {
+    "question": {
+      "az": "Dəftərə rəsm çəkmək və yazmaq üçün nə işlədirik?",
+      "en": "What do we use to draw and write in a notebook?",
+      "ru": "Что мы используем, чтобы рисовать и писать в тетради?"
+    },
+    "instruction": {
+      "az": "Yazı yazmaq üçün lazım olan əşyanı tap.",
+      "en": "Find the item used for writing.",
+      "ru": "Найди предмет для письма."
+    },
+    "options": {
+      "Rəngli Qələm": {
+        "en": "Color Pencil",
+        "ru": "Цветной карандаш"
+      },
+      "Qaşıq": {
+        "en": "Spoon",
+        "ru": "Ложка"
+      },
+      "Yastıq": {
+        "en": "Pillow",
+        "ru": "Подушка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "obj-school-bag-2": {
+    "question": {
+      "az": "Dəftər və kitablarımızı hara yığırıq?",
+      "en": "Where do we pack our notebooks and books?",
+      "ru": "Куда мы складываем тетради и книги?"
+    },
+    "instruction": {
+      "az": "Kitabları daşımaq üçün əşyanı seç.",
+      "en": "Select the item for carrying books.",
+      "ru": "Выбери предмет для ношения книг."
+    },
+    "options": {
+      "Məktəb Çantası": {
+        "en": "School Backpack",
+        "ru": "Школьный рюкзак"
+      },
+      "Boşqab": {
+        "en": "Plate",
+        "ru": "Тарелка"
+      },
+      "Stul": {
+        "en": "Chair",
+        "ru": "Стул"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "obj-school-book-3": {
+    "question": {
+      "az": "Hansı əşyadan gözəl nağıllar oxuyuruq?",
+      "en": "From which item do we read wonderful stories?",
+      "ru": "Из какого предмета мы читаем чудесные сказки?"
+    },
+    "instruction": {
+      "az": "Nağıl oxunan əşyanı seç.",
+      "en": "Select the item used to read stories.",
+      "ru": "Выбери предмет, из которого читают сказки."
+    },
+    "options": {
+      "Kitab": {
+        "en": "Book",
+        "ru": "Книга"
+      },
+      "Çəngəl": {
+        "en": "Fork",
+        "ru": "Вилка"
+      },
+      "Saat": {
+        "en": "Clock",
+        "ru": "Часы"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "obj-toys-1": {
+    "question": {
+      "az": "Yatağa aparıb qucaqladığımız yumşaq oyuncaq hansıdır?",
+      "en": "Which soft toy do we take to bed to hug?",
+      "ru": "Какую мягкую игрушку мы берем в кровать, чтобы обнять?"
+    },
+    "instruction": {
+      "az": "Yumşaq oyuncağı seç.",
+      "en": "Select the soft plush toy.",
+      "ru": "Выбери мягкую плюшевую игрушку."
+    },
+    "options": {
+      "Yumşaq Ayı": {
+        "en": "Teddy Bear",
+        "ru": "Плюшевый мишка"
+      },
+      "Dəftər": {
+        "en": "Notebook",
+        "ru": "Тетрадь"
+      },
+      "Fincan": {
+        "en": "Cup",
+        "ru": "Чашка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "obj-toys-ball-2": {
+    "question": {
+      "az": "Hansı oyuncağı yerə vuranda yuxarı tullanır?",
+      "en": "Which toy bounces up when hit on the ground?",
+      "ru": "Какая игрушка подскакивает, когда ударяется о землю?"
+    },
+    "instruction": {
+      "az": "Tullanan oyuncağı tap.",
+      "en": "Find the bouncing toy.",
+      "ru": "Найди прыгучую игрушку."
+    },
+    "options": {
+      "Rəngli Top": {
+        "en": "Colorful Ball",
+        "ru": "Цветной мяч"
+      },
+      "Stul": {
+        "en": "Chair",
+        "ru": "Стул"
+      },
+      "Qapı": {
+        "en": "Door",
+        "ru": "Дверь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "bod-legs-1": {
+    "question": {
+      "az": "Qaçmaq və tullanmaq üçün bədənimizin hansı hissəsi lazımdır?",
+      "en": "Which part of our body do we need to run and jump?",
+      "ru": "Какая часть тела нужна, чтобы бегать и прыгать?"
+    },
+    "instruction": {
+      "az": "Qaçmaq üçün lazım olan bədən üzvünü seç.",
+      "en": "Select the body part needed for running.",
+      "ru": "Выбери часть тела, необходимую для бега."
+    },
+    "options": {
+      "Ayaqlar": {
+        "en": "Legs",
+        "ru": "Ноги"
+      },
+      "Qulaqlar": {
+        "en": "Ears",
+        "ru": "Уши"
+      },
+      "Burun": {
+        "en": "Nose",
+        "ru": "Нос"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "bod-feet-shoes-2": {
+    "question": {
+      "az": "Ayaqqabını bədənimizin harasına geyinirik?",
+      "en": "Where on our body do we put shoes on?",
+      "ru": "Куда на теле мы надеваем обувь?"
+    },
+    "instruction": {
+      "az": "Ayaqqabının geyinildiyi yeri tap.",
+      "en": "Find where shoes are worn.",
+      "ru": "Найди, куда надевают обувь."
+    },
+    "options": {
+      "Ayağa": {
+        "en": "Feet",
+        "ru": "На ноги"
+      },
+      "Başa": {
+        "en": "Head",
+        "ru": "На голову"
+      },
+      "Ələ": {
+        "en": "Hands",
+        "ru": "На руки"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "bod-toes-3": {
+    "question": {
+      "az": "Bir ayağımızda neçə barmaq var?",
+      "en": "How many toes are on one foot?",
+      "ru": "Сколько пальцев на одной ноге?"
+    },
+    "instruction": {
+      "az": "Ayaqdakı barmaqların sayını tap.",
+      "en": "Find the number of toes on one foot.",
+      "ru": "Найди количество пальцев на одной ноге."
+    },
+    "options": {
+      "5 Barmaq": {
+        "en": "5 Toes",
+        "ru": "5 пальцев"
+      },
+      "2 Barmaq": {
+        "en": "2 Toes",
+        "ru": "2 пальца"
+      },
+      "10 Barmaq": {
+        "en": "10 Toes",
+        "ru": "10 пальцев"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "bod-mouth-1": {
+    "question": {
+      "az": "Şad olanda nəyimizlə şirin gülümsəyirik?",
+      "en": "What do we sweetly smile with when happy?",
+      "ru": "Чем мы радостно улыбаемся, когда счастливы?"
+    },
+    "instruction": {
+      "az": "Gülümsədiyimiz üz üzvünü seç.",
+      "en": "Select the face part we smile with.",
+      "ru": "Выбери часть лица, которой мы улыбаемся."
+    },
+    "options": {
+      "Ağzımızla": {
+        "en": "Mouth",
+        "ru": "Ртом"
+      },
+      "Qulağımızla": {
+        "en": "Ear",
+        "ru": "Ухом"
+      },
+      "Qolumuzla": {
+        "en": "Arm",
+        "ru": "Рукой"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "bod-teeth-2": {
+    "question": {
+      "az": "Yeməyi çeynəmək üçün bizə nə kömək edir?",
+      "en": "What helps us chew our food?",
+      "ru": "Что помогает нам пережевывать пищу?"
+    },
+    "instruction": {
+      "az": "Yeməyi çeynəyən orqanı tap.",
+      "en": "Find what chews food.",
+      "ru": "Найди, чем пережевывают пищу."
+    },
+    "options": {
+      "Ağappaq Dişlərimiz": {
+        "en": "White Teeth",
+        "ru": "Белые зубки"
+      },
+      "Gözümüz": {
+        "en": "Eye",
+        "ru": "Глаз"
+      },
+      "Saçımız": {
+        "en": "Hair",
+        "ru": "Волосы"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "ani-birds-1": {
+    "question": {
+      "az": "Göydə qanad çalıb uçan canlı hansıdır?",
+      "en": "Which creature flaps wings and flies in the sky?",
+      "ru": "Кто машет крыльями и летает в небе?"
+    },
+    "instruction": {
+      "az": "Göydə uçan quşu tap.",
+      "en": "Find the bird flying in the sky.",
+      "ru": "Найди птицу, летающую в небе."
+    },
+    "options": {
+      "Balaca Quş": {
+        "en": "Little Bird",
+        "ru": "Маленькая птичка"
+      },
+      "Tısbağa": {
+        "en": "Turtle",
+        "ru": "Черепаха"
+      },
+      "Pişik": {
+        "en": "Cat",
+        "ru": "Кошка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "ani-birds-duck-2": {
+    "question": {
+      "az": "Suda üzən və \"vak-vak\" edən quş hansıdır?",
+      "en": "Which bird swims in water and says quack quack?",
+      "ru": "Какая птица плавает в воде и говорит кря-кря?"
+    },
+    "instruction": {
+      "az": "Suda üzən quşu tap.",
+      "en": "Find the swimming bird.",
+      "ru": "Найди водоплавающую птицу."
+    },
+    "options": {
+      "Ördək": {
+        "en": "Duck",
+        "ru": "Утка"
+      },
+      "İt": {
+        "en": "Dog",
+        "ru": "Собака"
+      },
+      "At": {
+        "en": "Horse",
+        "ru": "Лошадь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "ani-sea-fish-1": {
+    "question": {
+      "az": "Suda üzgəcləri ilə üzən sevimli canlı hansıdır?",
+      "en": "Which lovely creature swims in water with fins?",
+      "ru": "Кто плавает в воде с плавниками?"
+    },
+    "instruction": {
+      "az": "Suda üzən balığı seç.",
+      "en": "Select the fish swimming in water.",
+      "ru": "Выбери рыбу, плавающую в воде."
+    },
+    "options": {
+      "Qızıl Balıq": {
+        "en": "Goldfish",
+        "ru": "Золотая рыбка"
+      },
+      "Dovşan": {
+        "en": "Rabbit",
+        "ru": "Кролик"
+      },
+      "Toyuq": {
+        "en": "Hen",
+        "ru": "Курица"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "ani-sea-dolphin-2": {
+    "question": {
+      "az": "Dənizdə şən tullanan və üzən dostumuz hansıdır?",
+      "en": "Which friend joyfully jumps and swims in the sea?",
+      "ru": "Какой друг весело прыгает и плавает в море?"
+    },
+    "instruction": {
+      "az": "Dəniz dostumuzu tap.",
+      "en": "Find our sea friend.",
+      "ru": "Найди нашего морского друга."
+    },
+    "options": {
+      "Delfin": {
+        "en": "Dolphin",
+        "ru": "Дельфин"
+      },
+      "Ayı": {
+        "en": "Bear",
+        "ru": "Медведь"
+      },
+      "Şir": {
+        "en": "Lion",
+        "ru": "Лев"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fav-strawberry-1": {
+    "question": {
+      "az": "Qırmızı rəngdə, nöqtəli və şirin giləmeyvə hansıdır?",
+      "en": "Which red, spotted, and sweet berry is this?",
+      "ru": "Какая ягода красная, в крапинку и сладкая?"
+    },
+    "instruction": {
+      "az": "Şirin qırmızı giləmeyvəni seç.",
+      "en": "Select the sweet red berry.",
+      "ru": "Выбери сладкую красную ягоду."
+    },
+    "options": {
+      "Çiyələk": {
+        "en": "Strawberry",
+        "ru": "Клубника"
+      },
+      "Xiyar": {
+        "en": "Cucumber",
+        "ru": "Огурец"
+      },
+      "Kartof": {
+        "en": "Potato",
+        "ru": "Картофель"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fav-banana-2": {
+    "question": {
+      "az": "Meymunların çox sevdiyi sarı meyvə hansıdır?",
+      "en": "Which yellow fruit do monkeys love?",
+      "ru": "Какой желтый фрукт очень любят обезьянки?"
+    },
+    "instruction": {
+      "az": "Sarı və şirin meyvəni tap.",
+      "en": "Find the yellow sweet fruit.",
+      "ru": "Найди желтый сладкий фрукт."
+    },
+    "options": {
+      "Banan": {
+        "en": "Banana",
+        "ru": "Банан"
+      },
+      "Kök": {
+        "en": "Carrot",
+        "ru": "Морковь"
+      },
+      "Pomidor": {
+        "en": "Tomato",
+        "ru": "Помидор"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fav-grapes-3": {
+    "question": {
+      "az": "Salxım şəklində böyüyən şirin giləmeyvə hansıdır?",
+      "en": "Which sweet berry grows in bunches?",
+      "ru": "Какая сладкая ягода растет гроздьями?"
+    },
+    "instruction": {
+      "az": "Salxımlı meyvəni seç.",
+      "en": "Select the cluster fruit.",
+      "ru": "Выбери ягоды гроздьями."
+    },
+    "options": {
+      "Üzüm": {
+        "en": "Grapes",
+        "ru": "Виноград"
+      },
+      "Soğan": {
+        "en": "Onion",
+        "ru": "Лук"
+      },
+      "Kələm": {
+        "en": "Cabbage",
+        "ru": "Капуста"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fav-potato-1": {
+    "question": {
+      "az": "Torpağın altında böyüyən, dadlı püresi olan tərəvəz hansıdır?",
+      "en": "Which vegetable grows underground and makes tasty puree?",
+      "ru": "Какой овощ растет под землей и из него делают пюре?"
+    },
+    "instruction": {
+      "az": "Torpaq altında yetişən tərəvəzi tap.",
+      "en": "Find the vegetable grown underground.",
+      "ru": "Найди овощ, растущий под землей."
+    },
+    "options": {
+      "Kartof": {
+        "en": "Potato",
+        "ru": "Картофель"
+      },
+      "Alma": {
+        "en": "Apple",
+        "ru": "Яблоко"
+      },
+      "Albalı": {
+        "en": "Cherry",
+        "ru": "Вишня"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fav-cucumber-2": {
+    "question": {
+      "az": "Yaşıl, xırçıltılı və təravətli tərəvəz hansıdır?",
+      "en": "Which vegetable is green, crunchy, and fresh?",
+      "ru": "Какой овощ зеленый, хрустящий и свежий?"
+    },
+    "instruction": {
+      "az": "Təravətli yaşıl tərəvəzi tap.",
+      "en": "Find the fresh green vegetable.",
+      "ru": "Найди свежий зеленый овощ."
+    },
+    "options": {
+      "Xiyar": {
+        "en": "Cucumber",
+        "ru": "Огурец"
+      },
+      "Limon": {
+        "en": "Lemon",
+        "ru": "Лимон"
+      },
+      "Şaftalı": {
+        "en": "Peach",
+        "ru": "Персик"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "tra-ship-1": {
+    "question": {
+      "az": "Dənizdə və okeanda üzən böyük nəqliyyat vasitəsi hansıdır?",
+      "en": "Which large transport vehicle sails in seas and oceans?",
+      "ru": "Какой большой транспорт плавает по морям и океанам?"
+    },
+    "instruction": {
+      "az": "Dənizdə üzən nəqliyyatı tap.",
+      "en": "Find the transport sailing in the sea.",
+      "ru": "Найди транспорт, плавающий в море."
+    },
+    "options": {
+      "Böyük Gəmi": {
+        "en": "Big Ship",
+        "ru": "Большой корабль"
+      },
+      "Avtomobil": {
+        "en": "Car",
+        "ru": "Автомобиль"
+      },
+      "Velosiped": {
+        "en": "Bicycle",
+        "ru": "Велосипед"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "tra-boat-2": {
+    "question": {
+      "az": "Avar çəkərək çayda üzdüyümüz nəqliyyat hansıdır?",
+      "en": "Which transport do we row in the river?",
+      "ru": "На каком транспорте мы гребем веслами по реке?"
+    },
+    "instruction": {
+      "az": "Çayda üzən qayığı seç.",
+      "en": "Select the boat sailing in river.",
+      "ru": "Выбери лодку, плывущую по реке."
+    },
+    "options": {
+      "Qayıq": {
+        "en": "Boat",
+        "ru": "Лодка"
+      },
+      "Təyyarə": {
+        "en": "Airplane",
+        "ru": "Самолет"
+      },
+      "Avtobus": {
+        "en": "Bus",
+        "ru": "Автобус"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "tra-sail-3": {
+    "question": {
+      "az": "Küləyin köməyi ilə üzən yelkənli nəqliyyat hansıdır?",
+      "en": "Which sailing transport moves with the help of wind?",
+      "ru": "Какой парусный транспорт движется с помощью ветра?"
+    },
+    "instruction": {
+      "az": "Küləklə üzən yelkənli vasitəni tap.",
+      "en": "Find the wind-powered sailing vessel.",
+      "ru": "Найди судно, плывущее от ветра."
+    },
+    "options": {
+      "Yelkənli Gəmi": {
+        "en": "Sailboat",
+        "ru": "Парусник"
+      },
+      "Qatar": {
+        "en": "Train",
+        "ru": "Поезд"
+      },
+      "Tramvay": {
+        "en": "Tram",
+        "ru": "Трамвай"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "tra-rescue-fire-1": {
+    "question": {
+      "az": "Qırmızı rəngdə olan və yanğını söndürməyə tələsən maşın hansıdır?",
+      "en": "Which red vehicle rushes to extinguish fires?",
+      "ru": "Какая красная машина спешит тушить пожар?"
+    },
+    "instruction": {
+      "az": "Yanğını söndürməyə gedən maşını seç.",
+      "en": "Select the fire fighting truck.",
+      "ru": "Выбери пожарную машину."
+    },
+    "options": {
+      "Yanğınsöndürən Maşın": {
+        "en": "Fire Truck",
+        "ru": "Пожарная машина"
+      },
+      "Taksi": {
+        "en": "Taxi",
+        "ru": "Такси"
+      },
+      "Traktor": {
+        "en": "Tractor",
+        "ru": "Трактор"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "tra-rescue-ambulance-2": {
+    "question": {
+      "az": "Həkimləri xəstələrin köməyinə tələsdirən maşın hansıdır?",
+      "en": "Which vehicle rushes doctors to help patients?",
+      "ru": "Какая машина везет врачей на помощь больным?"
+    },
+    "instruction": {
+      "az": "Xəstələrə kömək edən avtomobili tap.",
+      "en": "Find the vehicle that helps sick people.",
+      "ru": "Найди автомобиль, помогающий больным."
+    },
+    "options": {
+      "Təcili Yardım": {
+        "en": "Ambulance",
+        "ru": "Скорая помощь"
+      },
+      "Yük Maşını": {
+        "en": "Cargo Truck",
+        "ru": "Грузовик"
+      },
+      "Motosiklet": {
+        "en": "Motorcycle",
+        "ru": "Мотоцикл"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "prf-firefighter-1": {
+    "question": {
+      "az": "Yanğını söndürən cəsur peşə sahibi kimdir?",
+      "en": "Who is the brave professional who puts out fires?",
+      "ru": "Кто этот смелый человек, который тушит огонь?"
+    },
+    "instruction": {
+      "az": "Yanğını söndürən peşə sahibini seç.",
+      "en": "Select the professional who puts out fire.",
+      "ru": "Выбери профессию человека, тушащего пожары."
+    },
+    "options": {
+      "Yanğınsöndürən": {
+        "en": "Firefighter",
+        "ru": "Пожарный"
+      },
+      "Dərzi": {
+        "en": "Tailor",
+        "ru": "Портной"
+      },
+      "Bərbər": {
+        "en": "Barber",
+        "ru": "Парикмахер"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "prf-police-2": {
+    "question": {
+      "az": "Yol qaydalarına və asayişə nəzarət edən kimdir?",
+      "en": "Who oversees traffic rules and safety?",
+      "ru": "Кто следит за правилами дороги и порядком?"
+    },
+    "instruction": {
+      "az": "Qaydaları qoruyan peşə sahibini tap.",
+      "en": "Find the professional who protects rules.",
+      "ru": "Найди профессию человека, охраняющего порядок."
+    },
+    "options": {
+      "Polis": {
+        "en": "Police Officer",
+        "ru": "Полицейский"
+      },
+      "Rəssam": {
+        "en": "Painter",
+        "ru": "Художник"
+      },
+      "Musiqiçi": {
+        "en": "Musician",
+        "ru": "Музыкант"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "prf-fire-tool-3": {
+    "question": {
+      "az": "Yanğınsöndürən alovu söndürmək üçün nə istifadə edir?",
+      "en": "What does a firefighter use to extinguish fire?",
+      "ru": "Что использует пожарный для тушения огня?"
+    },
+    "instruction": {
+      "az": "Yanğını söndürən aləti seç.",
+      "en": "Select the tool for extinguishing fire.",
+      "ru": "Выбери инструмент для тушения огня."
+    },
+    "options": {
+      "Su Şlanqı": {
+        "en": "Water Hose",
+        "ru": "Водяной шланг"
+      },
+      "Qələm": {
+        "en": "Pen",
+        "ru": "Ручка"
+      },
+      "Qaşıq": {
+        "en": "Spoon",
+        "ru": "Ложка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "prf-chef-1": {
+    "question": {
+      "az": "Restoranda dadlı şorba və yeməklər bişirən kimdir?",
+      "en": "Who cooks delicious soup and meals in a restaurant?",
+      "ru": "Кто готовит вкусный суп и еду в ресторане?"
+    },
+    "instruction": {
+      "az": "Dadlı yeməklər bişirən peşə sahibini seç.",
+      "en": "Select the professional who cooks tasty meals.",
+      "ru": "Выбери профессию человека, готовящего вкусную еду."
+    },
+    "options": {
+      "Aşpaz": {
+        "en": "Chef",
+        "ru": "Повар"
+      },
+      "Həkim": {
+        "en": "Doctor",
+        "ru": "Врач"
+      },
+      "Kosmonavt": {
+        "en": "Astronaut",
+        "ru": "Космонавт"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "prf-builder-2": {
+    "question": {
+      "az": "Kərpiclərlə hündür və gözəl binalar tikən kimdir?",
+      "en": "Who builds tall and beautiful buildings with bricks?",
+      "ru": "Кто строит высокие красивые здания из кирпича?"
+    },
+    "instruction": {
+      "az": "Ev tikən peşə sahibini tap.",
+      "en": "Find the professional who builds houses.",
+      "ru": "Найди профессию человека, строящего дома."
+    },
+    "options": {
+      "İnşaatçı Bənna": {
+        "en": "Builder",
+        "ru": "Строитель"
+      },
+      "Müəllim": {
+        "en": "Teacher",
+        "ru": "Учитель"
+      },
+      "Dənizçi": {
+        "en": "Sailor",
+        "ru": "Моряк"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fam-brother-1": {
+    "question": {
+      "az": "Bizim sevimli oğlan ailə üzvümüz kimdir?",
+      "en": "Who is our beloved boy family member?",
+      "ru": "Кто наш любимый член семьи мальчик?"
+    },
+    "instruction": {
+      "az": "Qardaş ailə üzvünü seç.",
+      "en": "Select the brother family member.",
+      "ru": "Выбери члена семьи — брата."
+    },
+    "options": {
+      "Qardaş": {
+        "en": "Brother",
+        "ru": "Брат"
+      },
+      "Qonşu": {
+        "en": "Neighbor",
+        "ru": "Сосед"
+      },
+      "Yad Adam": {
+        "en": "Stranger",
+        "ru": "Незнакомец"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fam-sister-2": {
+    "question": {
+      "az": "Bizim mehriban qız ailə üzvümüz kimdir?",
+      "en": "Who is our kind girl family member?",
+      "ru": "Кто наш добрый член семьи девочка?"
+    },
+    "instruction": {
+      "az": "Bacı ailə üzvünü tap.",
+      "en": "Find the sister family member.",
+      "ru": "Найди члена семьи — сестру."
+    },
+    "options": {
+      "Bacı": {
+        "en": "Sister",
+        "ru": "Сестра"
+      },
+      "Qəhrəman": {
+        "en": "Hero",
+        "ru": "Герой"
+      },
+      "Satıcı": {
+        "en": "Shopkeeper",
+        "ru": "Продавец"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fam-share-3": {
+    "question": {
+      "az": "Qardaş və bacı ilə necə rəftar etməliyik?",
+      "en": "How should we behave with brother and sister?",
+      "ru": "Как мы должны обращаться с братом и сестрой?"
+    },
+    "instruction": {
+      "az": "Ailədə düzgün davranışı seç.",
+      "en": "Select the right behavior in family.",
+      "ru": "Выбери правильное поведение в семье."
+    },
+    "options": {
+      "Mehriban olmalı və bölüşməliyik": {
+        "en": "Be kind and share",
+        "ru": "Быть дружными и делиться"
+      },
+      "Oyuncaqları gizlətməliyik": {
+        "en": "Hide toys",
+        "ru": "Прятать игрушки"
+      },
+      "Küsüşməliyik": {
+        "en": "Quarrel",
+        "ru": "Ссориться"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fam-hug-1": {
+    "question": {
+      "az": "Ailə üzvlərimizi sevdiyimizi necə göstəririk?",
+      "en": "How do we show that we love our family members?",
+      "ru": "Как мы показываем любовь к членам семьи?"
+    },
+    "instruction": {
+      "az": "Sevgi göstərmək yolunu seç.",
+      "en": "Select the way to show love.",
+      "ru": "Выбери способ проявить любовь."
+    },
+    "options": {
+      "Mehribanlıqla qucaqlayaraq": {
+        "en": "With a warm hug",
+        "ru": "Теплыми объятиями"
+      },
+      "Qışqıraraq": {
+        "en": "By shouting",
+        "ru": "Криками"
+      },
+      "Qapını çırparaq": {
+        "en": "Slamming door",
+        "ru": "Хлопая дверью"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fam-help-mom-2": {
+    "question": {
+      "az": "Anamıza evdə necə kömək edə bilərik?",
+      "en": "How can we help our mother at home?",
+      "ru": "Как мы можем помочь маме дома?"
+    },
+    "instruction": {
+      "az": "Evdə kömək etməyi tap.",
+      "en": "Find how to help at home.",
+      "ru": "Найди, как помочь дома."
+    },
+    "options": {
+      "Oyuncaqları səliqəyə yığaraq": {
+        "en": "By tidying up toys",
+        "ru": "Убирая игрушки"
+      },
+      "Otağı dağıdaraq": {
+        "en": "Making a mess",
+        "ru": "Разбрасывая вещи"
+      },
+      "Tənbəllik edərək": {
+        "en": "Being lazy",
+        "ru": "Ленясь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "fam-dinner-together-3": {
+    "question": {
+      "az": "Bütün ailə birlikdə nə edəndə çox sevinir?",
+      "en": "When does the whole family feel happy together?",
+      "ru": "Когда вся семья радуется вместе?"
+    },
+    "instruction": {
+      "az": "Birlikdə vaxt keçirməyi seç.",
+      "en": "Select spending time together.",
+      "ru": "Выбери проведение времени вместе."
+    },
+    "options": {
+      "Birlikdə süfrə arxasında oturanda": {
+        "en": "Sitting together at dinner",
+        "ru": "Сидя вместе за ужином"
+      },
+      "Hamı tək qalanda": {
+        "en": "When everyone is alone",
+        "ru": "Когда все поодиночке"
+      },
+      "Qaranlıqda oturanda": {
+        "en": "Sitting in the dark",
+        "ru": "Сидя в темноте"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-jump-1": {
+    "question": {
+      "az": "Yerində 3 dəfə yuxarı tullan!",
+      "en": "Jump up 3 times on the spot!",
+      "ru": "Подпрыгни 3 раза на месте!"
+    },
+    "instruction": {
+      "az": "Tullanmaq komandasını tap.",
+      "en": "Find the jumping command.",
+      "ru": "Найди команду прыжка."
+    },
+    "options": {
+      "Tullanmaq": {
+        "en": "Jumping",
+        "ru": "Прыгать"
+      },
+      "Yatmaq": {
+        "en": "Sleeping",
+        "ru": "Спать"
+      },
+      "Oturmaq": {
+        "en": "Sitting",
+        "ru": "Сидеть"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-smile-2": {
+    "question": {
+      "az": "Gözəl təbəssümlə gülümsə!",
+      "en": "Smile with a lovely smile!",
+      "ru": "Улыбнись красивой улыбкой!"
+    },
+    "instruction": {
+      "az": "Gülümsəmək komandasını yerinə yetir.",
+      "en": "Perform the smiling command.",
+      "ru": "Выполни команду улыбки."
+    },
+    "options": {
+      "Gülümsəmək": {
+        "en": "Smiling",
+        "ru": "Улыбаться"
+      },
+      "Ağlamaq": {
+        "en": "Crying",
+        "ru": "Плакать"
+      },
+      "Qaşqabaq tökmək": {
+        "en": "Frowning",
+        "ru": "Хмуриться"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-stop-3": {
+    "question": {
+      "az": "Olduğun yerdə hərəkətsiz dayan!",
+      "en": "Freeze and stop on the spot!",
+      "ru": "Замри и остановись на месте!"
+    },
+    "instruction": {
+      "az": "Dayanmaq komandasını seç.",
+      "en": "Select the stop command.",
+      "ru": "Выбери команду остановки."
+    },
+    "options": {
+      "Dayanmaq": {
+        "en": "Stopping",
+        "ru": "Остановиться"
+      },
+      "Qaçmaq": {
+        "en": "Running",
+        "ru": "Бежать"
+      },
+      "Fırlanmaq": {
+        "en": "Spinning",
+        "ru": "Кружиться"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-touch-nose-4": {
+    "question": {
+      "az": "Barmağınla ehmalca burnuna toxun!",
+      "en": "Gently touch your nose with your finger!",
+      "ru": "Осторожно дотронься пальчиком до носика!"
+    },
+    "instruction": {
+      "az": "Burnuna toxunmaq komandasını tap.",
+      "en": "Find touch nose command.",
+      "ru": "Найди команду дотронуться до носа."
+    },
+    "options": {
+      "Burnuna toxunmaq": {
+        "en": "Touching nose",
+        "ru": "Трогать нос"
+      },
+      "Gözü yummaq": {
+        "en": "Closing eyes",
+        "ru": "Закрывать глаза"
+      },
+      "Qaçmaq": {
+        "en": "Running",
+        "ru": "Убегать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-march-7": {
+    "question": {
+      "az": "Əsgər kimi yerində şən addımla!",
+      "en": "March happily on the spot like a soldier!",
+      "ru": "Шагай весело на месте как солдатик!"
+    },
+    "instruction": {
+      "az": "Yerində addımlamaq komandasını tap.",
+      "en": "Find march on spot command.",
+      "ru": "Найди команду шагать на месте."
+    },
+    "options": {
+      "Yerində addımlamaq": {
+        "en": "Marching on spot",
+        "ru": "Шагать на месте"
+      },
+      "Oturmaq": {
+        "en": "Sitting",
+        "ru": "Сидеть"
+      },
+      "Yatmaq": {
+        "en": "Sleeping",
+        "ru": "Спать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-look-up-5": {
+    "question": {
+      "az": "Başını yuxarı qaldır və səmaya bax!",
+      "en": "Raise your head and look up at the sky!",
+      "ru": "Подними голову и посмотри вверх на небо!"
+    },
+    "instruction": {
+      "az": "Yuxarı baxmaq komandasını seç.",
+      "en": "Select look up command.",
+      "ru": "Выбери команду посмотреть вверх."
+    },
+    "options": {
+      "Yuxarı baxmaq": {
+        "en": "Looking up",
+        "ru": "Смотреть вверх"
+      },
+      "Aşağı baxmaq": {
+        "en": "Looking down",
+        "ru": "Смотреть вниз"
+      },
+      "Gözü bağlamaq": {
+        "en": "Shutting eyes",
+        "ru": "Закрывать глаза"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd-listen-6": {
+    "question": {
+      "az": "Əlini qulağına apar və diqqətlə dinlə!",
+      "en": "Put hand to ear and listen carefully!",
+      "ru": "Поднеси руку к уху и внимательно слушай!"
+    },
+    "instruction": {
+      "az": "Qulaq asmaq komandasını tap.",
+      "en": "Find listen command.",
+      "ru": "Найди команду слушать."
+    },
+    "options": {
+      "Qulaq asmaq": {
+        "en": "Listening",
+        "ru": "Слушать"
+      },
+      "Ağzı açmaq": {
+        "en": "Opening mouth",
+        "ru": "Открывать рот"
+      },
+      "Tullanmaq": {
+        "en": "Jumping",
+        "ru": "Прыгать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd2-clap-sit-1": {
+    "question": {
+      "az": "Əvvəlcə əl çal, sonra stulda otur!",
+      "en": "First clap your hands, then sit on the chair!",
+      "ru": "Сначала хлопни в ладоши, потом сядь на стул!"
+    },
+    "instruction": {
+      "az": "Ardıcıl iki hərəkəti seç.",
+      "en": "Select two consecutive movements.",
+      "ru": "Выбери два последовательных движения."
+    },
+    "options": {
+      "Əl çalmaq və oturmaq": {
+        "en": "Clap and sit",
+        "ru": "Хлопнуть и сесть"
+      },
+      "Yalnız oturmaq": {
+        "en": "Only sit",
+        "ru": "Только сесть"
+      },
+      "Yalnız yatmaq": {
+        "en": "Only sleep",
+        "ru": "Только спать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd2-stand-turn-2": {
+    "question": {
+      "az": "Ayağa dur və yerində bir dəfə fırlan!",
+      "en": "Stand up and spin once on the spot!",
+      "ru": "Встань и один раз повернись вокруг себя!"
+    },
+    "instruction": {
+      "az": "Ayağa qalxıb fırlanmaq komandasını tap.",
+      "en": "Find stand up and spin command.",
+      "ru": "Найди команду встать и повернуться."
+    },
+    "options": {
+      "Durmaq və fırlanmaq": {
+        "en": "Stand and spin",
+        "ru": "Встать и повернуться"
+      },
+      "Qaçmaq və tullanmaq": {
+        "en": "Run and jump",
+        "ru": "Бежать и прыгать"
+      },
+      "Oturmaq və susmaq": {
+        "en": "Sit and be quiet",
+        "ru": "Сесть и молчать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd2-draw-color-3": {
+    "question": {
+      "az": "Vərəqdə günəş çək və sarı rənglə!",
+      "en": "Draw a sun on paper and color it yellow!",
+      "ru": "Нарисуй солнце на бумаге и раскрась желтым!"
+    },
+    "instruction": {
+      "az": "Şəkil çəkib rəngləmək komandasını seç.",
+      "en": "Select draw and color command.",
+      "ru": "Выбери команду нарисовать и раскрасить."
+    },
+    "options": {
+      "Çəkmək və boyamaq": {
+        "en": "Draw and color",
+        "ru": "Нарисовать и раскрасить"
+      },
+      "Yalnız kəsmək": {
+        "en": "Only cut",
+        "ru": "Только резать"
+      },
+      "Kağızı cırmaq": {
+        "en": "Tear paper",
+        "ru": "Рвать бумагу"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd2-open-close-4": {
+    "question": {
+      "az": "Qapını aç və yavaşca bağla!",
+      "en": "Open the door and close it gently!",
+      "ru": "Открой дверь и аккуратно закрой!"
+    },
+    "instruction": {
+      "az": "Qapı komandasını yerinə yetir.",
+      "en": "Perform door command.",
+      "ru": "Выполни команду с дверью."
+    },
+    "options": {
+      "Açmaq və bağlamaq": {
+        "en": "Open and close",
+        "ru": "Открыть и закрыть"
+      },
+      "Yalnız qaçmaq": {
+        "en": "Only run",
+        "ru": "Только бежать"
+      },
+      "Qapını döymək": {
+        "en": "Knock door",
+        "ru": "Стучать в дверь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd2-wash-dry-5": {
+    "question": {
+      "az": "Əllərini sabunla yu və dəsmalla qurula!",
+      "en": "Wash your hands with soap and dry with towel!",
+      "ru": "Помой руки с мылом и вытри полотенцем!"
+    },
+    "instruction": {
+      "az": "Əllərin təmizlik komandasını tap.",
+      "en": "Find hands washing command.",
+      "ru": "Найди команду мытья рук."
+    },
+    "options": {
+      "Yumaq və qurulamaq": {
+        "en": "Wash and dry",
+        "ru": "Помыть и вытереть"
+      },
+      "Yalnız su tökmək": {
+        "en": "Only pour water",
+        "ru": "Только лить воду"
+      },
+      "Çirkli saxlamaq": {
+        "en": "Keep dirty",
+        "ru": "Оставить грязными"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "cmd2-ball-catch-6": {
+    "question": {
+      "az": "Topu yuxarı at və iki əlinlə tut!",
+      "en": "Throw the ball up and catch with both hands!",
+      "ru": "Брось мяч вверх и поймай двумя руками!"
+    },
+    "instruction": {
+      "az": "Top oyunu komandasını seç.",
+      "en": "Select ball game command.",
+      "ru": "Выбери команду игры с мячом."
+    },
+    "options": {
+      "Atmaq və tutmaq": {
+        "en": "Throw and catch",
+        "ru": "Бросить и поймать"
+      },
+      "Təpiklə vurmaq": {
+        "en": "Kick away",
+        "ru": "Пнуть ногой"
+      },
+      "Topu gizlətmək": {
+        "en": "Hide ball",
+        "ru": "Спрятать мяч"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "space-front-car-1": {
+    "question": {
+      "az": "Şəklə bax: Uşaq avtomobilin harasındadır?",
+      "en": "Look at the picture: Where is the child relative to the car?",
+      "ru": "Посмотри на картинку: Где ребенок по отношению к машине?"
+    },
+    "instruction": {
+      "az": "Şəklə baxıb mövqeyi tap.",
+      "en": "Look at the picture and find position.",
+      "ru": "Посмотри на картинку и найди положение."
+    },
+    "options": {
+      "Qabağında": {
+        "en": "In front of",
+        "ru": "Впереди / Спереди"
+      },
+      "Arxasında": {
+        "en": "Behind",
+        "ru": "Сзади"
+      },
+      "Altında": {
+        "en": "Under",
+        "ru": "Внизу / Под"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "space-behind-tree-2": {
+    "question": {
+      "az": "Şəklə bax: Dovşan ağacın harasında gizlənib?",
+      "en": "Look at the scene: Where is the rabbit hiding relative to tree?",
+      "ru": "Посмотри на картинку: Где кролик прячется за деревом?"
+    },
+    "instruction": {
+      "az": "Dovşanın gizləndiyi yeri seç.",
+      "en": "Select where the rabbit is hidden.",
+      "ru": "Выбери, где спрятался кролик."
+    },
+    "options": {
+      "Arxasında": {
+        "en": "Behind",
+        "ru": "Сзади / За ним"
+      },
+      "Üstündə": {
+        "en": "On top",
+        "ru": "Наверху"
+      },
+      "İçində": {
+        "en": "Inside",
+        "ru": "Внутри"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "space-front-house-3": {
+    "question": {
+      "az": "Şəklə bax: Gözəl çiçək evin harasındadır?",
+      "en": "Look at picture: Where is the flower relative to the house?",
+      "ru": "Где цветок по отношению к дому?"
+    },
+    "instruction": {
+      "az": "Gülün yerini müəyyən et.",
+      "en": "Identify the flower location.",
+      "ru": "Определи место цветка."
+    },
+    "options": {
+      "Qabağında": {
+        "en": "In front of",
+        "ru": "Перед домом"
+      },
+      "Altında": {
+        "en": "Underneath",
+        "ru": "Под домом"
+      },
+      "İçində": {
+        "en": "Inside",
+        "ru": "Внутри"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "space-above-cloud-4": {
+    "question": {
+      "az": "Şəklə bax: Təyyarə buludların harasındadır?",
+      "en": "Where is the airplane relative to the clouds?",
+      "ru": "Где самолет по отношению к облакам?"
+    },
+    "instruction": {
+      "az": "Təyyarənin mövqeyini tap.",
+      "en": "Find airplane position.",
+      "ru": "Найди положение самолета."
+    },
+    "options": {
+      "Yuxarıda": {
+        "en": "Above / Up",
+        "ru": "Вверху / Над"
+      },
+      "Aşağıda": {
+        "en": "Below / Down",
+        "ru": "Внизу / Под"
+      },
+      "İçində": {
+        "en": "Inside",
+        "ru": "Внутри"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "space-below-ground-5": {
+    "question": {
+      "az": "Şəklə bax: Balaca qarışqa haradadır?",
+      "en": "Where is the little ant located?",
+      "ru": "Где находится маленький муравей?"
+    },
+    "instruction": {
+      "az": "Qarışqanın yerini seç.",
+      "en": "Select ant location.",
+      "ru": "Выбери место муравья."
+    },
+    "options": {
+      "Aşağıda": {
+        "en": "Below / Down",
+        "ru": "Внизу"
+      },
+      "Yuxarıda göydə": {
+        "en": "Up in sky",
+        "ru": "Вверху в небе"
+      },
+      "Ulduzlarda": {
+        "en": "In stars",
+        "ru": "В звездах"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "space-lamp-table-6": {
+    "question": {
+      "az": "Şəklə bax: İşıq saçan lampa masanın harasındadır?",
+      "en": "Where is the lamp relative to the table?",
+      "ru": "Где лампа по отношению к столу?"
+    },
+    "instruction": {
+      "az": "Lampanın mövqeyini tap.",
+      "en": "Find lamp position.",
+      "ru": "Найди положение лампы."
+    },
+    "options": {
+      "Yuxarıda": {
+        "en": "Above",
+        "ru": "Вверху / Сверху"
+      },
+      "Altında": {
+        "en": "Underneath",
+        "ru": "Снизу / Под"
+      },
+      "Yanında": {
+        "en": "Beside",
+        "ru": "Сбоку"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "size-train-car-1": {
+    "question": {
+      "az": "Şəklə bax: Qatar və avtomobili müqayisə et: Hansı daha uzundur?",
+      "en": "Look at scene: Compare train and car: Which one is longer?",
+      "ru": "Посмотри на картинку: Какой транспорт длиннее?"
+    },
+    "instruction": {
+      "az": "Daha uzun olan nəqliyyatı seç.",
+      "en": "Select the longer transport.",
+      "ru": "Выбери более длинный транспорт."
+    },
+    "options": {
+      "Uzun Qatar": {
+        "en": "Long Train",
+        "ru": "Длинный поезд"
+      },
+      "Qısa Avtomobil": {
+        "en": "Short Car",
+        "ru": "Короткая машина"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "size-pencil-short-2": {
+    "question": {
+      "az": "Xətkeş və qələmə bax: Hansı daha qısadır?",
+      "en": "Look at ruler and pencil: Which one is shorter?",
+      "ru": "Посмотри на линейку и карандаш: Какой предмет короче?"
+    },
+    "instruction": {
+      "az": "Qısa olan əşyanı tap.",
+      "en": "Find the shorter item.",
+      "ru": "Найди более короткий предмет."
+    },
+    "options": {
+      "Qısa Qələm": {
+        "en": "Short Pencil",
+        "ru": "Короткий карандаш"
+      },
+      "Uzun Xətkeş": {
+        "en": "Long Ruler",
+        "ru": "Длинная линейка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "size-snake-worm-3": {
+    "question": {
+      "az": "İlan və soxulcana bax: Hansı daha uzundur?",
+      "en": "Look at snake and worm: Which is longer?",
+      "ru": "Посмотри на змею и червяка: Кто длиннее?"
+    },
+    "instruction": {
+      "az": "Uzun olan canlı seç.",
+      "en": "Select the longer animal.",
+      "ru": "Выбери более длинное животное."
+    },
+    "options": {
+      "Uzun İlan": {
+        "en": "Long Snake",
+        "ru": "Длинная змея"
+      },
+      "Qısa Soxulcan": {
+        "en": "Short Worm",
+        "ru": "Короткий червяк"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "size-elephant-feather-4": {
+    "question": {
+      "az": "Fil və quş tükünə bax: Hansı daha ağırdır?",
+      "en": "Look at elephant and feather: Which is heavier?",
+      "ru": "Посмотри на слона и перо: Кто тяжелее?"
+    },
+    "instruction": {
+      "az": "Ağır olan heyvanı seç.",
+      "en": "Select the heavy animal.",
+      "ru": "Выбери тяжелое животное."
+    },
+    "options": {
+      "Ağır Fil": {
+        "en": "Heavy Elephant",
+        "ru": "Тяжелый слон"
+      },
+      "Yüngül Tük": {
+        "en": "Light Feather",
+        "ru": "Легкое перо"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "size-balloon-stone-5": {
+    "question": {
+      "az": "Şar və daşa bax: Hansı havada uçacaq qədər yüngüldür?",
+      "en": "Look at balloon and stone: Which is light enough to fly in the air?",
+      "ru": "Посмотри на шарик и камень: Что настолько легкое, чтобы летать в воздухе?"
+    },
+    "instruction": {
+      "az": "Havada uçan yüngül əşyanı tap.",
+      "en": "Find the light flying item.",
+      "ru": "Найди легкий летающий предмет."
+    },
+    "options": {
+      "Yüngül Şar": {
+        "en": "Light Balloon",
+        "ru": "Легкий шарик"
+      },
+      "Ağır Daş": {
+        "en": "Heavy Stone",
+        "ru": "Тяжелый камень"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "size-watermelon-apple-6": {
+    "question": {
+      "az": "Qarpız və almanı müqayisə et: Hansı daha ağırdır?",
+      "en": "Compare watermelon and apple: Which one is heavier?",
+      "ru": "Сравни арбуз и яблоко: Что тяжелее?"
+    },
+    "instruction": {
+      "az": "Daha ağır olan meyvəni seç.",
+      "en": "Select the heavier fruit.",
+      "ru": "Выбери более тяжелый плод."
+    },
+    "options": {
+      "Ağır Qarpız": {
+        "en": "Heavy Watermelon",
+        "ru": "Тяжелый арбуз"
+      },
+      "Yüngül Alma": {
+        "en": "Light Apple",
+        "ru": "Легкое яблоко"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "opp-door-open-1": {
+    "question": {
+      "az": "Evə girmək üçün qapı necə olmalıdır?",
+      "en": "How should the door be to enter the house?",
+      "ru": "Какой должна быть дверь, чтобы войти в дом?"
+    },
+    "instruction": {
+      "az": "Açıq vəziyyəti tap.",
+      "en": "Find open state.",
+      "ru": "Найди открытое состояние."
+    },
+    "options": {
+      "Açıq": {
+        "en": "Open",
+        "ru": "Открытой"
+      },
+      "Bağlı": {
+        "en": "Closed",
+        "ru": "Закрытой"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "opp-book-closed-2": {
+    "question": {
+      "az": "Dərsi bitirdikdən sonra kitabı necə edirik?",
+      "en": "What do we do with the book after finishing our study?",
+      "ru": "Что мы делаем с книгой после окончания урока?"
+    },
+    "instruction": {
+      "az": "Dərsi bitirdikdən sonrakı halı tap.",
+      "en": "Find state after finishing lesson.",
+      "ru": "Найди состояние после окончания урока."
+    },
+    "options": {
+      "Bağlayırıq": {
+        "en": "Close it",
+        "ru": "Закрываем"
+      },
+      "Açıq qoyuruq": {
+        "en": "Leave open",
+        "ru": "Оставляем открытой"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "opp-box-open-3": {
+    "question": {
+      "az": "İçindəki hədiyyəni görmək üçün qutunun qapağı necə olmalıdır?",
+      "en": "How should the box lid be to see the gift inside?",
+      "ru": "Какой должна быть крышка коробки, чтобы увидеть подарок?"
+    },
+    "instruction": {
+      "az": "Qutunun vəziyyətini seç.",
+      "en": "Select box state.",
+      "ru": "Выбери состояние коробки."
+    },
+    "options": {
+      "Açıq": {
+        "en": "Open",
+        "ru": "Открытой"
+      },
+      "Bağlı": {
+        "en": "Closed",
+        "ru": "Закрытой"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "opp-sweet-honey-4": {
+    "question": {
+      "az": "Limon turşdur, bəs balın dadı necədir?",
+      "en": "Lemon is sour, but how does honey taste?",
+      "ru": "Лимон кислый, а какой на вкус мед?"
+    },
+    "instruction": {
+      "az": "Şirin dadı tap.",
+      "en": "Find the sweet taste.",
+      "ru": "Найди сладкий вкус."
+    },
+    "options": {
+      "Şirindir": {
+        "en": "Sweet",
+        "ru": "Сладкий"
+      },
+      "Acıdır": {
+        "en": "Bitter",
+        "ru": "Горький"
+      },
+      "Duzludur": {
+        "en": "Salty",
+        "ru": "Соленый"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "opp-full-glass-5": {
+    "question": {
+      "az": "Ləzzətli şirə ilə dolu olan stəkan hansıdır?",
+      "en": "Which glass is full of delicious juice?",
+      "ru": "Какой стакан полон вкусного сока?"
+    },
+    "instruction": {
+      "az": "Dolu olan stəkanı tap.",
+      "en": "Find the full glass.",
+      "ru": "Найди полный стакан."
+    },
+    "options": {
+      "Dolu Stəkan": {
+        "en": "Full Glass",
+        "ru": "Полный стакан"
+      },
+      "Boş Stəkan": {
+        "en": "Empty Glass",
+        "ru": "Пустой стакан"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "opp-up-down-6": {
+    "question": {
+      "az": "\"Yuxarı\" sözünün əksi hansıdır?",
+      "en": "What is the opposite of \"Up\"?",
+      "ru": "Что противоположно слову «Вверх»?"
+    },
+    "instruction": {
+      "az": "Əks istiqaməti seç.",
+      "en": "Select opposite direction.",
+      "ru": "Выбери противоположное направление."
+    },
+    "options": {
+      "Aşağı": {
+        "en": "Down",
+        "ru": "Вниз"
+      },
+      "İsti": {
+        "en": "Hot",
+        "ru": "Горячий"
+      },
+      "Gecə": {
+        "en": "Night",
+        "ru": "Ночь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "num-stars-6": {
+    "question": {
+      "az": "Göydəki 6 ulduzu say və düzgün rəqəmi seç: ⭐⭐⭐⭐⭐⭐",
+      "en": "Count the 6 stars and choose the right number: ⭐⭐⭐⭐⭐⭐",
+      "ru": "Посчитай 6 звезд и выбери правильную цифру: ⭐⭐⭐⭐⭐⭐"
+    },
+    "instruction": {
+      "az": "Göydəki 6 ulduzu say.",
+      "en": "Count the 6 stars in the sky.",
+      "ru": "Посчитай 6 звезд в небе."
+    },
+    "options": {
+      "6 Ulduz": {
+        "en": "6 Stars",
+        "ru": "6 звезд"
+      },
+      "4 Ulduz": {
+        "en": "4 Stars",
+        "ru": "4 звезды"
+      },
+      "2 Ulduz": {
+        "en": "2 Stars",
+        "ru": "2 звезды"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "num-flowers-7": {
+    "question": {
+      "az": "Çiçəkləri say: 🌸🌸🌸🌸🌸🌸🌸 — Neçə dənədir?",
+      "en": "Count flowers: 🌸🌸🌸🌸🌸🌸🌸 — How many are there?",
+      "ru": "Посчитай цветы: 🌸🌸🌸🌸🌸🌸🌸 — Сколько их?"
+    },
+    "instruction": {
+      "az": "Bağdakı 7 çiçəyi say.",
+      "en": "Count 7 flowers in garden.",
+      "ru": "Посчитай 7 цветков в саду."
+    },
+    "options": {
+      "7 Çiçək": {
+        "en": "7 Flowers",
+        "ru": "7 цветков"
+      },
+      "5 Çiçək": {
+        "en": "5 Flowers",
+        "ru": "5 цветков"
+      },
+      "3 Çiçək": {
+        "en": "3 Flowers",
+        "ru": "3 цветка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "num-pencils-8": {
+    "question": {
+      "az": "Qutuda 8 qələm var: ✏️✏️✏️✏️✏️✏️✏️✏️ — Hansı rəqəmdir?",
+      "en": "There are 8 pencils: ✏️✏️✏️✏️✏️✏️✏️✏️ — What number?",
+      "ru": "В коробке 8 карандашей: ✏️✏️✏️✏️✏️✏️✏️✏️ — Какая цифра?"
+    },
+    "instruction": {
+      "az": "Qələmləri say.",
+      "en": "Count the pencils.",
+      "ru": "Посчитай карандаши."
+    },
+    "options": {
+      "8 Qələm": {
+        "en": "8 Pencils",
+        "ru": "8 карандашей"
+      },
+      "6 Qələm": {
+        "en": "6 Pencils",
+        "ru": "6 карандашей"
+      },
+      "9 Qələm": {
+        "en": "9 Pencils",
+        "ru": "9 карандашей"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "num-balloons-9": {
+    "question": {
+      "az": "Uşağın əlində 9 şar var: 🎈🎈🎈🎈🎈🎈🎈🎈🎈 — Hansı rəqəmdir?",
+      "en": "Child holds 9 balloons: 🎈🎈🎈🎈🎈🎈🎈🎈🎈 — What number?",
+      "ru": "У ребенка 9 шаров: 🎈🎈🎈🎈🎈🎈🎈🎈🎈 — Какая цифра?"
+    },
+    "instruction": {
+      "az": "Şarları say.",
+      "en": "Count the balloons.",
+      "ru": "Посчитай шарики."
+    },
+    "options": {
+      "9 Şar": {
+        "en": "9 Balloons",
+        "ru": "9 шаров"
+      },
+      "7 Şar": {
+        "en": "7 Balloons",
+        "ru": "7 шаров"
+      },
+      "4 Şar": {
+        "en": "4 Balloons",
+        "ru": "4 шара"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "num-fingers-10": {
+    "question": {
+      "az": "İki əlimizdə cəmi neçə barmaq var? 🖐️ + 🖐️ = ?",
+      "en": "How many fingers in total on both hands? 🖐️ + 🖐️ = ?",
+      "ru": "Сколько пальцев на двух руках всего? 🖐️ + 🖐️ = ?"
+    },
+    "instruction": {
+      "az": "İki əlin barmaqlarını say.",
+      "en": "Count fingers on both hands.",
+      "ru": "Посчитай пальцы на обеих руках."
+    },
+    "options": {
+      "10 Barmaq": {
+        "en": "10 Fingers",
+        "ru": "10 пальцев"
+      },
+      "5 Barmaq": {
+        "en": "5 Fingers",
+        "ru": "5 пальцев"
+      },
+      "8 Barmaq": {
+        "en": "8 Fingers",
+        "ru": "8 пальцев"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "let-e-house-1": {
+    "question": {
+      "az": "'E' hərfi ilə başlayan hansı sözdür?",
+      "en": "Which word starts with letter 'E'?",
+      "ru": "Какое слово начинается на букву 'E'?"
+    },
+    "instruction": {
+      "az": "'E' hərfi ilə başlayan sözü seç.",
+      "en": "Select the word starting with 'E'.",
+      "ru": "Выбери слово на букву 'E'."
+    },
+    "options": {
+      "Ev": {
+        "en": "House (Ev)",
+        "ru": "Дом (Ev)"
+      },
+      "Top": {
+        "en": "Ball",
+        "ru": "Мяч"
+      },
+      "Alma": {
+        "en": "Apple",
+        "ru": "Яблоко"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "let-ae-glove-2": {
+    "question": {
+      "az": "'Ə' hərfi ilə başlayan hansı sözdür?",
+      "en": "Which word starts with letter 'Ə'?",
+      "ru": "Какое слово начинается на букву 'Ə'?"
+    },
+    "instruction": {
+      "az": "'Ə' hərfi ilə başlayan əşyanı tap.",
+      "en": "Find the item starting with 'Ə'.",
+      "ru": "Найди предмет на букву 'Ə'."
+    },
+    "options": {
+      "Əlcək": {
+        "en": "Glove (Əlcək)",
+        "ru": "Перчатка (Əlcək)"
+      },
+      "Balıq": {
+        "en": "Fish",
+        "ru": "Рыба"
+      },
+      "Qələm": {
+        "en": "Pen",
+        "ru": "Карандаш"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "let-ae-hand-3": {
+    "question": {
+      "az": "Bədənimizin hansı hissəsi 'Ə' hərfi ilə başlayır?",
+      "en": "Which body part starts with letter 'Ə'?",
+      "ru": "Какая часть тела начинается на букву 'Ə'?"
+    },
+    "instruction": {
+      "az": "'Ə' ilə başlayan bədən üzvünü tap.",
+      "en": "Find the body part starting with 'Ə'.",
+      "ru": "Найди часть тела на букву 'Ə'."
+    },
+    "options": {
+      "Əl": {
+        "en": "Hand (Əl)",
+        "ru": "Рука (Əl)"
+      },
+      "Göz": {
+        "en": "Eye",
+        "ru": "Глаз"
+      },
+      "Qulaq": {
+        "en": "Ear",
+        "ru": "Ухо"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "let-m-car-4": {
+    "question": {
+      "az": "'M' hərfi ilə hansı nəqliyyat başlayır?",
+      "en": "Which transport starts with letter 'M'?",
+      "ru": "Какой транспорт начинается на букву 'M'?"
+    },
+    "instruction": {
+      "az": "'M' hərfi ilə başlayan nəqliyyatı seç.",
+      "en": "Select transport starting with 'M'.",
+      "ru": "Выбери транспорт на букву 'M'."
+    },
+    "options": {
+      "Maşın": {
+        "en": "Car (Maşın)",
+        "ru": "Машина (Maşın)"
+      },
+      "Təyyarə": {
+        "en": "Plane",
+        "ru": "Самолет"
+      },
+      "Gəmi": {
+        "en": "Ship",
+        "ru": "Корабль"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "let-s-clock-5": {
+    "question": {
+      "az": "Vaxtı göstərən və 'S' ilə başlayan əşya hansıdır?",
+      "en": "Which item shows time and starts with 'S'?",
+      "ru": "Какой предмет показывает время и начинается на 'S'?"
+    },
+    "instruction": {
+      "az": "'S' hərfi ilə başlayan əşyanı tap.",
+      "en": "Find the item starting with 'S'.",
+      "ru": "Найди предмет на букву 'S'."
+    },
+    "options": {
+      "Saat": {
+        "en": "Clock (Saat)",
+        "ru": "Часы (Saat)"
+      },
+      "Kitab": {
+        "en": "Book",
+        "ru": "Книга"
+      },
+      "Stul": {
+        "en": "Chair",
+        "ru": "Стул"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "let-t-ball-6": {
+    "question": {
+      "az": "'T' hərfi ilə hansı sevimli oyuncaq başlayır?",
+      "en": "Which favorite toy starts with letter 'T'?",
+      "ru": "Какая любимая игрушка начинается на букву 'T'?"
+    },
+    "instruction": {
+      "az": "'T' hərfi ilə başlayan oyuncağı seç.",
+      "en": "Select toy starting with 'T'.",
+      "ru": "Выбери игрушку на букву 'T'."
+    },
+    "options": {
+      "Top": {
+        "en": "Ball (Top)",
+        "ru": "Мяч (Top)"
+      },
+      "Kukla": {
+        "en": "Doll",
+        "ru": "Кукла"
+      },
+      "Ayı": {
+        "en": "Bear",
+        "ru": "Мишка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "snd-cat-meow-1": {
+    "question": {
+      "az": "Hansı sevimli heyvan \"Miyau-miyau\" deyir?",
+      "en": "Which cute animal says \"Meow meow\"?",
+      "ru": "Какое милое животное говорит «Мяу-мяу»?"
+    },
+    "instruction": {
+      "az": "Miyau səsini çıxaran heyvanı tap.",
+      "en": "Find animal making meow sound.",
+      "ru": "Найди животное, издающее звук мяу."
+    },
+    "options": {
+      "Pişik": {
+        "en": "Cat",
+        "ru": "Кошка"
+      },
+      "İnək": {
+        "en": "Cow",
+        "ru": "Корова"
+      },
+      "İt": {
+        "en": "Dog",
+        "ru": "Собака"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "snd-dog-bark-2": {
+    "question": {
+      "az": "Evi qoruyan və \"Hav-hav\" edən dostumuz kimdir?",
+      "en": "Who guards the house and says \"Woof woof\"?",
+      "ru": "Кто охраняет дом и говорит «Гав-гав»?"
+    },
+    "instruction": {
+      "az": "Hürən heyvanı tap.",
+      "en": "Find barking animal.",
+      "ru": "Найди лающее животное."
+    },
+    "options": {
+      "İt": {
+        "en": "Dog",
+        "ru": "Собака"
+      },
+      "Toyuq": {
+        "en": "Hen",
+        "ru": "Курица"
+      },
+      "Quzu": {
+        "en": "Lamb",
+        "ru": "Ягненок"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "snd-rooster-crow-3": {
+    "question": {
+      "az": "Səhər tezdən \"Qu-qulu-qu\" deyib bizi oyadan kimdir?",
+      "en": "Who wakes us up in the morning saying \"Cock-a-doodle-doo\"?",
+      "ru": "Кто будит нас рано утром, крича «Ку-ка-ре-ку»?"
+    },
+    "instruction": {
+      "az": "Səhər banlayan quşu seç.",
+      "en": "Select the morning crowing bird.",
+      "ru": "Выбери утреннего петушка."
+    },
+    "options": {
+      "Xoruz": {
+        "en": "Rooster",
+        "ru": "Петушок"
+      },
+      "Ördək": {
+        "en": "Duck",
+        "ru": "Утка"
+      },
+      "Qurbağa": {
+        "en": "Frog",
+        "ru": "Лягушка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "snd-cow-moo-4": {
+    "question": {
+      "az": "Bizə dadlı süd verən və \"Mooo\" deyən heyvan hansıdır?",
+      "en": "Which animal gives us tasty milk and says \"Mooo\"?",
+      "ru": "Какое животное дает вкусное молоко и мычит «Мууу»?"
+    },
+    "instruction": {
+      "az": "Möhkəm moo deyən heyvanı tap.",
+      "en": "Find the animal that moos.",
+      "ru": "Найди животное, которое мычит."
+    },
+    "options": {
+      "İnək": {
+        "en": "Cow",
+        "ru": "Корова"
+      },
+      "At": {
+        "en": "Horse",
+        "ru": "Лошадь"
+      },
+      "Pişik": {
+        "en": "Cat",
+        "ru": "Кошка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "snd-frog-croak-5": {
+    "question": {
+      "az": "Göldə tullanan və \"Qur-qur\" edən canlı hansıdır?",
+      "en": "Which creature jumps in the pond and croaks?",
+      "ru": "Кто прыгает в пруду и квакает?"
+    },
+    "instruction": {
+      "az": "Quruldama səsini çıxaran canlı tap.",
+      "en": "Find croaking creature.",
+      "ru": "Найди квакающее существо."
+    },
+    "options": {
+      "Qurbağa": {
+        "en": "Frog",
+        "ru": "Лягушка"
+      },
+      "Balıq": {
+        "en": "Fish",
+        "ru": "Рыба"
+      },
+      "İlan": {
+        "en": "Snake",
+        "ru": "Змея"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "snd-sheep-baa-6": {
+    "question": {
+      "az": "Çəmənlikdə \"Məə-məə\" edən sevimli canlı hansıdır?",
+      "en": "Which cute animal says \"Baa baa\" on the meadow?",
+      "ru": "Какое милое животное блеет «Бее-бее» на лугу?"
+    },
+    "instruction": {
+      "az": "Məə deyən quzunu tap.",
+      "en": "Find the lamb saying baa.",
+      "ru": "Найди овечку, которая блеет."
+    },
+    "options": {
+      "Quzu və Qoyun": {
+        "en": "Lamb & Sheep",
+        "ru": "Овечка"
+      },
+      "Şir": {
+        "en": "Lion",
+        "ru": "Лев"
+      },
+      "Fil": {
+        "en": "Elephant",
+        "ru": "Слон"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "voc-sweet-candy-1": {
+    "question": {
+      "az": "Konfetin dadı necədir?",
+      "en": "How does candy taste?",
+      "ru": "Какой вкус у конфеты?"
+    },
+    "instruction": {
+      "az": "Konfetin dadını bildirən sözü seç.",
+      "en": "Select word describing candy taste.",
+      "ru": "Выбери слово, описывающее вкус конфеты."
+    },
+    "options": {
+      "Şirindir": {
+        "en": "Sweet",
+        "ru": "Сладкий"
+      },
+      "Acıdır": {
+        "en": "Bitter",
+        "ru": "Горький"
+      },
+      "Duzludur": {
+        "en": "Salty",
+        "ru": "Соленый"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "voc-soft-pillow-2": {
+    "question": {
+      "az": "Yastıq toxunanda necə hiss olunur?",
+      "en": "How does a pillow feel when touched?",
+      "ru": "Какая подушка на ощупь?"
+    },
+    "instruction": {
+      "az": "Yastığın xüsusiyyətini tap.",
+      "en": "Find pillow quality.",
+      "ru": "Найди свойство подушки."
+    },
+    "options": {
+      "Yumşaqdır": {
+        "en": "Soft",
+        "ru": "Мягкая"
+      },
+      "Daş kimidir": {
+        "en": "Hard as stone",
+        "ru": "Каменная"
+      },
+      "İtidir": {
+        "en": "Sharp",
+        "ru": "Острая"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "voc-fast-cheetah-3": {
+    "question": {
+      "az": "Çita meşədə necə qaçır?",
+      "en": "How does a cheetah run?",
+      "ru": "Как бегает гепард?"
+    },
+    "instruction": {
+      "az": "Sürət sözünü tap.",
+      "en": "Find speed word.",
+      "ru": "Найди слово скорости."
+    },
+    "options": {
+      "Çox sürətlidir": {
+        "en": "Very fast",
+        "ru": "Очень быстро"
+      },
+      "Yavaşdır": {
+        "en": "Slow",
+        "ru": "Медленно"
+      },
+      "Tərpənmir": {
+        "en": "Still",
+        "ru": "Неподвижно"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "voc-bright-star-4": {
+    "question": {
+      "az": "Gecə səmada ulduz necə görünür?",
+      "en": "How does a star look in the night sky?",
+      "ru": "Как выглядит звезда в ночном небе?"
+    },
+    "instruction": {
+      "az": "Ulduzun əlamətini tap.",
+      "en": "Find star quality.",
+      "ru": "Найди свойство звезды."
+    },
+    "options": {
+      "Parlaqdır": {
+        "en": "Bright",
+        "ru": "Яркая"
+      },
+      "Qaranlıqdır": {
+        "en": "Dark",
+        "ru": "Темная"
+      },
+      "Görünməzdir": {
+        "en": "Invisible",
+        "ru": "Невидимая"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "voc-fragrant-rose-5": {
+    "question": {
+      "az": "Bağdakı qızılgülün xüsusiyyəti nədir?",
+      "en": "What is the quality of a garden rose?",
+      "ru": "Какое свойство у садовой розы?"
+    },
+    "instruction": {
+      "az": "Gülün xüsusiyyətini tap.",
+      "en": "Find rose quality.",
+      "ru": "Найди свойство розы."
+    },
+    "options": {
+      "Gözəl ətirlidir": {
+        "en": "Fragrant",
+        "ru": "Ароматная"
+      },
+      "Turşdur": {
+        "en": "Sour",
+        "ru": "Кислая"
+      },
+      "Duzludur": {
+        "en": "Salty",
+        "ru": "Соленая"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "voc-cold-ice-6": {
+    "question": {
+      "az": "Buz və dondurma toxunanda necə hiss olunur?",
+      "en": "How do ice and ice-cream feel when touched?",
+      "ru": "Какой на ощупь лед и мороженое?"
+    },
+    "instruction": {
+      "az": "Buzun temperaturunu seç.",
+      "en": "Select ice temperature.",
+      "ru": "Выбери температуру льда."
+    },
+    "options": {
+      "Soyuqdur": {
+        "en": "Cold",
+        "ru": "Холодный"
+      },
+      "Qaynardır": {
+        "en": "Boiling hot",
+        "ru": "Горячий"
+      },
+      "İlıqdır": {
+        "en": "Lukewarm",
+        "ru": "Теплый"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-dog-barks-1": {
+    "question": {
+      "az": "Cümləni düzəlt: İt həyətdə hürür",
+      "en": "Build sentence: Dog barks in yard",
+      "ru": "Составь предложение: Собака лает во дворе"
+    },
+    "instruction": {
+      "az": "Sözləri ardıcıl düzərək cümlə qur.",
+      "en": "Arrange words to build sentence.",
+      "ru": "Сложи слова по порядку, чтобы составить предложение."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-girl-paints-2": {
+    "question": {
+      "az": "Cümləni düzəlt: Qız şəkil çəkir",
+      "en": "Build sentence: Girl draws picture",
+      "ru": "Составь предложение: Девочка рисует картину"
+    },
+    "instruction": {
+      "az": "Sözləri seçərək cümlə qur.",
+      "en": "Select words to build sentence.",
+      "ru": "Выбери слова и составь предложение."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-birds-fly-3": {
+    "question": {
+      "az": "Cümləni düzəlt: Quşlar göydə uçur",
+      "en": "Build sentence: Birds fly in the sky",
+      "ru": "Составь предложение: Птицы летят в небе"
+    },
+    "instruction": {
+      "az": "Cümləni tamamla.",
+      "en": "Complete the sentence.",
+      "ru": "Заверши предложение."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-mom-cooks-4": {
+    "question": {
+      "az": "Cümləni düzəlt: Ana yemək bişirir",
+      "en": "Build sentence: Mom cooks food",
+      "ru": "Составь предложение: Мама готовит еду"
+    },
+    "instruction": {
+      "az": "Sözləri ardıcıllıqla qoy.",
+      "en": "Put words in sequence.",
+      "ru": "Поставь слова по порядку."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-boy-ball-5": {
+    "question": {
+      "az": "Cümləni düzəlt: Əli top oynayır",
+      "en": "Build sentence: Ali plays with ball",
+      "ru": "Составь предложение: Али играет в мяч"
+    },
+    "instruction": {
+      "az": "Sözləri düz.",
+      "en": "Arrange words.",
+      "ru": "Расставь слова."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-fish-swim-6": {
+    "question": {
+      "az": "Cümləni düzəlt: Balıq suda üzür",
+      "en": "Build sentence: Fish swims in water",
+      "ru": "Составь предложение: Рыба плавает в воде"
+    },
+    "instruction": {
+      "az": "Cümləni qur.",
+      "en": "Build sentence.",
+      "ru": "Составь предложение."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "sent-sun-warm-7": {
+    "question": {
+      "az": "Cümləni düzəlt: Günəş yeri isidir",
+      "en": "Build sentence: Sun warms the earth",
+      "ru": "Составь предложение: Солнце греет землю"
+    },
+    "instruction": {
+      "az": "Cümləni birləşdir.",
+      "en": "Join the sentence.",
+      "ru": "Соедини предложение."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-who-treats-1": {
+    "question": {
+      "az": "Xəstələnəndə bizi kim müalicə edir?",
+      "en": "Who treats us when we get sick?",
+      "ru": "Кто лечит нас, когда мы болеем?"
+    },
+    "instruction": {
+      "az": "Sualın cavabını tap.",
+      "en": "Find answer to question.",
+      "ru": "Найди ответ на вопрос."
+    },
+    "options": {
+      "Həkim": {
+        "en": "Doctor",
+        "ru": "Врач"
+      },
+      "Sürücü": {
+        "en": "Driver",
+        "ru": "Водитель"
+      },
+      "Dülgər": {
+        "en": "Carpenter",
+        "ru": "Плотник"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-what-spoon-2": {
+    "question": {
+      "az": "Dadlı şorbanı nə ilə içirik?",
+      "en": "What do we eat delicious soup with?",
+      "ru": "Чем мы едим вкусный суп?"
+    },
+    "instruction": {
+      "az": "Aləti tap.",
+      "en": "Find the tool.",
+      "ru": "Найди прибор."
+    },
+    "options": {
+      "Qaşıqla": {
+        "en": "With spoon",
+        "ru": "Ложкой"
+      },
+      "Çəngəllə": {
+        "en": "With fork",
+        "ru": "Вилкой"
+      },
+      "Qələmlə": {
+        "en": "With pen",
+        "ru": "Карандашом"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-where-books-3": {
+    "question": {
+      "az": "Kitabları oxuduqdan sonra hara qoyuruq?",
+      "en": "Where do we place books after reading?",
+      "ru": "Куда мы кладем книги после чтения?"
+    },
+    "instruction": {
+      "az": "Yeri seç.",
+      "en": "Select place.",
+      "ru": "Выбери место."
+    },
+    "options": {
+      "Kitab rəfinə": {
+        "en": "On bookshelf",
+        "ru": "На книжную полку"
+      },
+      "Çarpayının altına": {
+        "en": "Under bed",
+        "ru": "Под кровать"
+      },
+      "Döşəməyə": {
+        "en": "On the floor",
+        "ru": "На пол"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-why-wash-4": {
+    "question": {
+      "az": "Yeməkdən əvvəl əllərimizi niyə yuyuruq?",
+      "en": "Why do we wash our hands before eating?",
+      "ru": "Зачем мы моем руки перед едой?"
+    },
+    "instruction": {
+      "az": "Səbəbi tap.",
+      "en": "Find reason.",
+      "ru": "Найди причину."
+    },
+    "options": {
+      "Təmiz və sağlam olmaq üçün": {
+        "en": "To be clean & healthy",
+        "ru": "Чтобы быть чистыми и здоровыми"
+      },
+      "Su ilə oynamaq üçün": {
+        "en": "To play with water",
+        "ru": "Играть с водой"
+      },
+      "Vaxt keçirmək üçün": {
+        "en": "To spend time",
+        "ru": "Тратить время"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-when-stars-5": {
+    "question": {
+      "az": "Ulduzları və ayı nə vaxt görürük?",
+      "en": "When do we see stars and moon?",
+      "ru": "Когда мы видим звезды и луну?"
+    },
+    "instruction": {
+      "az": "Zamanı tap.",
+      "en": "Find time.",
+      "ru": "Найди время."
+    },
+    "options": {
+      "Gecə vaxtı": {
+        "en": "At night",
+        "ru": "Ночью"
+      },
+      "Günorta": {
+        "en": "At noon",
+        "ru": "В полдень"
+      },
+      "Səhər tezdən": {
+        "en": "Early morning",
+        "ru": "Ранним утром"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-who-teaches-6": {
+    "question": {
+      "az": "Məktəbdə bizə bilik verən və öyrədən kimdir?",
+      "en": "Who gives us knowledge and teaches in school?",
+      "ru": "Кто дает нам знания и учит в школе?"
+    },
+    "instruction": {
+      "az": "Müəllimi tap.",
+      "en": "Find teacher.",
+      "ru": "Найди учителя."
+    },
+    "options": {
+      "Müəllim": {
+        "en": "Teacher",
+        "ru": "Учитель"
+      },
+      "İnşaatçı": {
+        "en": "Builder",
+        "ru": "Строитель"
+      },
+      "Polis": {
+        "en": "Police",
+        "ru": "Полицейский"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "qa-what-umbrella-7": {
+    "question": {
+      "az": "Yağış yağanda islanmamaq üçün nə açırıq?",
+      "en": "What do we open to stay dry in rain?",
+      "ru": "Что мы открываем в дождь, чтобы не промокнуть?"
+    },
+    "instruction": {
+      "az": "Çətiri tap.",
+      "en": "Find umbrella.",
+      "ru": "Найди зонт."
+    },
+    "options": {
+      "Çətir": {
+        "en": "Umbrella",
+        "ru": "Зонт"
+      },
+      "Kitab": {
+        "en": "Book",
+        "ru": "Книгу"
+      },
+      "Çanta": {
+        "en": "Bag",
+        "ru": "Сумку"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-brush-teeth-1": {
+    "question": {
+      "az": "Diş fırçalamaq addımlarını düzgün sıraya qoy:",
+      "en": "Put the teeth brushing steps in order:",
+      "ru": "Расставь этапы чистки зубов по порядку:"
+    },
+    "instruction": {
+      "az": "Diş təmizliyi addımlarını ardıcıl düz.",
+      "en": "Order teeth brushing steps.",
+      "ru": "Расставь шаги чистки зубов по порядку."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-eat-banana-2": {
+    "question": {
+      "az": "Banan yemək addımlarını ardıcıllıqla qoy:",
+      "en": "Put banana eating steps in order:",
+      "ru": "Поставь шаги поедания банана по порядку:"
+    },
+    "instruction": {
+      "az": "Addımları ardıcıl düz.",
+      "en": "Order steps.",
+      "ru": "Упорядочи шаги."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-paint-pic-3": {
+    "question": {
+      "az": "Rəsm çəkmək addımlarını düzgün sıraya qoy:",
+      "en": "Order painting steps:",
+      "ru": "Поставь шаги рисования по порядку:"
+    },
+    "instruction": {
+      "az": "Rəsm çəkmək ardıcıllığını qur.",
+      "en": "Order painting steps.",
+      "ru": "Упорядочи шаги рисования."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-make-bed-4": {
+    "question": {
+      "az": "Səhər oyanmaq addımlarını düz:",
+      "en": "Order morning wake-up steps:",
+      "ru": "Упорядочи шаги утреннего подъема:"
+    },
+    "instruction": {
+      "az": "Addımları ardıcıl düz.",
+      "en": "Order steps.",
+      "ru": "Упорядочи шаги."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-wear-shoes-5": {
+    "question": {
+      "az": "Ayaqqabı geyinmək ardıcıllığı:",
+      "en": "Shoes wearing order:",
+      "ru": "Порядок обувания:"
+    },
+    "instruction": {
+      "az": "Sıranı qur.",
+      "en": "Order steps.",
+      "ru": "Построй порядок."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-build-tower-6": {
+    "question": {
+      "az": "Kubiklərlə qala qurmaq sırası:",
+      "en": "Order for building a tower:",
+      "ru": "Порядок постройки башни:"
+    },
+    "instruction": {
+      "az": "Kubikləri ardıcıl düz.",
+      "en": "Order blocks.",
+      "ru": "Расставь кубики."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "seq-wash-hands-full-7": {
+    "question": {
+      "az": "Əlləri yumaq addımlarını düzgün sıraya qoy:",
+      "en": "Order handwashing steps:",
+      "ru": "Поставь шаги мытья рук по порядку:"
+    },
+    "instruction": {
+      "az": "Təmizlik addımlarını sırala.",
+      "en": "Sequence hygiene steps.",
+      "ru": "Расставь шаги гигиены."
+    },
+    "options": {},
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-cat-fish-1": {
+    "question": {
+      "az": "Pişik akvariuma maraqla baxır. O nə etmək istəyir?",
+      "en": "The cat watches aquarium with interest. What does it want?",
+      "ru": "Кошка с интересом смотрит в аквариум. Что она хочет?"
+    },
+    "instruction": {
+      "az": "Hekayənin davamını tap.",
+      "en": "Find story continuation.",
+      "ru": "Найди продолжение истории."
+    },
+    "options": {
+      "Rəngli balığı seyr etmək": {
+        "en": "Watch colorful fish",
+        "ru": "Наблюдать за рыбкой"
+      },
+      "Çölə qaçmaq": {
+        "en": "Run outside",
+        "ru": "Убежать на улицу"
+      },
+      "Yuxuya getmək": {
+        "en": "Go to sleep",
+        "ru": "Уснуть"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-puppy-joy-2": {
+    "question": {
+      "az": "Küçüyün anası gələndə küçük nə etdi?",
+      "en": "What did the puppy do when mother arrived?",
+      "ru": "Что сделал щенок, когда пришла мама?"
+    },
+    "instruction": {
+      "az": "Hekayənin sonunu seç.",
+      "en": "Select story ending.",
+      "ru": "Выбери конец рассказа."
+    },
+    "options": {
+      "Sevindi və quyruğunu buladı": {
+        "en": "Wagged tail with joy",
+        "ru": "Обрадовался и завилял хвостом"
+      },
+      "Ağladı və qaçdı": {
+        "en": "Cried and ran",
+        "ru": "Заплакал и убежал"
+      },
+      "Hirsli baxdı": {
+        "en": "Looked angry",
+        "ru": "Разозлился"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-bird-nest-3": {
+    "question": {
+      "az": "Quş ağacın budağında balaları üçün nə qurdu?",
+      "en": "What did the bird build on tree for its chicks?",
+      "ru": "Что птица построила на ветке для птенцов?"
+    },
+    "instruction": {
+      "az": "Quşun nə qurduğunu tap.",
+      "en": "Find what bird built.",
+      "ru": "Найди, что построила птица."
+    },
+    "options": {
+      "İsti və rahat yuva": {
+        "en": "Warm cozy nest",
+        "ru": "Теплое уютное гнездо"
+      },
+      "Maşın": {
+        "en": "Car",
+        "ru": "Машину"
+      },
+      "Çadır": {
+        "en": "Tent",
+        "ru": "Палатку"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-boy-kite-4": {
+    "question": {
+      "az": "Külək əsəndə Əli göyə nə uçurdu?",
+      "en": "What did Ali fly in the sky when wind blew?",
+      "ru": "Что запустил Али в небо, когда подул ветер?"
+    },
+    "instruction": {
+      "az": "Küləkdə uçan əşyanı tap.",
+      "en": "Find object flying in wind.",
+      "ru": "Найди предмет в ветре."
+    },
+    "options": {
+      "Rəngarəng çərpələng": {
+        "en": "Colorful kite",
+        "ru": "Разноцветного змея"
+      },
+      "Ağır daş": {
+        "en": "Heavy stone",
+        "ru": "Тяжелый камень"
+      },
+      "Dəftər": {
+        "en": "Notebook",
+        "ru": "Тетрадь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-ant-leaf-5": {
+    "question": {
+      "az": "Yağış yağanda balaca qarışqa harada gizləndi?",
+      "en": "Where did the little ant hide when it rained?",
+      "ru": "Где спрятался муравей, когда пошел дождь?"
+    },
+    "instruction": {
+      "az": "Qarışqanın sığınacağını seç.",
+      "en": "Select ant shelter.",
+      "ru": "Выбери укрытие муравья."
+    },
+    "options": {
+      "Geniş yaşıl yarpağın altında": {
+        "en": "Under a big green leaf",
+        "ru": "Под большим зеленым листом"
+      },
+      "Dərin gölün içində": {
+        "en": "Inside deep pond",
+        "ru": "В глубоком пруду"
+      },
+      "Buludun üstündə": {
+        "en": "On the cloud",
+        "ru": "На облаке"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-frog-pond-6": {
+    "question": {
+      "az": "Qurbağa yarpağın üstündən hara tullandı?",
+      "en": "Where did the frog jump from the leaf?",
+      "ru": "Куда прыгнула лягушка с кувшинки?"
+    },
+    "instruction": {
+      "az": "Qurbağanın hərəkətini tap.",
+      "en": "Find frog action.",
+      "ru": "Найди действие лягушки."
+    },
+    "options": {
+      "Suya şappıltı ilə tullandı": {
+        "en": "Splashed into water",
+        "ru": "Плюхнулась в воду"
+      },
+      "Aya doğru uçdu": {
+        "en": "Flew to moon",
+        "ru": "Полетела на луну"
+      },
+      "Ağacın zirvəsinə çıxdı": {
+        "en": "Climbed tree",
+        "ru": "Залезла на дерево"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "st-friends-picnic-7": {
+    "question": {
+      "az": "Uşaqlar meşə kənarında nə təşkil etdilər?",
+      "en": "What did the children organize by the forest?",
+      "ru": "Что устроили дети на опушке леса?"
+    },
+    "instruction": {
+      "az": "Hekayənin sonunu tap.",
+      "en": "Find story ending.",
+      "ru": "Найди финал рассказа."
+    },
+    "options": {
+      "Şən piknik və çay süfrəsi": {
+        "en": "Fun picnic & tea party",
+        "ru": "Веселый пикник и чаепитие"
+      },
+      "Qış yuxusu": {
+        "en": "Winter sleep",
+        "ru": "Зимнюю спячку"
+      },
+      "Mübahisə": {
+        "en": "Argument",
+        "ru": "Ссору"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "emo-gift-happy-1": {
+    "question": {
+      "az": "Sənə gözəl hədiyyə verəndə hansı hissi keçirirsən?",
+      "en": "What feeling do you have when receiving a nice gift?",
+      "ru": "Что ты чувствуешь, когда тебе дарят подарок?"
+    },
+    "instruction": {
+      "az": "Emosiyanı seç.",
+      "en": "Select emotion.",
+      "ru": "Выбери эмоцию."
+    },
+    "options": {
+      "Sevinc və xoşbəxtlik": {
+        "en": "Joy and happiness",
+        "ru": "Радость и счастье"
+      },
+      "Qorxu": {
+        "en": "Fear",
+        "ru": "Страх"
+      },
+      "Qəzəb": {
+        "en": "Anger",
+        "ru": "Злость"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "emo-broken-toy-2": {
+    "question": {
+      "az": "Sevimli oyuncaq qırılanda uşaq necə hiss edir?",
+      "en": "How does a child feel when a favorite toy breaks?",
+      "ru": "Что чувствует ребенок, когда ломается любимая игрушка?"
+    },
+    "instruction": {
+      "az": "Hissi tap.",
+      "en": "Find feeling.",
+      "ru": "Найди чувство."
+    },
+    "options": {
+      "Kədərli və məyus": {
+        "en": "Sad and upset",
+        "ru": "Грустно и печально"
+      },
+      "Çox şad": {
+        "en": "Very happy",
+        "ru": "Очень весело"
+      },
+      "Qürurlu": {
+        "en": "Proud",
+        "ru": "Гордо"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "emo-firework-surprise-3": {
+    "question": {
+      "az": "Gözlənilmədən atəşfəşanlıq görəndə hansı sima yaranır?",
+      "en": "What expression appears when seeing unexpected fireworks?",
+      "ru": "Какое лицо бывает при неожиданном салюте?"
+    },
+    "instruction": {
+      "az": "Simanı seç.",
+      "en": "Select facial expression.",
+      "ru": "Выбери выражение лица."
+    },
+    "options": {
+      "Təəccüb və heyranlıq": {
+        "en": "Surprise & wonder",
+        "ru": "Удивление и восторг"
+      },
+      "Yuxulu": {
+        "en": "Sleepy",
+        "ru": "Сонное"
+      },
+      "Qəzəbli": {
+        "en": "Angry",
+        "ru": "Сердитое"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "emo-calm-sleep-4": {
+    "question": {
+      "az": "Ananın laylasını dinləyərkən uşaq necə hiss edir?",
+      "en": "How does a child feel listening to mothers lullaby?",
+      "ru": "Что чувствует ребенок под мамину колыбельную?"
+    },
+    "instruction": {
+      "az": "Hissi tap.",
+      "en": "Find feeling.",
+      "ru": "Найди чувство."
+    },
+    "options": {
+      "Sakit və dinc": {
+        "en": "Calm and peaceful",
+        "ru": "Спокойно и мирно"
+      },
+      "Qorxmuş": {
+        "en": "Scared",
+        "ru": "Испуганно"
+      },
+      "Hirsli": {
+        "en": "Angry",
+        "ru": "Сердито"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "emo-fear-dark-5": {
+    "question": {
+      "az": "Qaranlıq otaqda tək qalanda bəzən nə hiss edə bilərik?",
+      "en": "What can we sometimes feel alone in the dark?",
+      "ru": "Что мы иногда чувствуем в темноте?"
+    },
+    "instruction": {
+      "az": "Emosiyanı müəyyən et.",
+      "en": "Identify emotion.",
+      "ru": "Определи эмоцию."
+    },
+    "options": {
+      "Qorxu": {
+        "en": "Fear",
+        "ru": "Страх"
+      },
+      "Sevinc": {
+        "en": "Joy",
+        "ru": "Радость"
+      },
+      "Qürur": {
+        "en": "Pride",
+        "ru": "Гордость"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "emo-brave-help-6": {
+    "question": {
+      "az": "Dostumuza kömək edəndə və çətinliyi keçəndə necə hiss edirik?",
+      "en": "How do we feel when helping a friend and overcoming challenge?",
+      "ru": "Что мы чувствуем, помогая другу и преодолевая трудности?"
+    },
+    "instruction": {
+      "az": "Müsbət hissi tap.",
+      "en": "Find positive feeling.",
+      "ru": "Найди положительное чувство."
+    },
+    "options": {
+      "Cəsur və qürurlu": {
+        "en": "Brave and proud",
+        "ru": "Смело и гордо"
+      },
+      "Qorxaq": {
+        "en": "Cowardly",
+        "ru": "Трусливо"
+      },
+      "Tənbəl": {
+        "en": "Lazy",
+        "ru": "Лениво"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-sorry-1": {
+    "question": {
+      "az": "Səhvən dostumuza toxunanda nə deməliyik?",
+      "en": "What should we say if we accidentally bump into a friend?",
+      "ru": "Что сказать, если случайно задели друга?"
+    },
+    "instruction": {
+      "az": "Düzgün nəzakətli sözü seç.",
+      "en": "Select polite word.",
+      "ru": "Выбери вежливое слово."
+    },
+    "options": {
+      "Bağışlayın, üzr istəyirəm": {
+        "en": "Sorry, excuse me",
+        "ru": "Извините, простите"
+      },
+      "Qışqırmaq": {
+        "en": "Shout",
+        "ru": "Кричать"
+      },
+      "Qaçıb getmək": {
+        "en": "Run away",
+        "ru": "Убежать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-goodbye-2": {
+    "question": {
+      "az": "Dostumuzla görüşüb ayrılanda nə deyirik?",
+      "en": "What do we say when parting with a friend?",
+      "ru": "Что мы говорим при расставании с другом?"
+    },
+    "instruction": {
+      "az": "Ayrılanda deyilən sözü tap.",
+      "en": "Find parting word.",
+      "ru": "Найди слово прощания."
+    },
+    "options": {
+      "Sağ ol, hələlik!": {
+        "en": "Goodbye, see you!",
+        "ru": "До свидания, пока!"
+      },
+      "Gəl bura!": {
+        "en": "Come here!",
+        "ru": "Иди сюда!"
+      },
+      "Otur!": {
+        "en": "Sit!",
+        "ru": "Сиди!"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-listen-3": {
+    "question": {
+      "az": "Başqası danışanda biz nə etməliyik?",
+      "en": "What should we do when someone else is talking?",
+      "ru": "Что нужно делать, когда говорит другой?"
+    },
+    "instruction": {
+      "az": "Düzgün davranışı seç.",
+      "en": "Select right behavior.",
+      "ru": "Выбери правильное поведение."
+    },
+    "options": {
+      "Səbirlə qulaq asmalıyıq": {
+        "en": "Listen patiently",
+        "ru": "Терпеливо слушать"
+      },
+      "Sözünü kəsməliyik": {
+        "en": "Interrupt",
+        "ru": "Перебивать"
+      },
+      "Qışqırmalıyıq": {
+        "en": "Shout",
+        "ru": "Кричать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-help-elder-4": {
+    "question": {
+      "az": "Nənəyə ağır çantanı daşımaqda necə davranmalıyıq?",
+      "en": "How should we act when grandma carries a heavy bag?",
+      "ru": "Как поступить, когда бабушка несет тяжелую сумку?"
+    },
+    "instruction": {
+      "az": "Xeyirxah hərəkəti seç.",
+      "en": "Select kind action.",
+      "ru": "Выбери доброе действие."
+    },
+    "options": {
+      "Kömək təklif etməliyik": {
+        "en": "Offer help",
+        "ru": "Предложить помощь"
+      },
+      "Baxıb keçməliyik": {
+        "en": "Pass by",
+        "ru": "Пройти мимо"
+      },
+      "Gülməliyik": {
+        "en": "Laugh",
+        "ru": "Смеяться"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-share-snack-5": {
+    "question": {
+      "az": "Yoldaşımızın peçenyesi olmayanda nə edirik?",
+      "en": "What do we do when our friend has no cookie?",
+      "ru": "Что сделать, если у друга нет печенья?"
+    },
+    "instruction": {
+      "az": "Bölüşməyi seç.",
+      "en": "Select sharing.",
+      "ru": "Выбери делиться."
+    },
+    "options": {
+      "Paylaşırıq və təklif edirik": {
+        "en": "Share and offer",
+        "ru": "Поделиться и предложить"
+      },
+      "Tək yeyirik": {
+        "en": "Eat alone",
+        "ru": "Съесть в одиночку"
+      },
+      "Gizlədirik": {
+        "en": "Hide it",
+        "ru": "Спрятать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-congratulate-6": {
+    "question": {
+      "az": "Dostumuz oyunda qalib gələndə nə edirik?",
+      "en": "What do we do when a friend wins the game?",
+      "ru": "Что сделать, когда друг победил в игре?"
+    },
+    "instruction": {
+      "az": "Dostcasına reaksiyanı tap.",
+      "en": "Find friendly reaction.",
+      "ru": "Найди дружелюбную реакцию."
+    },
+    "options": {
+      "\"Təbrik edirəm!\" deyib əl çalırıq": {
+        "en": "Say congrats and clap",
+        "ru": "Поздравить и похлопать"
+      },
+      "Küsürük": {
+        "en": "Pout",
+        "ru": "Обидеться"
+      },
+      "Ağlayırıq": {
+        "en": "Cry",
+        "ru": "Заплакать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "soc-ask-politely-7": {
+    "question": {
+      "az": "Qələmi götürmək üçün necə icazə alırıq?",
+      "en": "How do we ask for permission to take a pencil?",
+      "ru": "Как вежливо попросить карандаш?"
+    },
+    "instruction": {
+      "az": "Nəzakətli müraciəti seç.",
+      "en": "Select polite request.",
+      "ru": "Выбери вежливую просьбу."
+    },
+    "options": {
+      "\"Zəhmət olmasa, qələmi verə bilərsən?\"": {
+        "en": "\"Please, may I have pencil?\"",
+        "ru": "«Пожалуйста, можно взять?»"
+      },
+      "Əlindən dartıb alırıq": {
+        "en": "Snatch from hand",
+        "ru": "Вырвать из рук"
+      },
+      "Qışqırırıq": {
+        "en": "Shout",
+        "ru": "Кричать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-swing-1": {
+    "question": {
+      "az": "Yelləncəkdə başqa uşaq yellənir. Sən nə etməlisən?",
+      "en": "Another child is on the swing. What should you do?",
+      "ru": "На качелях качается другой ребенок. Что ты сделаешь?"
+    },
+    "instruction": {
+      "az": "Düzgün davranışı seç.",
+      "en": "Select right action.",
+      "ru": "Выбери правильное действие."
+    },
+    "options": {
+      "Növbəni səbirlə gözləməlisən": {
+        "en": "Wait patiently",
+        "ru": "Терпеливо ждать очереди"
+      },
+      "Onu itələməlisən": {
+        "en": "Push them",
+        "ru": "Толкнуть его"
+      },
+      "Ağlamalısan": {
+        "en": "Cry",
+        "ru": "Плакать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-water-cooler-2": {
+    "question": {
+      "az": "Su içmək üçün növbəyə duranda necə davranırıq?",
+      "en": "How do we behave in line for water?",
+      "ru": "Как вести себя в очереди за водой?"
+    },
+    "instruction": {
+      "az": "Növbə qaydasını tap.",
+      "en": "Find queue rule.",
+      "ru": "Найди правило очереди."
+    },
+    "options": {
+      "Növbədə arxada sakit dururuq": {
+        "en": "Stand quietly in line",
+        "ru": "Спокойно стоять в очереди"
+      },
+      "Hamını itələyirik": {
+        "en": "Push everyone",
+        "ru": "Всех толкать"
+      },
+      "Qabağa qaçırıq": {
+        "en": "Cut the line",
+        "ru": "Лезть вперед"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-hand-class-3": {
+    "question": {
+      "az": "Dərsdə cavab vermək istəyəndə nə edirik?",
+      "en": "What do we do to answer in class?",
+      "ru": "Что сделать, чтобы ответить на уроке?"
+    },
+    "instruction": {
+      "az": "Dərsdə qaydanı seç.",
+      "en": "Select classroom rule.",
+      "ru": "Выбери правило на уроке."
+    },
+    "options": {
+      "Əlimizi qaldırıb gözləyirik": {
+        "en": "Raise hand & wait",
+        "ru": "Поднять руку и ждать"
+      },
+      "Yerdən qışqırırıq": {
+        "en": "Shout from seat",
+        "ru": "Выкрикивать с места"
+      },
+      "Ayağa tullanırıq": {
+        "en": "Jump up",
+        "ru": "Вскакивать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-dice-turn-4": {
+    "question": {
+      "az": "Masaüstü oyunda zəri kim atmalıdır?",
+      "en": "Who rolls the dice in a board game?",
+      "ru": "Кто бросает кубик в настольной игре?"
+    },
+    "instruction": {
+      "az": "Oyun qaydasını tap.",
+      "en": "Find game rule.",
+      "ru": "Найди правило игры."
+    },
+    "options": {
+      "Növbəsi çatan oyunçu": {
+        "en": "Whose turn it is",
+        "ru": "Игрок, чья очередь"
+      },
+      "Hamı eyni anda": {
+        "en": "Everyone at once",
+        "ru": "Все одновременно"
+      },
+      "Yalnız bir nəfər": {
+        "en": "Only one person",
+        "ru": "Только один человек"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-bus-enter-5": {
+    "question": {
+      "az": "Avtobusa minərkən necə hərəkət edirik?",
+      "en": "How do we enter the bus?",
+      "ru": "Как заходить в автобус?"
+    },
+    "instruction": {
+      "az": "Nəqliyyata minmə qaydası.",
+      "en": "Bus boarding rule.",
+      "ru": "Правило посадки в автобус."
+    },
+    "options": {
+      "Bir-bir, növbə ilə minirik": {
+        "en": "One by one in turn",
+        "ru": "По одному, по очереди"
+      },
+      "İtələşirik": {
+        "en": "Pushing",
+        "ru": "Толкаясь"
+      },
+      "Qapıda sıxışırıq": {
+        "en": "Crowding door",
+        "ru": "Сбиваясь в дверях"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-toy-pass-6": {
+    "question": {
+      "az": "Oyuncaqla oynayıb qurtardıqdan sonra nə edirik?",
+      "en": "What to do after playing with a toy?",
+      "ru": "Что делать, закончив играть с игрушкой?"
+    },
+    "instruction": {
+      "az": "Oyun bitəndə nə edirik.",
+      "en": "What to do when done playing.",
+      "ru": "Что делать, когда поиграл."
+    },
+    "options": {
+      "Növbəti dostumuza veririk": {
+        "en": "Pass to next friend",
+        "ru": "Передать следующему другу"
+      },
+      "Evə aparırıq": {
+        "en": "Take home",
+        "ru": "Унести домой"
+      },
+      "Qırırıq": {
+        "en": "Break it",
+        "ru": "Сломать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "trn-fair-play-7": {
+    "question": {
+      "az": "Növbə gözləmək nəyə kömək edir?",
+      "en": "What does waiting for turns help with?",
+      "ru": "Чему помогает соблюдение очереди?"
+    },
+    "instruction": {
+      "az": "Növbənin faydasını tap.",
+      "en": "Benefit of turn-taking.",
+      "ru": "Польза соблюдения очереди."
+    },
+    "options": {
+      "Oyunun ədalətli və dostcasına olmasına": {
+        "en": "Fair and friendly game",
+        "ru": "Честной и дружной игре"
+      },
+      "Vaxtın itməsinə": {
+        "en": "Wasting time",
+        "ru": "Потере времени"
+      },
+      "Hamının küsməsinə": {
+        "en": "Everyone being upset",
+        "ru": "Всеобщей обиде"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-exercise-1": {
+    "question": {
+      "az": "Səhər yuxudan durduqdan sonra bədənimizi oyatmaq üçün nə edirik?",
+      "en": "What do we do in the morning to wake up our body?",
+      "ru": "Что мы делаем утром, чтобы взбодриться?"
+    },
+    "instruction": {
+      "az": "Səhər hərəkətini seç.",
+      "en": "Select morning action.",
+      "ru": "Выбери утреннее действие."
+    },
+    "options": {
+      "Şən səhər gimnastikası": {
+        "en": "Morning exercise",
+        "ru": "Утреннюю зарядку"
+      },
+      "Yenidən yatırıq": {
+        "en": "Sleep again",
+        "ru": "Спим дальше"
+      },
+      "Televizora baxırıq": {
+        "en": "Watch TV",
+        "ru": "Смотрим телевизор"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-breakfast-2": {
+    "question": {
+      "az": "Günə enerjili başlamaq üçün səhər nə etməliyik?",
+      "en": "What should we do to start the day with energy?",
+      "ru": "Что нужно сделать, чтобы начать день с энергией?"
+    },
+    "instruction": {
+      "az": "Səhər enerjisini seç.",
+      "en": "Select morning energy.",
+      "ru": "Выбери утреннюю энергию."
+    },
+    "options": {
+      "Dadlı və faydalı səhər yeməyi": {
+        "en": "Healthy breakfast",
+        "ru": "Вкусный полезный завтрак"
+      },
+      "Heç nə yeməmək": {
+        "en": "Skip food",
+        "ru": "Ничего не есть"
+      },
+      "Yalnız şirniyyat yemək": {
+        "en": "Only sweets",
+        "ru": "Есть только сладости"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-school-prep-3": {
+    "question": {
+      "az": "Məktəbə və ya bağçaya getməzdən əvvəl nəyi yoxlayırıq?",
+      "en": "What do we check before going to school or kindergarten?",
+      "ru": "Что мы проверяем перед уходом в школу или садик?"
+    },
+    "instruction": {
+      "az": "Dərsə hazırlığı tap.",
+      "en": "Find school prep.",
+      "ru": "Найди сборы на учебу."
+    },
+    "options": {
+      "Çantamızı və dəftərlərimizi": {
+        "en": "Backpack and notebooks",
+        "ru": "Рюкзак и тетради"
+      },
+      "Oyuncaq qutusunu": {
+        "en": "Toy box",
+        "ru": "Коробку с игрушками"
+      },
+      "Yastığımızı": {
+        "en": "Pillow",
+        "ru": "Подушку"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-lunch-time-4": {
+    "question": {
+      "az": "Günorta dərsdən qayıdanda nə edirik?",
+      "en": "What do we do returning from school at noon?",
+      "ru": "Что мы делаем, возвращаясь со школы днем?"
+    },
+    "instruction": {
+      "az": "Nahar qaydasını seç.",
+      "en": "Select lunch rule.",
+      "ru": "Выбери правило обеда."
+    },
+    "options": {
+      "Əlləri yuyub dadlı nahar edirik": {
+        "en": "Wash hands and eat lunch",
+        "ru": "Моем руки и обедаем"
+      },
+      "Çirkli əllərlə gəzirik": {
+        "en": "Walk with dirty hands",
+        "ru": "Ходим с грязными руками"
+      },
+      "Dərhal küçəyə qaçırıq": {
+        "en": "Run outside immediately",
+        "ru": "Сразу бежим на улицу"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-homework-5": {
+    "question": {
+      "az": "Dərslərimizi necə hazırlayırıq?",
+      "en": "How do we do our homework?",
+      "ru": "Как мы делаем уроки?"
+    },
+    "instruction": {
+      "az": "Dərs oxumağı tap.",
+      "en": "Find studying.",
+      "ru": "Найди выполнение уроков."
+    },
+    "options": {
+      "Səliqəli və diqqətlə": {
+        "en": "Neatly and carefully",
+        "ru": "Аккуратно и внимательно"
+      },
+      "Tələsik və yarımçıq": {
+        "en": "Hastily and half-done",
+        "ru": "В спешке и кое-как"
+      },
+      "Heç etmirik": {
+        "en": "Do not do it",
+        "ru": "Вообще не делаем"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-evening-bath-6": {
+    "question": {
+      "az": "Yatmazdan əvvəl təmizlənmək üçün nə edirik?",
+      "en": "What do we do to freshen up before bedtime?",
+      "ru": "Что мы делаем перед сном для чистоты?"
+    },
+    "instruction": {
+      "az": "Təmizlik vaxtını tap.",
+      "en": "Find bath time.",
+      "ru": "Найди время купания."
+    },
+    "options": {
+      "İlıq duş qəbul edirik": {
+        "en": "Take warm shower",
+        "ru": "Принимаем теплый душ"
+      },
+      "Qumda oynayırıq": {
+        "en": "Play in sand",
+        "ru": "Играем в песке"
+      },
+      "Çarpayıda tullanırıq": {
+        "en": "Jump on bed",
+        "ru": "Прыгаем на кровати"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "rt-bedtime-story-7": {
+    "question": {
+      "az": "Yatağa uzananda ana bizə nə oxuyur?",
+      "en": "What does mother read when we go to bed?",
+      "ru": "Что мама читает нам в кровати перед сном?"
+    },
+    "instruction": {
+      "az": "Yuxudan əvvəlki vaxtı tap.",
+      "en": "Find bedtime activity.",
+      "ru": "Найди занятие перед сном."
+    },
+    "options": {
+      "Sehrli və dinc nağıl": {
+        "en": "Magical bedtime story",
+        "ru": "Волшебную сказку на ночь"
+      },
+      "Yüksək səsli mahnı": {
+        "en": "Loud music",
+        "ru": "Громкую музыку"
+      },
+      "Qorxulu hekayə": {
+        "en": "Scary story",
+        "ru": "Страшилку"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-buttons-1": {
+    "question": {
+      "az": "Səhər geyinərkən köynəyin düymələrini necə edirik?",
+      "en": "How do we handle shirt buttons in the morning?",
+      "ru": "Что мы делаем с пуговицами на рубашке утром?"
+    },
+    "instruction": {
+      "az": "Geyinmə vərdişini tap.",
+      "en": "Find dressing habit.",
+      "ru": "Найди навык одевания."
+    },
+    "options": {
+      "Özümüz səliqə ilə bağlayırıq": {
+        "en": "Button up neatly ourselves",
+        "ru": "Аккуратно застегиваем сами"
+      },
+      "Qoparıb atırıq": {
+        "en": "Tear off",
+        "ru": "Отрываем"
+      },
+      "Həmişə açıq qoyuruq": {
+        "en": "Leave open",
+        "ru": "Оставляем расстегнутыми"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-wash-face-2": {
+    "question": {
+      "az": "Səhər yuxudan oyananda üzümüzü nə ilə yuyuruq?",
+      "en": "What do we wash our face with in the morning?",
+      "ru": "Чем мы умываем лицо утром?"
+    },
+    "instruction": {
+      "az": "Təmizlik vasitəsini seç.",
+      "en": "Select hygiene item.",
+      "ru": "Выбери предмет гигиены."
+    },
+    "options": {
+      "Təmiz su və sabunla": {
+        "en": "Clean water & soap",
+        "ru": "Чистой водой и мылом"
+      },
+      "Çirkli bezlə": {
+        "en": "Dirty cloth",
+        "ru": "Грязной тряпкой"
+      },
+      "Meyvə şirəsi ilə": {
+        "en": "Fruit juice",
+        "ru": "Соком"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-hanky-3": {
+    "question": {
+      "az": "Asqıranda və ya burnumuz axanda nə işlədirik?",
+      "en": "What do we use when sneezing or blowing nose?",
+      "ru": "Что использовать при чихании или насморке?"
+    },
+    "instruction": {
+      "az": "Dəsmalı seç.",
+      "en": "Select handkerchief.",
+      "ru": "Выбери платок."
+    },
+    "options": {
+      "Təmiz cib dəsmalı": {
+        "en": "Clean handkerchief",
+        "ru": "Чистый платок / салфетку"
+      },
+      "Köynəyin qolu": {
+        "en": "Shirt sleeve",
+        "ru": "Рукав рубашки"
+      },
+      "Əlin arxası": {
+        "en": "Back of hand",
+        "ru": "Ладонь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-clean-shoes-4": {
+    "question": {
+      "az": "Küçədən evə gələndə ayaqqabılarımızı nə edirik?",
+      "en": "What do we do with shoes coming home from street?",
+      "ru": "Что делать с обувью, придя с улицы домой?"
+    },
+    "instruction": {
+      "az": "Ayaqqabıya qulluğu seç.",
+      "en": "Select shoe care.",
+      "ru": "Выбери уход за обувью."
+    },
+    "options": {
+      "Silirik və yerinə qoyuruq": {
+        "en": "Wipe and place in spot",
+        "ru": "Протираем и ставим на место"
+      },
+      "Çarpayıya atırıq": {
+        "en": "Throw on bed",
+        "ru": "Бросаем на кровать"
+      },
+      "Xalçanın ortasına qoyuruq": {
+        "en": "Leave on carpet",
+        "ru": "Оставляем посреди ковра"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-cut-nails-5": {
+    "question": {
+      "az": "Dırnaqların təmiz qalması üçün nə edilməlidir?",
+      "en": "What should be done to keep nails clean?",
+      "ru": "Что делать, чтобы ногти оставались чистыми?"
+    },
+    "instruction": {
+      "az": "Dırnaq qaydasını tap.",
+      "en": "Find nail rule.",
+      "ru": "Найди правило для ногтей."
+    },
+    "options": {
+      "Dırnaqlar vaxtında kəsilməlidir": {
+        "en": "Cut nails on time",
+        "ru": "Вовремя стричь ногти"
+      },
+      "Dırnaqlar çeynənməlidir": {
+        "en": "Bite nails",
+        "ru": "Грызть ногти"
+      },
+      "Çirkli saxlanmalıdır": {
+        "en": "Keep dirty",
+        "ru": "Оставлять грязными"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-drink-water-6": {
+    "question": {
+      "az": "Sağlam və gümrah olmaq üçün gün ərzində nə içirik?",
+      "en": "What do we drink during the day to stay healthy?",
+      "ru": "Что нужно пить в течение дня для здоровья?"
+    },
+    "instruction": {
+      "az": "Sağlam içkini seç.",
+      "en": "Select healthy drink.",
+      "ru": "Выбери полезный напиток."
+    },
+    "options": {
+      "Bol təmiz su": {
+        "en": "Plenty of clean water",
+        "ru": "Много чистой воды"
+      },
+      "Yalnız qazlı şirin sular": {
+        "en": "Only sweet soda",
+        "ru": "Только сладкую газировку"
+      },
+      "Buz parçaları": {
+        "en": "Ice chunks",
+        "ru": "Кусочки льда"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "slf-tidy-room-7": {
+    "question": {
+      "az": "Oyun bitdikdən sonra otağımızı necə qoyuruq?",
+      "en": "How do we leave our room after playing?",
+      "ru": "Как оставить комнату после игры?"
+    },
+    "instruction": {
+      "az": "Səliqəli vərdişi tap.",
+      "en": "Find neat habit.",
+      "ru": "Найди аккуратную привычку."
+    },
+    "options": {
+      "Oyuncaqları səliqə ilə yığırıq": {
+        "en": "Tidy toys neatly",
+        "ru": "Аккуратно убираем игрушки"
+      },
+      "Yerdə dağınıq qoyuruq": {
+        "en": "Leave mess on floor",
+        "ru": "Оставляем разбросанными"
+      },
+      "Çarpayının altına atırıq": {
+        "en": "Shove under bed",
+        "ru": "Запихиваем под кровать"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "saf-traffic-yellow-1": {
+    "question": {
+      "az": "Şəklə bax: İşıqforun sarı işığı yananda nə etməliyik?",
+      "en": "Look at scene: What must we do when yellow traffic light turns on?",
+      "ru": "Посмотри на картинку: Что делать при желтом сигнале светофора?"
+    },
+    "instruction": {
+      "az": "İşıqforun sarı işığının qaydasını tap.",
+      "en": "Find yellow light rule.",
+      "ru": "Найди правило желтого сигнала светофора."
+    },
+    "options": {
+      "Hazırlaşmalıyıq (⚠️)": {
+        "en": "Get ready (⚠️)",
+        "ru": "Приготовиться (⚠️)"
+      },
+      "Qaçmalıyıq": {
+        "en": "Run fast",
+        "ru": "Бежать"
+      },
+      "Gözümüzü yummalıyıq": {
+        "en": "Close eyes",
+        "ru": "Закрыть глаза"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "saf-crosswalk-zebra-2": {
+    "question": {
+      "az": "Küçədə yolu hansı xətlərin üstü ilə təhlükəsiz keçirik?",
+      "en": "Where do we safely cross the street?",
+      "ru": "По каким полосам безопасно переходить дорогу?"
+    },
+    "instruction": {
+      "az": "Təhlükəsiz keçid yolunu seç.",
+      "en": "Select safe crossing path.",
+      "ru": "Выбери безопасный путь перехода."
+    },
+    "options": {
+      "Piyada keçidi (Zebra) ilə": {
+        "en": "Crosswalk (Zebra)",
+        "ru": "По пешеходному переходу"
+      },
+      "Maşınların arasından": {
+        "en": "Between cars",
+        "ru": "Между машинами"
+      },
+      "Yolun istənilən yerindən": {
+        "en": "Anywhere on road",
+        "ru": "В любом месте"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "saf-socket-plug-3": {
+    "question": {
+      "az": "Elektrik rozetkasına nə etmək qəti qadağandır?",
+      "en": "What is strictly forbidden with an electric socket?",
+      "ru": "Что строго запрещено делать с розеткой?"
+    },
+    "instruction": {
+      "az": "Təhlükəsizlik qaydasını tap.",
+      "en": "Find safety rule.",
+      "ru": "Найди правило безопасности."
+    },
+    "options": {
+      "Barmaq və əşya soxmaq": {
+        "en": "Inserting fingers or objects",
+        "ru": "Вставлять пальцы и предметы"
+      },
+      "Şəkil çəkmək": {
+        "en": "Drawing picture",
+        "ru": "Рисовать"
+      },
+      "Uzaqdan baxmaq": {
+        "en": "Looking from afar",
+        "ru": "Смотреть издалека"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "saf-window-balcony-4": {
+    "question": {
+      "az": "Açıq pəncərə və ya balkonda necə davranmalıyıq?",
+      "en": "How should we behave near an open window or balcony?",
+      "ru": "Как вести себя у открытого окна или балкона?"
+    },
+    "instruction": {
+      "az": "Pəncərə qaydasını seç.",
+      "en": "Select window rule.",
+      "ru": "Выбери правило у окна."
+    },
+    "options": {
+      "Pəncərədən heç vaxt sallanmamalıyıq": {
+        "en": "Never lean out the window",
+        "ru": "Никогда не высовываться из окна"
+      },
+      "Pəncərəyə dırmaşmalıyıq": {
+        "en": "Climb on sill",
+        "ru": "Залезать на подоконник"
+      },
+      "Aşağı baxıb tullanmalıyıq": {
+        "en": "Jump down",
+        "ru": "Прыгать вниз"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "saf-stranger-danger-5": {
+    "question": {
+      "az": "Küçədə tanımadığımız adam bizi çağırsa və konfet versə nə edirik?",
+      "en": "What do we do if a stranger calls us and offers candy?",
+      "ru": "Что делать, если незнакомец зовет с собой и предлагает конфету?"
+    },
+    "instruction": {
+      "az": "Küçədə yad adam qaydasını seç.",
+      "en": "Select stranger safety rule.",
+      "ru": "Выбери правило общения с незнакомцами."
+    },
+    "options": {
+      "Qətiyyən getmirik, böyüklərə deyirik": {
+        "en": "Never go, tell adults",
+        "ru": "Ни за что не идти, сказать взрослым"
+      },
+      "Onunla gedirik": {
+        "en": "Go with him",
+        "ru": "Пойти с ним"
+      },
+      "Konfeti alıb yeyirik": {
+        "en": "Take candy and eat",
+        "ru": "Взять конфету"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "saf-medicine-warning-6": {
+    "question": {
+      "az": "Evdəki dərmanları kimin icazəsi olmadan qəbul etmək olmaz?",
+      "en": "Without whose permission must medicines never be taken?",
+      "ru": "Без чьего разрешения нельзя принимать лекарства?"
+    },
+    "instruction": {
+      "az": "Dərman qaydasını tap.",
+      "en": "Find medicine rule.",
+      "ru": "Найди правило обращения с лекарствами."
+    },
+    "options": {
+      "Valideynlərin və həkimin": {
+        "en": "Parents and doctor",
+        "ru": "Родителей и врача"
+      },
+      "İstədiyimiz vaxt içərik": {
+        "en": "Take whenever",
+        "ru": "Можно пить когда угодно"
+      },
+      "Konfet kimi yeyərik": {
+        "en": "Eat like candy",
+        "ru": "Кушать как конфеты"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-find-cat-1": {
+    "question": {
+      "az": "Bu heyvanların içində hansı ev heyvanıdır?",
+      "en": "Which one of these animals is a domestic pet?",
+      "ru": "Какое из этих животных домашнее?"
+    },
+    "instruction": {
+      "az": "Şəkildə ev heyvanını tap.",
+      "en": "Find the domestic pet.",
+      "ru": "Найди домашнего питомца."
+    },
+    "options": {
+      "Ev Pişiyi": {
+        "en": "Cat",
+        "ru": "Кошка"
+      },
+      "Vəhşi Pələng": {
+        "en": "Tiger",
+        "ru": "Тигр"
+      },
+      "Timsah": {
+        "en": "Crocodile",
+        "ru": "Крокодил"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-fruit-basket-2": {
+    "question": {
+      "az": "Səbətdə alma, armud və banan var. Hansı tərəvəz bura səhv düşüb?",
+      "en": "In the fruit basket with apples and bananas, which vegetable is mistakenly there?",
+      "ru": "В корзине яблоки и бананы. Какой овощ попал туда по ошибке?"
+    },
+    "instruction": {
+      "az": "Meyvələrin içində tərəvəzi tap.",
+      "en": "Find vegetable among fruits.",
+      "ru": "Найди овощ среди фруктов."
+    },
+    "options": {
+      "Kök": {
+        "en": "Carrot",
+        "ru": "Морковь"
+      },
+      "Alma": {
+        "en": "Apple",
+        "ru": "Яблоко"
+      },
+      "Banan": {
+        "en": "Banana",
+        "ru": "Банан"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-find-pair-3": {
+    "question": {
+      "az": "Qırmızı çəkmənin tayını tap: 👢",
+      "en": "Find the matching red boot: 👢",
+      "ru": "Найди пару красному сапогу: 👢"
+    },
+    "instruction": {
+      "az": "Eyni olan cütü seç.",
+      "en": "Select matching pair.",
+      "ru": "Выбери подходящую пару."
+    },
+    "options": {
+      "Qırmızı Çəkmə": {
+        "en": "Red Boot",
+        "ru": "Красный сапог"
+      },
+      "Mavi Əlcək": {
+        "en": "Blue Glove",
+        "ru": "Синяя перчатка"
+      },
+      "Yaşıl Papaq": {
+        "en": "Green Hat",
+        "ru": "Зеленая шляпа"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-missing-wheel-4": {
+    "question": {
+      "az": "Avtomobilin getməsi üçün mütləq nəyi olmalıdır?",
+      "en": "What must a car have to drive?",
+      "ru": "Что обязательно должно быть у машины, чтобы ехать?"
+    },
+    "instruction": {
+      "az": "Çatışmayan vacib hissəni tap.",
+      "en": "Find essential missing part.",
+      "ru": "Найди недостающую часть."
+    },
+    "options": {
+      "Təkərləri": {
+        "en": "Wheels",
+        "ru": "Колеса"
+      },
+      "Qanadları": {
+        "en": "Wings",
+        "ru": "Крылья"
+      },
+      "Yelkəni": {
+        "en": "Sail",
+        "ru": "Парус"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-size-order-5": {
+    "question": {
+      "az": "Bu əşyaların içində ən kiçiyi hansıdır?",
+      "en": "Which item among these is the smallest?",
+      "ru": "Какой предмет из этих самый маленький?"
+    },
+    "instruction": {
+      "az": "Ən kiçik əşyanı seç.",
+      "en": "Select the smallest item.",
+      "ru": "Выбери самый маленький предмет."
+    },
+    "options": {
+      "Balaca yaşıl noxud": {
+        "en": "Tiny green pea",
+        "ru": "Маленькая горошина"
+      },
+      "Böyük qarpız": {
+        "en": "Big watermelon",
+        "ru": "Большой арбуз"
+      },
+      "Orta alma": {
+        "en": "Medium apple",
+        "ru": "Среднее яблоко"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-color-difference-6": {
+    "question": {
+      "az": "Sarı topların içində fərqli olan hansıdır? 🟡🟡🔵🟡",
+      "en": "Which ball is different among yellow ones? 🟡🟡🔵🟡",
+      "ru": "Какой мяч отличается среди желтых? 🟡🟡🔵🟡"
+    },
+    "instruction": {
+      "az": "Fərqli topu tap.",
+      "en": "Find odd ball.",
+      "ru": "Найди мяч другого цвета."
+    },
+    "options": {
+      "Göy Top": {
+        "en": "Blue Ball",
+        "ru": "Синий мяч"
+      },
+      "Sarı Top": {
+        "en": "Yellow Ball",
+        "ru": "Желтый мяч"
+      },
+      "Ulduz": {
+        "en": "Star",
+        "ru": "Звезда"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "att-shadow-rabbit-7": {
+    "question": {
+      "az": "Uzun qulaqlı şən kölgə hansı heyvana məxsusdur?",
+      "en": "Whose shadow has long ears?",
+      "ru": "Чья это тень с длинными ушками?"
+    },
+    "instruction": {
+      "az": "Kölgənin sahibini tap.",
+      "en": "Find shadow owner.",
+      "ru": "Найди хозяина тени."
+    },
+    "options": {
+      "Dovşan": {
+        "en": "Rabbit",
+        "ru": "Кролик"
+      },
+      "Tısbağa": {
+        "en": "Turtle",
+        "ru": "Черепаха"
+      },
+      "Balıq": {
+        "en": "Fish",
+        "ru": "Рыбка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-thunder-1": {
+    "question": {
+      "az": "Göydə şimşək çaxanda hansı gur səs eşidilir?",
+      "en": "What loud sound is heard when lightning strikes?",
+      "ru": "Какой громкий звук слышен при грозе?"
+    },
+    "instruction": {
+      "az": "Gur səsi tap.",
+      "en": "Find loud sound.",
+      "ru": "Найди громкий звук."
+    },
+    "options": {
+      "Bərk gurultu: Qum-qum!": {
+        "en": "Loud rumble: Boom!",
+        "ru": "Громкий грохот: Бабах!"
+      },
+      "Asta pıçıltı": {
+        "en": "Soft whisper",
+        "ru": "Тихий шепот"
+      },
+      "Cik-cik": {
+        "en": "Chirp chirp",
+        "ru": "Чик-чирик"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-whisper-2": {
+    "question": {
+      "az": "Biri gizli söz deyəndə necə danışır?",
+      "en": "How does someone speak when sharing a secret?",
+      "ru": "Как говорят, когда делятся секретом?"
+    },
+    "instruction": {
+      "az": "Asta səsi seç.",
+      "en": "Select quiet sound.",
+      "ru": "Выбери тихий звук."
+    },
+    "options": {
+      "Asta pıçıltı ilə": {
+        "en": "Quiet whisper",
+        "ru": "Тихим шепотом"
+      },
+      "Şeypur kimi bərk": {
+        "en": "Loud like horn",
+        "ru": "Громко как труба"
+      },
+      "Baraban kimi": {
+        "en": "Like drum",
+        "ru": "Как барабан"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-door-knock-3": {
+    "question": {
+      "az": "Qapı döyüləndə hansı səs çıxır?",
+      "en": "What sound comes when someone knocks on the door?",
+      "ru": "Какой звук, когда стучат в дверь?"
+    },
+    "instruction": {
+      "az": "Qapının səsini tap.",
+      "en": "Find door sound.",
+      "ru": "Найди звук двери."
+    },
+    "options": {
+      "Taq-taq-taq!": {
+        "en": "Knock knock!",
+        "ru": "Тук-тук-тук!"
+      },
+      "Vııı-vııı": {
+        "en": "Vroom vroom",
+        "ru": "Вжж-вжж"
+      },
+      "Şır-şır": {
+        "en": "Drip drop",
+        "ru": "Кап-кап"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-guitar-strum-4": {
+    "question": {
+      "az": "Barmaqla simlərinə toxunduqda gözəl musiqi çalan alət hansıdır?",
+      "en": "Which instrument plays music when fingers strum strings?",
+      "ru": "Какой инструмент играет красивую музыку, когда перебирают струны?"
+    },
+    "instruction": {
+      "az": "Simli musiqi alətini tap.",
+      "en": "Find string instrument.",
+      "ru": "Найди струнный инструмент."
+    },
+    "options": {
+      "Gitara": {
+        "en": "Guitar",
+        "ru": "Гитара"
+      },
+      "Baraban": {
+        "en": "Drum",
+        "ru": "Барабан"
+      },
+      "Şeypur": {
+        "en": "Horn",
+        "ru": "Труба"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-car-horn-5": {
+    "question": {
+      "az": "Yolda xəbərdarlıq edən avtomobil siqnalı necə səslənir?",
+      "en": "How does a car horn sound on the road?",
+      "ru": "Как звучит автомобильный клаксон на дороге?"
+    },
+    "instruction": {
+      "az": "Maşın siqnalını tap.",
+      "en": "Find car horn.",
+      "ru": "Найди автомобильный сигнал."
+    },
+    "options": {
+      "Bip-biiip!": {
+        "en": "Beep beep!",
+        "ru": "Бип-бииип!"
+      },
+      "Qu-qu": {
+        "en": "Coo-coo",
+        "ru": "Ку-ку"
+      },
+      "Tıp-tıp": {
+        "en": "Tip-tip",
+        "ru": "Кап-кап"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-water-splash-6": {
+    "question": {
+      "az": "Suya daş atanda hansı səs eşidilir?",
+      "en": "What sound is heard when throwing stone in water?",
+      "ru": "Какой звук, когда бросаешь камень в воду?"
+    },
+    "instruction": {
+      "az": "Suyun səsini tap.",
+      "en": "Find splash sound.",
+      "ru": "Найди звук всплеска."
+    },
+    "options": {
+      "Şappıltı: Şapp!": {
+        "en": "Splash: Plop!",
+        "ru": "Всплеск: Бульк!"
+      },
+      "Cik-cik": {
+        "en": "Chirp",
+        "ru": "Чик-чирик"
+      },
+      "Vzzz-vzzz": {
+        "en": "Buzz",
+        "ru": "Жжжж"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "aud-applause-clap-7": {
+    "question": {
+      "az": "Uşaqlar şeir oxuyub bitirdikdə hamı necə səs çıxarır?",
+      "en": "What sound does everyone make after reciting poem?",
+      "ru": "Какие звуки издают все после прочтения стихотворения?"
+    },
+    "instruction": {
+      "az": "Alqış səsini tap.",
+      "en": "Find applause sound.",
+      "ru": "Найди звук аплодисментов."
+    },
+    "options": {
+      "Gur alqışlar: Şaq-şaq!": {
+        "en": "Loud applause: Clap clap!",
+        "ru": "Громкие аплодисменты: Хлоп-хлоп!"
+      },
+      "Tam sükut": {
+        "en": "Complete silence",
+        "ru": "Полная тишина"
+      },
+      "Xoruldamaq": {
+        "en": "Snoring",
+        "ru": "Храп"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-circle-sun-1": {
+    "question": {
+      "az": "Şəklə bax: Günəşin ətrafında hansı xətt var?",
+      "en": "Look at scene: What path leads from sun to sunflower?",
+      "ru": "Какая линия ведет от солнца к подсолнуху?"
+    },
+    "instruction": {
+      "az": "Barmağınla dairəvi cizgini izlə.",
+      "en": "Trace circular line with finger.",
+      "ru": "Проведи пальчиком по круговой линии."
+    },
+    "options": {
+      "Dairəvi Halqa Xətti": {
+        "en": "Circular Loop",
+        "ru": "Круговая линия"
+      },
+      "Ziqzaq Xətt": {
+        "en": "Zigzag",
+        "ru": "Зигзаг"
+      },
+      "Nöqtə": {
+        "en": "Dot",
+        "ru": "Точка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-spiral-snail-2": {
+    "question": {
+      "az": "İlbizin çanağı hansı formadadır?",
+      "en": "What shape is the snail shell?",
+      "ru": "Какая форма у панциря улитки?"
+    },
+    "instruction": {
+      "az": "Spiral xətti barmağınla tamamla.",
+      "en": "Trace spiral path with finger.",
+      "ru": "Проведи по спирали пальчиком."
+    },
+    "options": {
+      "Qıvrım Spiral": {
+        "en": "Spiral",
+        "ru": "Спираль"
+      },
+      "Düz Xətt": {
+        "en": "Straight line",
+        "ru": "Прямая"
+      },
+      "Kvadrat": {
+        "en": "Square",
+        "ru": "Квадрат"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-lightning-3": {
+    "question": {
+      "az": "Şəklə bax: Buluddan meşəyə hansı xətt enir?",
+      "en": "Which path descends from cloud to forest?",
+      "ru": "Какая линия спускается от тучи к лесу?"
+    },
+    "instruction": {
+      "az": "Ziqzaq xətti barmaqla çək.",
+      "en": "Trace zigzag path with finger.",
+      "ru": "Проведи пальчиком зигзаг."
+    },
+    "options": {
+      "İti Ziqzaq Xətt": {
+        "en": "Sharp Zigzag",
+        "ru": "Острый зигзаг"
+      },
+      "Dairəvi Xətt": {
+        "en": "Circle",
+        "ru": "Круг"
+      },
+      "Kvadrat Xətt": {
+        "en": "Square",
+        "ru": "Квадратная"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-fish-wave-4": {
+    "question": {
+      "az": "Dənizdə balıq hansı xətlə üzür?",
+      "en": "What line does the fish swim along in sea?",
+      "ru": "По какой линии плывет рыбка в море?"
+    },
+    "instruction": {
+      "az": "Dalğalı xətti barmaqla çək.",
+      "en": "Trace wavy path.",
+      "ru": "Проведи волнистую линию."
+    },
+    "options": {
+      "Dalğalı Xətt": {
+        "en": "Wavy Line",
+        "ru": "Волнистая линия"
+      },
+      "Düz Xətt": {
+        "en": "Straight line",
+        "ru": "Прямая"
+      },
+      "Qutu Xətt": {
+        "en": "Box line",
+        "ru": "Коробка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-mountain-5": {
+    "question": {
+      "az": "Dağın zirvəsinə qalxan künclü cizgi hansıdır?",
+      "en": "Which pointed line climbs to mountain peak?",
+      "ru": "Какая линия поднимается к вершине горы?"
+    },
+    "instruction": {
+      "az": "Dağa doğru xətti izlə.",
+      "en": "Trace path to mountain.",
+      "ru": "Проведи линию к горе."
+    },
+    "options": {
+      "Ziqzaq Xətt": {
+        "en": "Zigzag Line",
+        "ru": "Зигзагообразная линия"
+      },
+      "Halqa Xətti": {
+        "en": "Loop",
+        "ru": "Петля"
+      },
+      "Nöqtə": {
+        "en": "Dot",
+        "ru": "Точка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-butterfly-6": {
+    "question": {
+      "az": "Kəpənək çiçəyə doğru necə uçur?",
+      "en": "How does butterfly fly to the flower?",
+      "ru": "Как бабочка летит к цветку?"
+    },
+    "instruction": {
+      "az": "Kəpənəyin yolunu barmaqla çək.",
+      "en": "Trace butterfly path with finger.",
+      "ru": "Проведи пальчиком путь бабочки."
+    },
+    "options": {
+      "Dalğalı və şən xətlə": {
+        "en": "Wavy playful line",
+        "ru": "Волнистой веселой линией"
+      },
+      "Hərəkətsiz": {
+        "en": "Motionless",
+        "ru": "Неподвижно"
+      },
+      "Aşağı düz": {
+        "en": "Straight down",
+        "ru": "Прямо вниз"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mot-trace-plane-loop-7": {
+    "question": {
+      "az": "Təyyarə enişdən əvvəl göydə hansı fiquru cızır?",
+      "en": "What shape does the plane draw before landing?",
+      "ru": "Какую фигуру описывает самолет перед посадкой?"
+    },
+    "instruction": {
+      "az": "Halqavari xətti barmaqla çək.",
+      "en": "Trace loop path.",
+      "ru": "Проведи петлю пальчиком."
+    },
+    "options": {
+      "Gözəl Halqa Xətti": {
+        "en": "Loop line",
+        "ru": "Красивую петлю"
+      },
+      "Kub": {
+        "en": "Cube",
+        "ru": "Куб"
+      },
+      "Xaç": {
+        "en": "Cross",
+        "ru": "Крест"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-run-place-1": {
+    "question": {
+      "az": "Olduğun yerdə 5 saniyə sürətlə qaç!",
+      "en": "Run in place fast for 5 seconds!",
+      "ru": "Беги быстро на месте 5 секунд!"
+    },
+    "instruction": {
+      "az": "Yerində qaçış hərəkətini et.",
+      "en": "Run in place.",
+      "ru": "Беги на месте."
+    },
+    "options": {
+      "Qaçmaq": {
+        "en": "Running",
+        "ru": "Бежать"
+      },
+      "Uzanmaq": {
+        "en": "Lying down",
+        "ru": "Лежать"
+      },
+      "Donub qalmaq": {
+        "en": "Freezing",
+        "ru": "Замереть"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-touch-toes-2": {
+    "question": {
+      "az": "Dizlərini bükmədən əyil və ayaq barmaqlarına toxun!",
+      "en": "Bend down without bending knees and touch toes!",
+      "ru": "Наклонись не сгибая колени и коснись пальцев ног!"
+    },
+    "instruction": {
+      "az": "Əyilmək hərəkətini yerinə yetir.",
+      "en": "Perform bending.",
+      "ru": "Выполни наклон."
+    },
+    "options": {
+      "Əyilmək": {
+        "en": "Bending",
+        "ru": "Наклониться"
+      },
+      "Tullanmaq": {
+        "en": "Jumping",
+        "ru": "Прыгать"
+      },
+      "Fırlanmaq": {
+        "en": "Spinning",
+        "ru": "Кружиться"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-star-jump-3": {
+    "question": {
+      "az": "Qollarını və ayaqlarını geniş açıb ulduz kimi tullan!",
+      "en": "Spread arms and legs wide and jump like a star!",
+      "ru": "Широко расставь руки и ноги и подпрыгни как звездочка!"
+    },
+    "instruction": {
+      "az": "Ulduz hərəkətini et.",
+      "en": "Do star jump.",
+      "ru": "Сделай прыжок-звездочку."
+    },
+    "options": {
+      "Ulduz tullanışı": {
+        "en": "Star jump",
+        "ru": "Прыжок звездочкой"
+      },
+      "Yuxuya getmək": {
+        "en": "Sleep",
+        "ru": "Спать"
+      },
+      "Oturmaq": {
+        "en": "Sit",
+        "ru": "Сидеть"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-spin-circle-4": {
+    "question": {
+      "az": "Yerində yavaşca bir tam dairə vuraraq fırlan!",
+      "en": "Spin around slowly one full circle on the spot!",
+      "ru": "Медленно покружись один раз вокруг себя!"
+    },
+    "instruction": {
+      "az": "Fırlanmaq komandası.",
+      "en": "Spin command.",
+      "ru": "Команда покружиться."
+    },
+    "options": {
+      "Fırlanmaq": {
+        "en": "Spinning",
+        "ru": "Кружиться"
+      },
+      "Düz getmək": {
+        "en": "Walk straight",
+        "ru": "Идти прямо"
+      },
+      "Gözü yummaq": {
+        "en": "Close eyes",
+        "ru": "Закрыть глаза"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-balance-stork-5": {
+    "question": {
+      "az": "Bir ayağın üstündə leylək kimi 5 saniyə dayan!",
+      "en": "Stand on one foot like a stork for 5 seconds!",
+      "ru": "Постой на одной ноге как аист 5 секунд!"
+    },
+    "instruction": {
+      "az": "Müvazinət saxla.",
+      "en": "Keep balance.",
+      "ru": "Держи равновесие."
+    },
+    "options": {
+      "Bir ayaqda durmaq": {
+        "en": "Stand on one foot",
+        "ru": "Стоять на одной ноге"
+      },
+      "Qaçmaq": {
+        "en": "Run",
+        "ru": "Бежать"
+      },
+      "Oturmaq": {
+        "en": "Sit",
+        "ru": "Сесть"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-march-soldier-6": {
+    "question": {
+      "az": "Dizlərini hündürə qaldıraraq yerində addımla!",
+      "en": "March on the spot lifting your knees high!",
+      "ru": "Маршируй на месте, высоко поднимая колени!"
+    },
+    "instruction": {
+      "az": "Dizləri qaldıraraq addımla.",
+      "en": "March lifting knees.",
+      "ru": "Маршируй поднимая колени."
+    },
+    "options": {
+      "Cəsur addımlamaq": {
+        "en": "Brave marching",
+        "ru": "Маршировать"
+      },
+      "Sürünmək": {
+        "en": "Crawl",
+        "ru": "Ползать"
+      },
+      "Yellənmək": {
+        "en": "Swing",
+        "ru": "Качаться"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "mov-happy-dance-7": {
+    "question": {
+      "az": "Şən musiqi sədaları altında sevinclə rəqs et!",
+      "en": "Joyfully dance to the happy music!",
+      "ru": "Весело потанцуй под музыку!"
+    },
+    "instruction": {
+      "az": "Rəqs etmək komandası.",
+      "en": "Dance command.",
+      "ru": "Команда танцевать."
+    },
+    "options": {
+      "Şən rəqs etmək": {
+        "en": "Happy dance",
+        "ru": "Весело танцевать"
+      },
+      "Susub oturmaq": {
+        "en": "Sit quietly",
+        "ru": "Сидеть тихо"
+      },
+      "Donub qalmaq": {
+        "en": "Freeze",
+        "ru": "Замереть"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "log-cow-milk-1": {
+    "question": {
+      "az": "Dadlı və ağ süd bizə hansı heyvandan gəlir?",
+      "en": "Which animal gives us tasty white milk?",
+      "ru": "Какое животное дает нам вкусное белое молоко?"
+    },
+    "instruction": {
+      "az": "Məntiqi əlaqəni tap.",
+      "en": "Find logical connection.",
+      "ru": "Найди логическую связь."
+    },
+    "options": {
+      "İnəkdən": {
+        "en": "From cow",
+        "ru": "От коровы"
+      },
+      "Toyuqdan": {
+        "en": "From hen",
+        "ru": "От курицы"
+      },
+      "Pişikdən": {
+        "en": "From cat",
+        "ru": "От кошки"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "log-wool-sweater-2": {
+    "question": {
+      "az": "Qoyunun yumşaq yunundan nə toxuyurlar?",
+      "en": "What is knitted from sheep soft wool?",
+      "ru": "Что вяжут из мягкой овечьей шерсти?"
+    },
+    "instruction": {
+      "az": "Yun ilə əlaqəli əşyanı tap.",
+      "en": "Find item made of wool.",
+      "ru": "Найди вещь из шерсти."
+    },
+    "options": {
+      "İsti sviter və corab": {
+        "en": "Warm sweater & socks",
+        "ru": "Теплый свитер и носки"
+      },
+      "Şüşə stəkan": {
+        "en": "Glass cup",
+        "ru": "Стеклянный стакан"
+      },
+      "Dəmir qapı": {
+        "en": "Iron door",
+        "ru": "Железную дверь"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "log-bird-nest-3": {
+    "question": {
+      "az": "Quş öz yumurtalarını və balalarını harada qoruyur?",
+      "en": "Where does the bird protect its eggs and chicks?",
+      "ru": "Где птица оберегает яйца и птенцов?"
+    },
+    "instruction": {
+      "az": "Quşun yumurtasını qoruduğu yeri seç.",
+      "en": "Select where bird protects eggs.",
+      "ru": "Выбери, где птица хранит яйца."
+    },
+    "options": {
+      "Ağacdakı yuvada": {
+        "en": "In tree nest",
+        "ru": "В гнезде на дереве"
+      },
+      "Su quyusunda": {
+        "en": "In water well",
+        "ru": "В колодце"
+      },
+      "Avtomobilin içində": {
+        "en": "Inside car",
+        "ru": "В машине"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "log-odd-out-car-4": {
+    "question": {
+      "az": "Bu sırada artıq olan hansıdır? (Alma, Armud, Banan, Avtomobil)",
+      "en": "Which one is odd in this list? (Apple, Pear, Banana, Car)",
+      "ru": "Что лишнее в этом ряду? (Яблоко, Груша, Банан, Машина)"
+    },
+    "instruction": {
+      "az": "Artıq olanı tap.",
+      "en": "Find odd item.",
+      "ru": "Найди лишнее."
+    },
+    "options": {
+      "Avtomobil (çünki nəqliyyatdır)": {
+        "en": "Car (it is transport)",
+        "ru": "Машина (так как это транспорт)"
+      },
+      "Alma": {
+        "en": "Apple",
+        "ru": "Яблоко"
+      },
+      "Banan": {
+        "en": "Banana",
+        "ru": "Банан"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "log-sunglasses-5": {
+    "question": {
+      "az": "Parlaq yay günəşindən gözlərimizi qorumaq üçün nə taxırıq?",
+      "en": "What do we wear to protect eyes from bright sun?",
+      "ru": "Что мы надеваем для защиты глаз от яркого солнца?"
+    },
+    "instruction": {
+      "az": "Günəş əşyasını tap.",
+      "en": "Find sun protection item.",
+      "ru": "Найди предмет защиты от солнца."
+    },
+    "options": {
+      "Gün eynəyi": {
+        "en": "Sunglasses",
+        "ru": "Солнцезащитные очки"
+      },
+      "Əlcək": {
+        "en": "Gloves",
+        "ru": "Перчатки"
+      },
+      "Qalın şərf": {
+        "en": "Scarf",
+        "ru": "Шарф"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
+  },
+  "log-key-lock-6": {
+    "question": {
+      "az": "Qapıdakı qıfılı açmaq üçün bizə nə lazımdır?",
+      "en": "What do we need to unlock a door lock?",
+      "ru": "Что нужно, чтобы открыть замок на двери?"
+    },
+    "instruction": {
+      "az": "Qıfılı açan əşyanı seç.",
+      "en": "Select item that opens lock.",
+      "ru": "Выбери предмет, открывающий замок."
+    },
+    "options": {
+      "Açar": {
+        "en": "Key",
+        "ru": "Ключ"
+      },
+      "Qələm": {
+        "en": "Pen",
+        "ru": "Карандаш"
+      },
+      "Qaşıq": {
+        "en": "Spoon",
+        "ru": "Ложка"
+      }
+    },
+    "explanation": {
+      "az": "Afərin! Düzgün cavab! 🌟",
+      "en": "Well done! Correct answer! 🌟",
+      "ru": "Молодец! Правильный ответ! 🌟"
+    }
   }
 };
 

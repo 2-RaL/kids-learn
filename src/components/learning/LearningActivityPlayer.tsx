@@ -371,6 +371,42 @@ const VisualSceneCard: React.FC<VisualSceneCardProps> = ({ scene, activeLang }) 
 };
 
 // ── Main Activity Player Component ──────────────────────────────────
+// Helper to organize and shuffle activities by topic/lesson clusters
+function prepareModuleActivities(targetModule: LearningModuleCategory): LearningActivityItem[] {
+  if (!targetModule?.activities || targetModule.activities.length === 0) return [];
+
+  // Strict pedagogical progression for Math: 1-10 counting, 10+1=11, 10+10=20, 20+5=25 up to 100
+  if (targetModule.id === 'math') {
+    return [...targetModule.activities];
+  }
+
+  // All other modules: group activities by their parent lesson/concept unit
+  // A lesson card and its subsequent practice questions stay together as an atomic cluster,
+  // but the clusters are shuffled so the child gets a fresh, randomized concept start every session!
+  const clusters: LearningActivityItem[][] = [];
+  let currentCluster: LearningActivityItem[] = [];
+
+  for (const act of targetModule.activities) {
+    if (act.lesson && currentCluster.length > 0) {
+      clusters.push(currentCluster);
+      currentCluster = [act];
+    } else {
+      currentCluster.push(act);
+    }
+  }
+  if (currentCluster.length > 0) {
+    clusters.push(currentCluster);
+  }
+
+  // Fisher-Yates shuffle on clusters
+  for (let i = clusters.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [clusters[i], clusters[j]] = [clusters[j], clusters[i]];
+  }
+
+  return clusters.flat();
+}
+
 export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   module,
   onClose,
@@ -380,12 +416,27 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   const [activeLang, setActiveLang] = useState<'az' | 'en' | 'ru'>((language as any) || 'az');
   const [isSpeaking, setIsSpeaking] = useState(false);
 
+  // Shuffled activities (non-math) or sequenced activities (math)
+  const [activeActivities, setActiveActivities] = useState<LearningActivityItem[]>(() =>
+    prepareModuleActivities(module)
+  );
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; text: string } | null>(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+
+  // Re-initialize on module change
+  useEffect(() => {
+    setActiveActivities(prepareModuleActivities(module));
+    setCurrentIndex(0);
+    setScore(0);
+    setIsFinished(false);
+    setAcknowledgedLessons({});
+    setIsReviewingLesson(false);
+  }, [module.id]);
 
   // Lesson view acknowledgement and review state
   const [acknowledgedLessons, setAcknowledgedLessons] = useState<Record<string, boolean>>({});
@@ -398,15 +449,15 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [availableWords, setAvailableWords] = useState<string[]>([]);
 
-  const currentActivity: LearningActivityItem | undefined = module.activities[currentIndex];
+  const currentActivity: LearningActivityItem | undefined = activeActivities[currentIndex];
   const ui = UI_TRANSLATIONS[activeLang] || UI_TRANSLATIONS.az;
 
   // Active lesson: either on current activity or closest preceding lesson in this module
   const activeLesson: LearningLesson | undefined = (() => {
     if (currentActivity?.lesson) return currentActivity.lesson;
     for (let i = currentIndex; i >= 0; i--) {
-      if (module.activities[i]?.lesson) {
-        return module.activities[i].lesson;
+      if (activeActivities[i]?.lesson) {
+        return activeActivities[i].lesson;
       }
     }
     return undefined;
@@ -642,7 +693,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
     parentSpeech.stop();
     setIsSpeaking(false);
 
-    if (currentIndex < module.activities.length - 1) {
+    if (currentIndex < activeActivities.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
       setIsFinished(true);
@@ -655,6 +706,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   const handleRestart = () => {
     parentSpeech.stop();
     setIsSpeaking(false);
+    setActiveActivities(prepareModuleActivities(module));
     setCurrentIndex(0);
     setScore(0);
     setIsFinished(false);
@@ -704,7 +756,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
           <div
             className="bg-amber-400 h-2 transition-all duration-300"
             style={{
-              width: `${((currentIndex + 1) / module.activities.length) * 100}%`,
+              width: `${((currentIndex + 1) / (activeActivities.length || 1)) * 100}%`,
             }}
           />
         </div>
@@ -1023,7 +1075,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                           onClick={handleNext}
                           className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs sm:text-sm font-black flex items-center gap-1.5 shadow cursor-pointer flex-shrink-0"
                         >
-                          <span>{currentIndex < module.activities.length - 1 ? ui.next : ui.finish}</span>
+                          <span>{currentIndex < activeActivities.length - 1 ? ui.next : ui.finish}</span>
                           <ArrowRight className="w-4 h-4" />
                         </button>
                       </motion.div>

@@ -31,7 +31,7 @@ const VOICE_MAP = {
 };
 
 function handleTtsRequest(text, voiceKey, res) {
-  const voice = VOICE_MAP[voiceKey] || VOICE_MAP.banu;
+  const voice = VOICE_MAP[voiceKey] || VOICE_MAP.babek;
   const trimmed = (text || '').trim();
 
   if (!trimmed) {
@@ -95,14 +95,14 @@ function handleTtsRequest(text, voiceKey, res) {
 // GET /api/tts?text=...&voice=...
 router.get('/', (req, res) => {
   const text = (req.query.text || '').toString();
-  const voiceKey = (req.query.voice || 'banu').toString();
+  const voiceKey = (req.query.voice || 'babek').toString();
   handleTtsRequest(text, voiceKey, res);
 });
 
 // POST /api/tts { text: "...", voice: "..." }
 router.post('/', (req, res) => {
   const text = (req.body?.text || '').toString();
-  const voiceKey = (req.body?.voice || 'banu').toString();
+  const voiceKey = (req.body?.voice || 'babek').toString();
   handleTtsRequest(text, voiceKey, res);
 });
 
