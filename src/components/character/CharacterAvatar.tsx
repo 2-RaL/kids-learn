@@ -43,17 +43,34 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
     switch (command) {
       case 'jump':
       case 'stretch':
+      case 'slide':
         return 'jumping';
       case 'wave':
       case 'point':
       case 'sing':
+      case 'talk':
+      case 'hug':
+      case 'holdHands':
+      case 'lightMatch':
+      case 'waterPlant':
         return 'waving';
       case 'sit':
       case 'sleep':
       case 'read':
       case 'write':
+      case 'draw':
+      case 'paint':
+      case 'cut':
+      case 'build':
+      case 'playToy':
         return 'sitting';
       case 'run':
+      case 'rideBike':
+      case 'walk':
+      case 'bring':
+      case 'takeAway':
+      case 'carry':
+      case 'pull':
         return 'running';
       case 'stand':
       case 'walkForward':
@@ -70,10 +87,23 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'laugh':
       case 'cry':
       case 'think':
-      case 'draw':
       case 'count':
       case 'eat':
       case 'drink':
+      case 'surprised':
+      case 'playInstrument':
+      case 'wakeUp':
+      case 'bathe':
+      case 'wash':
+      case 'comb':
+      case 'dress':
+      case 'openDoor':
+      case 'closeDoor':
+      case 'putAway':
+      case 'collect':
+      case 'clean':
+      case 'help':
+      case 'scatter':
       default:
         return 'standing';
     }
@@ -785,6 +815,246 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
           transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
           position: 'top-8 -right-3',
           size: 'text-3xl sm:text-4xl',
+        };
+      case 'walk':
+        return {
+          emoji: '🚶',
+          animate: { x: [-10, 10, -10], y: [0, -4, 0] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-8 right-0',
+          size: 'text-3xl sm:text-4xl',
+        };
+      case 'slide':
+        return {
+          emoji: '🛝',
+          animate: { y: [-15, 15, -15], rotate: [-10, 5, -10] },
+          transition: { duration: 1.0, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-6 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'rideBike':
+        return {
+          emoji: '🚲',
+          animate: { x: [-15, 15, -15], y: [0, -3, 0] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'bottom-10 right-0',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'surprised':
+        return {
+          emoji: '😲',
+          animate: { scale: [1, 1.4, 1.1, 1.35, 1], y: [0, -10, 0] },
+          transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-6 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'playInstrument':
+        return {
+          emoji: '🎸',
+          animate: { rotate: [-12, 12, -12], scale: [1, 1.15, 1] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-12 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'playToy':
+        return {
+          emoji: '🧸',
+          animate: { rotate: [-10, 10, -10], y: [0, -5, 0] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-14 right-0',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'wakeUp':
+        return {
+          emoji: '⏰',
+          animate: { rotate: [-15, 15, -15], scale: [1, 1.25, 1] },
+          transition: { duration: 0.6, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-6 right-0',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'bathe':
+        return {
+          emoji: '🚿',
+          animate: { y: [0, 8, 0], scale: [1, 1.2, 1] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-4 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'wash':
+        return {
+          emoji: '🧼',
+          animate: { rotate: [0, 20, -20, 0], scale: [0.9, 1.2, 0.9] },
+          transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'comb':
+        return {
+          emoji: '🪮',
+          animate: { y: [-10, 10, -10], rotate: [10, -10, 10] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-6 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'dress':
+        return {
+          emoji: '👕',
+          animate: { scale: [0.9, 1.25, 1], rotate: [-10, 10, 0] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-12 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'paint':
+        return {
+          emoji: '🖌️',
+          animate: { x: [-10, 10, -10], rotate: [-15, 15, -15] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'cut':
+        return {
+          emoji: '✂️',
+          animate: { scale: [0.9, 1.3, 0.9], rotate: [0, -15, 15, 0] },
+          transition: { duration: 0.6, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 right-0',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'talk':
+        return {
+          emoji: '💬',
+          animate: { scale: [0.8, 1.2, 0.9, 1.15, 0.8], y: [0, -6, 0] },
+          transition: { duration: 1.0, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-4 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'build':
+        return {
+          emoji: '🧱',
+          animate: { y: [0, -8, 0], scale: [1, 1.2, 1] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-12 right-0',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'hug':
+        return {
+          emoji: '🤗',
+          animate: { scale: [0.95, 1.3, 1.05, 1.25, 0.95] },
+          transition: { duration: 1.0, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-8 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'holdHands':
+        return {
+          emoji: '🤝',
+          animate: { scale: [1, 1.2, 1], y: [0, -4, 0] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'help':
+        return {
+          emoji: '❤️',
+          animate: { scale: [1, 1.35, 1], y: [0, -8, 0] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-6 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'openDoor':
+        return {
+          emoji: '🚪',
+          animate: { x: [0, 10, 0], scale: [1, 1.15, 1] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'closeDoor':
+        return {
+          emoji: '🔒',
+          animate: { scale: [0.8, 1.25, 1] },
+          transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'putAway':
+        return {
+          emoji: '📦',
+          animate: { y: [0, 8, 0], scale: [1, 1.15, 1] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-12 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'collect':
+        return {
+          emoji: '🧺',
+          animate: { scale: [0.9, 1.2, 0.9], y: [0, -5, 0] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-12 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'clean':
+        return {
+          emoji: '🧹',
+          animate: { rotate: [-20, 20, -20], x: [-6, 6, -6] },
+          transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-8 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'bring':
+        return {
+          emoji: '🎁',
+          animate: { x: [-15, 5, 0], scale: [0.8, 1.2, 1] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'takeAway':
+        return {
+          emoji: '🚶‍♂️',
+          animate: { x: [0, 18, 0], opacity: [1, 0.8, 1] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'carry':
+        return {
+          emoji: '🎒',
+          animate: { y: [0, -5, 0], scale: [1, 1.15, 1] },
+          transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'pull':
+        return {
+          emoji: '🪢',
+          animate: { x: [0, -15, 0], scale: [1, 1.15, 1] },
+          transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'scatter':
+        return {
+          emoji: '💥',
+          animate: { scale: [0.6, 1.4, 0.9], rotate: [0, 25, -25, 0] },
+          transition: { duration: 0.6, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-8 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'waterPlant':
+        return {
+          emoji: '🪴',
+          animate: { y: [0, -4, 0], scale: [0.95, 1.15, 0.95] },
+          transition: { duration: 0.9, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-10 -right-2',
+          size: 'text-4xl sm:text-5xl',
+        };
+      case 'lightMatch':
+        return {
+          emoji: '🕯️',
+          animate: { scale: [1, 1.25, 1.1, 1.25, 1], y: [0, -3, 0] },
+          transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' },
+          position: 'top-8 -right-2',
+          size: 'text-4xl sm:text-5xl',
         };
       default:
         return null;

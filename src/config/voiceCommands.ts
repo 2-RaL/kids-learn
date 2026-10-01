@@ -153,4 +153,154 @@ export const VOICE_COMMANDS: Record<CharacterCommand, VoiceCommandMap> = {
     en: ['point', 'point at', 'point your finger', 'show me'],
     ru: ['покажи', 'укажи', 'покажи пальцем', 'укажи пальцем'],
   },
+  walk: {
+    az: ['yol ilə get', 'get', 'addımla', 'getmək', 'yol ilə'],
+    en: ['walk along', 'walk', 'go', 'stroll'],
+    ru: ['иди по дороге', 'иди', 'шагай', 'прогуляйся'],
+  },
+  slide: {
+    az: ['sürüş', 'sürüşmək', 'sürüşkəndən sürüş'],
+    en: ['slide', 'go down slide', 'sliding'],
+    ru: ['катайся с горки', 'скользи', 'съезжай'],
+  },
+  rideBike: {
+    az: ['sür', 'velosiped sür', 'velosiped', 'sürmək'],
+    en: ['ride bike', 'ride a bicycle', 'cycling'],
+    ru: ['катайся на велосипеде', 'едь на велике', 'крути педали'],
+  },
+  surprised: {
+    az: ['təəccüblən', 'təəccüb et', 'təəccüblənmək', 'vay'],
+    en: ['be surprised', 'surprised', 'wow', 'gasp'],
+    ru: ['удивись', 'удивление', 'ого', 'ничего себе'],
+  },
+  playInstrument: {
+    az: ['çal', 'musiqi çal', 'alət çal', 'çalmaq', 'musiqi aləti çal'],
+    en: ['play instrument', 'play music', 'strum', 'play guitar'],
+    ru: ['играй на инструменте', 'сыграй музыку', 'играй музыку'],
+  },
+  playToy: {
+    az: ['oyuncaqla oyna', 'oyuncaq', 'oyna oyuncaq', 'oyuncaqlar'],
+    en: ['play with toy', 'play toy', 'play with teddy'],
+    ru: ['играй с игрушкой', 'играй в игрушки', 'возьми игрушку'],
+  },
+  wakeUp: {
+    az: ['oyan', 'yuxudan oyan', 'dur yuxudan', 'yuxudan dur', 'oyanmaq'],
+    en: ['wake up', 'get up', 'rise and shine'],
+    ru: ['просыпайся', 'проснись', 'подъем', 'вставай с постели'],
+  },
+  bathe: {
+    az: ['çim', 'duş al', 'çimmək', 'vanna qəbul et', 'yuyun'],
+    en: ['take a bath', 'take a shower', 'bathe', 'wash up'],
+    ru: ['принимай душ', 'купайся', 'в душ', 'прими ванну'],
+  },
+  wash: {
+    az: ['yu', 'yumaq', 'əlini yu', 'əl-üzünü yu', 'əlləri yu'],
+    en: ['wash hands', 'wash up', 'clean hands'],
+    ru: ['мой руки', 'помой руки', 'умойся', 'мой'],
+  },
+  comb: {
+    az: ['dara', 'daramaq', 'saçını dara', 'daraqla dara'],
+    en: ['comb hair', 'brush hair', 'comb'],
+    ru: ['причешись', 'расчеши волосы', 'расчешись'],
+  },
+  dress: {
+    az: ['geyin', 'geyinmək', 'paltarını geyin', 'geyinməyə başla'],
+    en: ['get dressed', 'dress up', 'put on clothes'],
+    ru: ['одевайся', 'оденься', 'надень одежду'],
+  },
+  paint: {
+    az: ['rənglə', 'rəngləmək', 'boya', 'rəngbərəng et'],
+    en: ['color and paint', 'paint', 'color it', 'coloring'],
+    ru: ['раскрашивай', 'покрась', 'рисуй красками', 'раскрась'],
+  },
+  cut: {
+    az: ['kəs', 'kəsmək', 'qayçı ilə kəs', 'kağızı kəs'],
+    en: ['cut with scissors', 'cut', 'snip snip'],
+    ru: ['режь ножницами', 'отрежь', 'порежь ножницами', 'режь'],
+  },
+  talk: {
+    az: ['danış', 'danışmaq', 'söz de', 'söylə'],
+    en: ['speak', 'talk', 'say something'],
+    ru: ['говори', 'скажи', 'поговори', 'разговаривай'],
+  },
+  build: {
+    az: ['düzəlt', 'düzəltmək', 'qur', 'təmir et', 'yarat'],
+    en: ['build and fix', 'build', 'construct', 'fix it'],
+    ru: ['мастери', 'строй', 'построй', 'почини'],
+  },
+  hug: {
+    az: ['qucaqla', 'qucaqlamaq', 'sarıl', 'qucaqla məni'],
+    en: ['give a hug', 'hug', 'cuddle'],
+    ru: ['обними', 'крепко обними', 'обнимашки'],
+  },
+  holdHands: {
+    az: ['əl-ələ tut', 'əl-ələ ver', 'əlimdən tut', 'əlindən tut'],
+    en: ['hold hands', 'take hands', 'hold my hand'],
+    ru: ['держись за руки', 'возьмись за руки', 'держи руку'],
+  },
+  help: {
+    az: ['kömək et', 'köməkləş', 'kömək elə', 'kömək'],
+    en: ['help someone', 'help', 'lend a hand'],
+    ru: ['помоги', 'помощь', 'выручай', 'помогай'],
+  },
+  openDoor: {
+    az: ['aç', 'qapını aç', 'açmaq', 'qapı aç'],
+    en: ['open door', 'open the door', 'open'],
+    ru: ['открой дверь', 'открой', 'открывай'],
+  },
+  closeDoor: {
+    az: ['bağla', 'qapını bağla', 'bağlamaq', 'qapı ört'],
+    en: ['close door', 'shut door', 'close'],
+    ru: ['закрой дверь', 'закрой', 'закрывай'],
+  },
+  putAway: {
+    az: ['qoy', 'yerinə qoy', 'yerinə yığ', 'əşyanı qoy'],
+    en: ['put away', 'put back', 'place in spot'],
+    ru: ['положи на место', 'положи', 'убери на место'],
+  },
+  collect: {
+    az: ['topla', 'yığ', 'toplamaq', 'əşyaları topla', 'oyuncaqları topla'],
+    en: ['collect items', 'collect', 'gather up', 'pick up'],
+    ru: ['собери вещи', 'собери', 'собирай', 'сложи'],
+  },
+  clean: {
+    az: ['təmizlə', 'təmizləmək', 'sil', 'yığışdır'],
+    en: ['clean up', 'clean', 'tidy up', 'wipe'],
+    ru: ['убирай', 'наведи порядок', 'вытри', 'очисти'],
+  },
+  bring: {
+    az: ['gətir', 'gətirmək', 'bura gətir', 'yanıma gətir'],
+    en: ['bring here', 'bring', 'bring it over'],
+    ru: ['принеси', 'неси сюда', 'подай', 'принеси мне'],
+  },
+  takeAway: {
+    az: ['apar', 'aparmaq', 'uzağa apar', 'oraya apar'],
+    en: ['take away', 'carry away', 'remove'],
+    ru: ['унеси', 'забери', 'отнеси', 'убери подальше'],
+  },
+  carry: {
+    az: ['daşı', 'daşımaq', 'yük daşı', 'əlində daşı'],
+    en: ['carry', 'carry it', 'bear weight'],
+    ru: ['неси', 'тащи', 'перенеси', 'неси в руках'],
+  },
+  pull: {
+    az: ['dart', 'dartmaq', 'özünə çək', 'dartışdır'],
+    en: ['pull', 'tug', 'pull it'],
+    ru: ['тяни', 'потяни', 'дергай', 'тяни к себе'],
+  },
+  scatter: {
+    az: ['dağıt', 'dağıtmaq', 'tök', 'hər yana dağıt'],
+    en: ['scatter', 'mess up', 'spill around'],
+    ru: ['разбросай', 'рассыпь', 'мусори', 'разбросай вещи'],
+  },
+  waterPlant: {
+    az: ['sula', 'sulamaq', 'bitkini sula', 'gülü sula'],
+    en: ['water plant', 'water flowers', 'water'],
+    ru: ['полей цветок', 'полей растение', 'поливай'],
+  },
+  lightMatch: {
+    az: ['yandır', 'kibrit yandır', 'yandırmaq', 'kibriti yandır'],
+    en: ['light match', 'strike a match', 'light fire'],
+    ru: ['зажги спичку', 'зажги', 'зажигай спичку'],
+  },
 };
