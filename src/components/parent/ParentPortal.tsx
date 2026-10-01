@@ -13,8 +13,26 @@ import ParentLogic from './ParentLogic';
 import ParentMath from './ParentMath';
 import ParentChess from './ParentChess';
 import ParentSettings from './ParentSettings';
+import ParentDailyPlan from './ParentDailyPlan';
+import ParentOfflineActivities from './ParentOfflineActivities';
+import ParentConversationPrompts from './ParentConversationPrompts';
+import ParentProgressView from './ParentProgressView';
+import LearningHubModal from '../learning/LearningHubModal';
+import { GraduationCap, Clock, Heart, MessageCircle, TrendingUp } from 'lucide-react';
 
-type ParentTab = 'dashboard' | 'stories' | 'videos' | 'movement' | 'logic' | 'math' | 'chess' | 'settings';
+type ParentTab =
+  | 'dashboard'
+  | 'dailyPlan'
+  | 'offlinePlay'
+  | 'conversation'
+  | 'progress'
+  | 'stories'
+  | 'videos'
+  | 'movement'
+  | 'logic'
+  | 'math'
+  | 'chess'
+  | 'settings';
 
 export const ParentPortal: React.FC = () => {
   const { user, parentProfile, logout, setActivePortal } = useAuthStore();
@@ -23,12 +41,18 @@ export const ParentPortal: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ParentTab>('dashboard');
   const [selectedAge, setSelectedAge] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLearningHubOpen, setIsLearningHubOpen] = useState(false);
 
   const childDisplayName = parentProfile?.child_name || 'Dostumuz';
 
   const navLabels = {
     az: {
       dashboard: 'Ana Səhifə',
+      learning: 'Təlim Bölmələri',
+      dailyPlan: 'Bu gün nə edək?',
+      offlinePlay: 'Uşağımla oynayıram',
+      conversation: 'Danışaq',
+      progress: 'İnkişaf Xülasəsi',
       stories: 'Hekayələr',
       videos: 'Video Dərslər',
       movement: 'Hərəkətlərlə Öyrən',
@@ -48,6 +72,11 @@ export const ParentPortal: React.FC = () => {
     },
     en: {
       dashboard: 'Home',
+      learning: 'Learning Modules',
+      dailyPlan: 'Daily 15-Min Plan',
+      offlinePlay: 'Offline Play',
+      conversation: 'Let us Talk',
+      progress: 'Progress Summary',
       stories: 'Stories',
       videos: 'Video Lessons',
       movement: 'Move & Learn',
@@ -67,6 +96,11 @@ export const ParentPortal: React.FC = () => {
     },
     ru: {
       dashboard: 'Главная',
+      learning: 'Разделы Обучения',
+      dailyPlan: 'План на сегодня',
+      offlinePlay: 'Играем с пользой',
+      conversation: 'Поговорим',
+      progress: 'Прогресс ребенка',
       stories: 'Сказки и Истории',
       videos: 'Видеоуроки',
       movement: 'Учимся в Движении',
@@ -88,6 +122,10 @@ export const ParentPortal: React.FC = () => {
 
   const navItems = [
     { id: 'dashboard' as ParentTab, label: navLabels.dashboard, icon: Home, emoji: '🏠' },
+    { id: 'dailyPlan' as ParentTab, label: navLabels.dailyPlan, icon: Clock, emoji: '☀️' },
+    { id: 'offlinePlay' as ParentTab, label: navLabels.offlinePlay, icon: Heart, emoji: '🧸' },
+    { id: 'conversation' as ParentTab, label: navLabels.conversation, icon: MessageCircle, emoji: '💬' },
+    { id: 'progress' as ParentTab, label: navLabels.progress, icon: TrendingUp, emoji: '📈' },
     { id: 'stories' as ParentTab, label: navLabels.stories, icon: BookOpen, emoji: '📖' },
     { id: 'videos' as ParentTab, label: navLabels.videos, icon: Video, emoji: '🎬' },
     { id: 'movement' as ParentTab, label: navLabels.movement, icon: Activity, emoji: '🏃' },
@@ -299,6 +337,20 @@ export const ParentPortal: React.FC = () => {
             </div>
           </div>
 
+          {/* Təlim Bölmələri Big Launcher Button in Sidebar */}
+          <button
+            onClick={() => setIsLearningHubOpen(true)}
+            className="w-full mb-3 flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 text-slate-950 font-black text-xs lg:text-sm shadow-md shadow-amber-400/30 hover:scale-[1.02] transition-all cursor-pointer border border-amber-300"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="text-xl">🎓</span>
+              <span className="truncate">{navLabels.learning}</span>
+            </div>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/40 text-slate-900 font-black">
+              37 Bölmə
+            </span>
+          </button>
+
           {/* Navigation Links */}
           <nav className="space-y-1.5 mt-2">
             {navItems.map((item) => {
@@ -469,6 +521,16 @@ export const ParentPortal: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Təlim Bölmələri Launcher in Top Bar */}
+            <button
+              onClick={() => setIsLearningHubOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-slate-950 font-black text-xs shadow-sm transition-all border border-amber-300 cursor-pointer"
+              title="Bütün Təlim Bölmələri"
+            >
+              <GraduationCap className="w-4 h-4 text-slate-950" />
+              <span className="hidden xs:inline">{navLabels.learning}</span>
+            </button>
+
             {/* 3-Language Selector in Top Header */}
             <div className="flex items-center gap-1 bg-white/95 border border-amber-300/80 p-1 rounded-2xl shadow-sm">
               {[
@@ -549,6 +611,48 @@ export const ParentPortal: React.FC = () => {
                 </div>
               </div>
 
+              {/* "Bu gün nə edək?" - 15-Minute Daily Micro Plan */}
+              <ParentDailyPlan />
+
+              {/* 3 Main Feature Action Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div
+                  onClick={() => setIsLearningHubOpen(true)}
+                  className="p-5 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-400 text-slate-950 font-black shadow-md hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-between"
+                >
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider opacity-80 block font-extrabold">37 Kateqoriya</span>
+                    <h3 className="text-base sm:text-lg">Təlim Bölmələri</h3>
+                    <p className="text-xs font-bold opacity-90 mt-0.5">Bütün interaktiv fəaliyyətlər</p>
+                  </div>
+                  <span className="text-4xl">🎓</span>
+                </div>
+
+                <div
+                  onClick={() => setActiveTab('offlinePlay')}
+                  className="p-5 rounded-3xl bg-gradient-to-br from-pink-400 to-rose-400 text-white font-black shadow-md hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-between"
+                >
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider opacity-80 block font-extrabold">Ekransız</span>
+                    <h3 className="text-base sm:text-lg">Uşağımla Oynayıram</h3>
+                    <p className="text-xs font-bold opacity-90 mt-0.5">Canlı ev fəaliyyətləri</p>
+                  </div>
+                  <span className="text-4xl">🧸</span>
+                </div>
+
+                <div
+                  onClick={() => setActiveTab('conversation')}
+                  className="p-5 rounded-3xl bg-gradient-to-br from-sky-400 to-blue-500 text-white font-black shadow-md hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-between"
+                >
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider opacity-80 block font-extrabold">Dialoq</span>
+                    <h3 className="text-base sm:text-lg">Danışaq</h3>
+                    <p className="text-xs font-bold opacity-90 mt-0.5">Şəkilli nitq inkişafı</p>
+                  </div>
+                  <span className="text-4xl">💬</span>
+                </div>
+              </div>
+
               {/* Quick Launch Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {dashboardContent.cards.map((item) => (
@@ -580,6 +684,10 @@ export const ParentPortal: React.FC = () => {
             </div>
           )}
 
+          {activeTab === 'dailyPlan' && <ParentDailyPlan />}
+          {activeTab === 'offlinePlay' && <ParentOfflineActivities />}
+          {activeTab === 'conversation' && <ParentConversationPrompts />}
+          {activeTab === 'progress' && <ParentProgressView />}
           {activeTab === 'stories' && <ParentStories selectedAge={selectedAge} onSelectAge={setSelectedAge} />}
           {activeTab === 'videos' && <ParentVideos selectedAge={selectedAge} />}
           {activeTab === 'movement' && <ParentMovement />}
@@ -589,6 +697,13 @@ export const ParentPortal: React.FC = () => {
           {activeTab === 'settings' && <ParentSettings />}
         </main>
       </div>
+
+      {/* Main Learning Hub Modal */}
+      <LearningHubModal
+        isOpen={isLearningHubOpen}
+        onClose={() => setIsLearningHubOpen(false)}
+        onNavigateToExistingSection={(sec) => setActiveTab(sec)}
+      />
     </div>
   );
 };

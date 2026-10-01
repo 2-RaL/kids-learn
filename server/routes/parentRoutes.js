@@ -306,4 +306,63 @@ router.get('/chess-lessons', async (req, res) => {
   }
 });
 
+// ── Parent Assigned Homework & Progress ──────────────────────────────
+
+// GET /api/parent/homework
+router.get('/homework', async (req, res) => {
+  try {
+    const db = getPool();
+    // Find parent's child profile
+    const [profiles] = await db.query('SELECT id FROM parent_profiles WHERE user_id = ? LIMIT 1', [req.user.id]);
+    const childId = profiles[0]?.id ? `ch-${profiles[0].id}` : `user-${req.user.id}`;
+
+    const [rows] = await db.query(
+      'SELECT * FROM homework_assignments WHERE child_id = ? OR child_id = "ch-1" ORDER BY id DESC',
+      [childId]
+    );
+    res.json({ homework: rows });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /api/parent/homework/:id/complete
+router.put('/homework/:id/complete', async (req, res) => {
+  try {
+    const db = getPool();
+    const { score } = req.body;
+    await db.query(
+      `UPDATE homework_assignments 
+       SET status = 'completed', score = ?, attempts_count = attempts_count + 1, completed_date = CURRENT_DATE 
+       WHERE id = ?`,
+      [score || 100, req.params.id]
+    );
+    res.json({ success: true, message: 'Ev tapşırığı tamamlandı' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/parent/offline-activities
+router.get('/offline-activities', async (req, res) => {
+  try {
+    const db = getPool();
+    const [rows] = await db.query('SELECT * FROM parent_offline_activities ORDER BY id ASC');
+    res.json({ activities: rows });
+  } catch (err) {
+    res.json({ activities: [] });
+  }
+});
+
+// GET /api/parent/conversation-prompts
+router.get('/conversation-prompts', async (req, res) => {
+  try {
+    const db = getPool();
+    const [rows] = await db.query('SELECT * FROM conversation_prompts ORDER BY id ASC');
+    res.json({ prompts: rows });
+  } catch (err) {
+    res.json({ prompts: [] });
+  }
+});
+
 export default router;

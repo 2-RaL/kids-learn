@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useGameStore } from '../../store/gameStore';
@@ -14,8 +14,12 @@ import {
   Shield,
   LogOut,
   ArrowLeft,
+  GraduationCap,
+  Stethoscope,
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
+import LearningHubModal from '../learning/LearningHubModal';
+import TherapistWorkspaceModal from '../therapist/TherapistWorkspaceModal';
 
 const LANG_OPTIONS: { code: Language; flag: string; label: string }[] = [
   { code: 'az', flag: '🇦🇿', label: 'AZ' },
@@ -40,7 +44,11 @@ export const Header: React.FC = () => {
     setShowAchievements,
   } = useGameStore();
 
+  const [isLearningHubOpen, setIsLearningHubOpen] = useState(false);
+  const [isTherapistWorkspaceOpen, setIsTherapistWorkspaceOpen] = useState(false);
+
   return (
+    <>
     <header className="w-full flex items-center justify-between px-2 sm:px-6 py-1.5 sm:py-2 z-30 select-none gap-1 sm:gap-2">
       {/* Left: 3D Sun and Clouds matching mockup + Portallar Button */}
       <div className="flex items-center gap-1 sm:gap-2.5 flex-shrink-0">
@@ -92,6 +100,28 @@ export const Header: React.FC = () => {
             L{level > 1 ? level : 2}
           </span>
         </div>
+
+        {/* Təlim Bölmələri Button (High Visibility Main Navigation) */}
+        <button
+          onClick={() => setIsLearningHubOpen(true)}
+          className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-slate-950 font-black text-xs sm:text-sm shadow-md transition-all border border-amber-200 cursor-pointer"
+          title="Bütün Təlim Bölmələri"
+        >
+          <GraduationCap className="w-4 h-4 text-slate-950" />
+          <span className="hidden xs:inline">Təlim bölmələri</span>
+        </button>
+
+        {/* Loqoped Masası / Workspace (Therapist, Admin, Editor) */}
+        {user && ['therapist', 'admin', 'editor'].includes(user.role) && (
+          <button
+            onClick={() => setIsTherapistWorkspaceOpen(true)}
+            className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs shadow-md transition-all border border-indigo-400 cursor-pointer"
+            title="Loqopedik Diaqnostika və İdarəetmə Paneli"
+          >
+            <Stethoscope className="w-3.5 h-3.5 text-sky-200" />
+            <span className="hidden md:inline">Loqoped Masası</span>
+          </button>
+        )}
 
         {/* Learn Mode Toggle (Tablet & Desktop) */}
         <button
@@ -181,6 +211,19 @@ export const Header: React.FC = () => {
         )}
       </div>
     </header>
+
+    {/* Main Learning Hub Modal */}
+    <LearningHubModal
+      isOpen={isLearningHubOpen}
+      onClose={() => setIsLearningHubOpen(false)}
+    />
+
+    {/* Therapist Clinical Workspace Modal */}
+    <TherapistWorkspaceModal
+      isOpen={isTherapistWorkspaceOpen}
+      onClose={() => setIsTherapistWorkspaceOpen(false)}
+    />
+    </>
   );
 };
 

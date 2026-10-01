@@ -314,6 +314,133 @@ export async function initDatabase() {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   `);
 
+  // ── 37 Learning Categories & Child Development ───────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS learning_categories (
+      id VARCHAR(100) PRIMARY KEY,
+      slug VARCHAR(100) NOT NULL UNIQUE,
+      title_az VARCHAR(200) NOT NULL,
+      title_en VARCHAR(200) DEFAULT NULL,
+      title_ru VARCHAR(200) DEFAULT NULL,
+      description_az TEXT DEFAULT NULL,
+      emoji VARCHAR(20) DEFAULT '🎨',
+      category_group VARCHAR(50) NOT NULL DEFAULT 'foundations',
+      min_age INT NOT NULL DEFAULT 2,
+      max_age INT NOT NULL DEFAULT 7,
+      color VARCHAR(100) DEFAULT NULL,
+      activities_json LONGTEXT DEFAULT NULL,
+      is_active TINYINT(1) NOT NULL DEFAULT 1,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  // ── Child Activity Progress ──────────────────────────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS child_activity_progress (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      child_id VARCHAR(100) DEFAULT NULL,
+      module_id VARCHAR(100) NOT NULL,
+      activity_id VARCHAR(100) DEFAULT NULL,
+      score INT NOT NULL DEFAULT 0,
+      completed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_user_child (user_id, child_id),
+      INDEX idx_module (module_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  // ── Therapy Goals ────────────────────────────────────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS therapy_goals (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      child_id VARCHAR(100) NOT NULL,
+      therapist_id INT DEFAULT NULL,
+      title_az VARCHAR(300) NOT NULL,
+      description_az TEXT DEFAULT NULL,
+      category VARCHAR(100) NOT NULL DEFAULT 'Artikulyasiya',
+      target_percent INT NOT NULL DEFAULT 100,
+      current_percent INT NOT NULL DEFAULT 0,
+      status ENUM('active', 'completed', 'paused') NOT NULL DEFAULT 'active',
+      notes TEXT DEFAULT NULL,
+      target_date DATE DEFAULT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      INDEX idx_child (child_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  // ── Homework Assignments ─────────────────────────────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS homework_assignments (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      child_id VARCHAR(100) NOT NULL,
+      therapist_id INT DEFAULT NULL,
+      activity_id VARCHAR(100) NOT NULL,
+      activity_title VARCHAR(300) NOT NULL,
+      category VARCHAR(100) DEFAULT NULL,
+      instructions TEXT NOT NULL,
+      assigned_date DATE NOT NULL,
+      due_date DATE NOT NULL,
+      target_skill VARCHAR(200) DEFAULT NULL,
+      parent_note TEXT DEFAULT NULL,
+      status ENUM('assigned', 'opened', 'completed') NOT NULL DEFAULT 'assigned',
+      score INT DEFAULT 0,
+      attempts_count INT DEFAULT 0,
+      completed_date DATE DEFAULT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_child (child_id),
+      INDEX idx_status (status)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  // ── Therapist Session Notes ──────────────────────────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS therapist_session_notes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      child_id VARCHAR(100) NOT NULL,
+      therapist_id INT DEFAULT NULL,
+      therapist_name VARCHAR(150) NOT NULL DEFAULT 'Loqoped',
+      session_date DATE NOT NULL,
+      activity_performed VARCHAR(300) NOT NULL,
+      observations TEXT DEFAULT NULL,
+      progress TEXT DEFAULT NULL,
+      difficulties TEXT DEFAULT NULL,
+      next_session_plan TEXT DEFAULT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_child (child_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  // ── Offline Parent Activities ────────────────────────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS parent_offline_activities (
+      id VARCHAR(100) PRIMARY KEY,
+      title_az VARCHAR(300) NOT NULL,
+      instruction_az TEXT NOT NULL,
+      benefit_az TEXT DEFAULT NULL,
+      age_group VARCHAR(50) DEFAULT '2-6 yaş',
+      category VARCHAR(50) NOT NULL DEFAULT 'home',
+      emoji VARCHAR(20) DEFAULT '🧸',
+      suggested_duration VARCHAR(50) DEFAULT '5 dəqiqə',
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
+  // ── Conversation Prompts ("Danışaq") ─────────────────────────────────
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS conversation_prompts (
+      id VARCHAR(100) PRIMARY KEY,
+      title_az VARCHAR(300) NOT NULL,
+      scenario_desc_az TEXT NOT NULL,
+      image_emoji VARCHAR(50) DEFAULT '🐶',
+      min_age INT NOT NULL DEFAULT 2,
+      max_age INT NOT NULL DEFAULT 7,
+      questions_json LONGTEXT DEFAULT NULL,
+      parent_tips_az TEXT DEFAULT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `);
+
   console.log('✅ All content tables ready.');
 
   // ── Seed Default Data (100% Idempotent) ──────────────────────────
