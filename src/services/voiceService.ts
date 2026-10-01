@@ -428,13 +428,26 @@ class VoiceService {
 
   /**
    * Speak a single prompt, educational instruction, question, or movement command.
+   * Universal method used across Parent Portal, Speech Therapist Portal, and Learning modules.
+   */
+  public speak(
+    text: string,
+    lang: Language = 'az',
+    onEnd?: () => void,
+    onError?: () => void
+  ): void {
+    this.speakQuick(text, lang, onEnd, onError);
+  }
+
+  /**
+   * Speak a single prompt, educational instruction, question, or movement command.
    * Priority 1: Instant static cache / Neural Studio Audio endpoint (az-AZ-BanuNeural / BabekNeural)
    * Priority 2: Genuine browser az-AZ SpeechSynthesis
    * STRICT: Never uses Turkish or English for Azerbaijani.
    */
   public speakQuick(
     text: string,
-    lang: Language,
+    lang: Language = 'az',
     onEnd?: () => void,
     onError?: () => void
   ): void {
