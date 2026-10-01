@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  X, Volume2, Sparkles, CheckCircle2, RotateCcw,
+  X, Volume2, VolumeX, Sparkles, CheckCircle2, RotateCcw,
   ArrowRight, Award, Star, ArrowLeft
 } from 'lucide-react';
 import type { LearningModuleCategory, LearningActivityItem } from '../../data/learningModulesData';
+import { ACTIVITY_TRANSLATIONS, UI_TRANSLATIONS } from '../../data/learningTranslations';
 import { parentSpeech } from '../../utils/parentSpeech';
 import { useGameStore } from '../../store/gameStore';
 
@@ -20,7 +21,8 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   onCompleteActivity,
 }) => {
   const { language, addStars } = useGameStore();
-  const currentLang = language || 'az';
+  const [activeLang, setActiveLang] = useState<'az' | 'en' | 'ru'>((language as any) || 'az');
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
@@ -37,8 +39,13 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
   const [availableWords, setAvailableWords] = useState<string[]>([]);
 
   const currentActivity: LearningActivityItem | undefined = module.activities[currentIndex];
+  const ui = UI_TRANSLATIONS[activeLang] || UI_TRANSLATIONS.az;
 
+  // Stop all background audio and speech on mount, unmount, or question switch
   useEffect(() => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
+
     if (!currentActivity) return;
     setSelectedOptionId(null);
     setIsAnswered(false);
@@ -46,7 +53,6 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
 
     // If sequence activity
     if (currentActivity.type === 'sequence' && currentActivity.sequenceSteps) {
-      // Shuffle sequence steps
       const shuffled = [...currentActivity.sequenceSteps].sort(() => Math.random() - 0.5);
       setSequenceItems(shuffled);
     }
@@ -58,17 +64,102 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
       setSelectedWords([]);
     }
 
-    // Play target audio
-    if (currentActivity.targetAudioText) {
-      parentSpeech.speak(currentActivity.targetAudioText, currentLang);
-    }
+    return () => {
+      parentSpeech.stop();
+    };
   }, [currentIndex, currentActivity?.id]);
 
-  const handleSpeak = (text?: string) => {
-    const textToSpeak = text || currentActivity?.targetAudioText || currentActivity?.instruction;
-    if (textToSpeak) {
-      parentSpeech.speak(textToSpeak, currentLang);
+  // Handle language switch
+  const handleLanguageChange = (lng: 'az' | 'en' | 'ru') => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
+    setActiveLang(lng);
+  };
+
+  // Get localized strings for current activity
+  const translation = currentActivity ? ACTIVITY_TRANSLATIONS[currentActivity.id] : undefined;
+
+  const questionText = (() => {
+    if (!currentActivity) return '';
+    if (activeLang === 'en') {
+      return (
+        translation?.question.en ||
+        currentActivity.questionEn ||
+        currentActivity.instructionEn ||
+        currentActivity.question ||
+        currentActivity.instruction
+      );
     }
+    if (activeLang === 'ru') {
+      return (
+        translation?.question.ru ||
+        currentActivity.questionRu ||
+        currentActivity.instructionRu ||
+        currentActivity.question ||
+        currentActivity.instruction
+      );
+    }
+    return (
+      translation?.question.az ||
+      currentActivity.question ||
+      currentActivity.instruction
+    );
+  })();
+
+  const instructionText = (() => {
+    if (!currentActivity) return '';
+    if (activeLang === 'en') return translation?.instruction?.en || currentActivity.instructionEn || currentActivity.instruction;
+    if (activeLang === 'ru') return translation?.instruction?.ru || currentActivity.instructionRu || currentActivity.instruction;
+    return translation?.instruction?.az || currentActivity.instruction;
+  })();
+
+  const getOptionLabel = (opt: { text: string; textEn?: string; textRu?: string }) => {
+    if (activeLang === 'en') {
+      return translation?.options?.[opt.text]?.en || opt.textEn || opt.text;
+    }
+    if (activeLang === 'ru') {
+      return translation?.options?.[opt.text]?.ru || opt.textRu || opt.text;
+    }
+    return opt.text;
+  };
+
+  const currentLocalizedExplanation = (() => {
+    if (!currentActivity) return '';
+    if (activeLang === 'en') return translation?.explanation?.en || currentActivity.explanationEn || currentActivity.explanation;
+    if (activeLang === 'ru') return translation?.explanation?.ru || currentActivity.explanationRu || currentActivity.explanation;
+    return translation?.explanation?.az || currentActivity.explanation;
+  })();
+
+  const moduleTitle =
+    activeLang === 'en' ? module.titleEn : activeLang === 'ru' ? module.titleRu : module.titleAz;
+
+  const activityTitle =
+    currentActivity
+      ? activeLang === 'en'
+        ? currentActivity.titleEn || currentActivity.title
+        : activeLang === 'ru'
+        ? currentActivity.titleRu || currentActivity.title
+        : currentActivity.title
+      : moduleTitle;
+
+  // On-demand speech strictly when child clicks the sound icon
+  const handleSpeak = () => {
+    if (isSpeaking) {
+      parentSpeech.stop();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const textToSpeak = questionText || instructionText;
+    if (!textToSpeak) return;
+
+    setIsSpeaking(true);
+    parentSpeech.speak(
+      textToSpeak,
+      activeLang,
+      () => setIsSpeaking(false),
+      () => setIsSpeaking(false)
+    );
   };
 
   const handleSelectOption = (opt: { id: string; text: string; isCorrect?: boolean; emoji?: string }) => {
@@ -81,16 +172,14 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
       setScore((s) => s + 10);
       setFeedback({
         isCorrect: true,
-        text: currentActivity?.explanation || 'Afərin! Düzgün cavab! 🌟',
+        text: currentLocalizedExplanation || ui.correctAnswer,
       });
-      parentSpeech.speak(currentActivity?.explanation || 'Afərin! Əla nəticə!', currentLang);
       addStars(1);
     } else {
       setFeedback({
         isCorrect: false,
-        text: 'Bir daha cəhd et, sən bacaracaqsan! 💡',
+        text: ui.tryAgain,
       });
-      parentSpeech.speak('Bir daha cəhd et!', currentLang);
     }
   };
 
@@ -116,20 +205,21 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
       setScore((s) => s + 10);
       setFeedback({
         isCorrect: true,
-        text: currentActivity.explanation || 'Möhtəşəm! Düzgün cümlə qurdun!',
+        text: currentLocalizedExplanation || ui.correctAnswer,
       });
-      parentSpeech.speak(currentActivity.explanation || 'Afərin! Cümlə hazırdır!', currentLang);
       addStars(1);
     } else {
       setFeedback({
         isCorrect: false,
-        text: `Düzgün cümlə belə olmalıdır: "${currentActivity.correctSentence}"`,
+        text: `${activeLang === 'ru' ? 'Правильное предложение' : activeLang === 'en' ? 'Correct sentence' : 'Düzgün cümlə'}: "${currentActivity.correctSentence}"`,
       });
-      parentSpeech.speak('Sözlərin sırasına bir də baxaq.', currentLang);
     }
   };
 
   const handleNext = () => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
+
     if (currentIndex < module.activities.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
@@ -137,14 +227,21 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
       if (onCompleteActivity) {
         onCompleteActivity(module.id, score + 10);
       }
-      parentSpeech.speak('Təbriklər! Bütün tapşırıqları uğurla tamamladın!', currentLang);
     }
   };
 
   const handleRestart = () => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
     setCurrentIndex(0);
     setScore(0);
     setIsFinished(false);
+  };
+
+  const handleModalClose = () => {
+    parentSpeech.stop();
+    setIsSpeaking(false);
+    onClose();
   };
 
   return (
@@ -156,10 +253,10 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
             <span className="text-3xl sm:text-4xl filter drop-shadow">{module.emoji}</span>
             <div>
               <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">
-                {module.titleAz}
+                {moduleTitle}
               </span>
               <h2 className="text-base sm:text-xl font-black truncate max-w-[200px] sm:max-w-md">
-                {currentActivity?.title || module.titleAz}
+                {activityTitle}
               </h2>
             </div>
           </div>
@@ -170,7 +267,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
               <span>{score}</span>
             </div>
             <button
-              onClick={onClose}
+              onClick={handleModalClose}
               className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all cursor-pointer"
             >
               <X className="w-5 h-5" />
@@ -193,22 +290,47 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
           {!isFinished && currentActivity ? (
             <div className="space-y-6">
               {/* Question / Instruction Header */}
-              <div className="bg-amber-50/90 rounded-2xl p-4 sm:p-5 border border-amber-200/80 flex items-start justify-between gap-3">
-                <div className="space-y-1">
-                  <span className="text-[11px] font-extrabold text-amber-700 uppercase tracking-wide">
-                    Tapşırıq {currentIndex + 1} / {module.activities.length}
-                  </span>
+              <div className="bg-amber-50/90 rounded-2xl p-4 sm:p-5 border border-amber-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div className="space-y-1.5 flex-1">
+                  <div className="flex items-center justify-between sm:justify-start gap-2 flex-wrap">
+                    <span className="text-[11px] font-extrabold text-amber-700 uppercase tracking-wide">
+                      {ui.task} {currentIndex + 1} / {module.activities.length}
+                    </span>
+
+                    {/* Trilingual Language Selector */}
+                    <div className="inline-flex items-center bg-amber-200/70 p-0.5 rounded-lg border border-amber-300/80">
+                      {(['az', 'en', 'ru'] as const).map((lng) => (
+                        <button
+                          key={lng}
+                          onClick={() => handleLanguageChange(lng)}
+                          className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase transition-all cursor-pointer ${
+                            activeLang === lng
+                              ? 'bg-amber-600 text-white shadow-xs'
+                              : 'text-amber-950/70 hover:bg-amber-300/60'
+                          }`}
+                        >
+                          {lng}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   <h3 className="text-base sm:text-lg font-black text-slate-800 leading-snug">
-                    {currentActivity.question || currentActivity.instruction}
+                    {questionText}
                   </h3>
                 </div>
 
+                {/* Səs işarəsi: Only speaks when tapped */}
                 <button
-                  onClick={() => handleSpeak()}
-                  className="p-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-900 transition-colors shadow-sm flex-shrink-0 cursor-pointer"
-                  title="Səsləndir"
+                  onClick={handleSpeak}
+                  className={`p-3 rounded-2xl transition-all shadow-sm flex items-center justify-center cursor-pointer flex-shrink-0 self-end sm:self-center ${
+                    isSpeaking
+                      ? 'bg-amber-500 text-white ring-4 ring-amber-300 animate-pulse'
+                      : 'bg-amber-400 hover:bg-amber-500 text-slate-900 hover:scale-105 active:scale-95'
+                  }`}
+                  title={isSpeaking ? 'Dayandır' : ui.listen}
                 >
-                  <Volume2 className="w-5 h-5" />
+                  {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                 </button>
               </div>
 
@@ -217,6 +339,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                   {currentActivity.options.map((opt) => {
                     const isSelected = selectedOptionId === opt.id;
+                    const optionLabel = getOptionLabel(opt);
                     return (
                       <button
                         key={opt.id}
@@ -231,7 +354,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                         }`}
                       >
                         {opt.emoji && <span className="text-4xl sm:text-5xl">{opt.emoji}</span>}
-                        <span className="font-extrabold text-sm sm:text-base">{opt.text}</span>
+                        <span className="font-extrabold text-sm sm:text-base">{optionLabel}</span>
                       </button>
                     );
                   })}
@@ -244,7 +367,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                   <div className="min-h-[60px] p-3 rounded-2xl bg-amber-100/50 border-2 border-dashed border-amber-300 flex flex-wrap gap-2 items-center justify-center">
                     {selectedWords.length === 0 ? (
                       <span className="text-xs text-slate-400 font-bold">
-                        Aşağıdakı sözlərə toxunaraq cümlə qur...
+                        {ui.sentencePrompt}
                       </span>
                     ) : (
                       selectedWords.map((word, idx) => (
@@ -278,7 +401,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                         onClick={checkSentence}
                         className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-sm rounded-2xl shadow-md transition-all cursor-pointer"
                       >
-                        Cümləni Yoxla ✓
+                        {ui.checkSentence}
                       </button>
                     </div>
                   )}
@@ -289,7 +412,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
               {currentActivity.type === 'sequence' && (
                 <div className="space-y-2">
                   <p className="text-xs font-bold text-slate-500 text-center">
-                    Düzgün ardıcıllıqla addımları təkrarlayaq:
+                    {ui.sequencePrompt}
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {currentActivity.sequenceSteps?.map((step) => (
@@ -298,7 +421,9 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                         className="p-3.5 rounded-xl bg-sky-50 border border-sky-200 flex items-center gap-3"
                       >
                         <span className="text-2xl">{step.emoji}</span>
-                        <span className="text-xs sm:text-sm font-bold text-slate-800">{step.text}</span>
+                        <span className="text-xs sm:text-sm font-bold text-slate-800">
+                          {activeLang === 'en' ? step.textEn || step.text : activeLang === 'ru' ? step.textRu || step.text : step.text}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -310,14 +435,13 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                           setScore((s) => s + 10);
                           setFeedback({
                             isCorrect: true,
-                            text: currentActivity.explanation || 'Əla ardıcıllıqdır!',
+                            text: currentLocalizedExplanation || ui.correctAnswer,
                           });
-                          parentSpeech.speak('Afərin! Bütün addımları düzgün anladın!', currentLang);
                           addStars(1);
                         }}
                         className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-sm rounded-2xl shadow-md cursor-pointer"
                       >
-                        Anladım və Tamamladım! ✓
+                        {ui.sequenceComplete}
                       </button>
                     </div>
                   )}
@@ -350,7 +474,7 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                       onClick={handleNext}
                       className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black flex items-center gap-1 shadow cursor-pointer flex-shrink-0"
                     >
-                      <span>{currentIndex < module.activities.length - 1 ? 'Növbəti' : 'Bitir'}</span>
+                      <span>{currentIndex < module.activities.length - 1 ? ui.next : ui.finish}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </motion.div>
@@ -365,11 +489,11 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
               </div>
               <div className="space-y-1">
                 <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
-                  Təbriklər, Balaca Qəhrəman!
+                  {ui.congratsTitle}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 font-bold max-w-md mx-auto">
-                  "{module.titleAz}" bölməsindəki bütün tapşırıqları uğurla tamamladın və{' '}
-                  <span className="text-amber-600 font-black">{score} xal</span> qazandın!
+                  "{moduleTitle}" {ui.congratsDesc}{' '}
+                  <span className="text-amber-600 font-black">{score} {ui.pointsEarned}</span>
                 </p>
               </div>
 
@@ -379,13 +503,13 @@ export const LearningActivityPlayer: React.FC<LearningActivityPlayerProps> = ({
                   className="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs flex items-center gap-2 cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  <span>Yenidən Oyna</span>
+                  <span>{ui.playAgain}</span>
                 </button>
                 <button
-                  onClick={onClose}
+                  onClick={handleModalClose}
                   className="px-6 py-2.5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs shadow-md shadow-amber-400/20 cursor-pointer"
                 >
-                  Təlim Bölmələrinə Qayıt
+                  {ui.backToHub}
                 </button>
               </div>
             </div>

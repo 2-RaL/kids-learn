@@ -1,13 +1,23 @@
 export interface LearningActivityItem {
   id: string;
   title: string;
+  titleEn?: string;
+  titleRu?: string;
   instruction: string;
+  instructionEn?: string;
+  instructionRu?: string;
   type: 'select' | 'match' | 'sequence' | 'sentence' | 'command' | 'audio-identify' | 'tracing' | 'flashcard';
   question?: string;
+  questionEn?: string;
+  questionRu?: string;
   targetAudioText?: string;
+  targetAudioTextEn?: string;
+  targetAudioTextRu?: string;
   options?: Array<{
     id: string;
     text: string;
+    textEn?: string;
+    textRu?: string;
     emoji?: string;
     isCorrect?: boolean;
     soundUrl?: string;
@@ -15,12 +25,20 @@ export interface LearningActivityItem {
   sequenceSteps?: Array<{
     id: string;
     text: string;
+    textEn?: string;
+    textRu?: string;
     order: number;
     emoji: string;
   }>;
   sentenceWords?: string[];
+  sentenceWordsEn?: string[];
+  sentenceWordsRu?: string[];
   correctSentence?: string;
+  correctSentenceEn?: string;
+  correctSentenceRu?: string;
   explanation?: string;
+  explanationEn?: string;
+  explanationRu?: string;
 }
 
 export interface LearningModuleCategory {
@@ -31,7 +49,7 @@ export interface LearningModuleCategory {
   titleRu: string;
   descriptionAz: string;
   emoji: string;
-  group: 'foundations' | 'commands' | 'speech' | 'social' | 'cognitive' | 'existing';
+  group: 'foundations' | 'commands' | 'speech' | 'social' | 'cognitive';
   minAge: number;
   maxAge: number;
   color: string;
@@ -46,7 +64,6 @@ export const LEARNING_GROUPS = [
   { id: 'speech', labelAz: 'Nitq və Dil', labelEn: 'Speech & Language', labelRu: 'Речь и Язык', emoji: '🗣️' },
   { id: 'social', labelAz: 'Emosiyalar & Sosial', labelEn: 'Emotions & Social', labelRu: 'Эмоции и Социум', emoji: '🤝' },
   { id: 'cognitive', labelAz: 'Koqnitiv & Motorika', labelEn: 'Cognitive & Motor', labelRu: 'Когнитивные и Моторика', emoji: '🧠' },
-  { id: 'existing', labelAz: 'Əlavə Fənlər', labelEn: 'Core Subjects', labelRu: 'Основные Предметы', emoji: '📚' },
 ] as const;
 
 export const LEARNING_MODULES: LearningModuleCategory[] = [
@@ -261,30 +278,50 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
       {
         id: 'anim-cat-1',
         title: 'Miyoldayan dostumuz',
+        titleEn: 'Our Meowing Friend',
+        titleRu: 'Наш мяукающий друг',
         instruction: '"Miyau" deyən heyvanı seç.',
+        instructionEn: 'Select the animal that says "meow".',
+        instructionRu: 'Выбери животное, которое говорит «мяу».',
         type: 'select',
         question: 'Hansı heyvan "miyau" edir?',
-        targetAudioText: 'Miyau deyən pişiyi seç.',
+        questionEn: 'Which animal says "meow"?',
+        questionRu: 'Какое животное говорит «мяу»?',
+        targetAudioText: 'Hansı heyvan miyau edir?',
+        targetAudioTextEn: 'Which animal says meow?',
+        targetAudioTextRu: 'Какое животное говорит мяу?',
         options: [
-          { id: 'a1', text: 'Pişik', emoji: '🐱', isCorrect: true },
-          { id: 'a2', text: 'İt', emoji: '🐶', isCorrect: false },
-          { id: 'a3', text: 'İnək', emoji: '🐮', isCorrect: false },
+          { id: 'a1', text: 'Pişik', textEn: 'Cat', textRu: 'Кошка', emoji: '🐱', isCorrect: true },
+          { id: 'a2', text: 'İt', textEn: 'Dog', textRu: 'Собака', emoji: '🐶', isCorrect: false },
+          { id: 'a3', text: 'İnək', textEn: 'Cow', textRu: 'Корова', emoji: '🐮', isCorrect: false },
         ],
         explanation: 'Düzdür! Pişik sevimli miyau səsi çıxarır.',
+        explanationEn: 'Correct! The cat makes a cute meow sound.',
+        explanationRu: 'Правильно! Кошка издает милый звук мяу.',
       },
       {
         id: 'anim-cow-2',
         title: 'Bizə süd verən heyvan',
+        titleEn: 'Animal Giving Milk',
+        titleRu: 'Животное, дающее молоко',
         instruction: '"Möö" deyən və süd verən inəyi tap.',
+        instructionEn: 'Find the cow that says "moo" and gives milk.',
+        instructionRu: 'Найди корову, которая говорит «му» и дает молоко.',
         type: 'select',
         question: 'İnək hansıdır?',
+        questionEn: 'Which one is the cow?',
+        questionRu: 'Где корова?',
         targetAudioText: 'İnəyi seç.',
+        targetAudioTextEn: 'Select the cow.',
+        targetAudioTextRu: 'Выбери корову.',
         options: [
-          { id: 'a4', text: 'Qoyun', emoji: '🐑', isCorrect: false },
-          { id: 'a5', text: 'İnək', emoji: '🐮', isCorrect: true },
-          { id: 'a6', text: 'At', emoji: '🐴', isCorrect: false },
+          { id: 'a4', text: 'Qoyun', textEn: 'Sheep', textRu: 'Овечка', emoji: '🐑', isCorrect: false },
+          { id: 'a5', text: 'İnək', textEn: 'Cow', textRu: 'Корова', emoji: '🐮', isCorrect: true },
+          { id: 'a6', text: 'At', textEn: 'Horse', textRu: 'Лошадка', emoji: '🐴', isCorrect: false },
         ],
         explanation: 'Əla! İnək bizə ləzzətli və faydalı süd verir.',
+        explanationEn: 'Great! The cow gives us tasty and healthy milk.',
+        explanationRu: 'Отлично! Корова дает нам вкусное и полезное молоко.',
       },
     ],
   },
@@ -1130,7 +1167,7 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
     titleRu: 'Математика',
     descriptionAz: 'Rəqəmlər, toplama, çıxma və əyləncəli sayma dərsləri.',
     emoji: '➕',
-    group: 'existing',
+    group: 'cognitive',
     minAge: 3,
     maxAge: 10,
     color: 'from-pink-500 to-rose-400',
@@ -1138,15 +1175,25 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
       {
         id: 'math-add-1',
         title: 'Sadə toplama',
+        titleEn: 'Simple Addition',
+        titleRu: 'Простое сложение',
         instruction: '1 alma + 1 alma neçə edir?',
+        instructionEn: 'How much is 1 apple + 1 apple?',
+        instructionRu: 'Сколько будет 1 яблоко + 1 яблоко?',
         type: 'select',
         question: '1 + 1 = ?',
+        questionEn: 'How much is 1 + 1?',
+        questionRu: 'Сколько будет 1 + 1?',
         targetAudioText: 'Bir üstəgəl bir neçə edir?',
+        targetAudioTextEn: 'How much is one plus one?',
+        targetAudioTextRu: 'Сколько будет один плюс один?',
         options: [
-          { id: 'ma1', text: '2', emoji: '2️⃣', isCorrect: true },
-          { id: 'ma2', text: '3', emoji: '3️⃣', isCorrect: false },
+          { id: 'ma1', text: '2', textEn: '2', textRu: '2', emoji: '2️⃣', isCorrect: true },
+          { id: 'ma2', text: '3', textEn: '3', textRu: '3', emoji: '3️⃣', isCorrect: false },
         ],
         explanation: 'Bəli, bir üstəgəl bir iki edir!',
+        explanationEn: 'Yes, one plus one equals two!',
+        explanationRu: 'Верно, один плюс один равно два!',
       },
     ],
   },
@@ -1160,7 +1207,7 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
     titleRu: 'Логика',
     descriptionAz: 'Fərqləri tapmaq, qanunauyğunluqlar və uşaq tapmacaları.',
     emoji: '💡',
-    group: 'existing',
+    group: 'cognitive',
     minAge: 3,
     maxAge: 10,
     color: 'from-purple-500 to-indigo-500',
@@ -1168,104 +1215,26 @@ export const LEARNING_MODULES: LearningModuleCategory[] = [
       {
         id: 'log-diff-1',
         title: 'Fərqli olanı seç',
+        titleEn: 'Find the odd one out',
+        titleRu: 'Выбери лишнее',
         instruction: 'Meyvələrin arasındakı fərqli nəqliyyatı tap.',
+        instructionEn: 'Find the vehicle among the fruits.',
+        instructionRu: 'Найди транспорт среди фруктов.',
         type: 'select',
         question: 'Hansı əşya digərlərindən fərqlidir?',
+        questionEn: 'Which item is different from the others?',
+        questionRu: 'Какой предмет отличается от остальных?',
         targetAudioText: 'Fərqli olanı tap.',
+        targetAudioTextEn: 'Find the odd one out.',
+        targetAudioTextRu: 'Найди лишний предмет.',
         options: [
-          { id: 'lg1', text: 'Maşın', emoji: '🚗', isCorrect: true },
-          { id: 'lg2', text: 'Alma', emoji: '🍎', isCorrect: false },
-          { id: 'lg3', text: 'Armud', emoji: '🍐', isCorrect: false },
+          { id: 'lg1', text: 'Maşın', textEn: 'Car', textRu: 'Машина', emoji: '🚗', isCorrect: true },
+          { id: 'lg2', text: 'Alma', textEn: 'Apple', textRu: 'Яблоко', emoji: '🍎', isCorrect: false },
+          { id: 'lg3', text: 'Armud', textEn: 'Pear', textRu: 'Груша', emoji: '🍐', isCorrect: false },
         ],
         explanation: 'Düzdür! Maşın meyvə deyil, nəqliyyatdır.',
-      },
-    ],
-  },
-
-  // ── 35. Şahmat (Chess - Core) ───────────────────────────────────────
-  {
-    id: 'chess',
-    slug: 'sahmat',
-    titleAz: 'Şahmat',
-    titleEn: 'Chess',
-    titleRu: 'Шахматы',
-    descriptionAz: 'Şahmat taxtası, fiqurlar (şah, vəzir, top, at, fil, piyada).',
-    emoji: '♟️',
-    group: 'existing',
-    minAge: 4,
-    maxAge: 12,
-    color: 'from-slate-700 to-slate-900',
-    activities: [
-      {
-        id: 'ch-king-1',
-        title: 'Şahmatın ən vacib fiquru',
-        instruction: 'Başında tac olan Şah fiqurunu seç.',
-        type: 'select',
-        question: 'Şah fiquru hansıdır?',
-        targetAudioText: 'Şah fiqurunu seç.',
-        options: [
-          { id: 'ch1', text: 'Şah', emoji: '♚', isCorrect: true },
-          { id: 'ch2', text: 'Piyada', emoji: '♟', isCorrect: false },
-        ],
-        explanation: 'Şah ən əsas fiqurdur və onu qorumaq lazımdır!',
-      },
-    ],
-  },
-
-  // ── 36. Hekayələr (Stories - Core) ──────────────────────────────────
-  {
-    id: 'stories',
-    slug: 'hekayeler',
-    titleAz: 'Hekayələr və Nağıllar',
-    titleEn: 'Stories & Tales',
-    titleRu: 'Сказки и Истории',
-    descriptionAz: 'Gündüz və gecə üçün maraqlı tərbiyəvi və səsli nağıllar.',
-    emoji: '📜',
-    group: 'existing',
-    minAge: 3,
-    maxAge: 12,
-    color: 'from-amber-500 to-orange-500',
-    activities: [
-      {
-        id: 'sto-intro-1',
-        title: 'Nağıllar dünyasına səyahət',
-        instruction: 'Sevimli nağılı dinləmək üçün daxil ol.',
-        type: 'select',
-        question: 'Nağıl dinləməyə hazırsan?',
-        targetAudioText: 'Nağıl dinləməyə hazırsan?',
-        options: [
-          { id: 'st1', text: 'Bəli, hazıram! 📖', emoji: '📖', isCorrect: true },
-        ],
-        explanation: 'Xoş dinləmələr!',
-      },
-    ],
-  },
-
-  // ── 37. Öyrədici videolar (Videos - Core) ───────────────────────────
-  {
-    id: 'videos',
-    slug: 'videolar',
-    titleAz: 'Öyrədici videolar',
-    titleEn: 'Educational Videos',
-    titleRu: 'Обучающие видео',
-    descriptionAz: 'Nitq inkişafı, gimnastika və musiqili maarifləndirici videolar.',
-    emoji: '🎬',
-    group: 'existing',
-    minAge: 2,
-    maxAge: 12,
-    color: 'from-sky-500 to-cyan-400',
-    activities: [
-      {
-        id: 'vid-intro-1',
-        title: 'Video dərslər',
-        instruction: 'Öyrədici videonu izlə və hərəkətləri təkrar et.',
-        type: 'select',
-        question: 'Video dərsə başlamaq istəyirsən?',
-        targetAudioText: 'Videonu başla.',
-        options: [
-          { id: 'vd1', text: 'İzlə 🎬', emoji: '🎬', isCorrect: true },
-        ],
-        explanation: 'Baxaq və birlikdə öyrənək!',
+        explanationEn: 'Correct! The car is not a fruit, it is a vehicle.',
+        explanationRu: 'Правильно! Машина — это транспорт, а не фрукт.',
       },
     ],
   },

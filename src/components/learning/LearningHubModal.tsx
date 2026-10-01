@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Search, Filter, Sparkles, BookOpen, Star,
@@ -10,6 +10,7 @@ import {
   type LearningModuleCategory,
 } from '../../data/learningModulesData';
 import LearningActivityPlayer from './LearningActivityPlayer';
+import { parentSpeech } from '../../utils/parentSpeech';
 import { useAuthStore } from '../../store/authStore';
 import { useGameStore } from '../../store/gameStore';
 
@@ -45,6 +46,15 @@ export const LearningHubModal: React.FC<LearningHubModalProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [activePlayingModule, setActivePlayingModule] = useState<LearningModuleCategory | null>(null);
 
+  useEffect(() => {
+    if (isOpen) {
+      parentSpeech.stop();
+    }
+    return () => {
+      parentSpeech.stop();
+    };
+  }, [isOpen]);
+
   const filteredModules = useMemo(() => {
     return LEARNING_MODULES.filter((mod) => {
       // Group filter
@@ -76,14 +86,14 @@ export const LearningHubModal: React.FC<LearningHubModalProps> = ({
   }, [selectedGroup, selectedAgeRange, searchTerm]);
 
   const handleLaunchModule = (mod: LearningModuleCategory) => {
-    // If it is one of the existing sections and callback is provided, route directly
-    if (['stories', 'videos', 'movement', 'logic', 'math', 'chess'].includes(mod.id) && onNavigateToExistingSection) {
-      onNavigateToExistingSection(mod.id as any);
-      onClose();
-      return;
-    }
-
+    parentSpeech.stop();
     setActivePlayingModule(mod);
+  };
+
+  const handleCloseModal = () => {
+    parentSpeech.stop();
+    setActivePlayingModule(null);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -110,7 +120,7 @@ export const LearningHubModal: React.FC<LearningHubModalProps> = ({
             </div>
 
             <button
-              onClick={onClose}
+              onClick={handleCloseModal}
               className="p-2 rounded-2xl bg-white/20 hover:bg-white/30 text-white transition-all cursor-pointer"
               title="Bağla"
             >
@@ -246,7 +256,7 @@ export const LearningHubModal: React.FC<LearningHubModalProps> = ({
           <div className="p-3 bg-slate-50 border-t border-slate-200 flex-shrink-0 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 font-bold px-5">
             <span>Cəmi {filteredModules.length} təlim bölməsi aktivdir</span>
             <button
-              onClick={onClose}
+              onClick={handleCloseModal}
               className="px-4 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-extrabold cursor-pointer"
             >
               Bağla
