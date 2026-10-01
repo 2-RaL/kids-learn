@@ -207,6 +207,166 @@ const VisualSceneCard: React.FC<VisualSceneCardProps> = ({ scene, activeLang }) 
     );
   }
 
+  if (scene.type === 'tracing') {
+    const { startEmoji = '⭐', targetEmoji = '🌙', pathType = 'straight' } = scene;
+    return (
+      <div className="w-full bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 text-white rounded-3xl border-2 border-indigo-400/80 p-4 sm:p-6 shadow-inner flex flex-col items-center justify-center relative overflow-hidden">
+        {caption && (
+          <div className="mb-4 inline-flex items-center gap-1.5 bg-indigo-900/90 backdrop-blur px-3.5 py-1.5 rounded-full border border-indigo-400 text-xs sm:text-sm font-black text-amber-300 shadow-xs">
+            <span>✨</span>
+            <span>{caption}</span>
+          </div>
+        )}
+
+        {/* Tracing Track Display */}
+        <div className="w-full max-w-md h-36 sm:h-44 bg-slate-950/80 rounded-2xl border-2 border-indigo-500/50 p-4 flex items-center justify-between relative shadow-lg">
+          {/* Start Point */}
+          <div className="flex flex-col items-center z-10">
+            <motion.div
+              animate={{ scale: [1, 1.15, 1], rotate: [0, 5, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="text-6xl sm:text-7xl md:text-8xl filter drop-shadow-md select-none"
+            >
+              {startEmoji}
+            </motion.div>
+            <span className="text-[10px] font-black uppercase text-amber-400 mt-1">
+              {activeLang === 'en' ? 'Start' : activeLang === 'ru' ? 'Старт' : 'Başlanğıc'}
+            </span>
+          </div>
+
+          {/* Path Line */}
+          <div className="flex-1 mx-3 sm:mx-6 relative flex items-center justify-center">
+            {pathType === 'straight' && (
+              <div className="w-full border-t-4 border-dashed border-amber-300 relative flex items-center">
+                <motion.div
+                  animate={{ x: ['0%', '100%'], opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'linear' }}
+                  className="absolute -top-3.5 text-xl select-none"
+                >
+                  ✨
+                </motion.div>
+              </div>
+            )}
+            {pathType === 'zigzag' && (
+              <div className="w-full flex items-center justify-around text-amber-400 font-black tracking-widest text-lg sm:text-xl select-none">
+                <span>⚡</span>
+                <span className="text-xs sm:text-sm font-mono text-indigo-300">~/~/~/~➔</span>
+                <span>⚡</span>
+              </div>
+            )}
+            {pathType === 'wave' && (
+              <div className="w-full flex items-center justify-around text-pink-400 font-black tracking-widest text-lg sm:text-xl select-none">
+                <span>🌸</span>
+                <span className="text-xs sm:text-sm font-mono text-pink-300">∿∿∿∿➔</span>
+                <span>🌸</span>
+              </div>
+            )}
+          </div>
+
+          {/* Target Destination */}
+          <div className="flex flex-col items-center z-10">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 2.2 }}
+              className="text-6xl sm:text-7xl md:text-8xl filter drop-shadow-md select-none"
+            >
+              {targetEmoji}
+            </motion.div>
+            <span className="text-[10px] font-black uppercase text-emerald-400 mt-1">
+              {activeLang === 'en' ? 'Goal' : activeLang === 'ru' ? 'Цель' : 'Hədəf'}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (scene.type === 'comparison') {
+    const { leftItem, rightItem } = scene;
+    const getSizeClass = (size?: string) => {
+      switch (size) {
+        case 'huge': return 'text-7xl sm:text-8xl md:text-9xl';
+        case 'large': return 'text-6xl sm:text-7xl';
+        case 'small': return 'text-3xl sm:text-4xl';
+        case 'tiny': return 'text-2xl sm:text-3xl';
+        default: return 'text-5xl sm:text-6xl';
+      }
+    };
+    return (
+      <div className="w-full bg-gradient-to-r from-amber-50 via-sky-50 to-emerald-50 rounded-3xl border-2 border-amber-200/80 p-4 sm:p-6 shadow-inner flex flex-col items-center justify-center">
+        {caption && (
+          <div className="mb-3 inline-flex items-center gap-1.5 bg-white/90 backdrop-blur px-3.5 py-1.5 rounded-full border border-amber-200 text-xs sm:text-sm font-black text-slate-700 shadow-xs">
+            <span>⚖️</span>
+            <span>{caption}</span>
+          </div>
+        )}
+        <div className="w-full max-w-md flex items-center justify-around gap-4 bg-white/80 rounded-2xl border border-slate-200 p-4 shadow-sm">
+          {leftItem && (
+            <div className="flex flex-col items-center gap-1">
+              <span className={`${getSizeClass(leftItem.size)} filter drop-shadow select-none`}>
+                {leftItem.emoji}
+              </span>
+              <span className="font-black text-xs sm:text-sm text-slate-700 bg-amber-100 px-2.5 py-0.5 rounded-full">
+                {activeLang === 'en' ? leftItem.labelEn || leftItem.labelAz : activeLang === 'ru' ? leftItem.labelRu || leftItem.labelAz : leftItem.labelAz}
+              </span>
+            </div>
+          )}
+          <span className="text-xl sm:text-2xl font-black text-slate-400">vs</span>
+          {rightItem && (
+            <div className="flex flex-col items-center gap-1">
+              <span className={`${getSizeClass(rightItem.size)} filter drop-shadow select-none`}>
+                {rightItem.emoji}
+              </span>
+              <span className="font-black text-xs sm:text-sm text-slate-700 bg-sky-100 px-2.5 py-0.5 rounded-full">
+                {activeLang === 'en' ? rightItem.labelEn || rightItem.labelAz : activeLang === 'ru' ? rightItem.labelRu || rightItem.labelAz : rightItem.labelAz}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (scene.type === 'traffic') {
+    const { activeLight = 'red' } = scene;
+    return (
+      <div className="w-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 text-white rounded-3xl border-2 border-slate-700 p-4 sm:p-6 shadow-inner flex flex-col items-center justify-center">
+        {caption && (
+          <div className="mb-3 inline-flex items-center gap-1.5 bg-slate-800/90 backdrop-blur px-3.5 py-1.5 rounded-full border border-slate-600 text-xs sm:text-sm font-black text-amber-300 shadow-xs">
+            <span>🚦</span>
+            <span>{caption}</span>
+          </div>
+        )}
+        <div className="bg-slate-950 p-4 sm:p-5 rounded-3xl border-4 border-slate-700 flex flex-col items-center gap-3 shadow-2xl">
+          {/* Red Light */}
+          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl transition-all ${
+            activeLight === 'red'
+              ? 'bg-rose-500 ring-8 ring-rose-500/40 shadow-lg shadow-rose-500 animate-pulse'
+              : 'bg-rose-950/40 opacity-40'
+          }`}>
+            {activeLight === 'red' && '🛑'}
+          </div>
+          {/* Yellow Light */}
+          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl transition-all ${
+            activeLight === 'yellow'
+              ? 'bg-amber-400 ring-8 ring-amber-400/40 shadow-lg shadow-amber-400 animate-pulse'
+              : 'bg-amber-950/40 opacity-40'
+          }`}>
+            {activeLight === 'yellow' && '⚠️'}
+          </div>
+          {/* Green Light */}
+          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl transition-all ${
+            activeLight === 'green'
+              ? 'bg-emerald-500 ring-8 ring-emerald-500/40 shadow-lg shadow-emerald-500 animate-pulse'
+              : 'bg-emerald-950/40 opacity-40'
+          }`}>
+            {activeLight === 'green' && '🚶'}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return null;
 };
 
