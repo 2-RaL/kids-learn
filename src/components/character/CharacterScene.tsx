@@ -33,13 +33,24 @@ export const CharacterScene: React.FC = () => {
 
   return (
     <div className="flex flex-col w-full h-full min-h-0">
-      {/* 3D Main Stage Area with Studio Blue Gradient Background */}
+      {/* 3D Main Stage Area: Studio Blue Gradient on mobile/tablet, Pixar 3D Scene on computer (lg+) */}
       <div className="relative flex-1 min-h-[300px] xs:min-h-[350px] sm:min-h-[420px] md:min-h-[490px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white/70 bg-gradient-to-b from-sky-400 via-sky-300 to-blue-400">
-        {/* Soft Ambient Studio Spotlight Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/30 via-transparent to-blue-900/15 pointer-events-none" />
+        {/* 3D Pixar Village Background - only on computer screens (lg:block) */}
+        <img
+          src="/assets/scene/village_garden.jpg"
+          alt="Village Garden"
+          className="hidden lg:block absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none select-none"
+          draggable={false}
+        />
 
-        {/* Subtle Bottom Ambient Gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-blue-500/25 to-transparent pointer-events-none" />
+        {/* Ambient Overlay Vignette for Computer View */}
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none" />
+
+        {/* Soft Ambient Studio Spotlight Glow on Small Screens (mobile & tablet) */}
+        <div className="lg:hidden absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/30 via-transparent to-blue-900/15 pointer-events-none" />
+
+        {/* Subtle Bottom Ambient Gradient on Small Screens */}
+        <div className="lg:hidden absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-blue-500/25 to-transparent pointer-events-none" />
 
         {/* Stage Top Bar: Character Drawer Trigger (Left), Status Banner (Center), and Voice/Mode (Right) */}
         <div className="absolute top-2.5 sm:top-4 inset-x-2.5 sm:inset-x-4 z-20 flex items-center justify-between pointer-events-none gap-1.5">

@@ -322,19 +322,19 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'dance':
         return {
           animate: {
-            rotate: [0, -8, 8, -6, 6, 0],
-            x: [0, -18, 18, -12, 12, 0],
-            y: [0, -14, 0, -14, 0],
+            rotate: [0, -3.5, 0, 3.5, 0],
+            x: [0, -6, 0, 6, 0],
+            y: [0, -6, 0, -6, 0],
           },
           transition: {
-            duration: duration * 1.4,
+            duration: duration * 3.2,
             repeat: Infinity,
             repeatType: 'loop' as const,
             ease: 'easeInOut',
           },
           shadowAnimate: {
-            scaleX: [1, 0.85, 1.15, 0.9, 1],
-            opacity: [0.65, 0.5, 0.7, 0.55, 0.65],
+            scaleX: [1, 0.94, 1, 0.94, 1],
+            opacity: [0.65, 0.58, 0.65, 0.58, 0.65],
           },
         };
 
@@ -836,12 +836,14 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
 
   return (
     <div className="relative flex flex-col items-center justify-center select-none">
-      {/* Dynamic Floor Shadow beneath character */}
-      <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 w-52 xs:w-60 sm:w-72 md:w-80 h-9 sm:h-11 rounded-full bg-slate-900/30 blur-[6px] pointer-events-none z-0"
-        animate={motionConfig.shadowAnimate as any}
-        transition={{ duration: 0.3 }}
-      />
+      {/* Dynamic Floor Shadow beneath character - 100% mathematically centered on all screen sizes */}
+      <div className="absolute -bottom-2 sm:-bottom-3 inset-x-0 flex items-center justify-center pointer-events-none z-0">
+        <motion.div
+          className="w-36 xs:w-44 sm:w-56 md:w-68 h-5 sm:h-7 md:h-8 rounded-full bg-slate-950/30 blur-[5px]"
+          animate={motionConfig.shadowAnimate as any}
+          transition={{ duration: 0.3 }}
+        />
+      </div>
 
       {/* Main Animated 3D Character Body */}
       <motion.div
