@@ -6,15 +6,29 @@ import type { CharacterCommand } from '../types';
 export const GENERATED_ACTIONS: Record<string, Set<string>> = {
   leyla: new Set([
     'bathe',
+    'build',
+    'clap',
     'closeDoor',
+    'cry',
     'dance',
+    'draw',
+    'drink',
+    'eat',
+    'hug',
+    'laugh',
+    'openDoor',
+    'paint',
+    'playInstrument',
     'playToy',
+    'read',
     'rideBike',
     'sing',
+    'sleep',
     'slide',
     'think',
     'wakeUp',
     'wash',
+    'write',
   ]),
   tom: new Set([
     'bathe',
@@ -39,10 +53,11 @@ export const GENERATED_ACTIONS: Record<string, Set<string>> = {
  */
 export const DEDICATED_SPRITES: Record<string, Set<string>> = {
   leyla: new Set([
-    'bathe', 'closeDoor', 'cry', 'dance', 'jump', 'jumping', 'laugh',
-    'playInstrument', 'playToy', 'rideBike', 'run', 'running', 'sing',
-    'sit', 'sitting', 'slide', 'stand', 'standing', 'think', 'wakeUp',
-    'wash', 'wave', 'waving',
+    'bathe', 'build', 'clap', 'closeDoor', 'cry', 'dance', 'draw', 'drink',
+    'eat', 'hug', 'jump', 'jumping', 'laugh', 'openDoor', 'paint',
+    'playInstrument', 'playToy', 'read', 'rideBike', 'run', 'running',
+    'sing', 'sit', 'sitting', 'sleep', 'slide', 'stand', 'standing',
+    'think', 'wakeUp', 'wash', 'wave', 'waving', 'write',
   ]),
   amara: new Set([
     'cry', 'jump', 'jumping', 'laugh', 'playInstrument', 'run', 'running',
