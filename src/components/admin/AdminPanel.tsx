@@ -9,6 +9,7 @@ import {
 import { useAuthStore, type AuthUser, type UserRole } from '../../store/authStore';
 import { apiUrl } from '../../config/api';
 import { MULTILINGUAL_STORIES } from '../../data/parentStoriesData';
+import { syncAdminUsersToParentService } from '../../services/parentService';
 
 type AdminTab = 'dashboard' | 'users' | 'stories' | 'videos' | 'logic' | 'math' | 'chess' | 'audit';
 type UserRoleFilter = 'all' | 'admin' | 'editor' | 'therapist' | 'parent' | 'user';
@@ -149,6 +150,7 @@ export const AdminPanel: React.FC = () => {
       const data = await res.json();
       if (res.ok && Array.isArray(data.users)) {
         setUsers(data.users);
+        syncAdminUsersToParentService(data.users);
       } else {
         setUsers([]);
       }

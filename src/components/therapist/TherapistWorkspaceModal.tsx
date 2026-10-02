@@ -21,14 +21,18 @@ import {
 import { LEARNING_MODULES } from '../../data/learningModulesData';
 import {
   getRegisteredParents,
+  fetchRealParentUsers,
   assignHomeworkToParent,
   getAssignedHomeworkList,
+  fetchRealHomeworkList,
   getSessionNotesList,
+  fetchRealSessionNotesList,
   saveSessionNote,
   type RegisteredParentUser,
   type AssignedHomework,
   type TherapistSessionNote,
 } from '../../services/parentService';
+import { useAuthStore } from '../../store/authStore';
 
 interface TherapistWorkspaceModalProps {
   isOpen: boolean;
@@ -56,14 +60,14 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   const [newGoalCategory, setNewGoalCategory] = useState('Artikulyasiya');
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);
 
-  // Registered Parent Directory & Notification State
+  // Registered Parent Directory & Notification State (Original Users from MySQL & Admin Panel)
   const [parentUsers, setParentUsers] = useState<RegisteredParentUser[]>(getRegisteredParents());
-  const [selectedParentIdForHw, setSelectedParentIdForHw] = useState<string>(parentUsers[0]?.id || 'parent-ayan');
-  const [selectedParentIdForNote, setSelectedParentIdForNote] = useState<string>(parentUsers[0]?.id || 'parent-ayan');
+  const [selectedParentIdForHw, setSelectedParentIdForHw] = useState<string>(parentUsers[0]?.id || '');
+  const [selectedParentIdForNote, setSelectedParentIdForNote] = useState<string>(parentUsers[0]?.id || '');
   const [notifyParentOnNote, setNotifyParentOnNote] = useState<boolean>(true);
   const [successToast, setSuccessToast] = useState<string | null>(null);
 
-  // Homework state backed by parentService
+  // Homework state backed by parentService & MySQL
   const [homeworkList, setHomeworkList] = useState<AssignedHomework[]>(getAssignedHomeworkList());
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   const [selectedModuleIdForHw, setSelectedModuleIdForHw] = useState(LEARNING_MODULES[0]?.id || 'colors');
@@ -71,7 +75,7 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   const [hwDueDate, setHwDueDate] = useState('');
   const [hwParentNote, setHwParentNote] = useState('');
 
-  // Session Notes state backed by parentService
+  // Session Notes state backed by parentService & MySQL
   const [sessionNotes, setSessionNotes] = useState<TherapistSessionNote[]>(getSessionNotesList());
   const [newNoteDate, setNewNoteDate] = useState(new Date().toISOString().split('T')[0]);
   const [newNoteActivity, setNewNoteActivity] = useState('');
@@ -84,14 +88,59 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   const [librarySearch, setLibrarySearch] = useState('');
   const [libraryAgeFilter, setLibraryAgeFilter] = useState<number | null>(null);
 
-  // Sync on modal open
+  // Sync on modal open directly with MySQL & Admin Panel
   useEffect(() => {
     if (isOpen) {
-      setParentUsers(getRegisteredParents());
-      setHomeworkList(getAssignedHomeworkList());
-      setSessionNotes(getSessionNotesList());
+      const cached = getRegisteredParents();
+      setParentUsers(cached);
+      if (cached.length > 0) {
+        setSelectedParentIdForHw((prev) => (prev && cached.some((p) => p.id === prev) ? prev : cached[0].id));
+        setSelectedParentIdForNote((prev) => (prev && cached.some((p) => p.id === prev) ? prev : cached[0].id));
+      }
+
+      // Fetch live original users from MySQL
+      fetchRealParentUsers().then((real) => {
+        if (Array.isArray(real)) {
+          setParentUsers(real);
+          if (real.length > 0) {
+            setSelectedParentIdForHw((prev) => (prev && real.some((p) => p.id === prev) ? prev : real[0].id));
+            setSelectedParentIdForNote((prev) => (prev && real.some((p) => p.id === prev) ? prev : real[0].id));
+          }
+        }
+      });
+
+      // Fetch live homework and notes from MySQL
+      fetchRealHomeworkList().then((hw) => {
+        if (Array.isArray(hw)) setHomeworkList(hw);
+      });
+      fetchRealSessionNotesList().then((notes) => {
+        if (Array.isArray(notes)) setSessionNotes(notes);
+      });
     }
   }, [isOpen]);
+
+  // Reactive listener for Admin Panel user creation / updates
+  useEffect(() => {
+    const handleParentsUpdated = (e: any) => {
+      const updated = e.detail || getRegisteredParents();
+      setParentUsers(updated);
+      if (updated.length > 0) {
+        setSelectedParentIdForHw((prev) => (prev && updated.some((p: any) => p.id === prev) ? prev : updated[0].id));
+        setSelectedParentIdForNote((prev) => (prev && updated.some((p: any) => p.id === prev) ? prev : updated[0].id));
+      }
+    };
+    const handleHwUpdated = () => {
+      setHomeworkList(getAssignedHomeworkList());
+    };
+    window.addEventListener('kml_parents_updated', handleParentsUpdated);
+    window.addEventListener('kml_notifications_updated', handleHwUpdated);
+    window.addEventListener('storage', handleParentsUpdated);
+    return () => {
+      window.removeEventListener('kml_parents_updated', handleParentsUpdated);
+      window.removeEventListener('kml_notifications_updated', handleHwUpdated);
+      window.removeEventListener('storage', handleParentsUpdated);
+    };
+  }, []);
 
   const selectedChild = children.find((c) => c.id === selectedChildId) || children[0];
 
@@ -559,47 +608,59 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                 <div className="text-[11px] font-black text-indigo-950 uppercase tracking-wider flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
                     <Users className="w-4 h-4 text-indigo-600" />
-                    <span>Valideyn Portalında Qeydiyyatda Olan İstifadəçilər ({parentUsers.length})</span>
+                    <span>MySQL & Admin Panel Real İstifadəçilər ({parentUsers.length})</span>
                   </span>
                   <span className="text-[10px] text-indigo-600 bg-white/80 px-2 py-0.5 rounded-full border border-indigo-200 font-bold">
-                    Seçilən valideynə dərhal bildiriş gedir 🔔
+                    Seçilən valideynə bildiriş gedir 🔔
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-                  {parentUsers.map((pu) => {
-                    const isSelected = selectedParentIdForHw === pu.id;
-                    return (
-                      <button
-                        type="button"
-                        key={pu.id}
-                        onClick={() => {
-                          setSelectedParentIdForHw(pu.id);
-                          if (!isAssignModalOpen) setIsAssignModalOpen(true);
-                        }}
-                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-white border-indigo-500 shadow-sm ring-2 ring-indigo-200'
-                            : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-indigo-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-2xl">{pu.childEmoji}</span>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-xs font-black text-slate-900 truncate">
-                              {pu.childName}
-                            </div>
-                            <div className="text-[11px] text-indigo-700 font-bold truncate">
-                              {pu.parentName}
-                            </div>
-                            <div className="text-[10px] text-slate-400 font-medium truncate">
-                              {pu.childAge} yaş
+
+                {parentUsers.length === 0 ? (
+                  <div className="p-4 rounded-xl bg-white/80 border border-dashed border-indigo-300 text-center space-y-1">
+                    <p className="text-xs font-bold text-slate-800">
+                      MySQL bazasında hələ qeydiyyatdan keçmiş valideyn istifadəçisi yoxdur.
+                    </p>
+                    <p className="text-[11px] text-slate-500 font-semibold">
+                      Admin Panelindən ("İstifadəçilər" bölməsi) "Valideyn" və ya "İstifadəçi" rolu ilə yeni hesab yaradın.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                    {parentUsers.map((pu) => {
+                      const isSelected = selectedParentIdForHw === pu.id;
+                      return (
+                        <button
+                          type="button"
+                          key={pu.id}
+                          onClick={() => {
+                            setSelectedParentIdForHw(pu.id);
+                            if (!isAssignModalOpen) setIsAssignModalOpen(true);
+                          }}
+                          className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-white border-indigo-500 shadow-sm ring-2 ring-indigo-200'
+                              : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-indigo-300'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className="text-2xl">{pu.childEmoji || '👧'}</span>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-xs font-black text-slate-900 truncate">
+                                {pu.childName}
+                              </div>
+                              <div className="text-[11px] text-indigo-700 font-bold truncate">
+                                {pu.parentName}
+                              </div>
+                              <div className="text-[10px] text-slate-400 font-medium truncate">
+                                @{pu.username} • {pu.childAge} yaş
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Assign Form */}
@@ -624,23 +685,31 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                       <label className="text-xs font-black text-indigo-950 block mb-1">
                         Valideyn Portalında Qeydiyyatdakı İstifadəçi (Tapşırıq Alan):
                       </label>
-                      <select
-                        value={selectedParentIdForHw}
-                        onChange={(e) => setSelectedParentIdForHw(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-indigo-300 text-xs font-black text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500"
-                      >
-                        {parentUsers.map((p) => (
-                          <option key={p.id} value={p.id}>
-                            {p.childEmoji} {p.childName} ({p.childAge} yaş) — Valideyn: {p.parentName} ({p.email})
-                          </option>
-                        ))}
-                      </select>
-                      <p className="mt-1 text-[11px] text-indigo-800 font-semibold flex items-center gap-1">
-                        <span>ℹ️</span>
-                        <span>
-                          Bu tapşırıq <strong>{parentUsers.find((p) => p.id === selectedParentIdForHw)?.childName}</strong> üçün təyin ediləcək və valideyn <strong>{parentUsers.find((p) => p.id === selectedParentIdForHw)?.parentName}</strong> hesabına bildiriş kimi göndəriləcək.
-                        </span>
-                      </p>
+                      {parentUsers.length === 0 ? (
+                        <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-bold text-amber-800">
+                          ⚠️ Heç bir orijinal valideyn istifadəçisi tapılmadı. Zəhmət olmasa Admin Paneldən valideyn hesabı yaradın.
+                        </div>
+                      ) : (
+                        <select
+                          value={selectedParentIdForHw}
+                          onChange={(e) => setSelectedParentIdForHw(e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-indigo-300 text-xs font-black text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500"
+                        >
+                          {parentUsers.map((p) => (
+                            <option key={p.id} value={p.id}>
+                              {p.childEmoji || '👧'} {p.childName} ({p.childAge} yaş) — Valideyn: {p.parentName} (@{p.username}) {p.email ? `• ${p.email}` : ''}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                      {parentUsers.length > 0 && (
+                        <p className="mt-1 text-[11px] text-indigo-800 font-semibold flex items-center gap-1">
+                          <span>ℹ️</span>
+                          <span>
+                            Bu tapşırıq <strong>{parentUsers.find((p) => p.id === selectedParentIdForHw)?.childName}</strong> üçün təyin ediləcək və valideyn <strong>{parentUsers.find((p) => p.id === selectedParentIdForHw)?.parentName}</strong> hesabına bildiriş kimi göndəriləcək.
+                          </span>
+                        </p>
+                      )}
                     </div>
 
                     <div>
@@ -811,47 +880,59 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                 <div className="text-[11px] font-black text-indigo-950 uppercase tracking-wider flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
                     <Users className="w-4 h-4 text-indigo-600" />
-                    <span>Qeyd Aparılacaq Uşaqlar & Valideynlər</span>
+                    <span>MySQL & Admin Panel Real İstifadəçilər ({parentUsers.length})</span>
                   </span>
                   <span className="text-[10px] text-slate-500 font-bold">
                     Seçib dərhal qeyd əlavə edin
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-                  {parentUsers.map((pu) => {
-                    const isSelected = selectedParentIdForNote === pu.id;
-                    return (
-                      <button
-                        type="button"
-                        key={pu.id}
-                        onClick={() => {
-                          setSelectedParentIdForNote(pu.id);
-                          if (!isAddNoteOpen) setIsAddNoteOpen(true);
-                        }}
-                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
-                          isSelected
-                            ? 'bg-white border-indigo-500 shadow-sm ring-2 ring-indigo-200'
-                            : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-indigo-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-2xl">{pu.childEmoji}</span>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-xs font-black text-slate-900 truncate">
-                              {pu.childName}
-                            </div>
-                            <div className="text-[11px] text-indigo-700 font-bold truncate">
-                              {pu.parentName}
-                            </div>
-                            <div className="text-[10px] text-slate-400 font-medium truncate">
-                              {pu.childAge} yaş
+
+                {parentUsers.length === 0 ? (
+                  <div className="p-4 rounded-xl bg-white/80 border border-dashed border-indigo-300 text-center space-y-1">
+                    <p className="text-xs font-bold text-slate-800">
+                      MySQL bazasında hələ qeydiyyatdan keçmiş valideyn istifadəçisi yoxdur.
+                    </p>
+                    <p className="text-[11px] text-slate-500 font-semibold">
+                      Admin Panelindən ("İstifadəçilər" bölməsi) "Valideyn" və ya "İstifadəçi" rolu ilə yeni hesab yaradın.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                    {parentUsers.map((pu) => {
+                      const isSelected = selectedParentIdForNote === pu.id;
+                      return (
+                        <button
+                          type="button"
+                          key={pu.id}
+                          onClick={() => {
+                            setSelectedParentIdForNote(pu.id);
+                            if (!isAddNoteOpen) setIsAddNoteOpen(true);
+                          }}
+                          className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-white border-indigo-500 shadow-sm ring-2 ring-indigo-200'
+                              : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-indigo-300'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className="text-2xl">{pu.childEmoji || '👧'}</span>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-xs font-black text-slate-900 truncate">
+                                {pu.childName}
+                              </div>
+                              <div className="text-[11px] text-indigo-700 font-bold truncate">
+                                {pu.parentName}
+                              </div>
+                              <div className="text-[10px] text-slate-400 font-medium truncate">
+                                @{pu.username} • {pu.childAge} yaş
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Add Note Form */}
@@ -865,8 +946,8 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                       <FileText className="w-4 h-4 text-indigo-600" />
                       <span>Seans Qeydi Əlavə Et</span>
                     </h3>
-                    <span className="text-xs font-bold text-slate-500">
-                      Demo Loqoped Kabineti
+                    <span className="text-xs font-bold text-indigo-800">
+                      Loqopedik Diaqnostika &amp; Təlim Masası
                     </span>
                   </div>
 
@@ -875,17 +956,23 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                     <label className="text-xs font-black text-indigo-950 block mb-1">
                       Uşaq və Valideyn Seçimi (Portal İstifadəçisi):
                     </label>
-                    <select
-                      value={selectedParentIdForNote}
-                      onChange={(e) => setSelectedParentIdForNote(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-indigo-300 text-xs font-black text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500"
-                    >
-                      {parentUsers.map((p) => (
-                        <option key={p.id} value={p.id}>
-                          {p.childEmoji} {p.childName} ({p.childAge} yaş) — Valideyn: {p.parentName} ({p.email})
-                        </option>
-                      ))}
-                    </select>
+                    {parentUsers.length === 0 ? (
+                      <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-bold text-amber-800">
+                        ⚠️ Heç bir orijinal valideyn istifadəçisi tapılmadı. Zəhmət olmasa Admin Paneldən valideyn hesabı yaradın.
+                      </div>
+                    ) : (
+                      <select
+                        value={selectedParentIdForNote}
+                        onChange={(e) => setSelectedParentIdForNote(e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-indigo-300 text-xs font-black text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500"
+                      >
+                        {parentUsers.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.childEmoji || '👧'} {p.childName} ({p.childAge} yaş) — Valideyn: {p.parentName} (@{p.username}) {p.email ? `• ${p.email}` : ''}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

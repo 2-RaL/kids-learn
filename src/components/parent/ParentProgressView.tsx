@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useGameStore } from '../../store/gameStore';
-import { getAssignedHomeworkList, AssignedHomework } from '../../services/parentService';
+import { getAssignedHomeworkList, fetchRealHomeworkList, AssignedHomework } from '../../services/parentService';
 
 export const ParentProgressView: React.FC = () => {
   const { parentProfile } = useAuthStore();
@@ -28,6 +28,9 @@ export const ParentProgressView: React.FC = () => {
   const [homeworkList, setHomeworkList] = useState<AssignedHomework[]>(getAssignedHomeworkList());
 
   useEffect(() => {
+    fetchRealHomeworkList().then((hw) => {
+      if (Array.isArray(hw)) setHomeworkList(hw);
+    });
     const handleUpdate = () => {
       setHomeworkList(getAssignedHomeworkList());
     };
