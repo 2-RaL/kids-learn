@@ -586,6 +586,22 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
           shadowAnimate: { scaleX: [1.1, 0.85, 1], opacity: 0.65 },
         };
 
+      case 'sleep':
+        return {
+          animate: {
+            y: [32, 29, 32],
+            scaleY: [1, 1.018, 1],
+            scaleX: [1, 1.008, 1],
+          },
+          transition: {
+            duration: duration * 2.4,
+            repeat: Infinity,
+            repeatType: 'loop' as const,
+            ease: 'easeInOut',
+          },
+          shadowAnimate: { scaleX: 1.35, opacity: 0.8 },
+        };
+
       case 'bathe':
         return {
           animate: {

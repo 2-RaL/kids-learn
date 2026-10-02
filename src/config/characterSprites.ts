@@ -51,7 +51,7 @@ export const DEDICATED_SPRITES: Record<string, Set<string>> = {
   tom: new Set([
     'bathe', 'closeDoor', 'cry', 'drink', 'eat', 'jump', 'jumping',
     'laugh', 'playInstrument', 'playToy', 'read', 'rideBike', 'run',
-    'running', 'sing', 'sit', 'sitting', 'slide', 'stand', 'standing',
+    'running', 'sing', 'sit', 'sitting', 'sleep', 'slide', 'stand', 'standing',
     'think', 'wakeUp', 'wash', 'wave', 'waving',
   ]),
   ali: new Set([
