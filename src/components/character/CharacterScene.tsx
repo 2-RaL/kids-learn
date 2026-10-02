@@ -6,10 +6,12 @@ import { COMMAND_AZ_LABELS } from '../../config/commands';
 import CharacterAvatar from './CharacterAvatar';
 import { RotateCcw, RotateCw, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useVoiceRecognition } from '../../hooks/useVoiceRecognition';
 import type { AnimationSpeed, Difficulty } from '../../types';
 
 export const CharacterScene: React.FC = () => {
   const { t } = useTranslation();
+  const { startListening, stopListening } = useVoiceRecognition();
   const {
     selectedCharacter,
     currentCommand,
@@ -22,10 +24,17 @@ export const CharacterScene: React.FC = () => {
     feedbackType,
     executeCommand,
     setShowCharacterDrawer,
-    setShowRightDrawer,
   } = useGameStore();
 
   const character = CHARACTERS.find((c) => c.id === selectedCharacter) || CHARACTERS[0];
+
+  const handleVoiceToggle = () => {
+    if (voiceState === 'listening') {
+      stopListening();
+    } else {
+      startListening();
+    }
+  };
 
   const handleReset = () => {
     executeCommand('idle');
@@ -99,17 +108,25 @@ export const CharacterScene: React.FC = () => {
             </span>
           </motion.div>
 
-          {/* Mobile / Tablet: Right Button to open Voice & Learning Drawer */}
+          {/* Top Right: One-Click Instant Voice Command Button */}
           <div className="pointer-events-auto">
             <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              onClick={() => setShowRightDrawer(true)}
-              className="lg:hidden flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-indigo-600/90 hover:bg-indigo-600 text-white shadow-lg border border-white/40 backdrop-blur-md transition-all text-xs font-bold cursor-pointer select-none active:scale-95"
-              title="Səsli əmr və öyrənmə rejimi"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleVoiceToggle}
+              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full shadow-lg border backdrop-blur-md transition-all text-xs font-black cursor-pointer select-none active:scale-95 ${
+                voiceState === 'listening'
+                  ? 'bg-rose-600 text-white border-rose-300 ring-4 ring-rose-400/40 animate-pulse'
+                  : 'bg-indigo-600/95 hover:bg-indigo-600 text-white border-white/40'
+              }`}
+              title={voiceState === 'listening' ? 'Dinləməni dayandır' : 'Səsli əmr ver'}
             >
-              <span>🎙️</span>
-              <span className="hidden sm:inline">Səs &amp; Rejim</span>
+              <span className={`text-xs sm:text-sm ${voiceState === 'listening' ? 'animate-bounce' : ''}`}>
+                🎙️
+              </span>
+              <span>
+                {voiceState === 'listening' ? 'Dinləyirəm...' : 'Səsli Əmr'}
+              </span>
             </motion.button>
           </div>
         </div>

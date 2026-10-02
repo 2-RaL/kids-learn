@@ -19,6 +19,16 @@ import {
   type SessionNote,
 } from '../../data/therapistData';
 import { LEARNING_MODULES } from '../../data/learningModulesData';
+import {
+  getRegisteredParents,
+  assignHomeworkToParent,
+  getAssignedHomeworkList,
+  getSessionNotesList,
+  saveSessionNote,
+  type RegisteredParentUser,
+  type AssignedHomework,
+  type TherapistSessionNote,
+} from '../../services/parentService';
 
 interface TherapistWorkspaceModalProps {
   isOpen: boolean;
@@ -46,16 +56,23 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   const [newGoalCategory, setNewGoalCategory] = useState('Artikulyasiya');
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);
 
-  // Homework state
-  const [homeworkList, setHomeworkList] = useState<HomeworkAssignment[]>(DEFAULT_HOMEWORK);
+  // Registered Parent Directory & Notification State
+  const [parentUsers, setParentUsers] = useState<RegisteredParentUser[]>(getRegisteredParents());
+  const [selectedParentIdForHw, setSelectedParentIdForHw] = useState<string>(parentUsers[0]?.id || 'parent-ayan');
+  const [selectedParentIdForNote, setSelectedParentIdForNote] = useState<string>(parentUsers[0]?.id || 'parent-ayan');
+  const [notifyParentOnNote, setNotifyParentOnNote] = useState<boolean>(true);
+  const [successToast, setSuccessToast] = useState<string | null>(null);
+
+  // Homework state backed by parentService
+  const [homeworkList, setHomeworkList] = useState<AssignedHomework[]>(getAssignedHomeworkList());
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
   const [selectedModuleIdForHw, setSelectedModuleIdForHw] = useState(LEARNING_MODULES[0]?.id || 'colors');
   const [hwInstructions, setHwInstructions] = useState('');
   const [hwDueDate, setHwDueDate] = useState('');
   const [hwParentNote, setHwParentNote] = useState('');
 
-  // Session Notes state
-  const [sessionNotes, setSessionNotes] = useState<SessionNote[]>(DEFAULT_SESSION_NOTES);
+  // Session Notes state backed by parentService
+  const [sessionNotes, setSessionNotes] = useState<TherapistSessionNote[]>(getSessionNotesList());
   const [newNoteDate, setNewNoteDate] = useState(new Date().toISOString().split('T')[0]);
   const [newNoteActivity, setNewNoteActivity] = useState('');
   const [newNoteObs, setNewNoteObs] = useState('');
@@ -66,6 +83,15 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   // Library search state
   const [librarySearch, setLibrarySearch] = useState('');
   const [libraryAgeFilter, setLibraryAgeFilter] = useState<number | null>(null);
+
+  // Sync on modal open
+  useEffect(() => {
+    if (isOpen) {
+      setParentUsers(getRegisteredParents());
+      setHomeworkList(getAssignedHomeworkList());
+      setSessionNotes(getSessionNotesList());
+    }
+  }, [isOpen]);
 
   const selectedChild = children.find((c) => c.id === selectedChildId) || children[0];
 
@@ -95,45 +121,48 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   const handleAssignHomework = (e: React.FormEvent) => {
     e.preventDefault();
     const targetMod = LEARNING_MODULES.find((m) => m.id === selectedModuleIdForHw);
+    const targetParent = parentUsers.find((p) => p.id === selectedParentIdForHw) || parentUsers[0];
 
-    const newHw: HomeworkAssignment = {
-      id: `hw-${Date.now()}`,
-      childId: selectedChildId,
+    const newHw = assignHomeworkToParent({
+      targetParentId: targetParent.id,
+      childName: targetParent.childName,
+      parentName: targetParent.parentName,
       activityId: selectedModuleIdForHw,
       activityTitle: targetMod?.titleAz || 'Təlim Fəaliyyəti',
       category: targetMod?.titleAz || 'Ümumi',
       instructions: hwInstructions.trim() || 'Verilən fəaliyyəti evdə valideynlə birlikdə tamamlayın.',
-      assignedDate: new Date().toISOString().split('T')[0],
       dueDate: hwDueDate || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       targetSkill: 'Nitq və qavrama inkişafı',
       parentNote: hwParentNote.trim(),
-      status: 'assigned',
-      score: 0,
-      attemptsCount: 0,
-    };
+    });
 
     setHomeworkList([newHw, ...homeworkList]);
     setHwInstructions('');
     setHwDueDate('');
     setHwParentNote('');
     setIsAssignModalOpen(false);
+    setSuccessToast(`Ev tapşırığı ${targetParent.childName} üçün təyin edildi və ${targetParent.parentName} hesabına bildiriş göndərildi! ✓`);
+    setTimeout(() => setSuccessToast(null), 4500);
   };
 
   const handleAddSessionNote = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newNoteActivity.trim()) return;
+    if (!newNoteActivity.trim() || !newNoteObs.trim()) return;
+    const targetParent = parentUsers.find((p) => p.id === selectedParentIdForNote) || parentUsers[0];
 
-    const newNote: SessionNote = {
-      id: `sn-${Date.now()}`,
-      childId: selectedChildId,
+    const newNote = saveSessionNote({
+      targetParentId: targetParent.id,
+      childName: targetParent.childName,
+      parentName: targetParent.parentName,
       date: newNoteDate,
       activityPerformed: newNoteActivity.trim(),
-      observations: newNoteObs.trim() || 'Müşahidə qeyd olunmayıb.',
-      progress: newNoteProgress.trim() || 'Uğurlu iştirak.',
-      difficulties: 'Yoxdur.',
-      nextSessionPlan: newNotePlan.trim() || 'Məşqlərin davam etdirilməsi.',
+      observations: newNoteObs.trim(),
+      progress: newNoteProgress.trim() || 'Məşqlər plana uyğun icra edildi.',
+      difficulties: '',
+      nextSessionPlan: newNotePlan.trim() || 'Növbəti seansda möhkəmləndirmə.',
       therapistName: 'Demo Loqoped',
-    };
+      notifiedParent: notifyParentOnNote,
+    });
 
     setSessionNotes([newNote, ...sessionNotes]);
     setNewNoteActivity('');
@@ -141,6 +170,12 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
     setNewNoteProgress('');
     setNewNotePlan('');
     setIsAddNoteOpen(false);
+    setSuccessToast(
+      `Seans qeydi saxlanıldı (${targetParent.childName} üçün. Valideynə bildiriş: ${
+        notifyParentOnNote ? 'Göndərildi ✓' : 'Göndərilmədi'
+      })`
+    );
+    setTimeout(() => setSuccessToast(null), 4500);
   };
 
   const updateAssessmentRating = (id: string, delta: number) => {
@@ -234,6 +269,22 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
 
         {/* Tab Content Display */}
         <div className="flex-1 p-5 sm:p-7 overflow-y-auto">
+          {/* Notification Toast */}
+          {successToast && (
+            <div className="mb-4 max-w-4xl mx-auto p-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl shadow-lg flex items-center justify-between gap-3 animate-in fade-in slide-in-from-top-2 border border-emerald-400">
+              <div className="flex items-center gap-2.5 text-xs font-black">
+                <span className="text-lg">🔔</span>
+                <span>{successToast}</span>
+              </div>
+              <button
+                onClick={() => setSuccessToast(null)}
+                className="text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/20 transition-all cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+
           {/* TAB 1: CHILD PROFILE */}
           {activeTab === 'children' && selectedChild && (
             <div className="space-y-6 max-w-4xl mx-auto">
@@ -484,43 +535,122 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
 
           {/* TAB 4: HOMEWORK ASSIGNMENT */}
           {activeTab === 'homework' && (
-            <div className="space-y-5 max-w-4xl mx-auto">
-              <div className="flex items-center justify-between">
+            <div className="space-y-6 max-w-4xl mx-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-slate-900">
-                    Ev Tapşırıqlarının Təyini və İzlənməsi
+                  <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                    <span>📚 Ev Tapşırıqlarının Təyini və Valideyn Əlaqəsi</span>
                   </h2>
                   <p className="text-xs text-slate-500 font-semibold">
-                    Təyin edilmiş tapşırıqlar birbaşa Valideyn Portalında görünür
+                    Valideyn portalında qeydiyyatdan keçmiş istənilən ailəyə fərdi tapşırıq göndərin və dərhal bildiriş çatdırın
                   </p>
                 </div>
                 <button
                   onClick={() => setIsAssignModalOpen(!isAssignModalOpen)}
-                  className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black flex items-center gap-1.5 shadow-sm cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black flex items-center gap-1.5 shadow-md shadow-indigo-200 cursor-pointer transition-all self-start sm:self-auto"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Tapşırıq Təyin Et</span>
+                  <span>+ Uşağa Yeni Ev Tapşırığı Göndər</span>
                 </button>
+              </div>
+
+              {/* Registered Parents Overview Section */}
+              <div className="bg-gradient-to-r from-indigo-50/90 to-purple-50/90 p-4 rounded-2xl border border-indigo-100 space-y-2">
+                <div className="text-[11px] font-black text-indigo-950 uppercase tracking-wider flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <Users className="w-4 h-4 text-indigo-600" />
+                    <span>Valideyn Portalında Qeydiyyatda Olan İstifadəçilər ({parentUsers.length})</span>
+                  </span>
+                  <span className="text-[10px] text-indigo-600 bg-white/80 px-2 py-0.5 rounded-full border border-indigo-200 font-bold">
+                    Seçilən valideynə dərhal bildiriş gedir 🔔
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                  {parentUsers.map((pu) => {
+                    const isSelected = selectedParentIdForHw === pu.id;
+                    return (
+                      <button
+                        type="button"
+                        key={pu.id}
+                        onClick={() => {
+                          setSelectedParentIdForHw(pu.id);
+                          if (!isAssignModalOpen) setIsAssignModalOpen(true);
+                        }}
+                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-white border-indigo-500 shadow-sm ring-2 ring-indigo-200'
+                            : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-indigo-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-2xl">{pu.childEmoji}</span>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-xs font-black text-slate-900 truncate">
+                              {pu.childName}
+                            </div>
+                            <div className="text-[11px] text-indigo-700 font-bold truncate">
+                              {pu.parentName}
+                            </div>
+                            <div className="text-[10px] text-slate-400 font-medium truncate">
+                              {pu.childAge} yaş
+                            </div>
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Assign Form */}
               {isAssignModalOpen && (
                 <form
                   onSubmit={handleAssignHomework}
-                  className="p-5 rounded-2xl bg-indigo-50/80 border border-indigo-200 space-y-3 animate-in fade-in"
+                  className="p-5 sm:p-6 rounded-2xl bg-indigo-50/90 border-2 border-indigo-300 space-y-4 animate-in fade-in shadow-md"
                 >
-                  <h3 className="text-xs font-black text-indigo-900 uppercase">
-                    Uşağa Yeni Ev Tapşırığı Göndər
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="flex items-center justify-between border-b border-indigo-200 pb-3">
+                    <h3 className="text-sm font-black text-indigo-950 uppercase flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-indigo-600" />
+                      <span>Uşağa Yeni Ev Tapşırığı Göndər</span>
+                    </h3>
+                    <span className="text-xs font-bold text-indigo-700 bg-white px-2.5 py-1 rounded-lg border border-indigo-200">
+                      🔔 Valideynə bildiriş getsin
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {/* Parent User Selection */}
+                    <div className="sm:col-span-2">
+                      <label className="text-xs font-black text-indigo-950 block mb-1">
+                        Valideyn Portalında Qeydiyyatdakı İstifadəçi (Tapşırıq Alan):
+                      </label>
+                      <select
+                        value={selectedParentIdForHw}
+                        onChange={(e) => setSelectedParentIdForHw(e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-indigo-300 text-xs font-black text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500"
+                      >
+                        {parentUsers.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.childEmoji} {p.childName} ({p.childAge} yaş) — Valideyn: {p.parentName} ({p.email})
+                          </option>
+                        ))}
+                      </select>
+                      <p className="mt-1 text-[11px] text-indigo-800 font-semibold flex items-center gap-1">
+                        <span>ℹ️</span>
+                        <span>
+                          Bu tapşırıq <strong>{parentUsers.find((p) => p.id === selectedParentIdForHw)?.childName}</strong> üçün təyin ediləcək və valideyn <strong>{parentUsers.find((p) => p.id === selectedParentIdForHw)?.parentName}</strong> hesabına bildiriş kimi göndəriləcək.
+                        </span>
+                      </p>
+                    </div>
+
                     <div>
-                      <label className="text-[11px] font-bold text-slate-600 block mb-1">
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">
                         Təlim Bölməsi:
                       </label>
                       <select
                         value={selectedModuleIdForHw}
                         onChange={(e) => setSelectedModuleIdForHw(e.target.value)}
-                        className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                       >
                         {LEARNING_MODULES.map((m) => (
                           <option key={m.id} value={m.id}>
@@ -531,20 +661,20 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                     </div>
 
                     <div>
-                      <label className="text-[11px] font-bold text-slate-600 block mb-1">
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">
                         Son Tarix (Due Date):
                       </label>
                       <input
                         type="date"
                         value={hwDueDate}
                         onChange={(e) => setHwDueDate(e.target.value)}
-                        className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Uşaq üçün Təlimat:
                     </label>
                     <input
@@ -552,37 +682,37 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                       value={hwInstructions}
                       onChange={(e) => setHwInstructions(e.target.value)}
                       placeholder="Məsələn: Bu tapşırığı gündə 5 dəqiqə valideynlə birlikdə təkrar edin..."
-                      className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-bold text-slate-600 block mb-1">
-                      Valideyn üçün Xüsusi Qeyd (İstəyə bağlı):
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                      Valideyn üçün Xüsusi Qeyd / Tövsiyə (İstəyə bağlı):
                     </label>
                     <input
                       type="text"
                       value={hwParentNote}
                       onChange={(e) => setHwParentNote(e.target.value)}
-                      placeholder="Məsələn: Səs çıxararkən dilinin vəziyyətinə diqqət yetirin..."
-                      className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                      placeholder="Məsələn: Tələffüz zamanı dilin vəziyyətinə diqqət yetirin və səsi uzadaraq təkrar etdirin..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                     />
                   </div>
 
-                  <div className="flex justify-end gap-2 pt-1">
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-indigo-200">
                     <button
                       type="button"
                       onClick={() => setIsAssignModalOpen(false)}
-                      className="px-4 py-1.5 rounded-xl bg-slate-200 text-slate-700 text-xs font-bold"
+                      className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold cursor-pointer"
                     >
                       Ləğv et
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-black"
+                      className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
                     >
-                      Valideyn Portalına Göndər ✓
+                      <span>Tapşırığı Təyin Et & Bildiriş Göndər 🔔</span>
                     </button>
                   </div>
                 </form>
@@ -590,25 +720,54 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
 
               {/* Homework List */}
               <div className="space-y-3">
+                <div className="text-xs font-black text-slate-500 uppercase tracking-wider">
+                  Təyin Edilmiş Tapşırıqlar ({homeworkList.length})
+                </div>
+
                 {homeworkList.map((hw) => (
                   <div
                     key={hw.id}
-                    className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                    className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 hover:border-indigo-300 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all"
                   >
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-900">
+                    <div className="space-y-2 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-black uppercase px-2.5 py-0.5 rounded-md bg-indigo-600 text-white flex items-center gap-1">
+                          <span>👧</span>
+                          <span>{hw.childName}</span>
+                        </span>
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-purple-100 text-purple-900">
+                          Valideyn: {hw.parentName}
+                        </span>
+                        <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
                           {hw.category}
                         </span>
-                        <span className="text-xs text-slate-400 font-bold">
-                          Son tarix: {hw.dueDate}
+                        <span className="text-xs text-slate-400 font-bold ml-auto md:ml-0">
+                          📅 Son tarix: {hw.dueDate}
                         </span>
                       </div>
+
                       <h4 className="text-sm font-black text-slate-900">{hw.activityTitle}</h4>
-                      <p className="text-xs text-slate-500 font-medium">{hw.instructions}</p>
+                      <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                        {hw.instructions}
+                      </p>
+
+                      {hw.parentNote && (
+                        <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 font-medium flex items-start gap-1.5">
+                          <span className="text-sm">💡</span>
+                          <div>
+                            <strong className="font-black text-amber-900">Valideynə Tövsiyə: </strong>
+                            {hw.parentNote}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 shrink-0 border-t md:border-t-0 pt-2 md:pt-0 border-slate-100">
+                      <span className="px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 text-[11px] font-black flex items-center gap-1">
+                        <span>🔔</span>
+                        <span>Valideynə bildiriş çatdı</span>
+                      </span>
+
                       {hw.status === 'completed' ? (
                         <span className="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-black flex items-center gap-1">
                           <CheckCircle2 className="w-4 h-4 text-emerald-600" />
@@ -616,7 +775,7 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                         </span>
                       ) : (
                         <span className="px-3 py-1.5 rounded-xl bg-amber-100 text-amber-900 text-xs font-black">
-                          Gözləyir (Təyin edilib)
+                          Gözləyir (Aktiv)
                         </span>
                       )}
                     </div>
@@ -628,95 +787,204 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
 
           {/* TAB 5: SESSION NOTES */}
           {activeTab === 'notes' && (
-            <div className="space-y-5 max-w-4xl mx-auto">
-              <div className="flex items-center justify-between">
+            <div className="space-y-6 max-w-4xl mx-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-slate-900">
-                    Seans Qeydləri və Müşahidə Jurnalı
+                  <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                    <span>📝 Seans Qeydləri və Valideyn Bildirişi</span>
                   </h2>
                   <p className="text-xs text-slate-500 font-semibold">
-                    Hər seansın nəticələrini və növbəti mərhələ planını qeyd edin
+                    İstənilən uşaq üçün nitq inkişafı qeydlərini aparın. "Tik" qoymaqla valideynə bildiriş göndərə bilərsiniz.
                   </p>
                 </div>
                 <button
                   onClick={() => setIsAddNoteOpen(!isAddNoteOpen)}
-                  className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black flex items-center gap-1.5 shadow-sm cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black flex items-center gap-1.5 shadow-md shadow-indigo-200 cursor-pointer transition-all self-start sm:self-auto"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Qeyd Yaz</span>
+                  <span>+ Yeni Qeyd Yaz</span>
                 </button>
               </div>
 
+              {/* Registered Parents Quick Picker */}
+              <div className="bg-gradient-to-r from-sky-50 to-indigo-50 p-4 rounded-2xl border border-indigo-100 space-y-2">
+                <div className="text-[11px] font-black text-indigo-950 uppercase tracking-wider flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <Users className="w-4 h-4 text-indigo-600" />
+                    <span>Qeyd Aparılacaq Uşaqlar & Valideynlər</span>
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-bold">
+                    Seçib dərhal qeyd əlavə edin
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                  {parentUsers.map((pu) => {
+                    const isSelected = selectedParentIdForNote === pu.id;
+                    return (
+                      <button
+                        type="button"
+                        key={pu.id}
+                        onClick={() => {
+                          setSelectedParentIdForNote(pu.id);
+                          if (!isAddNoteOpen) setIsAddNoteOpen(true);
+                        }}
+                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-white border-indigo-500 shadow-sm ring-2 ring-indigo-200'
+                            : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-indigo-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-2xl">{pu.childEmoji}</span>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-xs font-black text-slate-900 truncate">
+                              {pu.childName}
+                            </div>
+                            <div className="text-[11px] text-indigo-700 font-bold truncate">
+                              {pu.parentName}
+                            </div>
+                            <div className="text-[10px] text-slate-400 font-medium truncate">
+                              {pu.childAge} yaş
+                            </div>
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Add Note Form */}
               {isAddNoteOpen && (
                 <form
                   onSubmit={handleAddSessionNote}
-                  className="p-5 rounded-2xl bg-indigo-50/80 border border-indigo-200 space-y-3 animate-in fade-in"
+                  className="p-5 sm:p-6 rounded-2xl bg-indigo-50/90 border-2 border-indigo-300 space-y-4 animate-in fade-in shadow-md"
                 >
-                  <h3 className="text-xs font-black text-indigo-900 uppercase">Seans Qeydi Əlavə Et</h3>
+                  <div className="flex items-center justify-between border-b border-indigo-200 pb-3">
+                    <h3 className="text-sm font-black text-indigo-950 uppercase flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-indigo-600" />
+                      <span>Seans Qeydi Əlavə Et</span>
+                    </h3>
+                    <span className="text-xs font-bold text-slate-500">
+                      Demo Loqoped Kabineti
+                    </span>
+                  </div>
+
+                  {/* Child / Parent Selection */}
+                  <div>
+                    <label className="text-xs font-black text-indigo-950 block mb-1">
+                      Uşaq və Valideyn Seçimi (Portal İstifadəçisi):
+                    </label>
+                    <select
+                      value={selectedParentIdForNote}
+                      onChange={(e) => setSelectedParentIdForNote(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-indigo-300 text-xs font-black text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500"
+                    >
+                      {parentUsers.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.childEmoji} {p.childName} ({p.childAge} yaş) — Valideyn: {p.parentName} ({p.email})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                      <label className="text-[11px] font-bold text-slate-600 block mb-1">Tarix:</label>
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Tarix:</label>
                       <input
                         type="date"
                         value={newNoteDate}
                         onChange={(e) => setNewNoteDate(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                        className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                       />
                     </div>
                     <div className="sm:col-span-2">
-                      <label className="text-[11px] font-bold text-slate-600 block mb-1">
-                        Keçirilən Fəaliyyət:
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                        Keçirilən Fəaliyyət / Mövzu:
                       </label>
                       <input
                         type="text"
                         value={newNoteActivity}
                         onChange={(e) => setNewNoteActivity(e.target.value)}
-                        placeholder="Məs. Səslər və tənəffüs gimnastikası..."
-                        className="w-full px-3 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                        placeholder="Məs. Artikulyasiya gimnastikası, 'R' səsinin qoyuluşu və tənəffüs..."
+                        className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-bold text-slate-600 block mb-1">
-                      Müşahidələr və Uğurlar:
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                      Müşahidələr və Uğurlar / Loqoped Qeydi:
                     </label>
                     <textarea
-                      rows={2}
+                      rows={3}
                       value={newNoteObs}
                       onChange={(e) => setNewNoteObs(e.target.value)}
-                      placeholder="Uşağın reaksiyası, nailiyyətləri..."
-                      className="w-full px-3 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-medium text-slate-800"
+                      placeholder='Məsələn: Ayan "R" hərfini deməkdə çətinlik çəkir, "R" hərfi ilə bağlı sözləri daha çox dedirdin. Dil gimnastikası gündəlik 5 dəqiqə davam etdirilsin...'
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-indigo-200 text-xs font-medium text-slate-800"
+                      required
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-bold text-slate-600 block mb-1">
-                      Növbəti Seans Planı:
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                      Növbəti Seans Planı (İstəyə bağlı):
                     </label>
                     <input
                       type="text"
                       value={newNotePlan}
                       onChange={(e) => setNewNotePlan(e.target.value)}
-                      placeholder="Növbəti seans üçün hədəf..."
-                      className="w-full px-3 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
+                      placeholder="Məs. 'R' səsini sözün əvvəlində və ortasında möhkəmləndirmək..."
+                      className="w-full px-3.5 py-2 rounded-xl bg-white border border-indigo-200 text-xs font-bold text-slate-800"
                     />
                   </div>
 
-                  <div className="flex justify-end gap-2 pt-1">
+                  {/* CRITICAL FEATURE: Checkbox ("tik") for Parent Notification */}
+                  <div className="p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-300 flex items-start gap-3 shadow-xs">
+                    <input
+                      type="checkbox"
+                      id="notifyParentCheckbox"
+                      checked={notifyParentOnNote}
+                      onChange={(e) => setNotifyParentOnNote(e.target.checked)}
+                      className="mt-0.5 w-5 h-5 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer accent-indigo-600"
+                    />
+                    <label htmlFor="notifyParentCheckbox" className="text-xs cursor-pointer select-none">
+                      <span className="font-black text-slate-900 flex items-center gap-1.5">
+                        <span>🔔</span>
+                        <span>Bu qeydi bildiriş kimi valideynə göndər ("Tik" qoyulduqda bildiriş gedir)</span>
+                      </span>
+                      <span className="text-[11px] text-slate-600 font-medium block mt-1">
+                        {notifyParentOnNote ? (
+                          <strong className="text-emerald-700 flex items-center gap-1">
+                            <span>✓</span>
+                            <span>"Tik" qoyulub: Qeyd dərhal valideyn hesabına bildiriş kimi çatacaq və Valideyn Portalında görünəcək.</span>
+                          </strong>
+                        ) : (
+                          <strong className="text-slate-500 flex items-center gap-1">
+                            <span>✕</span>
+                            <span>"Tik" qoyulmayıb: Bu qeyd yalnız daxili loqoped jurnalında saxlanılacaq, valideynə heç bir bildiriş getməyəcək.</span>
+                          </strong>
+                        )}
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-indigo-200">
                     <button
                       type="button"
                       onClick={() => setIsAddNoteOpen(false)}
-                      className="px-4 py-1.5 rounded-xl bg-slate-200 text-slate-700 text-xs font-bold"
+                      className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold cursor-pointer"
                     >
                       Ləğv et
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-black"
+                      className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
                     >
-                      Qeydi Saxla
+                      <span>
+                        Qeydi Saxla {notifyParentOnNote ? '& Valideynə Bildiriş Göndər 🔔' : '(Yalnız Daxili Qeyd)'}
+                      </span>
                     </button>
                   </div>
                 </form>
@@ -724,29 +992,58 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
 
               {/* Notes List */}
               <div className="space-y-3">
+                <div className="text-xs font-black text-slate-500 uppercase tracking-wider">
+                  Müşahidə və Seans Qeydləri ({sessionNotes.length})
+                </div>
+
                 {sessionNotes.map((note) => (
                   <div
                     key={note.id}
-                    className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2"
+                    className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-indigo-200 shadow-xs space-y-3 transition-all"
                   >
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-indigo-600" />
-                        <span className="text-xs font-black text-slate-800">{note.date}</span>
+                    <div className="flex flex-wrap items-center justify-between border-b border-slate-100 pb-2.5 gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-black uppercase px-2.5 py-0.5 rounded-md bg-indigo-600 text-white flex items-center gap-1">
+                          <span>👧</span>
+                          <span>{note.childName}</span>
+                        </span>
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-purple-100 text-purple-900">
+                          Valideyn: {note.parentName}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500">
+                          <Calendar className="w-3.5 h-3.5 text-indigo-600" />
+                          <span>{note.date}</span>
+                        </div>
                       </div>
-                      <span className="text-xs font-bold text-slate-400">{note.therapistName}</span>
+
+                      {/* Notification Status Badge */}
+                      <div>
+                        {note.notifiedParent ? (
+                          <span className="px-2.5 py-1 rounded-lg bg-emerald-100 border border-emerald-200 text-emerald-800 text-[11px] font-black flex items-center gap-1">
+                            <span>🔔</span>
+                            <span>Valideynə bildiriş göndərildi</span>
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 text-[11px] font-bold flex items-center gap-1">
+                            <span>🔒</span>
+                            <span>Daxili qeyd (bildiriş göndərilmədi)</span>
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     <h4 className="text-sm font-black text-slate-900">{note.activityPerformed}</h4>
-                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                      <span className="font-bold text-slate-800">Müşahidə: </span>
+                    <p className="text-xs text-slate-700 font-medium leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <strong className="font-black text-slate-900 block mb-0.5">Müşahidə və Tövsiyə:</strong>
                       {note.observations}
                     </p>
 
-                    <div className="p-2.5 rounded-xl bg-indigo-50/70 text-xs text-indigo-950 font-bold">
-                      <span>Növbəti plan: </span>
-                      {note.nextSessionPlan}
-                    </div>
+                    {note.nextSessionPlan && (
+                      <div className="p-2.5 rounded-xl bg-indigo-50/80 text-xs text-indigo-950 font-bold border border-indigo-100">
+                        <span className="text-indigo-600">Növbəti seans planı: </span>
+                        <span>{note.nextSessionPlan}</span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

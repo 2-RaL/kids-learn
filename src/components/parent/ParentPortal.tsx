@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, Video, Activity, Brain, Calculator, Award,
-  Settings, LogOut, ArrowLeft, Home, Sparkles, Filter, Menu, X, Smile, Shield
+  Settings, LogOut, ArrowLeft, Home, Sparkles, Filter, Menu, X, Smile, Shield, Bell
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useGameStore } from '../../store/gameStore';
@@ -19,6 +19,13 @@ import ParentConversationPrompts from './ParentConversationPrompts';
 import ParentProgressView from './ParentProgressView';
 import LearningHubModal from '../learning/LearningHubModal';
 import { GraduationCap, Clock, Heart, MessageCircle, TrendingUp } from 'lucide-react';
+import {
+  getParentNotifications,
+  getUnreadNotificationCount,
+  markNotificationAsRead,
+  markAllNotificationsAsRead,
+  ParentNotification
+} from '../../services/parentService';
 
 type ParentTab =
   | 'dashboard'
@@ -42,6 +49,22 @@ export const ParentPortal: React.FC = () => {
   const [selectedAge, setSelectedAge] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLearningHubOpen, setIsLearningHubOpen] = useState(false);
+  const [notifications, setNotifications] = useState<ParentNotification[]>(getParentNotifications());
+  const [unreadCount, setUnreadCount] = useState<number>(getUnreadNotificationCount());
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setNotifications(getParentNotifications());
+      setUnreadCount(getUnreadNotificationCount());
+    };
+    window.addEventListener('kml_notifications_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('kml_notifications_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, []);
 
   const childDisplayName = parentProfile?.child_name || 'Dostumuz';
 
@@ -337,6 +360,29 @@ export const ParentPortal: React.FC = () => {
             </div>
           </div>
 
+          {/* Notification Center Button in Sidebar */}
+          <button
+            onClick={() => setIsNotificationModalOpen(true)}
+            className="w-full mb-3 flex items-center justify-between p-2.5 rounded-2xl bg-white border border-amber-200/80 hover:border-amber-400 hover:shadow-sm transition-all cursor-pointer group"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-amber-100 group-hover:bg-amber-200 flex items-center justify-center text-amber-800 transition-colors">
+                <Bell className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <span className="text-xs font-black text-slate-800 block">Bildirişlər</span>
+                <span className="text-[10px] text-slate-500 font-semibold">Loqoped və tapşırıqlar</span>
+              </div>
+            </div>
+            {unreadCount > 0 ? (
+              <span className="px-2 py-0.5 rounded-full bg-red-500 text-white text-[11px] font-black animate-pulse">
+                {unreadCount} yeni
+              </span>
+            ) : (
+              <span className="text-xs text-slate-400 font-bold">0</span>
+            )}
+          </button>
+
           {/* Təlim Bölmələri Big Launcher Button in Sidebar */}
           <button
             onClick={() => setIsLearningHubOpen(true)}
@@ -452,6 +498,20 @@ export const ParentPortal: React.FC = () => {
             ))}
           </div>
 
+          {/* Mobile Notification Bell */}
+          <button
+            onClick={() => setIsNotificationModalOpen(true)}
+            className="relative p-2 rounded-xl bg-amber-100 text-slate-800 cursor-pointer"
+            title="Bildirişlər"
+          >
+            <Bell className="w-5 h-5 text-amber-800" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-black flex items-center justify-center animate-pulse">
+                {unreadCount}
+              </span>
+            )}
+          </button>
+
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 rounded-xl bg-amber-100 text-slate-700 cursor-pointer"
@@ -521,6 +581,21 @@ export const ParentPortal: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Notification Bell Button in Top Header */}
+            <button
+              onClick={() => setIsNotificationModalOpen(true)}
+              className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-white border border-amber-300 hover:border-amber-400 text-slate-800 font-black text-xs shadow-sm transition-all cursor-pointer"
+              title="Loqoped Bildirişləri"
+            >
+              <Bell className="w-4 h-4 text-amber-600" />
+              <span className="hidden sm:inline">Bildirişlər</span>
+              {unreadCount > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full bg-red-500 text-white text-[10px] font-black animate-pulse">
+                  {unreadCount}
+                </span>
+              )}
+            </button>
+
             {/* Təlim Bölmələri Launcher in Top Bar */}
             <button
               onClick={() => setIsLearningHubOpen(true)}
@@ -587,6 +662,42 @@ export const ParentPortal: React.FC = () => {
         <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
           {activeTab === 'dashboard' && (
             <div className="space-y-6 max-w-6xl mx-auto">
+              {/* Unread Therapist Notification Alert Banner */}
+              {unreadCount > 0 && (
+                <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 text-white shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-indigo-400 animate-in fade-in slide-in-from-top-2">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0 shadow-inner">
+                      🔔
+                    </div>
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-black uppercase tracking-wider mb-1">
+                        <span>Yeni Bildiriş</span>
+                      </div>
+                      <h3 className="text-base font-black">
+                        Loqoped tərəfindən {unreadCount} yeni bildiriş göndərilib!
+                      </h3>
+                      <p className="text-xs text-indigo-100 font-medium">
+                        Yeni ev tapşırığı və ya seans üzrə xüsusi loqoped müşahidəsi var.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 self-start sm:self-auto">
+                    <button
+                      onClick={() => setIsNotificationModalOpen(true)}
+                      className="px-4 py-2 rounded-xl bg-white text-indigo-900 text-xs font-black hover:bg-indigo-50 shadow-md cursor-pointer transition-all"
+                    >
+                      Bildirişləri Aç 🔔
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('progress')}
+                      className="px-4 py-2 rounded-xl bg-indigo-500/60 hover:bg-indigo-500 text-white text-xs font-bold transition-all cursor-pointer"
+                    >
+                      Tapşırıqlara Bax
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Welcome Hero Banner */}
               <div className="relative rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 text-white shadow-xl overflow-hidden">
                 <div className="absolute -right-6 -bottom-6 text-9xl opacity-20 select-none">
@@ -697,6 +808,134 @@ export const ParentPortal: React.FC = () => {
           {activeTab === 'settings' && <ParentSettings />}
         </main>
       </div>
+
+      {/* Notification Center Modal */}
+      <AnimatePresence>
+        {isNotificationModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white rounded-3xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-amber-200"
+            >
+              {/* Header */}
+              <div className="p-5 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 text-white flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-xl shadow-inner">
+                    🔔
+                  </div>
+                  <div>
+                    <h2 className="text-base font-black">Valideyn Bildirişləri</h2>
+                    <p className="text-[11px] text-amber-100 font-semibold">
+                      Loqoped tərəfindən göndərilən ev tapşırıqları və seans qeydləri
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsNotificationModalOpen(false)}
+                  className="p-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white transition-all cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Action Bar */}
+              <div className="px-5 py-2.5 bg-amber-50/80 border-b border-amber-100 flex items-center justify-between text-xs">
+                <span className="font-bold text-slate-600">
+                  Cəmi {notifications.length} bildiriş ({unreadCount} oxunmamış)
+                </span>
+                {unreadCount > 0 && (
+                  <button
+                    onClick={() => {
+                      markAllNotificationsAsRead();
+                      setNotifications(getParentNotifications());
+                      setUnreadCount(0);
+                    }}
+                    className="text-amber-800 font-black hover:underline cursor-pointer"
+                  >
+                    Hamısını oxunmuş et ✓
+                  </button>
+                )}
+              </div>
+
+              {/* Notification List */}
+              <div className="flex-1 p-5 overflow-y-auto space-y-3">
+                {notifications.length === 0 ? (
+                  <div className="text-center py-12 text-slate-400">
+                    <span className="text-4xl block mb-2">📭</span>
+                    <p className="text-xs font-bold">Hələlik heç bir bildiriş yoxdur.</p>
+                  </div>
+                ) : (
+                  notifications.map((notif) => {
+                    const isNotificationRead = notif.isRead || notif.read;
+                    return (
+                      <div
+                        key={notif.id}
+                        onClick={() => {
+                          if (!isNotificationRead) {
+                            markNotificationAsRead(notif.id);
+                            setNotifications(getParentNotifications());
+                            setUnreadCount(getUnreadNotificationCount());
+                          }
+                        }}
+                        className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                          isNotificationRead
+                            ? 'bg-slate-50/80 border-slate-200'
+                            : 'bg-amber-50/90 border-amber-300 shadow-sm ring-1 ring-amber-200'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2 mb-1.5">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xl">
+                              {notif.type === 'homework' ? '📚' : notif.type === 'session_note' ? '📝' : '🔔'}
+                            </span>
+                            <span className="text-xs font-black text-slate-900">
+                              {notif.title}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            {!isNotificationRead && (
+                              <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                            )}
+                            <span className="text-[10px] text-slate-400 font-bold">
+                              {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                          </div>
+                        </div>
+
+                      <p className="text-xs text-slate-700 font-medium leading-relaxed mb-3">
+                        {notif.message}
+                      </p>
+
+                      <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200/70">
+                        <span className="text-slate-500 font-bold flex items-center gap-1">
+                          <span>👧</span>
+                          <span>Uşaq: {notif.childName}</span>
+                        </span>
+                        {notif.type === 'homework' && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsNotificationModalOpen(false);
+                              setActiveTab('progress');
+                            }}
+                            className="text-indigo-600 font-black hover:underline cursor-pointer flex items-center gap-1"
+                          >
+                            <span>Tapşırığa bax</span>
+                            <span>→</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Main Learning Hub Modal */}
       <LearningHubModal

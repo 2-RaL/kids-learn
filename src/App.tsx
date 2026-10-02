@@ -4,11 +4,9 @@ import { useGameStore } from './store/gameStore';
 import { useAuthStore } from './store/authStore';
 import Header from './components/layout/Header';
 import LeftPanel from './components/layout/LeftPanel';
-import RightPanel from './components/layout/RightPanel';
 import BottomControls from './components/layout/BottomControls';
 import CharacterScene from './components/character/CharacterScene';
 import CharacterDrawer from './components/character/CharacterDrawer';
-import RightDrawer from './components/layout/RightDrawer';
 import AchievementsModal from './components/achievements/AchievementsModal';
 import LoadingScreen from './components/common/LoadingScreen';
 import PortalSelectionPage from './components/portal/PortalSelectionPage';
@@ -23,8 +21,6 @@ export const App: React.FC = () => {
     isLoading,
     showCharacterDrawer,
     setShowCharacterDrawer,
-    showRightDrawer,
-    setShowRightDrawer,
   } = useGameStore();
 
   const {
@@ -139,11 +135,6 @@ export const App: React.FC = () => {
                   <BottomControls />
                 </div>
               </div>
-
-              {/* Right Column - Voice Control, Learning Mode & History */}
-              <div className="hidden lg:block w-64 lg:w-72 xl:w-80 flex-shrink-0 min-h-0">
-                <RightPanel />
-              </div>
             </div>
 
             {/* Footer */}
@@ -167,12 +158,6 @@ export const App: React.FC = () => {
       <CharacterDrawer
         isOpen={showCharacterDrawer}
         onClose={() => setShowCharacterDrawer(false)}
-      />
-
-      {/* Mobile/Tablet Right Drawer (Voice, Challenges & History) */}
-      <RightDrawer
-        isOpen={showRightDrawer}
-        onClose={() => setShowRightDrawer(false)}
       />
 
       {/* Achievements Modal */}

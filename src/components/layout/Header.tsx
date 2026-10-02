@@ -8,9 +8,7 @@ import {
   VolumeX,
   Maximize,
   Minimize,
-  Trophy,
   Star,
-  BookOpen,
   Shield,
   LogOut,
   ArrowLeft,
@@ -33,15 +31,12 @@ export const Header: React.FC = () => {
   const {
     language,
     setLanguage,
-    gameMode,
-    setGameMode,
     stars,
     level,
     soundEnabled,
     toggleSound,
     isFullscreen,
     toggleFullscreen,
-    setShowAchievements,
   } = useGameStore();
 
   const [isLearningHubOpen, setIsLearningHubOpen] = useState(false);
@@ -101,51 +96,27 @@ export const Header: React.FC = () => {
           </span>
         </div>
 
-        {/* Təlim Bölmələri Button (High Visibility Main Navigation) */}
+        {/* Təlim Bölmələri Button (Only Main Navigation - Full Name Displayed) */}
         <button
           onClick={() => setIsLearningHubOpen(true)}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-slate-950 font-black text-xs sm:text-sm shadow-md transition-all border border-amber-200 cursor-pointer"
-          title="Bütün Təlim Bölmələri"
+          className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 hover:from-amber-500 hover:to-orange-500 text-slate-950 font-black text-xs sm:text-sm shadow-md transition-all border border-amber-200 cursor-pointer active:scale-95"
+          title="Təlim bölmələri"
         >
-          <GraduationCap className="w-4 h-4 text-slate-950" />
-          <span className="hidden xs:inline">Təlim bölmələri</span>
+          <GraduationCap className="w-4 h-4 text-slate-950 flex-shrink-0" />
+          <span className="font-black whitespace-nowrap">Təlim bölmələri</span>
         </button>
 
         {/* Loqoped Masası / Workspace (Therapist, Admin, Editor) */}
         {user && ['therapist', 'admin', 'editor'].includes(user.role) && (
           <button
             onClick={() => setIsTherapistWorkspaceOpen(true)}
-            className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs shadow-md transition-all border border-indigo-400 cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs shadow-md transition-all border border-indigo-400 cursor-pointer"
             title="Loqopedik Diaqnostika və İdarəetmə Paneli"
           >
             <Stethoscope className="w-3.5 h-3.5 text-sky-200" />
             <span className="hidden md:inline">Loqoped Masası</span>
           </button>
         )}
-
-        {/* Learn Mode Toggle (Tablet & Desktop) */}
-        <button
-          onClick={() => setGameMode(gameMode === 'free' ? 'learning' : 'free')}
-          className={`hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl sm:rounded-2xl font-black text-xs transition-all shadow-md cursor-pointer ${
-            gameMode === 'learning'
-              ? 'bg-purple-600 text-white ring-2 ring-white/50'
-              : 'bg-purple-500/80 hover:bg-purple-500 text-white'
-          }`}
-          title="Öyrənmə rejimi"
-        >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span className="hidden md:inline">Learn</span>
-        </button>
-
-        {/* Achievements Modal Trigger */}
-        <button
-          onClick={() => setShowAchievements(true)}
-          className="hidden sm:flex items-center gap-1 px-2 py-1.5 rounded-xl sm:rounded-2xl bg-indigo-500/80 hover:bg-indigo-600 text-white font-bold text-xs shadow-md transition cursor-pointer"
-          title="Nailiyyətlər"
-        >
-          <Trophy className="w-3.5 h-3.5" />
-          <span className="hidden lg:inline">Nailiyyətlər</span>
-        </button>
 
         {/* Language Switcher */}
         <div className="flex bg-white/20 backdrop-blur-md rounded-xl sm:rounded-2xl p-0.5 border border-white/30">

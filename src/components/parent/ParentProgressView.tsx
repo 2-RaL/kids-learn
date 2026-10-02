@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Award, Star, CheckCircle2, TrendingUp, Calendar,
@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useGameStore } from '../../store/gameStore';
-import { DEFAULT_HOMEWORK } from '../../data/therapistData';
+import { getAssignedHomeworkList, AssignedHomework } from '../../services/parentService';
 
 export const ParentProgressView: React.FC = () => {
   const { parentProfile } = useAuthStore();
@@ -25,7 +25,19 @@ export const ParentProgressView: React.FC = () => {
     }
   })();
 
-  const homeworkList = DEFAULT_HOMEWORK;
+  const [homeworkList, setHomeworkList] = useState<AssignedHomework[]>(getAssignedHomeworkList());
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setHomeworkList(getAssignedHomeworkList());
+    };
+    window.addEventListener('kml_notifications_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('kml_notifications_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, []);
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto select-none">
@@ -131,7 +143,13 @@ export const ParentProgressView: React.FC = () => {
               className="p-4 rounded-2xl border border-amber-200/80 bg-amber-50/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
             >
               <div className="space-y-1">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  {hw.childName && (
+                    <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-indigo-600 text-white flex items-center gap-1">
+                      <span>👧</span>
+                      <span>{hw.childName}</span>
+                    </span>
+                  )}
                   <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-200/70 text-amber-900">
                     {hw.category}
                   </span>
