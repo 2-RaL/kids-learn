@@ -66,10 +66,13 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'hug':
       case 'holdHands':
       case 'nod':
-      case 'shakeHead':
       case 'lightMatch':
       case 'waterPlant':
         return 'waving';
+      case 'shakeHead':
+        return 'shakeHead';
+      case 'comb':
+        return 'comb';
       case 'sit':
       case 'sleep':
       case 'read':
@@ -292,10 +295,12 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'shakeHead':
         return {
           animate: {
-            rotate: [0, -6, 6, -5, 5, 0],
+            rotate: [0, -7, 7, -6, 6, -3, 3, 0],
           },
           transition: {
-            duration: duration * 1.0,
+            duration: duration * 1.5,
+            repeat: Infinity,
+            repeatDelay: 0.6,
             ease: 'easeInOut',
           },
           shadowAnimate: { scaleX: 1, opacity: 0.65 },
@@ -625,10 +630,10 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'comb':
         return {
           animate: {
-            rotate: [0, 4, -2, 4, 0],
-            y: [0, -4, 0],
+            rotate: [0, 1.8, -1.2, 1.8, 0],
+            y: [0, -3, 0],
           },
-          transition: { duration: duration * 1.0, repeat: Infinity, ease: 'easeInOut' },
+          transition: { duration: duration * 2.8, repeat: Infinity, ease: 'easeInOut' },
           shadowAnimate: { scaleX: 1, opacity: 0.65 },
         };
 
@@ -733,20 +738,21 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'putAway':
         return {
           animate: {
-            y: [38, 44, 38],
+            y: [0, -6, 0],
+            scale: [1, 0.98, 1],
           },
           transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
-          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+          shadowAnimate: { scaleX: 1.05, opacity: 0.7 },
         };
 
       case 'collect':
         return {
           animate: {
-            x: [-12, 12, -12],
-            y: [38, 42, 38],
+            x: [-8, 8, -8],
+            y: [0, -4, 0],
           },
           transition: { duration: duration * 1.3, repeat: Infinity, ease: 'easeInOut' },
-          shadowAnimate: { scaleX: 1.15, opacity: 0.75 },
+          shadowAnimate: { scaleX: 1.05, opacity: 0.7 },
         };
 
       case 'clean':
@@ -802,11 +808,11 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
       case 'scatter':
         return {
           animate: {
-            scale: [0.95, 1.12, 0.98, 1],
-            rotate: [-4, 4, 0],
+            scale: [1, 1.03, 1],
+            rotate: [-2, 2, 0],
           },
-          transition: { duration: duration * 0.9, repeat: Infinity, ease: 'easeInOut' },
-          shadowAnimate: { scaleX: [1, 1.15, 1], opacity: 0.65 },
+          transition: { duration: duration * 1.2, repeat: Infinity, ease: 'easeInOut' },
+          shadowAnimate: { scaleX: [1, 1.05, 1], opacity: 0.65 },
         };
 
       case 'waterPlant':
@@ -924,15 +930,25 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
 
         {command === 'shakeHead' && (
           <motion.div
-            initial={{ scale: 0, rotate: 20 }}
-            animate={{ scale: 1, rotate: 0 }}
-            className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 z-20 pointer-events-none drop-shadow-md"
+            initial={{ scale: 0, y: -10 }}
+            animate={{ scale: 1, y: 0 }}
+            className="absolute -top-3 sm:-top-5 z-20 pointer-events-none drop-shadow-xl"
           >
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-rose-500 border-2 border-white flex items-center justify-center text-white shadow-lg">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+            <div className="px-4 py-1.5 rounded-full bg-rose-600 text-white font-extrabold text-sm sm:text-base border-2 border-white shadow-xl flex items-center gap-1.5 tracking-wide">
+              <span>🙅</span>
+              <span>XEYR</span>
             </div>
+          </motion.div>
+        )}
+
+        {command === 'comb' && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: [0.2, 1, 0.2], y: [0, 16, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-12 right-12 sm:top-16 sm:right-16 z-20 pointer-events-none text-2xl"
+          >
+            <span>✨</span>
           </motion.div>
         )}
 

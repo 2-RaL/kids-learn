@@ -9,6 +9,7 @@ export const GENERATED_ACTIONS: Record<string, Set<string>> = {
     'build',
     'clap',
     'closeDoor',
+    'comb',
     'cry',
     'dance',
     'draw',
@@ -22,6 +23,7 @@ export const GENERATED_ACTIONS: Record<string, Set<string>> = {
     'playToy',
     'read',
     'rideBike',
+    'shakeHead',
     'sing',
     'sleep',
     'slide',
@@ -33,12 +35,15 @@ export const GENERATED_ACTIONS: Record<string, Set<string>> = {
   tom: new Set([
     'bathe',
     'closeDoor',
+    'comb',
     'drink',
     'eat',
     'playToy',
     'read',
     'rideBike',
+    'shakeHead',
     'sing',
+    'sleep',
     'slide',
     'think',
     'wakeUp',
@@ -53,10 +58,10 @@ export const GENERATED_ACTIONS: Record<string, Set<string>> = {
  */
 export const DEDICATED_SPRITES: Record<string, Set<string>> = {
   leyla: new Set([
-    'bathe', 'build', 'clap', 'closeDoor', 'cry', 'dance', 'draw', 'drink',
+    'bathe', 'build', 'clap', 'closeDoor', 'comb', 'cry', 'dance', 'draw', 'drink',
     'eat', 'hug', 'jump', 'jumping', 'laugh', 'openDoor', 'paint',
     'playInstrument', 'playToy', 'read', 'rideBike', 'run', 'running',
-    'sing', 'sit', 'sitting', 'sleep', 'slide', 'stand', 'standing',
+    'shakeHead', 'sing', 'sit', 'sitting', 'sleep', 'slide', 'stand', 'standing',
     'think', 'wakeUp', 'wash', 'wave', 'waving', 'write',
   ]),
   amara: new Set([
@@ -64,9 +69,9 @@ export const DEDICATED_SPRITES: Record<string, Set<string>> = {
     'sit', 'sitting', 'stand', 'standing', 'wave', 'waving',
   ]),
   tom: new Set([
-    'bathe', 'closeDoor', 'cry', 'drink', 'eat', 'jump', 'jumping',
+    'bathe', 'closeDoor', 'comb', 'cry', 'drink', 'eat', 'jump', 'jumping',
     'laugh', 'playInstrument', 'playToy', 'read', 'rideBike', 'run',
-    'running', 'sing', 'sit', 'sitting', 'sleep', 'slide', 'stand', 'standing',
+    'running', 'shakeHead', 'sing', 'sit', 'sitting', 'sleep', 'slide', 'stand', 'standing',
     'think', 'wakeUp', 'wash', 'wave', 'waving',
   ]),
   ali: new Set([
