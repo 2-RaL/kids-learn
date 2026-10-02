@@ -1,7 +1,7 @@
 import type { Character } from '../types';
 
 export const CHARACTERS: Character[] = [
-  // 4 GIRLS
+  // 2 ACTIVE GIRLS (Leyla and Amara)
   {
     id: 'girl-1',
     name: 'Leyla',
@@ -30,6 +30,40 @@ export const CHARACTERS: Character[] = [
     hasHijab: false,
     thumbnail: '/assets/portraits/girl_amara.jpg',
   },
+
+  // 2 ACTIVE BOYS (Tom and Ali)
+  {
+    id: 'boy-1',
+    name: 'Tom',
+    gender: 'boy',
+    skinTone: '#A66A44',
+    hairColor: '#1A1A1A',
+    hairStyle: 'short-curly',
+    outfitColor: '#2563EB',
+    outfitAccent: '#3B82F6',
+    eyeColor: '#4A3728',
+    hasGlasses: false,
+    hasHijab: false,
+    thumbnail: '/assets/portraits/boy_tom.jpg',
+  },
+  {
+    id: 'boy-3',
+    name: 'Ali',
+    gender: 'boy',
+    skinTone: '#D99B65',
+    hairColor: '#1A1A1A',
+    hairStyle: 'short-spiky',
+    outfitColor: '#E11D48',
+    outfitAccent: '#FB7185',
+    eyeColor: '#2A1F1D',
+    hasGlasses: false,
+    hasHijab: false,
+    thumbnail: '/assets/portraits/boy_ali.jpg',
+  },
+];
+
+// Preserved characters for future re-enablement
+export const HIDDEN_CHARACTERS: Character[] = [
   {
     id: 'girl-3',
     name: 'Mei',
@@ -58,22 +92,6 @@ export const CHARACTERS: Character[] = [
     hasHijab: true,
     thumbnail: '/assets/portraits/girl_zara.jpg',
   },
-
-  // 4 BOYS
-  {
-    id: 'boy-1',
-    name: 'Tom',
-    gender: 'boy',
-    skinTone: '#A66A44',
-    hairColor: '#1A1A1A',
-    hairStyle: 'short-curly',
-    outfitColor: '#2563EB',
-    outfitAccent: '#3B82F6',
-    eyeColor: '#4A3728',
-    hasGlasses: false,
-    hasHijab: false,
-    thumbnail: '/assets/portraits/boy_tom.jpg',
-  },
   {
     id: 'boy-2',
     name: 'Leo',
@@ -87,20 +105,6 @@ export const CHARACTERS: Character[] = [
     hasGlasses: true,
     hasHijab: false,
     thumbnail: '/assets/portraits/boy_leo.jpg',
-  },
-  {
-    id: 'boy-3',
-    name: 'Ali',
-    gender: 'boy',
-    skinTone: '#D99B65',
-    hairColor: '#1A1A1A',
-    hairStyle: 'short-spiky',
-    outfitColor: '#E11D48',
-    outfitAccent: '#FB7185',
-    eyeColor: '#2A1F1D',
-    hasGlasses: false,
-    hasHijab: false,
-    thumbnail: '/assets/portraits/boy_ali.jpg',
   },
   {
     id: 'boy-4',

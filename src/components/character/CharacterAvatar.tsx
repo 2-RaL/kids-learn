@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Character, CharacterCommand, AnimationSpeed } from '../../types';
+import { resolveCharacterSprite } from '../../config/characterSprites';
 
 interface CharacterAvatarProps {
   character: Character;
@@ -32,14 +33,14 @@ function getCharacterPrefix(characterId: string): string {
 export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, command, speed }) => {
   const duration = SPEED_MAP[speed];
   const prefix = getCharacterPrefix(character.id);
-  const [imgFallbackLevel, setImgFallbackLevel] = useState(0);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    setImgFallbackLevel(0);
+    setHasError(false);
   }, [character.id, command]);
 
   const handleImgError = () => {
-    setImgFallbackLevel((prev) => prev + 1);
+    setHasError(true);
   };
 
   // Select 3D rendered sprite pose based on the active command
@@ -116,23 +117,13 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
     }
   }, [command]);
 
-  // 4-Level Robust Action Sprite Loader:
-  // Level 0: Master generated action (/generated-actions/${prefix}/${command}.png)
-  // Level 1: Dedicated command sprite (/assets/characters/${prefix}_${command}.png)
-  // Level 2: Base pose sprite (/assets/characters/${prefix}_${poseType}.png)
-  // Level 3: Safe standing fallback (/assets/characters/${prefix}_standing.png)
+  // Synchronous zero-404 action sprite resolver:
   const poseImage = useMemo(() => {
-    if (imgFallbackLevel === 0) {
-      return `/generated-actions/${prefix}/${command}.png`;
+    if (hasError) {
+      return `/assets/characters/${prefix}_standing.png`;
     }
-    if (imgFallbackLevel === 1) {
-      return `/assets/characters/${prefix}_${command}.png`;
-    }
-    if (imgFallbackLevel === 2) {
-      return `/assets/characters/${prefix}_${poseType}.png`;
-    }
-    return `/assets/characters/${prefix}_standing.png`;
-  }, [prefix, command, poseType, imgFallbackLevel]);
+    return resolveCharacterSprite(prefix, command, poseType);
+  }, [prefix, command, poseType, hasError]);
 
   // Motion variants for natural human physics
   const motionConfig = useMemo(() => {
@@ -844,10 +835,10 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
   }, [command, duration]);
 
   return (
-    <div className="relative flex flex-col items-center justify-end select-none">
+    <div className="relative flex flex-col items-center justify-center select-none">
       {/* Dynamic Floor Shadow beneath character */}
       <motion.div
-        className="absolute -bottom-3 w-48 sm:w-56 h-9 rounded-full bg-black/35 blur-[6px] pointer-events-none z-0"
+        className="absolute -bottom-3 sm:-bottom-4 w-52 xs:w-60 sm:w-72 md:w-80 h-9 sm:h-11 rounded-full bg-slate-900/30 blur-[6px] pointer-events-none z-0"
         animate={motionConfig.shadowAnimate as any}
         transition={{ duration: 0.3 }}
       />
@@ -864,11 +855,11 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({ character, com
             src={poseImage}
             alt={character.name}
             onError={handleImgError}
-            initial={{ opacity: 0.9, scale: 0.98 }}
+            initial={{ opacity: 0.92, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0.9 }}
+            exit={{ opacity: 0.92 }}
             transition={{ duration: 0.15 }}
-            className="w-auto h-[230px] xs:h-[270px] sm:h-[340px] md:h-[420px] lg:h-[480px] max-h-[48vh] sm:max-h-[58vh] md:max-h-[68vh] object-contain drop-shadow-[0_14px_22px_rgba(0,0,0,0.24)] pointer-events-none"
+            className="w-auto h-[290px] xs:h-[340px] sm:h-[410px] md:h-[480px] lg:h-[540px] max-h-[58vh] xs:max-h-[64vh] sm:max-h-[72vh] md:max-h-[78vh] object-contain drop-shadow-[0_16px_26px_rgba(0,0,0,0.22)] pointer-events-none"
             draggable={false}
           />
         </AnimatePresence>

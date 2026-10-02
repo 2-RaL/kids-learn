@@ -29,10 +29,14 @@ function save(key: string, value: unknown) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
 }
 
+const rawSavedChar = loadFromStorage<string | null>('kml-character', DEFAULT_CHARACTER_ID);
+const initialCharId = CHARACTERS.some((c) => c.id === rawSavedChar) ? rawSavedChar : DEFAULT_CHARACTER_ID;
+const initialChar = CHARACTERS.find((c) => c.id === initialCharId) || CHARACTERS[0];
+
 const initialState: GameState = {
   language: loadFromStorage<Language>('kml-language', 'az'),
-  selectedCharacter: loadFromStorage<string | null>('kml-character', DEFAULT_CHARACTER_ID),
-  selectedGender: loadFromStorage<Gender>('kml-gender', 'girl'),
+  selectedCharacter: initialCharId,
+  selectedGender: loadFromStorage<Gender>('kml-gender', initialChar.gender),
   currentCommand: 'idle',
   voiceState: 'idle',
   lastTranscript: '',

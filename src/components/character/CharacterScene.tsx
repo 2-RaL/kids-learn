@@ -33,22 +33,13 @@ export const CharacterScene: React.FC = () => {
 
   return (
     <div className="flex flex-col w-full h-full min-h-0">
-      {/* 3D Main Stage Area */}
-      <div className="relative flex-1 min-h-[250px] xs:min-h-[290px] sm:min-h-[350px] md:min-h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white/60 bg-gradient-to-b from-sky-300/40 via-sky-200/50 to-indigo-200/40 md:bg-sky-200">
-        {/* 3D Pixar Village Background - only on tablet and desktop (md:block) */}
-        <img
-          src="/assets/scene/village_garden.jpg"
-          alt="Village Garden"
-          className="hidden md:block absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none select-none"
-          draggable={false}
-        />
+      {/* 3D Main Stage Area with Studio Blue Gradient Background */}
+      <div className="relative flex-1 min-h-[300px] xs:min-h-[350px] sm:min-h-[420px] md:min-h-[490px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white/70 bg-gradient-to-b from-sky-400 via-sky-300 to-blue-400">
+        {/* Soft Ambient Studio Spotlight Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/30 via-transparent to-blue-900/15 pointer-events-none" />
 
-        {/* Mobile Clean Studio Background (telefonda arxa fon yoxdur, sadəcə studiya işığı və kölgə) */}
-        <div className="md:hidden absolute inset-0 bg-gradient-to-b from-sky-400/20 via-sky-300/30 to-blue-400/25 pointer-events-none" />
-        <div className="md:hidden absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-8 rounded-full bg-slate-900/15 blur-sm pointer-events-none" />
-
-        {/* Soft Ambient Sunlight Vignette (Desktop/Tablet) */}
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-black/10 pointer-events-none" />
+        {/* Subtle Bottom Ambient Gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-blue-500/25 to-transparent pointer-events-none" />
 
         {/* Stage Top Bar: Character Drawer Trigger (Left), Status Banner (Center), and Voice/Mode (Right) */}
         <div className="absolute top-2.5 sm:top-4 inset-x-2.5 sm:inset-x-4 z-20 flex items-center justify-between pointer-events-none gap-1.5">
@@ -112,8 +103,8 @@ export const CharacterScene: React.FC = () => {
           </div>
         </div>
 
-        {/* Center Character on the Stage */}
-        <div className="absolute inset-0 flex items-end justify-center pb-4 xs:pb-6 sm:pb-8 md:pb-12 z-10 pointer-events-none">
+        {/* Center Character on the Stage (Centered vertically and horizontally in the blue background) */}
+        <div className="absolute inset-0 flex items-center justify-center pt-8 pb-8 sm:pt-10 sm:pb-10 z-10 pointer-events-none">
           <CharacterAvatar character={character} command={currentCommand} speed={animationSpeed} />
         </div>
 
