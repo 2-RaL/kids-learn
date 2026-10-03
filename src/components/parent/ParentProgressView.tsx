@@ -8,9 +8,12 @@ import { useAuthStore } from '../../store/authStore';
 import { useGameStore } from '../../store/gameStore';
 import { getAssignedHomeworkList, fetchRealHomeworkList, AssignedHomework } from '../../services/parentService';
 
+import { ParentCertificateModal } from './ParentCertificateModal';
+
 export const ParentProgressView: React.FC = () => {
   const { parentProfile } = useAuthStore();
   const { stars, level } = useGameStore();
+  const [isCertOpen, setIsCertOpen] = useState(false);
 
   const childName = parentProfile?.child_name || 'Övladınız';
   const childAge = parentProfile?.child_age ? `${parentProfile.child_age} yaş` : 'Uşaq';
@@ -64,21 +67,40 @@ export const ParentProgressView: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="bg-white/20 backdrop-blur-md px-4 py-3 rounded-2xl text-center border border-white/30">
-            <span className="text-2xl font-black block">{stars > 0 ? stars : 125}</span>
-            <span className="text-[10px] uppercase tracking-wider font-extrabold text-amber-100">
-              Ulduz Xalı
-            </span>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="flex items-center gap-3">
+            <div className="bg-white/20 backdrop-blur-md px-4 py-3 rounded-2xl text-center border border-white/30">
+              <span className="text-2xl font-black block">{stars > 0 ? stars : 125}</span>
+              <span className="text-[10px] uppercase tracking-wider font-extrabold text-amber-100">
+                Ulduz Xalı
+              </span>
+            </div>
+            <div className="bg-white/20 backdrop-blur-md px-4 py-3 rounded-2xl text-center border border-white/30">
+              <span className="text-2xl font-black block">L{level > 1 ? level : 2}</span>
+              <span className="text-[10px] uppercase tracking-wider font-extrabold text-amber-100">
+                Səviyyə
+              </span>
+            </div>
           </div>
-          <div className="bg-white/20 backdrop-blur-md px-4 py-3 rounded-2xl text-center border border-white/30">
-            <span className="text-2xl font-black block">L{level > 1 ? level : 2}</span>
-            <span className="text-[10px] uppercase tracking-wider font-extrabold text-amber-100">
-              Səviyyə
-            </span>
-          </div>
+
+          <button
+            onClick={() => setIsCertOpen(true)}
+            className="w-full sm:w-auto px-4 py-3 rounded-2xl bg-white text-slate-900 hover:bg-amber-50 font-black text-xs flex items-center justify-center gap-1.5 shadow-lg transition cursor-pointer"
+          >
+            <Award className="w-4 h-4 text-amber-500" />
+            <span>Uğur Sertifikatı</span>
+          </button>
         </div>
       </div>
+
+      <ParentCertificateModal
+        isOpen={isCertOpen}
+        onClose={() => setIsCertOpen(false)}
+        childName={childName}
+        childAge={childAge}
+        stars={stars}
+        level={level}
+      />
 
       {/* 4 Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">

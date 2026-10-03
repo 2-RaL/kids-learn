@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useGameStore } from '../../store/gameStore';
 import type { CharacterCommand } from '../../types';
+import { playPopSound, playJumpSound } from '../../utils/soundEffects';
 
 interface CommandItem {
   command: CharacterCommand;
@@ -135,7 +136,14 @@ export const BottomControls: React.FC = () => {
     return (
       <motion.button
         key={item.command}
-        onClick={() => executeCommand(item.command, 'button')}
+        onClick={() => {
+          if (item.command === 'jump') {
+            playJumpSound();
+          } else {
+            playPopSound();
+          }
+          executeCommand(item.command, 'button');
+        }}
         whileHover={{ scale: 1.04, y: -2 }}
         whileTap={{ scale: 0.96, y: 1 }}
         className={`flex-1 min-w-[56px] xs:min-w-[64px] sm:min-w-[78px] py-1 xs:py-1.5 sm:py-2 px-1 xs:px-1.5 sm:px-2 rounded-xl sm:rounded-2xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-xs transition-all border-2 cursor-pointer select-none active:scale-95 whitespace-nowrap ${
@@ -160,7 +168,10 @@ export const BottomControls: React.FC = () => {
         {CATEGORIES.map((cat) => (
           <button
             key={cat.key}
-            onClick={() => setSelectedCategory(cat.key)}
+            onClick={() => {
+              playPopSound();
+              setSelectedCategory(cat.key);
+            }}
             className={`flex-shrink-0 flex-1 min-w-fit py-1 sm:py-1.5 px-2.5 sm:px-3 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
               selectedCategory === cat.key
                 ? 'bg-white text-indigo-700 shadow-sm scale-102 font-extrabold'

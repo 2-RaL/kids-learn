@@ -33,6 +33,7 @@ import {
   type TherapistSessionNote,
 } from '../../services/parentService';
 import { useAuthStore } from '../../store/authStore';
+import ClinicalDiagnosticReportModal from './ClinicalDiagnosticReportModal';
 
 interface TherapistWorkspaceModalProps {
   isOpen: boolean;
@@ -66,6 +67,7 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
   const [selectedParentIdForNote, setSelectedParentIdForNote] = useState<string>(parentUsers[0]?.id || '');
   const [notifyParentOnNote, setNotifyParentOnNote] = useState<boolean>(true);
   const [successToast, setSuccessToast] = useState<string | null>(null);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   // Homework state backed by parentService & MySQL
   const [homeworkList, setHomeworkList] = useState<AssignedHomework[]>(getAssignedHomeworkList());
@@ -427,7 +429,7 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
           {/* TAB 2: ASSESSMENT AREA (10 CLINICAL AREAS) */}
           {activeTab === 'assessment' && (
             <div className="space-y-5 max-w-4xl mx-auto">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <h2 className="text-base sm:text-lg font-black text-slate-900">
                     10 Sahə Üzrə Diaqnostik Qiymətləndirmə
@@ -436,6 +438,13 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
                     {selectedChild.name} üçün loqopedik müşahidə və bal göstəriciləri (1–5 şkalası)
                   </p>
                 </div>
+                <button
+                  onClick={() => setIsReportModalOpen(true)}
+                  className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md transition cursor-pointer self-start sm:self-auto"
+                >
+                  <FileText className="w-4 h-4 text-amber-300" />
+                  <span>Hesabatı Çap Et / PDF İxrac</span>
+                </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -1207,6 +1216,15 @@ export const TherapistWorkspaceModal: React.FC<TherapistWorkspaceModalProps> = (
           )}
         </div>
       </div>
+
+      <ClinicalDiagnosticReportModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        child={selectedChild}
+        assessments={assessments}
+        goals={goals}
+        homeworkList={homeworkList}
+      />
     </div>
   );
 };
